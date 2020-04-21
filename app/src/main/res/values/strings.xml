@@ -12,6 +12,7 @@
     <string name="passwd">Password</string>
     <string name="passwd2">Ulang Password</string>
     <string name="lokasi_wisata">Lokasi Wisata</string>
+    <string name="lanjutkan">Lanjutkan</string>
 
 
     <string-array name="dt_obj_wis">
