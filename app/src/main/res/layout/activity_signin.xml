@@ -48,6 +48,7 @@
                 android:textSize="20sp" />
 
             <EditText
+                android:id="@+id/txt_login_email"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@drawable/bg_input_edit"
@@ -77,6 +78,7 @@
                 android:textSize="20sp" />
 
             <EditText
+                android:id="@+id/txt_login_passwd"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@drawable/bg_input_edit"
@@ -98,6 +100,8 @@
             android:background="@drawable/bg_btn_blue"
             android:text="@string/login"
             android:textColor="#FFF"
+            android:drawableEnd="@drawable/ic_send_black_24dp"
+            android:paddingEnd="15dp"
             android:textSize="14sp" />
 
     </LinearLayout>
@@ -114,5 +118,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
+
+
+    <RelativeLayout
+        android:id="@+id/loadingPanel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center" >
+
+        <ProgressBar
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:indeterminate="true" />
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

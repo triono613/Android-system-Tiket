@@ -90,7 +90,7 @@
                         android:fontFamily="@font/mlight"
                         android:text="@string/name"
                         android:textColor="@color/grayPrimary"
-                        android:textSize="20sp" />
+                        android:textSize="16sp" />
 
                     <EditText
                         android:id="@+id/txt_wisatawan_name"
@@ -120,7 +120,7 @@
                         android:fontFamily="@font/mlight"
                         android:text="@string/dob"
                         android:textColor="@color/grayPrimary"
-                        android:textSize="20sp" />
+                        android:textSize="16sp" />
 
 
 
@@ -153,7 +153,7 @@
                         android:layout_marginBottom="12dp"
                         android:fontFamily="@font/mlight"
                         android:textColor="@color/grayPrimary"
-                        android:textSize="20sp" />
+                        android:textSize="16sp" />
 
                     <EditText
                         android:id="@+id/txt_wisatawan_email"
@@ -183,7 +183,7 @@
                         android:fontFamily="@font/mlight"
                         android:text="@string/hp"
                         android:textColor="@color/grayPrimary"
-                        android:textSize="20sp" />
+                        android:textSize="16sp" />
 
                     <EditText
                         android:id="@+id/txt_wisatawan_hp"
@@ -213,7 +213,7 @@
                         android:fontFamily="@font/mlight"
                         android:text="@string/passwd"
                         android:textColor="@color/grayPrimary"
-                        android:textSize="20sp" />
+                        android:textSize="16sp" />
 
                     <EditText
                         android:id="@+id/txt_wisatawan_passwd"
@@ -243,7 +243,7 @@
                         android:fontFamily="@font/mlight"
                         android:text="@string/passwd2"
                         android:textColor="@color/grayPrimary"
-                        android:textSize="20sp" />
+                        android:textSize="16sp" />
 
                     <EditText
                         android:id="@+id/txt_wisatawan_passwd_2"
@@ -262,6 +262,7 @@
 
 
                 <LinearLayout
+                    android:gravity="center"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -280,7 +281,7 @@
                         app:layout_goneMarginTop="0dp" />
                     <Button
                         android:id="@+id/btn_daftar_wisatawan"
-                        android:layout_width="200dp"
+                        android:layout_width="160dp"
                         android:layout_height="45dp"
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="45dp"

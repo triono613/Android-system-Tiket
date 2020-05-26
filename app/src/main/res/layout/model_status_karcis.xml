@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:paddingTop="20dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:id="@+id/linearStatusKarcis"
+            android:background="@drawable/cardview_child"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:paddingBottom="10dp"
+            android:gravity="center_horizontal"
+            android:layout_marginBottom="15dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:gravity="center"
+                android:paddingTop="1dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                >
+
+                <TextView
+                    android:id="@+id/titel_va"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_margin="1dp"
+                    android:fontFamily="@font/mmedium"
+                    android:gravity="left"
+                    android:text="Nomor Va"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_margin="1dp"
+                    android:fontFamily="@font/mmedium"
+                    android:gravity="center"
+                    android:text=" : "
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textview_va"
+                    android:textSize="14sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:padding="5dp"
+                    android:paddingTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:text="1202000000666123" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center"
+                android:paddingTop="1dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                >
+
+                <TextView
+                    android:id="@+id/titel_va"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_margin="1dp"
+                    android:fontFamily="@font/mmedium"
+                    android:gravity="left"
+                    android:text="Tanggal"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_margin="1dp"
+                    android:fontFamily="@font/mmedium"
+                    android:gravity="center"
+                    android:text=" : "
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textview_tgl"
+                    android:textSize="14sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:padding="5dp"
+                    android:paddingTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:text="13-12-2020" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center"
+                android:paddingTop="1dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                >
+
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_margin="1dp"
+                    android:fontFamily="@font/mmedium"
+                    android:gravity="left"
+                    android:text="Status"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_margin="1dp"
+                    android:fontFamily="@font/mmedium"
+                    android:gravity="center"
+                    android:text=" : "
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textview_status"
+                    android:textSize="14sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:padding="5dp"
+                    android:paddingTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:text="Tagihan" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center"
+                android:paddingTop="1dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                >
+
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="60dp"
+                    android:paddingTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_margin="1dp"
+                    android:fontFamily="@font/mmedium"
+                    android:gravity="top|center_horizontal"
+                    android:text="Lokasi Wisata"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+
+                    android:layout_width="50dp"
+                    android:layout_height="60dp"
+                    android:paddingTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_margin="1dp"
+                    android:fontFamily="@font/mmedium"
+                    android:gravity="top|center_horizontal"
+                    android:text=" : "
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textview_lokWis"
+                    android:textSize="14sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:padding="5dp"
+                    android:paddingTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:text="Taman Nasional Gunung Gede Pangrango" />
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

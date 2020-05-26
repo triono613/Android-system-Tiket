@@ -10,4 +10,19 @@
     <color name="blueSecondary">#2595F5</color>
     <color name="grayPrimary">#8D8D8D</color>
     <color name="blackPrimary">#21272C</color>
+    <color name="whitePrimary">#FFF</color>
+
+    <color name="colorPrimaryDashboard">#708090</color>
+    <color name="colorPrimaryDarkDashboard">#2F4F4F</color>
+    <color name="colorbackgroundDashboard">#FCFCFC</color>
+    <color name="colorlightgraylineDashboard">#EDEDED</color>
+    <color name="colorbrownDashboard">#A52A2A</color>
+    <color name="colorcadetblueDashboard">#5F9EAD</color>
+    <color name="colorchocolateDashboard">#D2691E </color>
+    <color name="colorAccentDashboard">#FF4081</color>
+    <color name="colorlimegreenDashboard">#32CD32</color>
+    <color name="colordarkcoralDashboard">#FF7F50</color>
+
+
+
 </resources>

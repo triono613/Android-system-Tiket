@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:paddingTop="10dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:id="@+id/linearStatusKarcis"
+            android:background="@drawable/cardview_child"
+            android:layout_width="350dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:paddingStart="5dp"
+            android:paddingBottom="50dp"
+            android:gravity="center_horizontal"
+            android:layout_marginBottom="5dp"
+            android:orientation="vertical"
+            tools:ignore="RtlSymmetry">
+
+            <LinearLayout
+                android:paddingTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:gravity="center_horizontal"
+                android:layout_marginBottom="1dp"
+
+                >
+
+                <TextView
+                    android:id="@+id/titel_va"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_margin="1dp"
+                    android:fontFamily="@font/mmedium"
+                    android:gravity="left"
+                    android:text="Nomor Va"
+                    android:textSize="12sp"
+                    />
+
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_margin="1dp"
+                    android:fontFamily="@font/mmedium"
+                    android:gravity="left"
+                    android:text=" : "
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_va"
+                    android:textSize="12sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:padding="1dp"
+                    android:paddingTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:gravity="center_horizontal"
+                android:layout_marginBottom="1dp"
+                >
+
+                <TextView
+                    android:id="@+id/titel_va"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_margin="1dp"
+                    android:fontFamily="@font/mmedium"
+                    android:gravity="left"
+                    android:text="Tanggal"
+                    android:textSize="12sp"
+                     />
+
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_margin="1dp"
+                    android:fontFamily="@font/mmedium"
+                    android:gravity="left"
+                    android:text=" : "
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_tgl"
+                    android:textSize="14sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:padding="1dp"
+                    android:paddingTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:gravity="center_horizontal"
+                android:layout_marginBottom="1dp"
+                >
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_margin="1dp"
+                    android:fontFamily="@font/mmedium"
+                    android:gravity="left"
+                    android:text="Status"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_margin="1dp"
+                    android:fontFamily="@font/mmedium"
+                    android:gravity="left"
+                    android:text=" : "
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:padding="1dp"
+                    android:paddingTop="2dp"
+                    android:textSize="12sp"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:gravity="center_horizontal"
+                android:layout_marginBottom="1dp"
+                >
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="60dp"
+                    android:paddingTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_margin="1dp"
+                    android:fontFamily="@font/mmedium"
+                    android:gravity="left|center_horizontal"
+                    android:text="Lokasi Wisata"
+                    android:textSize="12sp" />
+
+                <TextView
+
+                    android:layout_width="20dp"
+                    android:layout_height="60dp"
+                    android:paddingTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_margin="1dp"
+                    android:fontFamily="@font/mmedium"
+                    android:gravity="left|center_horizontal"
+                    android:text=" : "
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_lokWis"
+                    android:textSize="12sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:padding="1dp"
+                    android:paddingTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:text="" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="0dp"
+
+                >
+
+                <Button
+                    android:id="@+id/btn_entity_edit"
+                    android:layout_width="80dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/bg_btn_blue"
+                    android:paddingEnd="5dp"
+                    android:text="edit"
+
+                    android:textColor="#FFF"
+                    android:textSize="8sp" />
+
+                <Button
+                    android:id="@+id/btn_entity_detail"
+                    android:layout_width="80dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/bg_btn_blue"
+                    android:paddingEnd="5dp"
+                    android:text="detail"
+
+                    android:textColor="#FFF"
+                    android:textSize="8sp" />
+
+                <Button
+                    android:id="@+id/btn_entity_view"
+                    android:layout_width="80dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/bg_btn_blue"
+                    android:paddingEnd="5dp"
+                    android:text="view"
+
+                    android:textColor="#FFF"
+                    android:textSize="8sp" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

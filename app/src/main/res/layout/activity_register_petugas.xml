@@ -11,6 +11,7 @@
 
 
 <ScrollView
+
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -93,7 +94,7 @@
                     android:fontFamily="@font/mlight"
                     android:text="@string/name"
                     android:textColor="@color/grayPrimary"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
 
                 <EditText
                     android:id="@+id/txt_petugas_name"
@@ -123,9 +124,13 @@
                     android:fontFamily="@font/mlight"
                     android:text="@string/dob"
                     android:textColor="@color/grayPrimary"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
+
+
 
                 <EditText
+                    android:id="@+id/txt_petugas_tgl_lhr"
+                    android:tooltipText="2020-01-13"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:background="@drawable/bg_input_edit"
@@ -152,7 +157,7 @@
                     android:fontFamily="@font/mlight"
                     android:text="@string/email"
                     android:textColor="@color/grayPrimary"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
 
                 <EditText
                     android:id="@+id/txt_petugas_email"
@@ -182,7 +187,7 @@
                     android:fontFamily="@font/mlight"
                     android:text="@string/hp"
                     android:textColor="@color/grayPrimary"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
 
                 <EditText
                     android:id="@+id/txt_petugas_hp"
@@ -212,7 +217,7 @@
                     android:fontFamily="@font/mlight"
                     android:text="@string/passwd"
                     android:textColor="@color/grayPrimary"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
 
                 <EditText
                     android:id="@+id/txt_petugas_passwd"
@@ -242,7 +247,7 @@
                     android:fontFamily="@font/mlight"
                     android:text="@string/passwd2"
                     android:textColor="@color/grayPrimary"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
 
                 <EditText
                     android:id="@+id/txt_petugas_passwd_2"
@@ -253,6 +258,36 @@
                     android:inputType="textPassword"
                     android:lines="1"
                     android:paddingLeft="12dp"
+                    android:textColor="@color/blackPrimary" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginBottom="24dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:fontFamily="@font/mlight"
+                    android:text="Password TWA"
+                    android:textColor="@color/grayPrimary"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/txt_passwd_twa"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_input_edit"
+                    android:fontFamily="@font/mmedium"
+                    android:inputType="textPassword"
+                    android:lines="1"
+                    android:paddingStart="12dp"
                     android:textColor="@color/blackPrimary" />
 
             </LinearLayout>
@@ -274,11 +309,10 @@
                     android:fontFamily="@font/mlight"
                     android:text="@string/lokasi_wisata"
                     android:textColor="@color/grayPrimary"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
 
                 <Spinner
                     android:layout_marginBottom="50dp"
-                    style="@style/TextAppearance.AppCompat.Widget.Button"
                     android:id="@+id/spinner_lok_wisata"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -286,6 +320,8 @@
             </LinearLayout>
 
             <LinearLayout
+                android:gravity="center"
+                android:layout_gravity="center"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -294,31 +330,42 @@
                 android:id="@+id/btn_pendaftaran_petugas_back"
                 android:layout_width="100dp"
                 android:layout_height="45dp"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="0dp"
+
                 android:layout_marginBottom="0dp"
                 android:src="@drawable/back_icon"
                 app:layout_constraintBottom_toBottomOf="@+id/view2"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout"
                 app:layout_constraintVertical_bias="0.267"
                 app:layout_goneMarginTop="0dp" />
-            <Button
-                android:id="@+id/btn_dafatar_petugas"
-                android:layout_width="200dp"
-                android:layout_height="45dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="45dp"
-                android:layout_marginBottom="0dp"
 
-                android:layout_marginTop="0dp"
-                android:background="@drawable/bg_btn_blue"
-                android:text="@string/daftar"
-                android:textColor="#FFF"
-                android:textSize="14sp" />
-        </LinearLayout>
+                <Button
+                    android:id="@+id/btn_daftar_petugas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="45dp"
+                    android:layout_marginBottom="0dp"
+                    android:layout_marginTop="0dp"
+                    android:background="@drawable/bg_btn_blue"
+                    android:text="@string/daftar"
+                    android:textColor="#FFF"
+                    android:textSize="14sp" />
 
         </LinearLayout>
+
+        </LinearLayout>
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
+    <RelativeLayout
+        android:id="@+id/loadingPanel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center" >
+
+        <ProgressBar
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:indeterminate="true" />
+    </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

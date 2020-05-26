@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<androidx.appcompat.widget.Toolbar
+    android:fitsSystemWindows="true"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/cardview_child"
+    app:titleTextColor="@color/whitePrimary"
+    android:id="@+id/toolbar_new"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"/>
+

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:layout_margin="8dp"
+tools:context="com.example.aga.StatusKarcisPetugasActivity">
+
+<View
+    android:id="@+id/view"
+    android:layout_width="match_parent"
+    android:layout_height="310dp"
+    android:background="@drawable/vector_header" />
+
+<View
+    android:layout_width="match_parent"
+    android:layout_height="810dp"
+    android:background="@drawable/bg_getstarted"
+    app:layout_constraintBottom_toBottomOf="parent" />
+
+    <LinearLayout
+        android:gravity="right"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:background="@drawable/cardview_child"
+                android:outlineAmbientShadowColor="@color/grayPrimary"
+                android:id="@+id/appbar"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:textAlignment="center"
+                android:gravity="center_horizontal"
+                android:layout_marginBottom="200dp"
+                >
+
+                <include
+                    android:id="@+id/toolbar_new"
+                    layout="@layout/my_toolbar" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="110dp"
+        android:layout_marginEnd="0dp"
+        android:background="@drawable/cardview"
+        android:gravity="top"
+        android:minHeight="450dp"
+        android:orientation="vertical"
+        android:paddingTop="2dp"
+        android:paddingBottom="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.521">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_data_status_karcis_ptgs"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:foregroundGravity="center"
+            android:scrollbars="vertical">
+
+        </androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
+
+<RelativeLayout
+    android:id="@+id/loadingPanel"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center" >
+
+    <ProgressBar
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:indeterminate="true" />
+</RelativeLayout>
+</RelativeLayout>
