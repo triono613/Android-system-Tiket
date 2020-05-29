@@ -59,6 +59,10 @@ public class SessionManager {
     public  static  final String key_nama_pembayaran = "key_nama_pembayaran";
     public static  final  String key_index = "key_index";
 
+    public static  final String key_jns_claim_position = "key_jns_claim_position";
+    public static  final String key_jns_claim = "key_jns_claim";
+    public static  final String key_nama_claim = "key_nama_claim";
+
 
     public SessionManager (Context context){
         this.context = context;
@@ -157,6 +161,16 @@ public class SessionManager {
     {
         editor.putString(key_mode_pembayaran,mode_pembayaran);
         editor.putString(key_nama_pembayaran,nama_pembayaran);
+        editor.commit();
+        editor.apply();
+
+    }
+
+    public void createSessionJnsClaim(String position ,String jns_claim, String nama_claim)
+    {
+        editor.putString(key_jns_claim_position,position);
+        editor.putString(key_jns_claim,jns_claim);
+        editor.putString(key_nama_claim,nama_claim);
         editor.commit();
         editor.apply();
 
@@ -285,6 +299,14 @@ public class SessionManager {
         return data;
     }
 
+    public HashMap<String,String> getDataJnsClaim() {
+        HashMap<String,String> data = new HashMap<String, String>();
+
+        data.put(key_jns_claim_position, pref.getString(key_jns_claim_position,null));
+        data.put(key_jns_claim, pref.getString(key_jns_claim,null));
+        data.put(key_nama_claim,pref.getString(key_nama_claim, null));
+        return data;
+    }
 
 
 }

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -217,11 +218,11 @@ public class SigninActivity extends AppCompatActivity {
 
                                 if (jObj_child.getString("flag").equals("0")) {
 
-                                    Intent goto_register_success_petugas = new Intent(SigninActivity.this, SuccessRegistrasiWisatawanActivity.class);
-                                    goto_register_success_petugas.putExtra("result_dt_ket", "Belum Dilakukan Verifikasi/Belum Registrasi");
-                                    goto_register_success_petugas.putExtra("result_dt_email", "-");
-                                    goto_register_success_petugas.putExtra("result_dt_berhasil", false);
-                                    startActivity(goto_register_success_petugas);
+                                    Intent i = new Intent(SigninActivity.this, SuccessRegistrasiWisatawanActivity.class);
+                                    i.putExtra("result_dt_ket", "Belum Dilakukan Verifikasi/Belum Registrasi");
+                                    i.putExtra("result_dt_email", "-");
+                                    i.putExtra("result_dt_berhasil", false);
+                                    startActivity(i);
 
 
                                 } else if (jObj_child.getString("flag").equals("1")) {
@@ -232,21 +233,25 @@ public class SigninActivity extends AppCompatActivity {
                                     if (jObj_child.getString("kode_lokasi").equals("null")) {
 
                                         /*  activity for Wisatawan */
+                                        Log.i("SigninActivity", "kode_lokasi ===" + jObj_child.getString("kode_lokasi"));
+                                                Toast.makeText(SigninActivity.this,"kode_lokasi equals null= "+ jObj_child.getString("kode_lokasi"), Toast.LENGTH_LONG).show();
 
-                                        Intent goto_register_success_petugas = new Intent(SigninActivity.this, DashboardWisatawanActivity.class);
-                                        goto_register_success_petugas.putExtra("result_dt_ket", val_ket.toString());
-                                        goto_register_success_petugas.putExtra("result_dt_email", val_email.toString());
-                                        goto_register_success_petugas.putExtra("result_dt_berhasil", true);
-                                        startActivity(goto_register_success_petugas);
+                                        Intent ii = new Intent(SigninActivity.this, DashboardWisatawanActivity.class);
+                                        ii.putExtra("result_dt_ket", val_ket.toString());
+                                        ii.putExtra("result_dt_email", val_email.toString());
+                                        ii.putExtra("result_dt_berhasil", true);
+                                        startActivity(ii);
                                         overridePendingTransition(R.anim.app_getstarted,R.anim.btt);
                                     } else {
                                         /*  activity for Petugas */
 
-                                        Intent goto_register_success_petugas = new Intent(SigninActivity.this, DashboardPetugasActivity.class);
-                                        goto_register_success_petugas.putExtra("result_dt_ket", val_ket.toString());
-                                        goto_register_success_petugas.putExtra("result_dt_email", val_email.toString());
-                                        goto_register_success_petugas.putExtra("result_dt_berhasil", true);
-                                        startActivity(goto_register_success_petugas);
+                                        Toast.makeText(SigninActivity.this,"kode_lokasi not null= "+ jObj_child.getString("kode_lokasi"), Toast.LENGTH_LONG).show();
+
+                                        Intent iii = new Intent(SigninActivity.this, DashboardPetugasActivity.class);
+                                        iii.putExtra("result_dt_ket", val_ket.toString());
+                                        iii.putExtra("result_dt_email", val_email.toString());
+                                        iii.putExtra("result_dt_berhasil", true);
+                                        startActivity(iii);
                                         overridePendingTransition(R.anim.app_getstarted,R.anim.btt);
                                     }
                                 }

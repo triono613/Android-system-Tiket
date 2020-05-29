@@ -375,21 +375,9 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
                                 AlertDialog alert = builder.create();
                                 alert.show();
                             }
-
-
-
                             _spinner_lok_pintu_ptgs.setAdapter(new ArrayAdapter<SpinnerListWisata>(PesanKarcisPetugasActivity.this, android.R.layout.simple_spinner_dropdown_item,arrListWisata) );
-
-
                             String compareValue = sessionManager.getDataSetupPintu().get(SessionManager.key_index);
                             Log.i("","compareValue "+compareValue);
-
-
-//                            _spinner_lok_pintu_ptgs.setSelection(Integer.parseInt(compareValue));
-
-
-
-//                            }
                         } catch (JSONException e) {
                             Log.i("triono", "error ===" + e.toString() );
                             e.printStackTrace();

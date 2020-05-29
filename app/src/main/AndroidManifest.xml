@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
+        <activity android:name=".ClaimPetugasActivity"></activity>
         <activity android:name=".StatusKarcisPetugasActivity" />
         <activity android:name=".StatusKarcisActivity" />
         <activity android:name=".SetupPintuActivity" />

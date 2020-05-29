@@ -90,8 +90,9 @@ public class SuccessRegistrasiWisatawanActivity extends AppCompatActivity {
         btn_continue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goto_register_getstarted = new Intent(SuccessRegistrasiWisatawanActivity.this, SigninActivity.class);
-                startActivity(goto_register_getstarted);
+                sessionManager.logout();
+                Intent i = new Intent(SuccessRegistrasiWisatawanActivity.this, SigninActivity.class);
+                startActivity(i);
 
                 overridePendingTransition(R.anim.app_getstarted,R.anim.btt);
             }
