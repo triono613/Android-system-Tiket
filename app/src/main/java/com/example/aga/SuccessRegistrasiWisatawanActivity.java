@@ -64,9 +64,14 @@ public class SuccessRegistrasiWisatawanActivity extends AppCompatActivity {
 
 
 
-        Log.i("SigninActivity","sessionManager.isLoggedIn() = "+ sessionManager.isLoggedIn() );
-        Log.i("SigninActivity","sessionManager.getFlag= "+ sessionManager.getFlag());
-        Log.i("SigninActivity","SessionManager.key_kode_lokasi= "+  sessionManager.getUserDetail().get(SessionManager.key_kode_lokasi));
+        Log.i("","sessionManager.isLoggedIn() = "+ sessionManager.isLoggedIn() );
+        Log.i("","sessionManager.getFlag= "+ sessionManager.getFlag());
+        Log.i("","SessionManager.key_kode_lokasi= "+  sessionManager.getUserDetail().get(SessionManager.key_kode_lokasi));
+
+        Log.i("","sessionIntentFlag= "+ sessionIntentFlag );
+        Log.i("","sessionIntentKet= "+ sessionIntentKet );
+        Log.i("","sessionIntentEmail= "+ sessionIntentEmail );
+        Log.i("","sessionIntentBerhasil= "+ sessionIntentBerhasil );
 
 
 
@@ -90,18 +95,82 @@ public class SuccessRegistrasiWisatawanActivity extends AppCompatActivity {
         btn_continue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sessionManager.logout();
-                Intent i = new Intent(SuccessRegistrasiWisatawanActivity.this, SigninActivity.class);
-                startActivity(i);
 
-                overridePendingTransition(R.anim.app_getstarted,R.anim.btt);
+                assert sessionIntentFlag != null;
+                switch (sessionIntentFlag){
+                    case "ClaimPetugas":
+                        Intent i = new Intent(SuccessRegistrasiWisatawanActivity.this, DashboardPetugasActivity.class);
+                        startActivity(i);
+                        break;
+                    case "flagPesanKarcisPetugas":
+                        Intent ii = new Intent(SuccessRegistrasiWisatawanActivity.this, DashboardPetugasActivity.class);
+                        startActivity(ii);
+                        break;
+                    case "flagPesanKarcisWisatawan":
+                        Intent a = new Intent(SuccessRegistrasiWisatawanActivity.this, DashboardWisatawanActivity.class);
+                        startActivity(a);
+                        break;
+                    case "flagSetupPintu":
+                        Intent b = new Intent(SuccessRegistrasiWisatawanActivity.this, DashboardPetugasActivity.class);
+                        startActivity(b);
+                        break;
+                    case "flagEditPasswordPetugasTrue":
+                        Intent c = new Intent(SuccessRegistrasiWisatawanActivity.this, DashboardPetugasActivity.class);
+                        startActivity(c);
+                        sessionManager.logout();
+                        break;
+                    case "flagEditPasswordPetugasFalse":
+                        Intent d = new Intent(SuccessRegistrasiWisatawanActivity.this, DashboardPetugasActivity.class);
+                        startActivity(d);
+                        break;
+                    default:
+                        Log.i("","logout ini");
+                        sessionManager.logout();
+                        Intent x = new Intent(SuccessRegistrasiWisatawanActivity.this, SigninActivity.class);
+                        startActivity(x);
+                }
+
+            /*
+                if (sessionIntentFlag.equals("ClaimPetugas")){
+                    Intent i = new Intent(SuccessRegistrasiWisatawanActivity.this, DashboardPetugasActivity.class);
+                    startActivity(i);
+                }
+                if(sessionIntentFlag.equals("flagPesanKarcisPetugas")){
+                    Intent i = new Intent(SuccessRegistrasiWisatawanActivity.this, DashboardPetugasActivity.class);
+                    startActivity(i);
+                }
+                if(sessionIntentFlag.equals("flagPesanKarcisWisatawan")){
+                    Intent i = new Intent(SuccessRegistrasiWisatawanActivity.this, DashboardWisatawanActivity.class);
+                    startActivity(i);
+                }
+                if (sessionIntentFlag.equals("flagSetupPintu")) {
+                    Intent i = new Intent(SuccessRegistrasiWisatawanActivity.this, DashboardPetugasActivity.class);
+                    startActivity(i);
+                }
+                if ( sessionIntentFlag.equals("flagEditPasswordPetugasTrue")) {
+                    sessionManager.logout();
+                    Intent i = new Intent(SuccessRegistrasiWisatawanActivity.this, DashboardPetugasActivity.class);
+                    startActivity(i);
+                }
+                if ( sessionIntentFlag.equals("flagEditPasswordPetugasFalse")) {
+                    Intent i = new Intent(SuccessRegistrasiWisatawanActivity.this, DashboardPetugasActivity.class);
+                    startActivity(i);
+                }
+                else {
+                    Log.i("","logout ini");
+                    sessionManager.logout();
+                    Intent i = new Intent(SuccessRegistrasiWisatawanActivity.this, SigninActivity.class);
+                    startActivity(i);
+                }
+                */
+
             }
         });
 
         btn_back_regis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sessionManager.logout();
+//                sessionManager.logout();
                 finish();
 
             }

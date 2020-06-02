@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -36,6 +37,7 @@ public class SigninActivity extends AppCompatActivity {
     SessionManager sessionManager;
     Button btn_login_user;
     EditText txt_login_email;
+    LinearLayout _linear_lupa_password;
 
     @Override
     public void onBackPressed() {
@@ -59,11 +61,10 @@ public class SigninActivity extends AppCompatActivity {
         setupView();
         btn_login_user.setEnabled(true);
         btn_login_user.setText("Login");
-
         sessionManager = new SessionManager(getApplicationContext());
         findViewById(R.id.loadingPanel).setVisibility(View.GONE);
         txt_login_email = (EditText) findViewById(R.id.txt_login_email);
-
+        _linear_lupa_password = (LinearLayout) findViewById(R.id.linear_lupa_password);
 
         Log.i("SigninActivity","sessionManager.isLoggedIn() = "+ sessionManager.isLoggedIn() );
         Log.i("SigninActivity","sessionManager.getFlag= "+ sessionManager.getFlag());
@@ -71,47 +72,25 @@ public class SigninActivity extends AppCompatActivity {
 
 
 
-//        if (sessionManager.isLoggedIn()) {
-//            if (sessionManager.getFlag().equals("1")) {
-//                if (sessionManager.getUserDetail().get(SessionManager.key_kode_lokasi) == "1") {
-//                    Intent intent = new Intent(SigninActivity.this, DashboardPetugasActivity.class);
-//                    startActivity(intent);
-//                    finish();
-//                } else {
-//                    Intent intent = new Intent(SigninActivity.this, DashboardWisatawanActivity.class);
-//                    startActivity(intent);
-//                    finish();
-//                }
-//            }
-//
-//        }
-//        else
-//        {
-//            Toast.makeText(SigninActivity.this, "check session SigninActivity: " + sessionManager.isLoggedIn() + " - " + sessionManager.getFlag() + " - " + (sessionManager.getUserDetail().get(SessionManager.key_kode_lokasi)), Toast.LENGTH_LONG).show();
-//            Intent intent = new Intent(SigninActivity.this, GetStartedActivity.class);
-//            startActivity(intent);
-//            finish();
-//        }
-
-
 
         if( sessionManager.isLoggedIn() ){
+//            Intent intent;
+            /*
+            switch (sessionManager.getFlag())
+            {
+                case "1":
+                    intent = new Intent(SigninActivity.this, DashboardWisatawanActivity.class);
+                    break;
+                case "0":
+                    intent = new Intent(SigninActivity.this, DashboardPetugasActivity.class);
+                    break;
+                default:
+                    intent = new Intent(SigninActivity.this,SigninActivity.class);
+                    break;
+            }
+            */
 
             Intent intent;
-
-//            switch (sessionManager.getFlag())
-//            {
-//                case "1":
-//                    intent = new Intent(SigninActivity.this, DashboardWisatawanActivity.class);
-//                    break;
-//                case "0":
-//                    intent = new Intent(SigninActivity.this, DashboardPetugasActivity.class);
-//                    break;
-//                default:
-//                    intent = new Intent(SigninActivity.this,SigninActivity.class);
-//                    break;
-//            }
-
             switch (sessionManager.getFlag())
             {
                 case "1":
@@ -134,15 +113,17 @@ public class SigninActivity extends AppCompatActivity {
             finish();
         }
 
-
         btn_login_user.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
-
                 getDataPostVolley();
-
             }
+        });
+
+        _linear_lupa_password.setOnClickListener(v -> {
+                Intent x = new Intent(SigninActivity.this, LupaPasswordActivity.class);
+                startActivity(x);
         });
 
 
@@ -193,6 +174,10 @@ public class SigninActivity extends AppCompatActivity {
                             Log.i("triono ","jObj "+ jObj);
                             Log.i("triono ","sukses "+ sukses);
 
+                            btn_login_user.setEnabled(true);
+                            btn_login_user.setText("LOGIN");
+                            btn_login_user.refreshDrawableState();
+
                             if(sukses) {
 
                                 String data = jObj.getString("data");
@@ -222,6 +207,7 @@ public class SigninActivity extends AppCompatActivity {
                                     i.putExtra("result_dt_ket", "Belum Dilakukan Verifikasi/Belum Registrasi");
                                     i.putExtra("result_dt_email", "-");
                                     i.putExtra("result_dt_berhasil", false);
+                                    i.putExtra("result_dt_flag", "flagSignin");
                                     startActivity(i);
 
 
@@ -240,6 +226,7 @@ public class SigninActivity extends AppCompatActivity {
                                         ii.putExtra("result_dt_ket", val_ket.toString());
                                         ii.putExtra("result_dt_email", val_email.toString());
                                         ii.putExtra("result_dt_berhasil", true);
+                                        ii.putExtra("result_dt_flag", "");
                                         startActivity(ii);
                                         overridePendingTransition(R.anim.app_getstarted,R.anim.btt);
                                     } else {
@@ -251,6 +238,7 @@ public class SigninActivity extends AppCompatActivity {
                                         iii.putExtra("result_dt_ket", val_ket.toString());
                                         iii.putExtra("result_dt_email", val_email.toString());
                                         iii.putExtra("result_dt_berhasil", true);
+                                        iii.putExtra("result_dt_flag", "");
                                         startActivity(iii);
                                         overridePendingTransition(R.anim.app_getstarted,R.anim.btt);
                                     }

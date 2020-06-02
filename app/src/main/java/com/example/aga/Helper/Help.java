@@ -12,6 +12,8 @@ import java.util.Date;
 
 public class Help {
 
+    private Object ConnectivityManager;
+
     public static boolean isJSONValid(String test) {
         try {
             new JSONObject(test);
@@ -44,4 +46,9 @@ public class Help {
         Date date = new Date();
         return dateFormat.format(date);
     }
+
+   
+
+
+
 }

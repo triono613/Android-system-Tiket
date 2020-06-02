@@ -2,6 +2,7 @@ package com.example.aga;
 
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -9,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -52,6 +54,7 @@ public class StatusKarcisPetugasActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     Toolbar _toolbar;
     MenuItem _cariToolbar;
+    Button _btn_entity_edit;
 
 
     RecyclerView.LayoutManager layoutManager;
@@ -63,24 +66,40 @@ public class StatusKarcisPetugasActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_status_karcis_petugas);
+//        setContentView(R.layout.entity_status_karcis_petugas);
         entityStatusKarcisPetugasArrayList = new ArrayList<>();
         findViewById(R.id.loadingPanel).setVisibility(View.GONE);
         sessionManager = new SessionManager(getApplicationContext());
-//        recyclerView = (RecyclerView) findViewById(R.id.recycler_view_data_status_karcis_ptgs);
 
+//        recyclerView = (RecyclerView) findViewById(R.id.recycler_view_data_status_karcis_ptgs);
 //        jsonrequest("informasi_status_karcis");
+
+        @SuppressLint("InflateParams") View inflatedView = getLayoutInflater().inflate(R.layout.entity_status_karcis, null);
+        _btn_entity_edit = (Button) inflatedView.findViewById(R.id.btn_entity_edit);
+//        _btn_entity_edit.setText("Hello!");
 
         _toolbar = (Toolbar)  findViewById(R.id.toolbar_new);
         setSupportActionBar(_toolbar);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_data_status_karcis_ptgs);
 
+//        _btn_entity_edit = (Button) findViewById(R.id.btn_entity_edit_ptgs);
+
+
+        _btn_entity_edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                if(sessionManager.isLoggedIn()) {
+                    Intent i = new Intent(StatusKarcisPetugasActivity.this,EditPasswordPetugasActivity.class);
+                    startActivity(i);
+//                }
+
+            }
+        });
+
 
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
-
-
-
 
 
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
@@ -91,18 +110,14 @@ public class StatusKarcisPetugasActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         Log.i("triono", "response 1 ===" + response );
-
-
                         try {
                             findViewById(R.id.loadingPanel).setVisibility(View.GONE);
                             if( Help.isJSONValid(response) ){
-
                                 ArrayList dx = new ArrayList<>();
                                 JSONObject jsonObject = new JSONObject(response.toString());
 
                                 if( jsonObject.getBoolean("success") ) {
                                     JSONArray jsonArray = jsonObject.getJSONArray("data");
-
                                     Log.i("triono", "jsonObject.getBoolean() ===" + jsonObject.getBoolean("success") );
                                     String _va_no;
                                     String _tgl_kunjungan;
@@ -116,9 +131,7 @@ public class StatusKarcisPetugasActivity extends AppCompatActivity {
                                         _tgl_kunjungan = jsonObject1.getString("tgl_kunjungan");
                                         _status = jsonObject1.getString("status");
                                         _nama = jsonObject1.getString("nama");
-
                                         Log.i("petugas","_va_no "+_va_no);
-
                                         entityStatusKarcisPetugasArrayList.add(new EntityStatusKarcisPetugas(_va_no,_tgl_kunjungan,_status,_nama));
                                     }
 
@@ -174,6 +187,8 @@ public class StatusKarcisPetugasActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+
+
 
 
     }
@@ -234,32 +249,17 @@ public class StatusKarcisPetugasActivity extends AppCompatActivity {
         MenuItem searchIem = menu.findItem(R.id.search);
         final SearchView searchView = (SearchView) searchIem.getActionView();
 
-
-//        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
-//        searchView.setSearchableInfo(sessionManager.getS);
-
-
-//        MenuInflater inflater = getMenuInflater();
-//        inflater.inflate(R.menu.example_menu, menu);
-//        MenuItem searchIem = menu.findItem(R.id.search);
-//        final  searchView = (androidx.appcompat.widget.SearchView) searchIem.getActionView();
-
         searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-//                Toast.makeText(getApplicationContext(), "dddddd " + query, Toast.LENGTH_LONG).show();
                 jsonrequest(query);
                 return true;
-
             }
             @Override
             public boolean onQueryTextChange(String nextText) {
-
                 nextText = nextText.toLowerCase();
                 ArrayList<EntityStatusKarcisPetugas> dataFilter =new ArrayList<EntityStatusKarcisPetugas>();
-
-
                 for(EntityStatusKarcisPetugas data : entityStatusKarcisPetugasArrayList){
                     String va = data.getVa().toLowerCase();
                     String tgl = data.getTgl().toLowerCase();
@@ -292,8 +292,6 @@ public class StatusKarcisPetugasActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         Log.i("TAG", "response 1 ===" + response );
-
-
                         try {
                             findViewById(R.id.loadingPanel).setVisibility(View.GONE);
                             if( Help.isJSONValid(response) ){

@@ -124,13 +124,16 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
 
         final String KL = sessionManager.getUserDetail().get(SessionManager.key_kode_lokasi);
 
-        spinnerLokPintuPtgs("daftar_lokasi_pintu", KL);
+//        spinnerLokPintuPtgs("daftar_lokasi_pintu", KL);
+
+        spinnerLokPintuPtgs("petugas_daftar_lokasi_wisata", KL);
         spinnerJnsByrPtgs("informasi_mode_pembayaran","");
         _tgl_kunjungan_ptgs.setText(Help.getDateTime());
         _tgl_kunjungan_ptgs.setEnabled(false);
         _ttl_ptgs.setEnabled(false);
         _ttl_tmbhn_ptgs.setEnabled(false);
         _grand_ttl_ptgs.setEnabled(false);
+        _spinner_lok_pintu_ptgs.setEnabled(false);
 
 
 
@@ -342,8 +345,8 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
 
                                 Log.i("","spinner pintu response= "+response);
 
-                                String nm_obj_wisata;
-                                String kd_lokasi;
+                                String lokasi_pintu;
+                                String nama_pintu;
                                 arrListWisata.clear();
 
                                 findViewById(R.id.loadingPanel).setVisibility(View.GONE);
@@ -352,13 +355,14 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
                                     JSONArray jsonArray = jsonObject.getJSONArray("data");
                                     for (int i = 0; i <jsonArray.length();i++ ) {
                                         JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-                                        nm_obj_wisata = jsonObject1.getString("nama");
-                                        kd_lokasi = jsonObject1.getString("kode_lokasi");
+                                        lokasi_pintu = jsonObject1.getString("lokasi_pintu");
+                                        nama_pintu = jsonObject1.getString("nama_pintu");
 
-                                        Log.i("","spinner kd_lokasi= "+kd_lokasi);
-                                        Log.i("","spinner nm_obj_wisata= "+nm_obj_wisata);
+                                        Log.i("tag","kode_ksda= "+lokasi_pintu);
+                                        Log.i("tag","nama= "+nama_pintu);
 
-                                        arrListWisata.add(new SpinnerListWisata(kd_lokasi,nm_obj_wisata));
+                                        arrListWisata.add(new SpinnerListWisata(lokasi_pintu,nama_pintu));
+
                                     }
                                 } else {
 
@@ -369,7 +373,7 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
                                         .setCancelable(false)
                                         .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int id) {
-                                                sessionManager.logout();
+//                                                sessionManager.logout();
                                             }
                                         });
                                 AlertDialog alert = builder.create();
@@ -396,9 +400,9 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> obj = new HashMap<String, String>();
-//                final String ksda_val =  sessionManager.getDataLokWisPesankarcisWisatawanKsda().get(SessionManager.key_kd_ksda);
-                Log.i("","KL = "+ KL);
-                obj.put("kode_ksda", KL);
+                final String key_email =  sessionManager.getUserDetail().get(SessionManager.key_email);
+                Log.i("","key_email = "+ key_email);
+                obj.put("alamat_email", key_email);
                 return obj;
             }
         };
@@ -651,6 +655,8 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
                                     i.putExtra("result_dt_ket", "Pemesanan Anda Berhasil Silahkan Cek email!");
                                     i.putExtra("result_dt_email", "");
                                     i.putExtra("result_dt_berhasil", berhasil);
+                                    i.putExtra("result_dt_flag", "flagPesanKarcisPetugas");
+
                                     startActivity(i);
                                 }
                             }

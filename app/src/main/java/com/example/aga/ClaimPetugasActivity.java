@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -94,7 +95,6 @@ public class ClaimPetugasActivity extends AppCompatActivity implements DatePicke
         _text_contact_pelapor=(TextView) findViewById(R.id.text_contact_pelapor);
         _text_nama_pengunjung=(TextView) findViewById(R.id.text_nama_pengunjung);
         _text_contact_pengunjung=(TextView) findViewById(R.id.text_contact_pengunjung);
-        _text_contact_pengunjung=(TextView) findViewById(R.id.text_contact_pengunjung);
         _spinner_jns_klaim_ptgs = (Spinner) findViewById(R.id.spinner_jns_klaim_ptgs);
         _text_nom_claim = (TextView) findViewById(R.id.text_nom_claim);
         _text_ket_claim = (TextView) findViewById(R.id.text_ket_claim);
@@ -130,7 +130,55 @@ public class ClaimPetugasActivity extends AppCompatActivity implements DatePicke
         _btn_order_claim_ptgs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendData("input_data_klaim","");
+
+
+
+                final String no_va = _no_va.getText().toString();
+                final String atas_nama = _atas_nama.getText().toString();
+                final String text_contact_pelapor = _text_contact_pelapor.getText().toString();
+                final String text_nama_pengunjung = _text_nama_pengunjung.getText().toString();
+                final String text_contact_pengunjung = _text_contact_pengunjung.getText().toString();
+                final String text_nom_claim = _text_nom_claim.getText().toString();
+                final String text_ket_claim  = _text_ket_claim.getText().toString();
+                final String tgl_kejadian  = _tgl_kejadian.getText().toString();
+                final String text_lokasi_kejadian  = _text_lokasi_kejadian.getText().toString();
+
+
+
+                if(TextUtils.isEmpty(no_va) ) {
+                    _no_va.setError("No va Masih Kosong!");
+                }
+                else if(TextUtils.isEmpty(atas_nama) ) {
+                    _atas_nama.setError("Atas Nama Masih Kosong!");
+                }
+//                if  (!EMAIL_ADDRESS_PATTERN.matcher(email_val).matches() ) {
+//                    ptgsEmail.setError("Alamat Email Invalid!");
+//                }
+
+                else if(TextUtils.isEmpty(text_contact_pelapor) ) {
+                    _text_contact_pelapor.setError("Kontak Pelapor Masih Kosong!");
+                }
+                else if(TextUtils.isEmpty(text_nama_pengunjung) ) {
+                    _text_nama_pengunjung.setError("Nama Pengunjung Masih Kosong!");
+                }
+                else if(TextUtils.isEmpty(text_contact_pengunjung) ) {
+                    _text_contact_pengunjung.setError("Kontak Pengunjung Masih Kosong ");
+                }
+                else if(TextUtils.isEmpty(text_nom_claim) ) {
+                    _text_nom_claim.setError("Nominal Klaim Masih Kosong!");
+                }
+                else if(TextUtils.isEmpty(text_ket_claim) ) {
+                    _text_ket_claim.setError("Nominal Klaim Masih Kosong!");
+                }
+                else if(TextUtils.isEmpty(tgl_kejadian) ) {
+                    _tgl_kejadian.setError("Tgl Kejadian Masih Kosong!");
+                }
+                else if(TextUtils.isEmpty(text_lokasi_kejadian)){
+                    _text_lokasi_kejadian.setError("Lokasi Kejadian Masih Kosong!");
+                }
+                else {
+                    sendData("input_data_klaim","");
+                }
             }
         });
 
@@ -355,10 +403,11 @@ public class ClaimPetugasActivity extends AppCompatActivity implements DatePicke
                                     */
 
 
+//                                    Intent ii = new Intent(ClaimPetugasActivity.this, SuccessClaimActivity.class);
                                     Intent ii = new Intent(ClaimPetugasActivity.this, SuccessRegistrasiWisatawanActivity.class);
                                     ii.putExtra("result_dt_ket", "Claim berhasil Diinput");
                                     ii.putExtra("result_dt_email", va_no);
-                                    ii.putExtra("result_dt_flag", "1");
+                                    ii.putExtra("result_dt_flag", "ClaimPetugas");
                                     ii.putExtra("result_dt_berhasil", true);
                                     startActivity(ii);
                                 } else {
@@ -369,7 +418,7 @@ public class ClaimPetugasActivity extends AppCompatActivity implements DatePicke
                                         .setCancelable(false)
                                         .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int id) {
-                                                sessionManager.logout();
+//                                                sessionManager.logout();
                                             }
                                         });
                                 AlertDialog alert = builder.create();

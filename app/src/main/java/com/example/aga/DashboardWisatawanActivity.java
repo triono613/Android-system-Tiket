@@ -1,6 +1,5 @@
 package com.example.aga;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,7 +15,9 @@ import com.example.aga.Adapter.SessionManager;
 
 public class DashboardWisatawanActivity extends AppCompatActivity {
     Button btn_logout_wstn;
-    LinearLayout _card_pemesanan_karcis_wstn,_card_status_karcis_wstn;
+    LinearLayout _card_pemesanan_karcis_wstn;
+    LinearLayout _card_status_karcis_wstn;
+    LinearLayout _card_ganti_password_wstwn;
     SessionManager sessionManager;
     TextView _textview_email_session;
 
@@ -46,6 +47,7 @@ public class DashboardWisatawanActivity extends AppCompatActivity {
         _card_pemesanan_karcis_wstn = (LinearLayout) findViewById(R.id.card_pemesanan_karcis_wstn);
         _card_status_karcis_wstn = (LinearLayout) findViewById(R.id.card_status_karcis_wstn);
         _textview_email_session = (TextView) findViewById(R.id.textview_email_session);
+        _card_ganti_password_wstwn = (LinearLayout) findViewById(R.id.card_ganti_password_wstwn);
 
         sessionManager = new SessionManager(getApplicationContext());
 
@@ -66,35 +68,28 @@ public class DashboardWisatawanActivity extends AppCompatActivity {
             }
         });
 
-        btn_logout_wstn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(DashboardWisatawanActivity.this);
-                builder.setMessage("Anda Yakin Akan Keluar ?")
-                        .setCancelable(false)
-                        .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
+        btn_logout_wstn.setOnClickListener(v -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(DashboardWisatawanActivity.this);
+            builder.setMessage("Anda Yakin Akan Keluar ?")
+                    .setCancelable(false)
+                    .setPositiveButton("Ya", (dialog, id) -> {
 //                                DashboardPetugasActivity.this.onSuperBackPressed();
-                                sessionManager.logout();
-                            }
-                        })
-                        .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        });
-                AlertDialog alert = builder.create();
-                alert.show();
-            }
+                        sessionManager.logout();
+                    })
+                    .setNegativeButton("Tidak", (dialog, id) -> dialog.cancel());
+            AlertDialog alert = builder.create();
+            alert.show();
         });
 
-        _card_status_karcis_wstn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(DashboardWisatawanActivity.this, StatusKarcisActivity.class);
-                startActivity(i);
-                overridePendingTransition(R.anim.app_getstarted,R.anim.btt);
-            }
+        _card_status_karcis_wstn.setOnClickListener(v -> {
+            Intent i = new Intent(DashboardWisatawanActivity.this, StatusKarcisActivity.class);
+            startActivity(i);
+//            overridePendingTransition(R.anim.app_getstarted,R.anim.btt);
+        });
+
+        _card_ganti_password_wstwn.setOnClickListener(v -> {
+            Intent x = new Intent(DashboardWisatawanActivity.this, EditPasswordWisatawanActivity.class);
+            startActivity(x);
         });
 
 

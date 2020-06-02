@@ -319,19 +319,20 @@ public class RegisterPetugasActivity extends AppCompatActivity implements DatePi
                             String ket = jObj2.getString("keterangan");
                             String email = jObj2.getString("alamat_email");
                             String name = jObj2.getString("nama");
-                            Boolean sukses = jObj.getBoolean("success");
+                            boolean sukses = jObj.getBoolean("success");
 
 //                            Log.i("triono", "data ===" + data );
 //                            Log.i("triono", "keterangan ===" + ket );
 //                            Log.i("triono", "sukses ===" + sukses );
 
                             if (sukses){
-                                Intent goto_register_success_petugas = new Intent(RegisterPetugasActivity.this, SuccessRegistrasiWisatawanActivity.class);
-                                goto_register_success_petugas.putExtra("result_dt_ket", ket);
-                                goto_register_success_petugas.putExtra("result_dt_email", email);
-                                goto_register_success_petugas.putExtra("result_dt_berhasil", berhasil);
+                                Intent i = new Intent(RegisterPetugasActivity.this, SuccessRegistrasiWisatawanActivity.class);
+                                i.putExtra("result_dt_ket", ket);
+                                i.putExtra("result_dt_email", email);
+                                i.putExtra("result_dt_berhasil", berhasil);
+                                i.putExtra("result_dt_flag", "");
 
-                                startActivity(goto_register_success_petugas);
+                                startActivity(i);
                                 overridePendingTransition(R.anim.app_getstarted,R.anim.app_splash);
                             }
                         } catch (JSONException e) {
@@ -372,15 +373,24 @@ public class RegisterPetugasActivity extends AppCompatActivity implements DatePi
                 final String spinnerLokWisata_val = spinnerLokWisata.getSelectedItem().toString();
                 final String[] split =  spinnerLokWisata_val.split("-");
 
+                Log.i("","nama_val= "+nama_val);
+                Log.i("","email_val= "+email_val);
+                Log.i("","tgllhr_val= "+tgllhr_val);
+                Log.i("","phone_val= "+phone_val);
+                Log.i("","passwd1_val= "+passwd1_val);
+                Log.i("","passwd2_val= "+passwd2_val);
+                Log.i("","passwd_twa_val= "+passwd_twa_val);
+                Log.i("","kode_lokasi= "+split[0]);
+
                 obj.put("nama",nama_val);
-                obj.put("alamat_email",email_val );
                 obj.put("tgl_lahir", tgllhr_val);
-                obj.put("jenis_kelamin", "L");
                 obj.put("sellular_no", phone_val);
-                obj.put("kode_lokasi", split[0]);
-                obj.put("flag", "daftar_petugas");
-                obj.put("kunci_twa", passwd_twa_val);
+                obj.put("alamat_email",email_val );
+                obj.put("jenis_kelamin", "L");
                 obj.put("kata_kunci", passwd1_val );
+                obj.put("kode_lokasi", split[0].toString());
+                obj.put("kunci_twa", passwd_twa_val);
+//                obj.put("flag", "daftar_petugas");
                 return obj;
             }
 

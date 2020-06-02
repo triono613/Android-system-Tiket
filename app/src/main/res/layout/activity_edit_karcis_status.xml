@@ -4,45 +4,49 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ClaimPetugasActivity">
+    tools:context=".EditKarcisStatusActivity">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="310dp"
-                android:background="@drawable/vector_header"
-                />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="810dp"
-                android:background="@drawable/bg_getstarted"
-                app:layout_constraintBottom_toBottomOf="parent" />
 
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="80dp"
-                android:fontFamily="@font/mregular"
-                android:text="Pengajuan Klaim"
-                android:textColor="#fff"
-                android:textSize="24sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:fontFamily="@font/mlight"
-                android:lineSpacingExtra="9dp"
-                android:text="Petugas"
-                android:textAlignment="center"
-                android:textColor="#fff"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="310dp"
+        android:background="@drawable/vector_header"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="810dp"
+        android:background="@drawable/bg_getstarted"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="80dp"
+        android:fontFamily="@font/mregular"
+        android:text="Perubahan Status Karcis"
+        android:textColor="#fff"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:fontFamily="@font/mlight"
+        android:lineSpacingExtra="9dp"
+        android:text="Petugas"
+        android:textAlignment="center"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
 
     <ScrollView
@@ -58,7 +62,7 @@
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
                 android:layout_marginTop="155dp"
-                android:id="@+id/linearLayoutPtgs"
+                android:id="@+id/linearLayoutptgs_eks"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
@@ -88,229 +92,56 @@
                         android:textStyle="bold"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="6dp"
+                        android:layout_marginBottom="12dp"
                         android:fontFamily="@font/mlight"
-                        android:text="No VA"
-                        android:textColor="@color/grayPrimary"
-                        android:textSize="16sp" />
-
-                    <LinearLayout
-                        android:layout_gravity="center"
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <EditText
-                            android:id="@+id/no_va"
-                            android:layout_width="250dp"
-                            android:layout_height="50dp"
-                            android:background="@drawable/bg_input_edit"
-                            android:fontFamily="@font/mmedium"
-                            android:inputType="number"
-                            android:clickable="true"
-                            android:paddingStart="12dp"
-                            android:textColor="@color/blackPrimary"
-                            android:focusable="true" />
-
-
-                        <Button
-                            android:layout_gravity="center_horizontal"
-                            android:id="@+id/btn_find_va"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="5dp"
-                            android:layout_marginBottom="0dp"
-
-                            android:background="@drawable/bg_btn_blue"
-                            android:text="Cari"
-                            android:fontFamily="@font/mmedium"
-                            android:textColor="@color/whitePrimary"
-                            android:textSize="12sp" />
-                    </LinearLayout>
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="24dp"
-                    android:layout_marginRight="24dp"
-                    android:layout_marginBottom="24dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="6dp"
-                        android:fontFamily="@font/mlight"
-                        android:text="Atas Nama"
-                        android:textColor="@color/grayPrimary"
-                        android:textSize="16sp" />
-
-                    <EditText
-                        android:id="@+id/text_atas_nama"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:background="@drawable/bg_input_edit"
-                        android:fontFamily="@font/mmedium"
-                        android:inputType="text"
-                        android:clickable="true"
-                        android:lines="1"
-                        android:paddingLeft="12dp"
-                        android:textColor="@color/blackPrimary" />
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="24dp"
-                    android:layout_marginRight="24dp"
-                    android:layout_marginBottom="24dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="6dp"
-                        android:fontFamily="@font/mlight"
-                        android:text="Kontak Pelapor"
-                        android:textColor="@color/grayPrimary"
-                        android:textSize="16sp" />
-
-                    <EditText
-                        android:id="@+id/text_contact_pelapor"
-                        android:layout_width="match_parent"
-                        android:layout_height="90dp"
-                        android:background="@drawable/bg_input_edit"
-                        android:fontFamily="@font/mmedium"
-                        android:clickable="true"
-                        android:gravity="top|left"
-                        android:inputType="textMultiLine"
-                        android:overScrollMode="always"
-                        android:scrollbarStyle="outsideOverlay"
-                        android:scrollbars="vertical"
-                        android:lines="3"
-                        android:paddingStart="12dp"
-                        android:textColor="@color/blackPrimary" />
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="24dp"
-                    android:layout_marginRight="24dp"
-                    android:layout_marginBottom="24dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="6dp"
-                        android:fontFamily="@font/mlight"
-                        android:text="Nama Pengunjung"
-                        android:textColor="@color/grayPrimary"
-                        android:textSize="16sp" />
-
-                    <EditText
-                        android:id="@+id/text_nama_pengunjung"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:background="@drawable/bg_input_edit"
-                        android:fontFamily="@font/mmedium"
-                        android:inputType="text"
-                        android:clickable="true"
-                        android:lines="1"
-                        android:paddingStart="12dp"
-                        android:textColor="@color/blackPrimary"
-                        android:focusable="true" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="24dp"
-                    android:layout_marginRight="24dp"
-                    android:layout_marginBottom="24dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="6dp"
-                        android:fontFamily="@font/mlight"
-                        android:text="Kontak Pengunjung"
-                        android:textColor="@color/grayPrimary"
-                        android:textSize="16sp" />
-
-                    <EditText
-                        android:id="@+id/text_contact_pengunjung"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:background="@drawable/bg_input_edit"
-                        android:fontFamily="@font/mmedium"
-                        android:inputType="text"
-                        android:clickable="true"
-                        android:lines="1"
-                        android:paddingLeft="12dp"
-                        android:textColor="@color/blackPrimary" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="24dp"
-                    android:layout_marginRight="24dp"
-                    android:layout_marginBottom="24dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:textStyle="bold"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="6dp"
-                        android:fontFamily="@font/mlight"
-                        android:text="Jenis Klaim"
+                        android:text="Lokasi Pintu"
                         android:textColor="@color/grayPrimary"
                         android:textSize="16sp" />
 
                     <Spinner
-                        android:id="@+id/spinner_jns_klaim_ptgs"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="24dp"
-                    android:layout_marginRight="24dp"
-                    android:layout_marginBottom="24dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="6dp"
+                        android:textAlignment="inherit"
+                        android:id="@+id/spinner_lok_pintu_ptgs_eks"
+                        android:layout_marginBottom="12dp"
                         android:fontFamily="@font/mlight"
-                        android:text="Nominal Klaim"
+                        android:text="Tgl Kunjungan"
                         android:textColor="@color/grayPrimary"
-                        android:inputType="number"
                         android:textSize="16sp" />
 
                     <EditText
-                        android:id="@+id/text_nom_claim"
-                        android:inputType="number"
+                        android:id="@+id/tgl_kunjungan_ptgs_eks"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:background="@drawable/bg_input_edit"
                         android:fontFamily="@font/mmedium"
+                        android:inputType="text"
+                        android:clickable="true"
+                        android:lines="1"
                         android:paddingLeft="12dp"
                         android:textColor="@color/blackPrimary" />
 
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginRight="24dp"
+                    android:layout_marginBottom="24dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:textStyle="bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:fontFamily="@font/mlight"
+                        android:text="Karcis Utama"
+                        android:textColor="@color/grayPrimary"
+                        android:textSize="16sp" />
+
+                    <Spinner
+                        android:id="@+id/spinner_karcis_utama_ptgs_eks"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -322,29 +153,19 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:textStyle="bold"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="6dp"
+                        android:layout_marginBottom="12dp"
                         android:fontFamily="@font/mlight"
-                        android:text="Keterangan Klaim"
+                        android:text="Karcis Tambahan"
                         android:textColor="@color/grayPrimary"
                         android:textSize="16sp" />
 
-                    <EditText
-                        android:id="@+id/text_ket_claim"
+                    <Spinner
+                        android:id="@+id/spinner_karcis_tmbhn_ptgs_eks"
                         android:layout_width="match_parent"
-                        android:layout_height="80dp"
-                        android:background="@drawable/bg_input_edit"
-                        android:fontFamily="@font/mmedium"
-                        android:clickable="true"
-                        android:gravity="top|left"
-                        android:inputType="textMultiLine"
-                        android:overScrollMode="always"
-                        android:scrollbarStyle="outsideOverlay"
-                        android:scrollbars="vertical"
-                        android:lines="3"
-                        android:paddingStart="12dp"
-                        android:focusable="true" />
+                        android:layout_height="wrap_content" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -360,19 +181,165 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12dp"
                         android:fontFamily="@font/mlight"
-                        android:text="Tgl Kejadian"
+                        android:text="Jml Karcis Wisnu"
                         android:textColor="@color/grayPrimary"
                         android:textSize="16sp" />
 
                     <EditText
-                        android:id="@+id/tgl_kejadian"
+                        android:id="@+id/jml_krcs_wisnu_ptgs_eks"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:background="@drawable/bg_input_edit"
                         android:fontFamily="@font/mmedium"
-                        android:inputType="text"
-                        android:clickable="true"
-                        android:lines="1"
+                        android:inputType="number"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/blackPrimary" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginRight="24dp"
+                    android:layout_marginBottom="24dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:fontFamily="@font/mlight"
+                        android:text="Jml Karcis Wisman"
+                        android:textColor="@color/grayPrimary"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/jml_krcs_wisman_ptgs_eks"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@drawable/bg_input_edit"
+                        android:fontFamily="@font/mmedium"
+                        android:inputType="number"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/blackPrimary" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginRight="24dp"
+                    android:layout_marginBottom="24dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:fontFamily="@font/mlight"
+                        android:text="Total Rp."
+                        android:tooltipText="jml X hrg"
+                        android:textColor="@color/grayPrimary"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/ttl_ptgs_eks"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@drawable/bg_input_edit"
+                        android:fontFamily="@font/mmedium"
+                        android:inputType="number"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/blackPrimary" />
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginRight="24dp"
+                    android:layout_marginBottom="24dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:fontFamily="@font/mlight"
+                        android:text="Jml Karcis Tambahan"
+                        android:textColor="@color/grayPrimary"
+                        android:textSize="16sp" />
+
+
+                    <EditText
+                        android:inputType="number"
+                        android:id="@+id/jml_krcs_wisman_tmbhn_ptgs_eks"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@drawable/bg_input_edit"
+                        android:fontFamily="@font/mmedium"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/blackPrimary" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginRight="24dp"
+                    android:layout_marginBottom="24dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:fontFamily="@font/mlight"
+                        android:text="Total Tambahan Rp."
+                        android:textColor="@color/grayPrimary"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:inputType="number"
+                        android:id="@+id/ttl_tmbhn_ptgs_eks"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@drawable/bg_input_edit"
+                        android:fontFamily="@font/mmedium"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/blackPrimary" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginRight="24dp"
+                    android:layout_marginBottom="24dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:fontFamily="@font/mlight"
+                        android:text="Grand Total Rp."
+                        android:textColor="@color/grayPrimary"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:inputType="number"
+                        android:id="@+id/grand_ttl_ptgs_eks"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@drawable/bg_input_edit"
+                        android:fontFamily="@font/mmedium"
                         android:paddingLeft="12dp"
                         android:textColor="@color/blackPrimary" />
 
@@ -392,12 +359,37 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12dp"
                         android:fontFamily="@font/mlight"
-                        android:text="Lokasi Kejadian"
+                        android:text="Jenis Bayar"
+                        android:textColor="@color/grayPrimary"
+                        android:textSize="16sp" />
+
+                    <Spinner
+                        android:textAlignment="inherit"
+                        android:id="@+id/spinner_jns_byr_ptgs_eks"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginRight="24dp"
+                    android:layout_marginBottom="24dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:textStyle="bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:fontFamily="@font/mlight"
+                        android:text="Nama"
                         android:textColor="@color/grayPrimary"
                         android:textSize="16sp" />
 
                     <EditText
-                        android:id="@+id/text_lokasi_kejadian"
+                        android:id="@+id/nama_pengunjung_ptgs_eks"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:background="@drawable/bg_input_edit"
@@ -407,6 +399,64 @@
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginRight="24dp"
+                    android:layout_marginBottom="24dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:textStyle="bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:fontFamily="@font/mlight"
+                        android:text="No. Handphone"
+                        android:textColor="@color/grayPrimary"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:inputType="number"
+                        android:id="@+id/hp_pengunjung_ptgs_eks"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@drawable/bg_input_edit"
+                        android:fontFamily="@font/mmedium"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/blackPrimary" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginRight="24dp"
+                    android:layout_marginBottom="24dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:textStyle="bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:fontFamily="@font/mlight"
+                        android:text="Email"
+                        android:textColor="@color/grayPrimary"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/email_pengunjung_ptgs_eks"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@drawable/bg_input_edit"
+                        android:fontFamily="@font/mmedium"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/blackPrimary" />
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:orientation="horizontal"
@@ -414,7 +464,7 @@
                     android:layout_height="wrap_content">
 
                     <ImageView
-                        android:id="@+id/btn_psn_karcis_ptgs_back"
+                        android:id="@+id/btn_psn_karcis_ptgs_eks_back"
                         android:layout_width="100dp"
                         android:layout_height="45dp"
                         android:layout_marginLeft="25dp"
@@ -427,7 +477,7 @@
                         app:layout_goneMarginTop="0dp" />
 
                     <Button
-                        android:id="@+id/btn_order_claim_ptgs"
+                        android:id="@+id/btn_order_ptgs_eks"
                         android:layout_width="200dp"
                         android:layout_height="45dp"
                         android:layout_marginLeft="5dp"
@@ -438,11 +488,28 @@
                         android:text="Pesan"
                         android:textColor="#FFF"
                         android:textSize="14sp" />
+
                 </LinearLayout>
+
             </LinearLayout>
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="143dp"
+                android:layout_height="78dp"
+                android:fillViewport="true"
+                tools:layout_editor_absoluteX="146dp"
+                tools:layout_editor_absoluteY="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+            </androidx.core.widget.NestedScrollView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
+
     <RelativeLayout
         android:id="@+id/loadingPanel"
         android:layout_width="match_parent"

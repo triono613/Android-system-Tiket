@@ -220,13 +220,13 @@ public class RegisterWisatawanActivity extends AppCompatActivity implements Date
 
 
                             if (sukses){
-                                Intent goto_register_success_wstwn = new Intent(RegisterWisatawanActivity.this, SuccessRegistrasiWisatawanActivity.class);
-                                goto_register_success_wstwn.putExtra("result_dt_ket", ket);
-                                goto_register_success_wstwn.putExtra("result_dt_email", email);
-                                goto_register_success_wstwn.putExtra("result_dt_flag", "wisatawan");
-                                goto_register_success_wstwn.putExtra("result_dt_berhasil", berhasil);
+                                Intent i = new Intent(RegisterWisatawanActivity.this, SuccessRegistrasiWisatawanActivity.class);
+                                i.putExtra("result_dt_ket", ket);
+                                i.putExtra("result_dt_email", email);
+                                i.putExtra("result_dt_flag", "wisatawan");
+                                i.putExtra("result_dt_berhasil", berhasil);
 
-                                startActivity(goto_register_success_wstwn);
+                                startActivity(i);
                             }
 
                         } catch (JSONException e) {

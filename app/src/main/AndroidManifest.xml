@@ -3,6 +3,8 @@
     package="com.example.aga">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -12,7 +14,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ClaimPetugasActivity"></activity>
+        <activity android:name=".LupaPasswordActivity"></activity>
+        <activity android:name=".EditPasswordWisatawanActivity" />
+        <activity android:name=".EditKarcisStatusActivity" />
+        <activity android:name=".EditPasswordPetugasActivity" />
+        <activity android:name=".SuccessClaimActivity" />
+        <activity android:name=".ClaimPetugasActivity" />
         <activity android:name=".StatusKarcisPetugasActivity" />
         <activity android:name=".StatusKarcisActivity" />
         <activity android:name=".SetupPintuActivity" />

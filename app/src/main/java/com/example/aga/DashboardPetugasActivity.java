@@ -24,6 +24,7 @@ public class DashboardPetugasActivity extends AppCompatActivity {
     LinearLayout _card_status_karcis_ptgs;
     LinearLayout _card_setup_pintu_ptgs;
     LinearLayout _card_pengajuan_klaim_ptgs;
+    LinearLayout _card_ganti_password_ptgs;
 
 
 
@@ -66,6 +67,7 @@ public class DashboardPetugasActivity extends AppCompatActivity {
         _card_status_karcis_ptgs = (LinearLayout) findViewById(R.id.card_status_karcis_ptgs);
         _card_setup_pintu_ptgs = (LinearLayout) findViewById(R.id.card_setup_pintu_ptgs);
         _card_pengajuan_klaim_ptgs = (LinearLayout) findViewById(R.id.card_pengajuan_klaim_ptgs);
+        _card_ganti_password_ptgs = (LinearLayout) findViewById(R.id.card_ganti_password_ptgs);
 
 
 //        Toast.makeText(DashboardPetugasActivity.this,"check session : "+sessionManager.isLoggedIn()+" - "+sessionManager.getFlag()+" - "+(sessionManager.getUserDetail().get(SessionManager.key_kode_lokasi)), Toast.LENGTH_LONG).show();
@@ -120,8 +122,6 @@ public class DashboardPetugasActivity extends AppCompatActivity {
                     Intent i = new Intent(DashboardPetugasActivity.this,StatusKarcisPetugasActivity.class);
 //                    Intent i = new Intent(DashboardPetugasActivity.this,CariActivity.class);
                     startActivity(i);
-
-
                 }
             }
         });
@@ -129,12 +129,10 @@ public class DashboardPetugasActivity extends AppCompatActivity {
         _card_setup_pintu_ptgs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if( sessionManager.isLoggedIn()) {
                     Intent i = new Intent(DashboardPetugasActivity.this,SetupPintuActivity.class);
 //                    Intent i = new Intent(DashboardPetugasActivity.this,CariActivity.class);
                     startActivity(i);
-
                 }
 
             }
@@ -144,11 +142,21 @@ public class DashboardPetugasActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if ( sessionManager.isLoggedIn() ){
-
                     Intent i = new Intent(DashboardPetugasActivity.this, ClaimPetugasActivity.class);
                     startActivity(i);
-
                 }
+            }
+        });
+
+        _card_ganti_password_ptgs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if( sessionManager.isLoggedIn() ) {
+                    Intent i = new Intent(DashboardPetugasActivity.this, EditPasswordPetugasActivity.class);
+                    startActivity(i);
+                }
+
             }
         });
 

@@ -41,8 +41,6 @@ tools:context="com.example.aga.StatusKarcisPetugasActivity">
                     layout="@layout/my_toolbar" />
 
         </com.google.android.material.appbar.AppBarLayout>
-
-
     </LinearLayout>
 
 
@@ -75,7 +73,6 @@ tools:context="com.example.aga.StatusKarcisPetugasActivity">
             android:layout_marginTop="10dp"
             android:foregroundGravity="center"
             android:scrollbars="vertical">
-
         </androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>
 

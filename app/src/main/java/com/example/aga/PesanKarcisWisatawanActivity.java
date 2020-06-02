@@ -671,11 +671,12 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements D
 //                                        sessionManager.createSessionWisTmbhn(_kode_ksda, _kode_lokasi, _kode_karcis,
 //                                                _nama_karcis, _kode_libur, _harga_karcis_wisata, _harga_karcis_asuransi, _id );
 
-                                        Intent goto_register_success_petugas = new Intent(PesanKarcisWisatawanActivity.this, SuccessRegistrasiWisatawanActivity.class);
-                                        goto_register_success_petugas.putExtra("result_dt_ket", "Pemesanan Anda Berhasil Silahkan Cek email!");
-                                        goto_register_success_petugas.putExtra("result_dt_email", "");
-                                        goto_register_success_petugas.putExtra("result_dt_berhasil", berhasil);
-                                        startActivity(goto_register_success_petugas);
+                                        Intent i = new Intent(PesanKarcisWisatawanActivity.this, SuccessRegistrasiWisatawanActivity.class);
+                                        i.putExtra("result_dt_ket", "Pemesanan Anda Berhasil Silahkan Cek email!");
+                                        i.putExtra("result_dt_email", "");
+                                        i.putExtra("result_dt_berhasil", berhasil);
+                                        i.putExtra("result_dt_flag", "flagPesanKarcisWisatawan");
+                                        startActivity(i);
 //                                        finish();
 
                                     }
