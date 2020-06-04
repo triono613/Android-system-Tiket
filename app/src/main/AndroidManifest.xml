@@ -21,7 +21,7 @@
         <activity android:name=".SuccessClaimActivity" />
         <activity android:name=".ClaimPetugasActivity" />
         <activity android:name=".StatusKarcisPetugasActivity" />
-        <activity android:name=".StatusKarcisActivity" />
+        <activity android:name=".StatusKarcisWisatawanActivity" />
         <activity android:name=".SetupPintuActivity" />
         <activity android:name=".PesanKarcisWisatawanActivity" />
         <activity android:name=".DashboardWisatawanActivity" />

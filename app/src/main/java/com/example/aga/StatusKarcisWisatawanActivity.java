@@ -20,7 +20,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.aga.Adapter.CustomAdapter;
+import com.example.aga.Adapter.CustomAdapterEntityWisatawan;
 import com.example.aga.Adapter.SessionManager;
 import com.example.aga.Helper.Help;
 import com.example.aga.Model.EntityStatusKarcis;
@@ -33,7 +33,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class StatusKarcisActivity extends AppCompatActivity {
+public class StatusKarcisWisatawanActivity extends AppCompatActivity {
 
     private final String JSON_URL ="http://kaffah.amanahgitha.com/~androidwisata/?data=informasi_status_karcis";
     private JsonArrayRequest jsonArrayRequest;
@@ -64,7 +64,7 @@ public class StatusKarcisActivity extends AppCompatActivity {
     private void jsonrequest(String EP){
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
         String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
-        final RequestQueue requestQueue = Volley.newRequestQueue(StatusKarcisActivity.this);
+        final RequestQueue requestQueue = Volley.newRequestQueue(StatusKarcisWisatawanActivity.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
                 new Response.Listener<String>() {
                     @Override
@@ -103,14 +103,14 @@ public class StatusKarcisActivity extends AppCompatActivity {
 
                                     }
 
-                                    CustomAdapter customAdapter = new CustomAdapter( entityStatusKarcisArrayList, StatusKarcisActivity.this);
+                                    CustomAdapterEntityWisatawan customAdapter = new CustomAdapterEntityWisatawan( entityStatusKarcisArrayList, StatusKarcisWisatawanActivity.this);
                                     recyclerView.setAdapter(customAdapter);
 
                                 } else {
                                         // do nothing just pray to Allah
                                 }
                             } else {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(StatusKarcisActivity.this);
+                                AlertDialog.Builder builder = new AlertDialog.Builder(StatusKarcisWisatawanActivity.this);
                                 builder.setMessage("Format Json Error !")
                                         .setCancelable(false)
                                         .setPositiveButton("Ya", new DialogInterface.OnClickListener() {

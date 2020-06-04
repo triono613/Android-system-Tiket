@@ -88,10 +88,10 @@ public class StatusKarcisPetugasActivity extends AppCompatActivity {
         _btn_entity_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if(sessionManager.isLoggedIn()) {
+                if(sessionManager.isLoggedIn()) {
                     Intent i = new Intent(StatusKarcisPetugasActivity.this,EditPasswordPetugasActivity.class);
                     startActivity(i);
-//                }
+                }
 
             }
         });

@@ -82,7 +82,7 @@ public class DashboardWisatawanActivity extends AppCompatActivity {
         });
 
         _card_status_karcis_wstn.setOnClickListener(v -> {
-            Intent i = new Intent(DashboardWisatawanActivity.this, StatusKarcisActivity.class);
+            Intent i = new Intent(DashboardWisatawanActivity.this, StatusKarcisWisatawanActivity.class);
             startActivity(i);
 //            overridePendingTransition(R.anim.app_getstarted,R.anim.btt);
         });

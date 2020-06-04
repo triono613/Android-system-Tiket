@@ -69,7 +69,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tv_va_wist"
+                    android:id="@+id/tv_va_ptgs"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="2dp"
@@ -91,7 +91,7 @@
                 android:paddingRight="25dp">
 
                 <TextView
-                    android:id="@+id/titel_va_wist"
+                    android:id="@+id/titel_va_ptgs"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="1dp"
@@ -115,7 +115,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tv_tgl_wist"
+                    android:id="@+id/tv_tgl_ptgs"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="2dp"
@@ -228,7 +228,7 @@
                 <Button
                     android:id="@+id/btn_entity_edit_ptgs"
                     android:layout_width="80dp"
-                    android:layout_height="20dp"
+                    android:layout_height="25dp"
                     android:layout_marginLeft="40dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="5dp"
@@ -236,31 +236,31 @@
                     android:paddingEnd="5dp"
                     android:text="edit"
                     android:textColor="#FFF"
-                    android:textSize="8sp" />
+                    android:textSize="9sp" />
 
                 <Button
                     android:id="@+id/btn_entity_detail_ptgs"
                     android:layout_width="80dp"
-                    android:layout_height="20dp"
+                    android:layout_height="25dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="5dp"
                     android:background="@drawable/bg_btn_blue"
                     android:paddingEnd="5dp"
                     android:text="detail"
                     android:textColor="#FFF"
-                    android:textSize="8sp" />
+                    android:textSize="9sp" />
 
                 <Button
                     android:id="@+id/btn_entity_view_ptgs"
                     android:layout_width="80dp"
-                    android:layout_height="20dp"
+                    android:layout_height="25dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
                     android:background="@drawable/bg_btn_blue"
                     android:paddingEnd="5dp"
                     android:text="view"
                     android:textColor="#FFF"
-                    android:textSize="8sp" />
+                    android:textSize="9sp" />
 
             </LinearLayout>
         </LinearLayout>
