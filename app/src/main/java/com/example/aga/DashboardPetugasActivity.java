@@ -143,6 +143,7 @@ public class DashboardPetugasActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if ( sessionManager.isLoggedIn() ){
                     Intent i = new Intent(DashboardPetugasActivity.this, ClaimPetugasActivity.class);
+                    i.putExtra("result_dt_flag", "fromDashboardPetugas");
                     startActivity(i);
                 }
             }

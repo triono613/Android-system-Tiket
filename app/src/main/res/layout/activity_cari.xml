@@ -20,7 +20,7 @@
        >
 
         <include
-            android:id="@+id/toolbar_new"
+            android:id="@+id/toolbar_new_cari"
             layout="@layout/my_toolbar" />
 
     </com.google.android.material.appbar.AppBarLayout>

@@ -1,13 +1,13 @@
 package com.example.aga.Model;
 
-public class EntityStatusKarcis {
+public class EntityStatusKarcisWisatawan {
 
     public String va;
     public String tgl;
     public String status;
     public String lokWis;
 
-    public EntityStatusKarcis(String va, String tgl, String status, String lokWis) {
+    public EntityStatusKarcisWisatawan(String va, String tgl, String status, String lokWis) {
         this.va = va;
         this.tgl = tgl;
         this.status = status;

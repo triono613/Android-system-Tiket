@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EditKarcisStatusActivity">
+    tools:context=".EditKarcisStatusPetugasActivity">
 
     <View
         android:layout_width="match_parent"
@@ -92,29 +92,18 @@
                         android:textSize="16sp" />
 
                     <Spinner
+                        android:id="@+id/spinner_lok_pintu_ptgs_eks"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAlignment="inherit"
-                        android:id="@+id/spinner_lok_pintu_ptgs_eks"
                         android:layout_marginBottom="12dp"
                         android:fontFamily="@font/mlight"
-                        android:text="Tgl Kunjungan"
                         android:textColor="@color/grayPrimary"
                         android:textSize="16sp" />
 
-                    <EditText
-                        android:id="@+id/tgl_kunjungan_ptgs_eks"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:background="@drawable/bg_input_edit"
-                        android:fontFamily="@font/mmedium"
-                        android:inputType="text"
-                        android:clickable="true"
-                        android:lines="1"
-                        android:paddingLeft="12dp"
-                        android:textColor="@color/blackPrimary" />
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -133,10 +122,16 @@
                         android:textColor="@color/grayPrimary"
                         android:textSize="16sp" />
 
-                    <Spinner
-                        android:id="@+id/spinner_karcis_utama_ptgs_eks"
+                    <EditText
+                        android:id="@+id/karcis_utama_ptgs_eks"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="50dp"
+                        android:background="@drawable/bg_input_edit"
+                        android:fontFamily="@font/mmedium"
+                        android:inputType="number"
+                        android:textSize="14sp"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/blackPrimary" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -157,10 +152,19 @@
                         android:textColor="@color/grayPrimary"
                         android:textSize="16sp" />
 
-                    <Spinner
-                        android:id="@+id/spinner_karcis_tmbhn_ptgs_eks"
+
+                    <EditText
+                        android:id="@+id/karcis_tmbhn_ptgs_eks"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="50dp"
+                        android:background="@drawable/bg_input_edit"
+                        android:fontFamily="@font/mmedium"
+                        android:inputType="number"
+                        android:textSize="14sp"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/blackPrimary" />
+
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -176,9 +180,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12dp"
                         android:fontFamily="@font/mlight"
-                        android:text="Jml Karcis Wisnu"
+                        android:text="Jumlah Karcis Wisatawan Nusantara"
                         android:textColor="@color/grayPrimary"
-                        android:textSize="16sp" />
+                        android:textSize="14sp" />
 
                     <EditText
                         android:id="@+id/jml_krcs_wisnu_ptgs_eks"
@@ -187,6 +191,7 @@
                         android:background="@drawable/bg_input_edit"
                         android:fontFamily="@font/mmedium"
                         android:inputType="number"
+                        android:textSize="14sp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/blackPrimary" />
                 </LinearLayout>
@@ -204,9 +209,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12dp"
                         android:fontFamily="@font/mlight"
-                        android:text="Jml Karcis Wisman"
+                        android:text="Jumlah Karcis Wisatawan Mancanegara"
                         android:textColor="@color/grayPrimary"
-                        android:textSize="16sp" />
+                        android:textSize="14sp" />
 
                     <EditText
                         android:id="@+id/jml_krcs_wisman_ptgs_eks"
@@ -215,6 +220,7 @@
                         android:background="@drawable/bg_input_edit"
                         android:fontFamily="@font/mmedium"
                         android:inputType="number"
+                        android:textSize="14sp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/blackPrimary" />
 
@@ -235,7 +241,7 @@
                         android:layout_marginBottom="12dp"
                         android:fontFamily="@font/mlight"
                         android:text="Total Rp."
-                        android:tooltipText="jml X hrg"
+                        android:tooltipText="Jumlah X hrg"
                         android:textColor="@color/grayPrimary"
                         android:textSize="16sp" />
 
@@ -246,6 +252,7 @@
                         android:background="@drawable/bg_input_edit"
                         android:fontFamily="@font/mmedium"
                         android:inputType="number"
+                        android:textSize="14sp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/blackPrimary" />
                 </LinearLayout>
@@ -265,7 +272,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12dp"
                         android:fontFamily="@font/mlight"
-                        android:text="Jml Karcis Tambahan"
+                        android:text="Jumlah Karcis Tambahan"
                         android:textColor="@color/grayPrimary"
                         android:textSize="16sp" />
 
@@ -277,6 +284,7 @@
                         android:layout_height="50dp"
                         android:background="@drawable/bg_input_edit"
                         android:fontFamily="@font/mmedium"
+                        android:textSize="14sp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/blackPrimary" />
                 </LinearLayout>
@@ -305,6 +313,7 @@
                         android:layout_height="50dp"
                         android:background="@drawable/bg_input_edit"
                         android:fontFamily="@font/mmedium"
+                        android:textSize="14sp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/blackPrimary" />
 
@@ -335,6 +344,7 @@
                         android:layout_height="50dp"
                         android:background="@drawable/bg_input_edit"
                         android:fontFamily="@font/mmedium"
+                        android:textSize="14sp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/blackPrimary" />
 
@@ -379,46 +389,18 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12dp"
                         android:fontFamily="@font/mlight"
-                        android:text="Nama"
-                        android:textColor="@color/grayPrimary"
-                        android:textSize="16sp" />
-
-                    <EditText
-                        android:id="@+id/nama_pengunjung_ptgs_eks"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:background="@drawable/bg_input_edit"
-                        android:fontFamily="@font/mmedium"
-                        android:paddingLeft="12dp"
-                        android:textColor="@color/blackPrimary" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="24dp"
-                    android:layout_marginRight="24dp"
-                    android:layout_marginBottom="24dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:textStyle="bold"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="12dp"
-                        android:fontFamily="@font/mlight"
                         android:text="No. Handphone"
                         android:textColor="@color/grayPrimary"
                         android:textSize="16sp" />
 
                     <EditText
-                        android:id="@+id/hp_pengunjung_ptgs_eks"
+                        android:id="@+id/phone_ptgs_eks"
                         android:inputType="number"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:background="@drawable/bg_input_edit"
                         android:fontFamily="@font/mmedium"
+                        android:textSize="14sp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/blackPrimary" />
 
@@ -448,8 +430,23 @@
                         android:layout_height="50dp"
                         android:background="@drawable/bg_input_edit"
                         android:fontFamily="@font/mmedium"
+                        android:textSize="14sp"
                         android:paddingLeft="12dp"
                         android:textColor="@color/blackPrimary" />
+
+                    <EditText
+
+                        android:id="@+id/text_kd_pintu_eksp"
+                        android:layout_width="match_parent"
+                        android:layout_height="4dp"
+                        />
+
+                    <EditText
+
+                        android:id="@+id/text_jns_byr_eksp"
+                        android:layout_width="match_parent"
+                        android:layout_height="4dp"
+                        />
 
                 </LinearLayout>
 
@@ -480,7 +477,7 @@
                         android:layout_marginBottom="0dp"
                         android:layout_marginTop="0dp"
                         android:background="@drawable/bg_btn_blue"
-                        android:text="Pesan"
+                        android:text="Ubah"
                         android:textColor="#FFF"
                         android:textSize="14sp" />
 

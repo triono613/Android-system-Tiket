@@ -123,6 +123,10 @@ public class SuccessRegistrasiWisatawanActivity extends AppCompatActivity {
                         Intent d = new Intent(SuccessRegistrasiWisatawanActivity.this, DashboardPetugasActivity.class);
                         startActivity(d);
                         break;
+                    case "flagEditKarcisStatusPetugasTrue":
+                        Intent e = new Intent(SuccessRegistrasiWisatawanActivity.this, DashboardPetugasActivity.class);
+                        startActivity(e);
+                        break;
                     default:
                         Log.i("","logout ini");
                         sessionManager.logout();

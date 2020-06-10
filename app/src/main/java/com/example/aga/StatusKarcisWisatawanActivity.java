@@ -23,7 +23,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.aga.Adapter.CustomAdapterEntityWisatawan;
 import com.example.aga.Adapter.SessionManager;
 import com.example.aga.Helper.Help;
-import com.example.aga.Model.EntityStatusKarcis;
+import com.example.aga.Model.EntityStatusKarcisWisatawan;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,7 +42,7 @@ public class StatusKarcisWisatawanActivity extends AppCompatActivity {
 
     RecyclerView.LayoutManager layoutManager;
     SessionManager sessionManager ;
-    ArrayList<EntityStatusKarcis> entityStatusKarcisArrayList;
+    ArrayList<EntityStatusKarcisWisatawan> entityStatusKarcisArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +99,7 @@ public class StatusKarcisWisatawanActivity extends AppCompatActivity {
                                         Log.i("wisatawan","i "+ i);
                                         Log.i("wisatawan","_va_no "+_va_no);
 
-                                        entityStatusKarcisArrayList.add(new EntityStatusKarcis(_va_no,_tgl_kunjungan,_status,_nama));
+                                        entityStatusKarcisArrayList.add(new EntityStatusKarcisWisatawan(_va_no,_tgl_kunjungan,_status,_nama));
 
                                     }
 

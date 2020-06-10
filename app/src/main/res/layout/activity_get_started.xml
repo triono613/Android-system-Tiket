@@ -91,6 +91,7 @@
 
 
         <Button
+            android:visibility="gone"
             android:id="@+id/btn_pendaftaran_petugas"
             android:layout_width="match_parent"
             android:layout_height="45dp"
@@ -110,7 +111,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="24dp"
             android:background="@drawable/bg_btn_blue"
-            android:text="@string/pendaftaran_wisatawan"
+            android:text="Belum punya akun ? Daftar Disini "
             android:textColor="#FFF"
             android:textSize="14sp" />
 

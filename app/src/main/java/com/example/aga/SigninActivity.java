@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -141,10 +140,10 @@ public class SigninActivity extends AppCompatActivity {
         final String passwd_val = loginPsswd.getText().toString();
 
 
-        if  (!EMAIL_ADDRESS_PATTERN.matcher(email_val).matches() ) {
-            loginEmail.setError("Alamat Email Invalid!");
-        }
-        else if(TextUtils.isEmpty(passwd_val) ) {
+//        if  (!EMAIL_ADDRESS_PATTERN.matcher(email_val).matches() ) {
+//            loginEmail.setError("Alamat Email Invalid!");
+//        }
+        if(TextUtils.isEmpty(passwd_val) ) {
             loginPsswd.setError("Password Masih Kosong!");
         }
         else {
@@ -152,9 +151,9 @@ public class SigninActivity extends AppCompatActivity {
         }
     }
 
+
     @SuppressLint("SetTextI18n")
     void newPostLogin(){
-
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
         btn_login_user.setEnabled(false);
         btn_login_user.setText("Loading...");
@@ -204,8 +203,8 @@ public class SigninActivity extends AppCompatActivity {
                                 if (jObj_child.getString("flag").equals("0")) {
 
                                     Intent i = new Intent(SigninActivity.this, SuccessRegistrasiWisatawanActivity.class);
-                                    i.putExtra("result_dt_ket", "Belum Dilakukan Verifikasi/Belum Registrasi");
-                                    i.putExtra("result_dt_email", "-");
+                                    i.putExtra("result_dt_ket",val_ket);
+                                    i.putExtra("result_dt_email", val_email);
                                     i.putExtra("result_dt_berhasil", false);
                                     i.putExtra("result_dt_flag", "flagSignin");
                                     startActivity(i);
@@ -220,11 +219,11 @@ public class SigninActivity extends AppCompatActivity {
 
                                         /*  activity for Wisatawan */
                                         Log.i("SigninActivity", "kode_lokasi ===" + jObj_child.getString("kode_lokasi"));
-                                                Toast.makeText(SigninActivity.this,"kode_lokasi equals null= "+ jObj_child.getString("kode_lokasi"), Toast.LENGTH_LONG).show();
+//                                                Toast.makeText(SigninActivity.this,"kode_lokasi equals null= "+ jObj_child.getString("kode_lokasi"), Toast.LENGTH_LONG).show();
 
                                         Intent ii = new Intent(SigninActivity.this, DashboardWisatawanActivity.class);
-                                        ii.putExtra("result_dt_ket", val_ket.toString());
-                                        ii.putExtra("result_dt_email", val_email.toString());
+                                        ii.putExtra("result_dt_ket", val_ket);
+                                        ii.putExtra("result_dt_email", val_email);
                                         ii.putExtra("result_dt_berhasil", true);
                                         ii.putExtra("result_dt_flag", "");
                                         startActivity(ii);
@@ -232,11 +231,11 @@ public class SigninActivity extends AppCompatActivity {
                                     } else {
                                         /*  activity for Petugas */
 
-                                        Toast.makeText(SigninActivity.this,"kode_lokasi not null= "+ jObj_child.getString("kode_lokasi"), Toast.LENGTH_LONG).show();
+//                                        Toast.makeText(SigninActivity.this,"kode_lokasi not null= "+ jObj_child.getString("kode_lokasi"), Toast.LENGTH_LONG).show();
 
                                         Intent iii = new Intent(SigninActivity.this, DashboardPetugasActivity.class);
-                                        iii.putExtra("result_dt_ket", val_ket.toString());
-                                        iii.putExtra("result_dt_email", val_email.toString());
+                                        iii.putExtra("result_dt_ket", val_ket);
+                                        iii.putExtra("result_dt_email", val_email);
                                         iii.putExtra("result_dt_berhasil", true);
                                         iii.putExtra("result_dt_flag", "");
                                         startActivity(iii);

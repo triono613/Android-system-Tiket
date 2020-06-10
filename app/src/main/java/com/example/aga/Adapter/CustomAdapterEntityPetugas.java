@@ -3,6 +3,7 @@ package com.example.aga.Adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +13,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.aga.EditKarcisStatusActivity;
+import com.example.aga.ClaimPetugasActivity;
+import com.example.aga.EditKarcisStatusPetugasActivity;
 import com.example.aga.Model.EntityStatusKarcisPetugas;
 import com.example.aga.R;
 import com.example.aga.R.layout;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
@@ -42,6 +43,7 @@ public class CustomAdapterEntityPetugas extends RecyclerView.Adapter<CustomAdapt
         TextView _tv_lokWis;
 //        ImageView img_more;
         Button _btn_entity_edit;
+        Button _btn_entity_view_ptgs;
 
         MyViewHolder( View itemView) {
             super(itemView);
@@ -51,6 +53,7 @@ public class CustomAdapterEntityPetugas extends RecyclerView.Adapter<CustomAdapt
             this._tv_lokWis = (TextView) itemView.findViewById(R.id.tv_lokWis_ptgs);
 //            this.img_more=(ImageView) itemView.findViewById(R.id.img_more);
             this._btn_entity_edit = (Button) itemView.findViewById(R.id.btn_entity_edit_ptgs);
+            this._btn_entity_view_ptgs = (Button) itemView.findViewById(R.id.btn_entity_view_ptgs);
         }
     }
 
@@ -73,6 +76,7 @@ public class CustomAdapterEntityPetugas extends RecyclerView.Adapter<CustomAdapt
         TextView tv_status = holder._tv_status;
         TextView tv_lokWis = holder._tv_lokWis;
         Button  btn_entity_edit = holder._btn_entity_edit;
+        Button btn_entity_view_ptgs = holder._btn_entity_view_ptgs;
 
 
         final String _va = entityStatusKarcisPetugasArrayList.get(position).getVa();
@@ -82,20 +86,25 @@ public class CustomAdapterEntityPetugas extends RecyclerView.Adapter<CustomAdapt
         tv_lokWis.setText(entityStatusKarcisPetugasArrayList.get(position).lokWis);
 
 
-
         btn_entity_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(v, "Clicked element "+ _va , Snackbar.LENGTH_LONG).show();
+//                Snackbar.make(v, "Clicked element "+ _va , Snackbar.LENGTH_LONG).show();
 
-
-
-                Intent i = new Intent(v.getContext(), EditKarcisStatusActivity.class);
-
+                Intent i = new Intent(v.getContext(), EditKarcisStatusPetugasActivity.class);
                 i.putExtra("result_va", _va );
+                i.putExtra("result_dt_flag", "fromCustomAdapterEntityPetugas" );
                 context.startActivity(i);
+                Log.i("","_va "+_va);
 
             }
+        });
+
+        btn_entity_view_ptgs.setOnClickListener(v -> {
+            Intent x = new Intent(v.getContext(), ClaimPetugasActivity.class);
+            x.putExtra("result_va", _va);
+            context.startActivity(x);
+
         });
 
     }
@@ -112,32 +121,4 @@ public void setFilter(ArrayList<EntityStatusKarcisPetugas> filterList){
     notifyDataSetChanged();
 }
 
-//    public Filter getFilter() {
-//        return exampleFilter;
-//    }
-//    private Filter exampleFilter = new Filter() {
-//        @Override
-//        protected FilterResults performFiltering(CharSequence constraint) {
-//            List<EntityStatusKarcisPetugas> filteredList = new ArrayList<>();
-//            if (constraint == null || constraint.length() == 0) {
-//                filteredList.addAll(exampleListFull);
-//            } else {
-//                String filterPattern = constraint.toString().toLowerCase().trim();
-//                for (EntityStatusKarcisPetugas item : exampleListFull) {
-//                    if (item.getVa().toLowerCase().contains(filterPattern)) {
-//                        filteredList.add(item);
-//                    }
-//                }
-//            }
-//            FilterResults results = new FilterResults();
-//            results.values = filteredList;
-//            return results;
-//        }
-//        @Override
-//        protected void publishResults(CharSequence constraint, FilterResults results) {
-//            exampleList.clear();
-//            exampleList.addAll((List) results.values);
-//            notifyDataSetChanged();
-//        }
-//    };
 }

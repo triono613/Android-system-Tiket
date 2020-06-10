@@ -14,9 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".LupaPasswordActivity"></activity>
+        <activity android:name=".EditKarcisStatusWisatawanActivity"></activity>
+        <activity android:name=".LupaPasswordActivity" />
         <activity android:name=".EditPasswordWisatawanActivity" />
-        <activity android:name=".EditKarcisStatusActivity" />
+        <activity android:name=".EditKarcisStatusPetugasActivity" />
         <activity android:name=".EditPasswordPetugasActivity" />
         <activity android:name=".SuccessClaimActivity" />
         <activity android:name=".ClaimPetugasActivity" />

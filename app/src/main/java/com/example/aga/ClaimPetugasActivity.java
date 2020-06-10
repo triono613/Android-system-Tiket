@@ -90,6 +90,15 @@ public class ClaimPetugasActivity extends AppCompatActivity implements DatePicke
 
         findViewById(R.id.loadingPanel).setVisibility(View.GONE);
 
+        String _va = "";
+        String _flag = "";
+        _va = getIntent().getStringExtra("result_va");
+        _flag = getIntent().getStringExtra("result_dt_flag");
+//        i.putExtra("result_dt_flag", "fromDashboardPetugas");
+
+        Log.i("","_vax="+_va);
+        Log.i("","_flag="+_flag);
+
         _no_va = (TextView) findViewById(R.id.no_va);
         _atas_nama =(TextView) findViewById(R.id.text_atas_nama);
         _text_contact_pelapor=(TextView) findViewById(R.id.text_contact_pelapor);
@@ -104,13 +113,32 @@ public class ClaimPetugasActivity extends AppCompatActivity implements DatePicke
         _btn_order_claim_ptgs = (Button) findViewById(R.id.btn_order_claim_ptgs);
 
 
+        if(_flag=="fromDashboardPetugas") {
+            _va = "";
+        }else {
+            _va= _va.trim();
+        }
+
+//        _no_va.setText(_va.toString().trim());
+
 //        spinnerSearchJnsClaim("cari_jenis_klaim_by_no_va","");
 
+        String final_va = _va;
         _btn_find_va.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String nova = _no_va.getText().toString();
+                if(final_va.equals("")){
 
+//                    final String xx_val = _no_va.getText().toString();
+//                    if(TextUtils.isEmpty(xx_val) ) {
+                        _no_va.setError("No VA Masih Kosong!");
+//                    }
+
+
+                }else{
+                    _no_va.setText(final_va.toString().trim());
+                }
+                final String nova = _no_va.getText().toString();
                 getDataNova("cari_no_va",nova);
 
             }

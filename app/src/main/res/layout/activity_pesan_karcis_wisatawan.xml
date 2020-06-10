@@ -215,9 +215,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12dp"
                         android:fontFamily="@font/mlight"
-                        android:text="Jml Karcis Wisnu"
+                        android:text="Jumlah Karcis Wisatawan Nusantara"
                         android:textColor="@color/grayPrimary"
-                        android:textSize="16sp" />
+                        android:textSize="14sp" />
 
                     <EditText
                         android:id="@+id/txt_jml_krcs_wisnu"
@@ -243,9 +243,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12dp"
                         android:fontFamily="@font/mlight"
-                        android:text="Jml Karcis Wisman"
+                        android:text="Jumlah Karcis Wisatawan Mancanegara"
                         android:textColor="@color/grayPrimary"
-                        android:textSize="16sp" />
+                        android:textSize="14sp" />
 
                     <EditText
                         android:id="@+id/txt_jml_krcs_wisman"
@@ -274,7 +274,7 @@
                         android:layout_marginBottom="12dp"
                         android:fontFamily="@font/mlight"
                         android:text="Total Rp."
-                        android:tooltipText="jml X hrg"
+                        android:tooltipText="Jumlah X hrg"
                         android:textColor="@color/grayPrimary"
                         android:textSize="16sp" />
 
@@ -304,7 +304,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12dp"
                         android:fontFamily="@font/mlight"
-                        android:text="Jml Karcis Tambahan"
+                        android:text="Jumlah Karcis Tambahan"
                         android:textColor="@color/grayPrimary"
                         android:textSize="16sp" />
 

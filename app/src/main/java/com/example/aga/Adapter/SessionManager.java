@@ -59,9 +59,19 @@ public class SessionManager {
     public  static  final String key_nama_pembayaran = "key_nama_pembayaran";
     public static  final  String key_index = "key_index";
 
+    public  static  final String key_mode_pembayaran_eksp = "key_mode_pembayaran_eksp";
+    public  static  final String key_nama_pembayaran_eksp = "key_nama_pembayaran_eksp";
+
     public static  final String key_jns_claim_position = "key_jns_claim_position";
     public static  final String key_jns_claim = "key_jns_claim";
     public static  final String key_nama_claim = "key_nama_claim";
+
+    public static  final String key_kd_lok_eksp = "key_kd_lok_eksp";
+    public static  final String key_nm_lok_eksp = "key_nm_lok_eksp";
+
+    public  static  final  String key_kode_pintu_eksp = "key_kode_pintu_eksp";
+    public  static  final  String key_jns_byr_eksp = "key_jns_byr_eksp";
+
 
 
     public SessionManager (Context context){
@@ -157,13 +167,28 @@ public class SessionManager {
 
     }
 
+    public void createSessionSpinnerEksp(String kode_pintu_eksp, String jns_byr_eksp)
+    {
+        editor.putString(key_kode_pintu_eksp,kode_pintu_eksp);
+        editor.putString(key_jns_byr_eksp,jns_byr_eksp);
+        editor.commit();
+        editor.apply();
+    }
+
     public void createSessionJnsByr(String mode_pembayaran, String  nama_pembayaran)
     {
         editor.putString(key_mode_pembayaran,mode_pembayaran);
         editor.putString(key_nama_pembayaran,nama_pembayaran);
         editor.commit();
         editor.apply();
+    }
 
+    public void createSessionJnsByrEksp(String mode_pembayaran_eksp, String  nama_pembayaran_eksp)
+    {
+        editor.putString(key_mode_pembayaran_eksp,mode_pembayaran_eksp);
+        editor.putString(key_nama_pembayaran_eksp,nama_pembayaran_eksp);
+        editor.commit();
+        editor.apply();
     }
 
     public void createSessionJnsClaim(String position ,String jns_claim, String nama_claim)
@@ -180,6 +205,16 @@ public class SessionManager {
     {
         editor.putString(key_kd_ksda,kd_ksda);
         editor.putString(key_nm_lok,nm_lok);
+        editor.commit();
+        editor.apply();
+
+    }
+
+
+    public void createSessionEksp( String kd_lok_eksp, String  nm_lok_eksp)
+    {
+        editor.putString(key_kd_lok_eksp,kd_lok_eksp);
+        editor.putString(key_nm_lok_eksp,nm_lok_eksp);
         editor.commit();
         editor.apply();
 
@@ -299,6 +334,14 @@ public class SessionManager {
         return data;
     }
 
+    public HashMap<String,String > getDataJnsByrEksp() {
+        HashMap<String, String> data = new HashMap<String, String>();
+        data.put(key_mode_pembayaran_eksp,pref.getString(key_mode_pembayaran_eksp,null));
+        data.put(key_nama_pembayaran_eksp,pref.getString(key_nama_pembayaran_eksp,null));
+        return data;
+    }
+
+
     public HashMap<String,String> getDataJnsClaim() {
         HashMap<String,String> data = new HashMap<String, String>();
 
@@ -307,6 +350,25 @@ public class SessionManager {
         data.put(key_nama_claim,pref.getString(key_nama_claim, null));
         return data;
     }
+
+
+    public HashMap<String,String> getDataLokEksp() {
+        HashMap<String,String> data = new HashMap<String, String>();
+
+        data.put(key_kd_lok_eksp, pref.getString(key_kd_lok_eksp,null));
+        data.put(key_nm_lok_eksp, pref.getString(key_nm_lok_eksp,null));
+        return data;
+    }
+
+
+
+    public HashMap<String,String> getDataSpinnerEksp() {
+        HashMap<String,String> data = new HashMap<String, String>();
+        data.put(key_kode_pintu_eksp, pref.getString(key_kode_pintu_eksp,null));
+        data.put(key_jns_byr_eksp, pref.getString(key_jns_byr_eksp,null));
+        return data;
+    }
+
 
 
 }

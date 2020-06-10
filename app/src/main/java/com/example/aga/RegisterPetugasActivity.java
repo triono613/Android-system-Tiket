@@ -333,7 +333,7 @@ public class RegisterPetugasActivity extends AppCompatActivity implements DatePi
                                 i.putExtra("result_dt_flag", "");
 
                                 startActivity(i);
-                                overridePendingTransition(R.anim.app_getstarted,R.anim.app_splash);
+//                                overridePendingTransition(R.anim.app_getstarted,R.anim.app_splash);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

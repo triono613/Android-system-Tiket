@@ -74,7 +74,7 @@ public class StatusKarcisPetugasActivity extends AppCompatActivity {
 //        recyclerView = (RecyclerView) findViewById(R.id.recycler_view_data_status_karcis_ptgs);
 //        jsonrequest("informasi_status_karcis");
 
-        @SuppressLint("InflateParams") View inflatedView = getLayoutInflater().inflate(R.layout.entity_status_karcis, null);
+        @SuppressLint("InflateParams") View inflatedView = getLayoutInflater().inflate(R.layout.entity_status_karcis_wisatawan, null);
         _btn_entity_edit = (Button) inflatedView.findViewById(R.id.btn_entity_edit);
 //        _btn_entity_edit.setText("Hello!");
 
@@ -181,15 +181,11 @@ public class StatusKarcisPetugasActivity extends AppCompatActivity {
         stringRequest.setRetryPolicy(policy);
         requestQueue.add(stringRequest);
 
-
         DividerItemDecoration itemDecoration = new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL);
         adapter = new CustomAdapterEntityPetugas(entityStatusKarcisPetugasArrayList,this);
         recyclerView.setAdapter(adapter);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-
-
-
 
     }
 

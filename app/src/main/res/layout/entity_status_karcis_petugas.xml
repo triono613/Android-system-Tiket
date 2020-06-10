@@ -258,7 +258,7 @@
                     android:layout_marginRight="10dp"
                     android:background="@drawable/bg_btn_blue"
                     android:paddingEnd="5dp"
-                    android:text="view"
+                    android:text="klaim"
                     android:textColor="#FFF"
                     android:textSize="9sp" />
 
