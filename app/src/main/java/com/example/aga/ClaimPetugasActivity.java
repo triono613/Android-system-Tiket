@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -90,14 +91,8 @@ public class ClaimPetugasActivity extends AppCompatActivity implements DatePicke
 
         findViewById(R.id.loadingPanel).setVisibility(View.GONE);
 
-        String _va = "";
-        String _flag = "";
-        _va = getIntent().getStringExtra("result_va");
-        _flag = getIntent().getStringExtra("result_dt_flag");
 //        i.putExtra("result_dt_flag", "fromDashboardPetugas");
 
-        Log.i("","_vax="+_va);
-        Log.i("","_flag="+_flag);
 
         _no_va = (TextView) findViewById(R.id.no_va);
         _atas_nama =(TextView) findViewById(R.id.text_atas_nama);
@@ -112,35 +107,44 @@ public class ClaimPetugasActivity extends AppCompatActivity implements DatePicke
         _btn_find_va = (Button) findViewById(R.id.btn_find_va);
         _btn_order_claim_ptgs = (Button) findViewById(R.id.btn_order_claim_ptgs);
 
+        String _va = "";
+        String _flag = "";
+        _va = getIntent().getStringExtra("result_va");
+        _flag = getIntent().getStringExtra("result_dt_flag");
 
-        if(_flag=="fromDashboardPetugas") {
-            _va = "";
+
+        Log.i("","_vax="+_va);
+        Log.i("","_flagx="+_flag);
+
+        assert _flag != null;
+        String _xx = null;
+        if(_va == null && _flag.equals("fromDashboardPetugas")) {
+            _xx = "0";
+            Toast.makeText(getApplicationContext(), "toast _va null",Toast.LENGTH_LONG).show();
         }else {
-            _va= _va.trim();
+            assert _va != null;
+            _xx= _va.trim();
+            _no_va.setText(_xx.trim());
+            Toast.makeText(getApplicationContext(), "toast _va terisi",Toast.LENGTH_LONG).show();
         }
+        Log.i("","_xx="+_xx);
 
-//        _no_va.setText(_va.toString().trim());
 
-//        spinnerSearchJnsClaim("cari_jenis_klaim_by_no_va","");
 
-        String final_va = _va;
+
         _btn_find_va.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(final_va.equals("")){
 
-//                    final String xx_val = _no_va.getText().toString();
-//                    if(TextUtils.isEmpty(xx_val) ) {
+                final String nova_val = _no_va.getText().toString();
+
+                Log.i("","nova_val "+nova_val);
+                    if(TextUtils.isEmpty(nova_val) ) {
                         _no_va.setError("No VA Masih Kosong!");
-//                    }
-
-
-                }else{
-                    _no_va.setText(final_va.toString().trim());
-                }
-                final String nova = _no_va.getText().toString();
-                getDataNova("cari_no_va",nova);
-
+                        _no_va.setFocusable(true);
+                    } else {
+                        getDataNova("cari_no_va",nova_val);
+                    }
             }
         });
 

@@ -85,6 +85,7 @@ public class CustomAdapterEntityWisatawan extends RecyclerView.Adapter<CustomAda
 
                 Intent i = new Intent(v.getContext(), EditKarcisStatusWisatawanActivity.class);
                 i.putExtra("result_va", _va );
+                i.putExtra("result_dt_flag", "fromCustomAdapterEntityWisatawan" );
                 context.startActivity(i);
                 Log.i("","_va= "+_va);
 

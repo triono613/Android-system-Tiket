@@ -95,7 +95,8 @@ public class CustomAdapterEntityPetugas extends RecyclerView.Adapter<CustomAdapt
                 i.putExtra("result_va", _va );
                 i.putExtra("result_dt_flag", "fromCustomAdapterEntityPetugas" );
                 context.startActivity(i);
-                Log.i("","_va "+_va);
+                Log.i("","_va Entity "+_va);
+
 
             }
         });
@@ -103,7 +104,9 @@ public class CustomAdapterEntityPetugas extends RecyclerView.Adapter<CustomAdapt
         btn_entity_view_ptgs.setOnClickListener(v -> {
             Intent x = new Intent(v.getContext(), ClaimPetugasActivity.class);
             x.putExtra("result_va", _va);
+            x.putExtra("result_dt_flag", "fromCustomAdapterEntityPetugas" );
             context.startActivity(x);
+
 
         });
 

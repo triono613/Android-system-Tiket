@@ -210,6 +210,14 @@ public class SessionManager {
 
     }
 
+    public void createSessionQuota( String kd_lok_eksp, String  nm_lok_eksp)
+    {
+        editor.putString(key_kd_lok_eksp,kd_lok_eksp);
+        editor.putString(key_nm_lok_eksp,nm_lok_eksp);
+        editor.commit();
+        editor.apply();
+
+    }
 
     public void createSessionEksp( String kd_lok_eksp, String  nm_lok_eksp)
     {
