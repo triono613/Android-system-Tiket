@@ -1,8 +1,10 @@
 package com.example.aga;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,8 +15,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -58,11 +62,14 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
     TextView _hp_pengunjung_ptgs;
     TextView _email_pengunjung;
     TextView _nama_pengunjung_ptgs;
+    TextView _text_quota;
+
     Spinner _spinner_karcis_utama_ptgs;
     Spinner _spinner_karcis_tmbhn_ptgs;
     Spinner _spinner_lok_pintu_ptgs;
     Spinner _spinner_jns_byr_ptgs;
     Button _btn_order_ptgs;
+    ImageView _imgv;
 
     private List<String> arrListUtamaPtgs = new ArrayList<String>();
     private List<String> arrListTambahanPtgs = new ArrayList<String>();
@@ -90,6 +97,8 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
         _spinner_lok_pintu_ptgs = (Spinner) findViewById(R.id.spinner_lok_pintu_ptgs);
         _spinner_karcis_utama_ptgs = (Spinner) findViewById(R.id.spinner_karcis_utama_ptgs);
         _spinner_karcis_tmbhn_ptgs  = (Spinner) findViewById(R.id.spinner_karcis_tmbhn_ptgs);;
+        _text_quota = (TextView) findViewById(R.id.text_quota);
+
         final String LP = sessionManager.getDataLokWisPesankarcisWisatawan().get(SessionManager.key_kd_lok);
         spinnerWisatawanUtama("daftar_karcis_wisatawan_utama",LP);
         spinnerWisatawanTambahan("daftar_karcis_wisatawan_tambahan",LP);
@@ -108,7 +117,6 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
         _spinner_karcis_utama_ptgs = (Spinner) findViewById(R.id.spinner_karcis_utama_ptgs);
         _spinner_karcis_tmbhn_ptgs =(Spinner) findViewById(R.id.spinner_karcis_tmbhn_ptgs);
         _spinner_jns_byr_ptgs = (Spinner) findViewById(R.id.spinner_jns_byr_ptgs);
-        _btn_order_ptgs = (Button) findViewById(R.id.btn_order_ptgs);
         _jml_krcs_wisnu_ptgs = (EditText) findViewById(R.id.jml_krcs_wisnu_ptgs);
         _jml_krcs_wisman_ptgs = (EditText) findViewById(R.id.jml_krcs_wisman_ptgs);
         _jml_krcs_wisman_tmbhn_ptgs = (EditText) findViewById(R.id.jml_krcs_wisman_tmbhn_ptgs);
@@ -119,6 +127,8 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
         _hp_pengunjung_ptgs = (TextView) findViewById(R.id.hp_pengunjung_ptgs);
         _email_pengunjung = (TextView) findViewById(R.id.email_pengunjung_ptgs);
         _nama_pengunjung_ptgs = (TextView) findViewById(R.id.nama_pengunjung_ptgs);
+//        _imgv = (ImageView) findViewById(R.id.imgBell);
+//        _imgv.setVisibility(View.GONE);
 
 //        spinnerLokPintuPtgs("daftar_lokasi_wisata","");
 
@@ -128,6 +138,8 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
 
         spinnerLokPintuPtgs("petugas_daftar_lokasi_wisata", KL);
         spinnerJnsByrPtgs("informasi_mode_pembayaran","");
+//        quotaTwa("quota_per_twa","");
+
         _tgl_kunjungan_ptgs.setText(Help.getDateTime());
         _tgl_kunjungan_ptgs.setEnabled(false);
         _ttl_ptgs.setEnabled(false);
@@ -163,14 +175,15 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
 
         _btn_order_ptgs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 pesanKarcisPetugas("input_petugas");
+
             }
         });
 
@@ -182,12 +195,10 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-
             }
         });
 
@@ -253,6 +264,80 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
     }
 
 
+    private void quotaTwa(String EP,String KSDA){
+        findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
+        String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        final RequestQueue requestQueue = Volley.newRequestQueue(PesanKarcisPetugasActivity.this);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
+                new Response.Listener<String>() {
+                    @SuppressLint("SetTextI18n")
+                    @Override
+                    public void onResponse(String response) {
+                        Log.i("tag", "response quotaTwa =" + response );
+                        try {
+                            findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+                            if( Help.isJSONValid(response) ){
+
+                                JSONObject jsonObject = new JSONObject(response);
+                                String data = jsonObject.getString("data");
+                                JSONObject jsonObject1 = new JSONObject(data);
+                                boolean _berhasil = jsonObject1.getBoolean("berhasil");
+
+//                                if( _berhasil ) {
+                                   String  _id = jsonObject1.getString("id");
+                                    int _quota = jsonObject1.getInt("quota");
+                                    String _keterangan = jsonObject1.getString("keterangan");
+                                Log.i("","_keterangan "+_keterangan);
+//                                Log.i("","_berhasil "+_berhasil);
+//                                Log.i("","qouta "+_quota);
+//                                Log.i("","_keterangan "+_keterangan);
+//                                    if( _quota > 0  ){
+
+                                        Toast.makeText(PesanKarcisPetugasActivity.this,"quota > 0.", Toast.LENGTH_LONG).show();
+                                        TextView quotax = (TextView)findViewById(R.id.text_quota);
+                                        ImageView imgv = (ImageView) findViewById(R.id.imgBell);
+                                        quotax.setText(String.valueOf("Quota: "+_quota));
+                                        quotax.setTextColor(Color.parseColor("#ffe458"));
+//                                        imgv.setVisibility(View.VISIBLE);
+//                                    }
+                            }
+                            _spinner_jns_byr_ptgs.setAdapter(new ArrayAdapter<SpinnerJnsByr>(PesanKarcisPetugasActivity.this, android.R.layout.simple_spinner_dropdown_item, arrJnsByr) );
+                        } catch (JSONException e) {
+                            Log.i("", "error =" + e.toString() );
+                            e.printStackTrace();
+                        }
+                        requestQueue.stop();
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.i("", "response =" + error.toString());
+                error.printStackTrace();
+                requestQueue.stop();
+            }
+        }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> obj = new HashMap<String, String>();
+
+                Log.i("","KSDAx "+KSDA);
+                Log.i("","Help.getDateTime()x "+Help.getDateTime());
+
+                obj.put("kode_ksda", KSDA);
+                obj.put("tgl_quota",Help.getDateTime());
+
+//                obj.put("kode_ksda", "27");
+//                obj.put("tgl_quota","2020-06-11");
+                return obj;
+            }
+        };
+        int socketTimeout = 30000;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        stringRequest.setRetryPolicy(policy);
+        requestQueue.add(stringRequest);
+    }
+
     private void spinnerJnsByrPtgs(String EP,String KL){
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
         String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
@@ -261,7 +346,7 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Log.i("tag", "response spinnerLokPintuPtgs =" + response );
+                        Log.i("tag", "response spinnerJnsByrPtgs =" + response );
                         try {
                             findViewById(R.id.loadingPanel).setVisibility(View.GONE);
                             if( Help.isJSONValid(response) ){
@@ -345,8 +430,7 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
 
                                 Log.i("","spinner pintu response= "+response);
 
-                                String lokasi_pintu;
-                                String nama_pintu;
+
                                 arrListWisata.clear();
 
                                 findViewById(R.id.loadingPanel).setVisibility(View.GONE);
@@ -355,29 +439,18 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
                                     JSONArray jsonArray = jsonObject.getJSONArray("data");
                                     for (int i = 0; i <jsonArray.length();i++ ) {
                                         JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-                                        lokasi_pintu = jsonObject1.getString("lokasi_pintu");
-                                        nama_pintu = jsonObject1.getString("nama_pintu");
+                                        String kode_ksda = jsonObject1.getString("kode_ksda");
+                                        String lokasi_pintu = jsonObject1.getString("lokasi_pintu");
+                                        String nama_pintu = jsonObject1.getString("nama_pintu");
 
-                                        Log.i("tag","kode_ksda= "+lokasi_pintu);
+                                        sessionManager.createSessionEksp(kode_ksda,nama_pintu);
+
+                                        Log.i("tag","kode_ksda= "+kode_ksda);
                                         Log.i("tag","nama= "+nama_pintu);
-
                                         arrListWisata.add(new SpinnerListWisata(lokasi_pintu,nama_pintu));
-
+                                        quotaTwa("quota_per_twa",kode_ksda);
                                     }
-                                } else {
-
                                 }
-                            } else {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(PesanKarcisPetugasActivity.this);
-                                builder.setMessage("Format Json Error !")
-                                        .setCancelable(false)
-                                        .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog, int id) {
-//                                                sessionManager.logout();
-                                            }
-                                        });
-                                AlertDialog alert = builder.create();
-                                alert.show();
                             }
                             _spinner_lok_pintu_ptgs.setAdapter(new ArrayAdapter<SpinnerListWisata>(PesanKarcisPetugasActivity.this, android.R.layout.simple_spinner_dropdown_item,arrListWisata) );
                             String compareValue = sessionManager.getDataSetupPintu().get(SessionManager.key_index);
@@ -624,7 +697,7 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
                                 JSONObject jObj = new JSONObject(response);
                                 String data = jObj.getString("data");
                                 JSONObject jsonObject1 = new JSONObject(data);
-                                Boolean berhasil = jsonObject1.getBoolean("berhasil");
+                                boolean berhasil = jsonObject1.getBoolean("berhasil");
 
                                 Log.i("tag","success= " + jObj.getBoolean("success") );
                                 Log.i("tag","data= " + data );
@@ -652,16 +725,15 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
                                     String _email_pengunjung = jsonObject1.getString("email_pengunjung");
 
                                     Intent i = new Intent(PesanKarcisPetugasActivity.this, SuccessRegistrasiWisatawanActivity.class);
-                                    i.putExtra("result_dt_ket", "Pemesanan Anda Berhasil Silahkan Cek email!");
-                                    i.putExtra("result_dt_email", "");
-                                    i.putExtra("result_dt_berhasil", berhasil);
-                                    i.putExtra("result_dt_flag", "flagPesanKarcisPetugas");
 
+                                    i.putExtra("result_dt_ket","Pesanan Karcis berhasil, harap check email Anda");
+                                    i.putExtra("result_dt_email", _alamat_email);
+                                    i.putExtra("result_dt_berhasil", true);
+                                    i.putExtra("result_dt_flag", "flagPesanKarcisPetugas");
                                     startActivity(i);
+
                                 }
                             }
-
-
                         } catch (JSONException e) {
                             Log.i("triono", "error ===" + e.toString() );
                             e.printStackTrace();
@@ -705,17 +777,17 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
                 Log.i("tag","jns_byr= " + jns_byr );
                 Log.i("tag","hp_pengunjung= " + hp_pengunjung );
                 Log.i("tag","nama_pengunjung= " + nama_pengunjung );
-//                Log.i("tag","key_email= " + key_email );
-//                Log.i("tag","key_hp= " + key_hp );
-//                Log.i("tag","key_tgl_penjualan= " + key_tgl_penjualan );
-//                Log.i("tag","tgl_kunjungan= " + tgl_kunjungan );
-//                Log.i("tag","key_kode_lokasi= " + key_kode_lokasi );
-//                Log.i("tag","key_id_utama= " + key_id_utama );
-//                Log.i("tag","key_id_tmbhn= " + key_id_tmbhn );
-//                Log.i("tag","jml_wisnu= " + jml_wisnu );
-//                Log.i("tag","jml_wisman= " + jml_wisman );
-//                Log.i("tag","jml_tmhn= " + jml_tmhn );
-//                Log.i("tag","flag_pemesan= " + flag_pemesan );
+                Log.i("tag","key_email= " + key_email );
+                Log.i("tag","key_hp= " + key_hp );
+                Log.i("tag","key_tgl_penjualan= " + key_tgl_penjualan );
+                Log.i("tag","tgl_kunjungan= " + tgl_kunjungan );
+                Log.i("tag","key_kode_lokasi= " + key_kode_lokasi );
+                Log.i("tag","key_id_utama= " + key_id_utama );
+                Log.i("tag","key_id_tmbhn= " + key_id_tmbhn );
+                Log.i("tag","jml_wisnu= " + jml_wisnu );
+                Log.i("tag","jml_wisman= " + jml_wisman );
+                Log.i("tag","jml_tmhn= " + jml_tmhn );
+                Log.i("tag","flag_pemesan= " + flag_pemesan );
 
 
                 obj.put("registration_by", key_email);

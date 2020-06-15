@@ -56,7 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-    <LinearLayout
+            <LinearLayout
         android:layout_marginTop="50dp"
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
@@ -130,9 +130,19 @@
                     android:text="Pilih Pintu Masuk Sesuai Keinginan" />
 
             </LinearLayout>
+
         </LinearLayout>
 
-        <LinearLayout
+                <LinearLayout
+
+                    android:textAlignment="textEnd"
+                    android:layout_gravity="right"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </LinearLayout>
+
+                <LinearLayout
             android:id="@+id/card_pemesanan_karcis_ptgs"
             android:background="@drawable/cardview_child"
             android:layout_width="match_parent"
@@ -146,6 +156,7 @@
             android:layout_marginBottom="20dp"
             android:orientation="horizontal">
 
+
             <ImageView
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="20dp"
@@ -156,27 +167,42 @@
                 android:src="@drawable/ic_speaker_group_black_24dp" />
 
             <LinearLayout
-                android:paddingTop="10dp"
                 android:orientation="vertical"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="5dp"
-                android:paddingEnd="5dp"
-                >
-
-                <TextView
-                    android:layout_marginStart="10dp"
+                android:paddingEnd="5dp">
+                <LinearLayout
+                    android:paddingTop="4dp"
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="10dp"
-                    android:layout_margin="5dp"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
                     android:fontFamily="@font/mmedium"
                     android:gravity="left"
-                    android:text="Pemesanan Karcis"
+                    android:paddingTop="5dp"
+                    android:text="Pemesanan \nKarcis"
                     android:textSize="16dp"
                     android:textStyle="bold" />
 
-
+                    <ImageView
+                        android:id="@+id/imgBell"
+                        android:visibility="gone"
+                        android:textAlignment="textEnd"
+                        android:layout_width="70dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center_horizontal"
+                        android:elevation="4dp"
+                        android:src="@drawable/bell2"
+                        tools:ignore="RtlCompat" />
+                </LinearLayout>
                 <TextView
                     android:layout_marginStart="5dp"
                     android:textSize="14dp"
@@ -187,7 +213,9 @@
                     android:text="Pesan Tiket Untuk Kedatangan Anda" />
 
             </LinearLayout>
-        </LinearLayout>
+
+
+                </LinearLayout>
 
 
         <LinearLayout

@@ -5,6 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".PesanKarcisPetugasActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="1dp">
 
             <View
                 android:layout_width="match_parent"
@@ -17,34 +22,61 @@
                 android:layout_height="810dp"
                 android:background="@drawable/bg_getstarted"
                 app:layout_constraintBottom_toBottomOf="parent" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="10dp">
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="80dp"
+                android:layout_marginTop="60dp"
                 android:fontFamily="@font/mregular"
                 android:text="Pemesanan Karcis"
                 android:textColor="#fff"
                 android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="110dp"
+        >
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:fontFamily="@font/mlight"
-                android:lineSpacingExtra="9dp"
-                android:text="Petugas"
-                android:textAlignment="center"
-                android:textColor="#fff"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:fontFamily="@font/mlight"
+            android:lineSpacingExtra="9dp"
+            android:text="Petugas"
+            android:textAlignment="center"
+            android:textColor="#fff"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
+        <TextView
+            android:id="@+id/text_quota"
+            android:layout_width="227dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:fontFamily="@font/mlight"
+            android:lineSpacingExtra="9dp"
+            android:text="quota"
+            android:textAlignment="textEnd"
+            android:textColor="#fff"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
+    </LinearLayout>
     <ScrollView
         android:orientation="vertical"
         android:layout_width="match_parent"

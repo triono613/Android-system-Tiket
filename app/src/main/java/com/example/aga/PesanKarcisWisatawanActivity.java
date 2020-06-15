@@ -677,14 +677,10 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements D
                                         i.putExtra("result_dt_berhasil", berhasil);
                                         i.putExtra("result_dt_flag", "flagPesanKarcisWisatawan");
                                         startActivity(i);
-//                                        finish();
-
                                     }
                                 }
-
-
                         } catch (JSONException e) {
-                            Log.i("triono", "error ===" + e.toString() );
+                            Log.i("", "error pesan karcis wisatawan" + e.toString() );
                             e.printStackTrace();
                         }
                         requestQueue.stop();

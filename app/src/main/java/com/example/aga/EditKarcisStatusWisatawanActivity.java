@@ -105,7 +105,7 @@ public class EditKarcisStatusWisatawanActivity extends AppCompatActivity {
         final String _kdksda = sessionManager.getUserDetail().get(SessionManager.key_kode_lokasi);
 
         getDataNova("edit_cari_no_va",_va);
-
+        spinnerLokWisata("lokasi_pintu_by_va_no",_va );
 //        spinnerLokWisata("daftar_lokasi_pintu",_kdksda );
 //        spinnerJnsByrwstwn("informasi_mode_pembayaran","");
 
@@ -349,7 +349,7 @@ public class EditKarcisStatusWisatawanActivity extends AppCompatActivity {
                                 }
                             }
 //                            _spinner_jns_klaim_wstwn.setAdapter(new ArrayAdapter<SpinnerJnsClaim>(EditKarcisStatusActivity.this, android.R.layout.simple_spinner_dropdown_item, arrJnsClaim) );
-                            _spinner_lok_pintu_wstwn_eks.setAdapter(new ArrayAdapter<SpinnerListWisataEksp>(EditKarcisStatusWisatawanActivity.this, android.R.layout.simple_spinner_dropdown_item,arrListWistEksp) );
+//                            _spinner_lok_pintu_wstwn_eks.setAdapter(new ArrayAdapter<SpinnerListWisataEksp>(EditKarcisStatusWisatawanActivity.this, android.R.layout.simple_spinner_dropdown_item,arrListWistEksp) );
                             _spinner_jns_byr_wstwn_eks.setAdapter(new ArrayAdapter<SpinnerJnsByrEksp>(EditKarcisStatusWisatawanActivity.this, android.R.layout.simple_spinner_dropdown_item, arrJnsByrEksp) );
                         } catch (JSONException e) {
                             Log.i("triono", "error ===" + e.toString() );
@@ -383,7 +383,7 @@ public class EditKarcisStatusWisatawanActivity extends AppCompatActivity {
     }
 
 
-    private void spinnerLokWisata(String EP,String KSDA){
+    private void spinnerLokWisata(String EP,String VA_NO){
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
         String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue(EditKarcisStatusWisatawanActivity.this);
@@ -391,33 +391,29 @@ public class EditKarcisStatusWisatawanActivity extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Log.i("triono", "response 1 ===" + response );
+                        Log.i("triono", "response spinnerLokWisata " + response );
                         try {
 
                             if( Help.isJSONValid(response) ){
 //                                findViewById(R.id.loadingPanel).setVisibility(View.GONE);
                                 JSONObject jsonObject = new JSONObject(response.toString());
-                                String nm_obj_wisata;
-                                String kd_lokasi;
                                 arrListWistEksp.clear();
 
                                 if( jsonObject.getBoolean("success") ) {
                                     JSONArray jsonArray = jsonObject.getJSONArray("data");
                                     for (int i = 0; i <jsonArray.length();i++ ) {
                                         JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-                                        nm_obj_wisata = jsonObject1.getString("nama");
-                                        kd_lokasi = jsonObject1.getString("kode_lokasi");
+                                        String kode_pintu = jsonObject1.getString("kode_pintu");
+                                        String nama_pintu = jsonObject1.getString("nama_pintu");
 
-                                        Log.i("","kd_lokasi= "+kd_lokasi);
-                                        Log.i("","nm_obj_wisata= "+nm_obj_wisata);
+                                        Log.i("","kode_pintu= "+kode_pintu);
+                                        Log.i("","nama_pintu= "+nama_pintu);
                                         Log.i("","arrListWistEksp.size()= "+ arrListWistEksp.size());
 
 //                                        kd_lokasi = "27002";
-                                        arrListWistEksp.add(new SpinnerListWisataEksp(kd_lokasi,nm_obj_wisata));
+                                        arrListWistEksp.add(new SpinnerListWisataEksp(kode_pintu,nama_pintu));
 
                                     }
-                                } else {
-
                                 }
                             }
                             _spinner_lok_pintu_wstwn_eks.setAdapter(new ArrayAdapter<SpinnerListWisataEksp>(EditKarcisStatusWisatawanActivity.this, android.R.layout.simple_spinner_dropdown_item,arrListWistEksp) );
@@ -431,7 +427,7 @@ public class EditKarcisStatusWisatawanActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.i("triono", "response =" + error.toString());
+                Log.i("", "response =" + error.toString());
                 error.printStackTrace();
                 requestQueue.stop();
             }
@@ -440,8 +436,8 @@ public class EditKarcisStatusWisatawanActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> obj = new HashMap<String, String>();
-                Log.i("","ksda= "+ KSDA);
-                obj.put("kode_ksda", KSDA);
+//                Log.i("","ksda= "+ KSDA);
+                obj.put("va_no", VA_NO);
                 return obj;
             }
         };

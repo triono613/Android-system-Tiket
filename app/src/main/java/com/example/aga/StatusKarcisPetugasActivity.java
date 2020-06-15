@@ -97,9 +97,9 @@ public class StatusKarcisPetugasActivity extends AppCompatActivity {
         });
 
 
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setHasFixedSize(true);
+//        layoutManager = new LinearLayoutManager(this);
+//        recyclerView.setLayoutManager(layoutManager);
+//        recyclerView.setHasFixedSize(true);
 
 
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
@@ -122,37 +122,26 @@ public class StatusKarcisPetugasActivity extends AppCompatActivity {
                                     String _va_no;
                                     String _tgl_kunjungan;
                                     String _status;
-                                    String _nama;
-                                    entityStatusKarcisPetugasArrayList = new ArrayList<>();
+                                    String _nm_objk_wis;
+//                                    entityStatusKarcisPetugasArrayList = new ArrayList<>();
+                                    entityStatusKarcisPetugasArrayList.clear();
 
+                                    Log.i("","jsonArray.length() "+jsonArray.length());
                                     for (int i = 0; i <jsonArray.length();i++ ) {
                                         JSONObject jsonObject1 = jsonArray.getJSONObject(i);
                                         _va_no = jsonObject1.getString("va_no");
                                         _tgl_kunjungan = jsonObject1.getString("tgl_kunjungan");
                                         _status = jsonObject1.getString("status");
-                                        _nama = jsonObject1.getString("nama");
+                                        _nm_objk_wis = jsonObject1.getString("nama");
+
+                                        Log.i("petugas","_i "+i);
                                         Log.i("petugas","_va_no "+_va_no);
-                                        entityStatusKarcisPetugasArrayList.add(new EntityStatusKarcisPetugas(_va_no,_tgl_kunjungan,_status,_nama));
+
+                                        entityStatusKarcisPetugasArrayList.add(new EntityStatusKarcisPetugas(_va_no,_tgl_kunjungan,_status,_nm_objk_wis));
+//                                        entityStatusKarcisPetugasArrayList.add(new EntityStatusKarcisPetugas("20122020000000098","2020-01-02","unPaid","gunung pangrango"));
                                     }
-
-                                    DividerItemDecoration itemDecoration = new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL);
-                                    layoutManager = new LinearLayoutManager(StatusKarcisPetugasActivity.this);
-                                    recyclerView.setLayoutManager(layoutManager);
-
-                                } else {
-                                    // do nothing just pray to Allah
                                 }
-                            } else {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(StatusKarcisPetugasActivity.this);
-                                builder.setMessage("Format Json Error !")
-                                        .setCancelable(false)
-                                        .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog, int id) {
-                                                sessionManager.logout();
-                                            }
-                                        });
-                                AlertDialog alert = builder.create();
-                                alert.show();
+//                                entityStatusKarcisPetugasArrayList.add(new EntityStatusKarcisPetugas("20122020000000098","2020-01-02","unPaid","gunung pangrango"));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -249,7 +238,7 @@ public class StatusKarcisPetugasActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                jsonrequest(query);
+//                jsonrequest(query);
                 return true;
             }
             @Override
@@ -263,12 +252,13 @@ public class StatusKarcisPetugasActivity extends AppCompatActivity {
                     if(va.contains(nextText)){
                         dataFilter.add(data);
                     }
-                    if(tgl.contains(nextText)){
+                    else if(tgl.contains(nextText)){
                         dataFilter.add(data);
                     }
-                    if(status.contains(nextText)){
+                    else if(status.contains(nextText)){
                         dataFilter.add(data);
                     }
+
                 }
                 adapter.setFilter(dataFilter);
                 return true;
@@ -313,18 +303,18 @@ public class StatusKarcisPetugasActivity extends AppCompatActivity {
 
                                         Log.i("petugas","_va_no "+_va_no);
 
-                                        entityStatusKarcisPetugasArrayList.add(new EntityStatusKarcisPetugas(_va_no,_tgl_kunjungan,_status,_nama));
+//                                        entityStatusKarcisPetugasArrayList.add(new EntityStatusKarcisPetugas(_va_no,_tgl_kunjungan,_status,_nama));
 
                                     }
 
-                                    DividerItemDecoration itemDecoration = new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL);
-                                    itemDecoration.setDrawable(Objects.requireNonNull(ContextCompat.getDrawable(getApplicationContext(), R.drawable.line)));
-                                    recyclerView.addItemDecoration(itemDecoration);
-                                    recyclerView.setItemAnimator(new DefaultItemAnimator());
-                                    CustomAdapterEntityPetugas customAdapterEntityPetugas = new CustomAdapterEntityPetugas( entityStatusKarcisPetugasArrayList, StatusKarcisPetugasActivity.this);
-                                    recyclerView.setAdapter(customAdapterEntityPetugas);
-                                    layoutManager = new LinearLayoutManager(StatusKarcisPetugasActivity.this);
-                                    recyclerView.setLayoutManager(layoutManager);
+//                                    DividerItemDecoration itemDecoration = new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL);
+//                                    itemDecoration.setDrawable(Objects.requireNonNull(ContextCompat.getDrawable(getApplicationContext(), R.drawable.line)));
+//                                    recyclerView.addItemDecoration(itemDecoration);
+//                                    recyclerView.setItemAnimator(new DefaultItemAnimator());
+//                                    CustomAdapterEntityPetugas customAdapterEntityPetugas = new CustomAdapterEntityPetugas( entityStatusKarcisPetugasArrayList, StatusKarcisPetugasActivity.this);
+//                                    recyclerView.setAdapter(customAdapterEntityPetugas);
+//                                    layoutManager = new LinearLayoutManager(StatusKarcisPetugasActivity.this);
+//                                    recyclerView.setLayoutManager(layoutManager);
 
                                 } else {
                                     // do nothing just pray to Allah

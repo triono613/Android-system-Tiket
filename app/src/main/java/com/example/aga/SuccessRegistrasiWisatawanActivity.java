@@ -99,34 +99,25 @@ public class SuccessRegistrasiWisatawanActivity extends AppCompatActivity {
                 assert sessionIntentFlag != null;
                 switch (sessionIntentFlag){
                     case "ClaimPetugas":
+                    case "flagEditKarcisStatusPetugasTrue":
+                    case "flagEditPasswordPetugasFalse":
+                    case "flagSetupPintu":
+                    case "flagPesanKarcisPetugas":
                         Intent i = new Intent(SuccessRegistrasiWisatawanActivity.this, DashboardPetugasActivity.class);
                         startActivity(i);
-                        break;
-                    case "flagPesanKarcisPetugas":
-                        Intent ii = new Intent(SuccessRegistrasiWisatawanActivity.this, DashboardPetugasActivity.class);
-                        startActivity(ii);
                         break;
                     case "flagPesanKarcisWisatawan":
                         Intent a = new Intent(SuccessRegistrasiWisatawanActivity.this, DashboardWisatawanActivity.class);
                         startActivity(a);
-                        break;
-                    case "flagSetupPintu":
-                        Intent b = new Intent(SuccessRegistrasiWisatawanActivity.this, DashboardPetugasActivity.class);
-                        startActivity(b);
                         break;
                     case "flagEditPasswordPetugasTrue":
                         Intent c = new Intent(SuccessRegistrasiWisatawanActivity.this, DashboardPetugasActivity.class);
                         startActivity(c);
                         sessionManager.logout();
                         break;
-                    case "flagEditPasswordPetugasFalse":
-                        Intent d = new Intent(SuccessRegistrasiWisatawanActivity.this, DashboardPetugasActivity.class);
-                        startActivity(d);
-                        break;
-                    case "flagEditKarcisStatusPetugasTrue":
-                        Intent e = new Intent(SuccessRegistrasiWisatawanActivity.this, DashboardPetugasActivity.class);
-                        startActivity(e);
-                        break;
+                    case "checkQuotaTwa":
+                        Intent f = new Intent(SuccessRegistrasiWisatawanActivity.this, DashboardPetugasActivity.class);
+                        startActivity(f);
                     default:
                         Log.i("","logout ini");
                         sessionManager.logout();

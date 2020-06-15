@@ -1,11 +1,9 @@
 package com.example.aga;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -70,18 +68,13 @@ public class StatusKarcisWisatawanActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         Log.i("triono", "response 1 ===" + response );
-
-
                         try {
                             findViewById(R.id.loadingPanel).setVisibility(View.GONE);
                             if( Help.isJSONValid(response) ){
-
                                 ArrayList dx = new ArrayList<>();
                                 JSONObject jsonObject = new JSONObject(response.toString());
-
                                 if( jsonObject.getBoolean("success") ) {
                                     JSONArray jsonArray = jsonObject.getJSONArray("data");
-
                                     Log.i("triono", "jsonObject.getBoolean() ===" + jsonObject.getBoolean("success") );
                                     String _va_no;
                                     String _tgl_kunjungan;
@@ -100,37 +93,16 @@ public class StatusKarcisWisatawanActivity extends AppCompatActivity {
                                         Log.i("wisatawan","_va_no "+_va_no);
 
                                         entityStatusKarcisArrayList.add(new EntityStatusKarcisWisatawan(_va_no,_tgl_kunjungan,_status,_nama));
-
                                     }
-
                                     CustomAdapterEntityWisatawan customAdapter = new CustomAdapterEntityWisatawan( entityStatusKarcisArrayList, StatusKarcisWisatawanActivity.this);
                                     recyclerView.setAdapter(customAdapter);
-
-                                } else {
-                                        // do nothing just pray to Allah
                                 }
-                            } else {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(StatusKarcisWisatawanActivity.this);
-                                builder.setMessage("Format Json Error !")
-                                        .setCancelable(false)
-                                        .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog, int id) {
-                                                sessionManager.logout();
-                                            }
-                                        });
-                                AlertDialog alert = builder.create();
-                                alert.show();
                             }
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                         requestQueue.stop();
-
-
                     }
-
-
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
