@@ -1,4 +1,4 @@
-package com.example.aga;
+package com.amanahgithawisata.aga;
 
 import org.junit.Test;
 

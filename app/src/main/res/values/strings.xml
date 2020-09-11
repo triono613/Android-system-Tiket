@@ -13,6 +13,7 @@
     <string name="passwd2">Ulang Password</string>
     <string name="lokasi_wisata">Lokasi Wisata</string>
     <string name="lanjutkan">Lanjutkan</string>
+    <string name="apps_name">Jelajah \n Wisata</string>
 
 
     <string-array name="dt_obj_wis">
@@ -33,9 +34,11 @@
     <string name="menu_slideshow">Slideshow</string>
 
     <string name="home_second">Home Second</string>
-
-
     <string name="titlememe">TitleMeme</string>
     <string name="submeme">SubMeme</string>
     <string name="todo">TODO</string>
+
+    <string name="facebook_app_id">910605569458197</string>
+    <string name="fb_login_protocol_scheme">fb910605569458197</string>
+
 </resources>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DashboardPetugasActivity">
+    tools:context="com.amanahgithawisata.aga.DashboardPetugasActivity">
 
     <View
         android:id="@+id/view"
@@ -12,11 +12,6 @@
         android:layout_height="310dp"
         android:background="@drawable/vector_header" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="810dp"
-        android:background="@drawable/bg_getstarted"
-        app:layout_constraintBottom_toBottomOf="parent" />
 
     <TextView
         android:id="@+id/textView3"
@@ -27,7 +22,7 @@
         android:fontFamily="@font/mregular"
         android:text="Dashboard Petugas"
         android:textColor="#fff"
-        android:textSize="20sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,7 +36,7 @@
         android:fontFamily="@font/mlight"
         android:text="email"
         android:textColor="#fff"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -57,355 +52,480 @@
             android:layout_height="wrap_content">
 
             <LinearLayout
-        android:layout_marginTop="50dp"
-        android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/cardview"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:paddingTop="40dp"
-        android:paddingBottom="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.521">
-
-
-        <LinearLayout
-            android:id="@+id/card_setup_pintu_ptgs"
-            android:background="@drawable/cardview_child"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:paddingLeft="25dp"
-            android:paddingRight="25dp"
-            android:paddingBottom="10dp"
-            android:gravity="center_horizontal"
-            android:layout_marginBottom="20dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="20dp"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:padding="10dp"
-                android:background="@drawable/circlebackground1"
-                android:src="@drawable/ic_account_balance_wallet_black_24dp"
-                />
-
-            <LinearLayout
-                android:paddingTop="10dp"
-                android:orientation="vertical"
+                android:id="@+id/linearLayout2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="5dp"
-                android:paddingEnd="5dp"
-                >
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/cardview"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingTop="40dp"
+                android:paddingBottom="30dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.521">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="10dp"
-                    android:layout_margin="5dp"
-                    android:fontFamily="@font/mmedium"
-                    android:gravity="left"
-                    android:text="Setup Pintu"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-
-                <TextView
-                    android:textSize="14sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="left"
-                    android:padding="5dp"
-                    android:text="Pilih Pintu Masuk Sesuai Keinginan" />
-
-            </LinearLayout>
-
-        </LinearLayout>
 
                 <LinearLayout
-
-                    android:textAlignment="textEnd"
-                    android:layout_gravity="right"
+                    android:id="@+id/card_setup_pintu_ptgs"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/cardview_child"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    android:paddingLeft="25dp"
+                    android:paddingRight="25dp"
+                    android:paddingBottom="10dp">
+
+                    <ImageView
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/circlebackground1"
+                        android:padding="10dp"
+                        android:src="@drawable/ic_account_balance_wallet_black_24dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingStart="5dp"
+                        android:paddingTop="10dp"
+                        android:paddingEnd="5dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:fontFamily="@font/mmedium"
+                            android:gravity="left"
+                            android:paddingTop="10dp"
+                            android:text="Informasi Pintu"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="left"
+                            android:padding="5dp"
+                            android:text="Melihat detail informasi pintu"
+                            android:textSize="10sp" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
+
                 <LinearLayout
-            android:id="@+id/card_pemesanan_karcis_ptgs"
-            android:background="@drawable/cardview_child"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:paddingLeft="25dp"
-            android:paddingRight="25dp"
-            android:paddingBottom="10dp"
-            android:gravity="center_horizontal"
-            android:layout_marginBottom="20dp"
-            android:orientation="horizontal">
-
-
-            <ImageView
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="20dp"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:background="@drawable/circlebackground3"
-                android:padding="10dp"
-                android:src="@drawable/ic_speaker_group_black_24dp" />
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="5dp"
-                android:paddingEnd="5dp">
-                <LinearLayout
-                    android:paddingTop="4dp"
-                    android:orientation="horizontal"
+                    android:visibility="visible"
+                    android:id="@+id/card_pemesanan_karcis_ptgs"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/cardview_child"
+                    android:orientation="horizontal"
+                    android:paddingLeft="25dp"
+                    android:paddingRight="25dp"
+                    android:paddingBottom="10dp">
+
+
+                    <ImageView
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/circlebackground3"
+                        android:padding="10dp"
+                        android:src="@drawable/ic_speaker_group_black_24dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="10dp"
+                        android:orientation="vertical"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:paddingStart="5dp"
+                            android:paddingTop="4dp"
+                            android:paddingEnd="5dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="2dp"
+                                android:fontFamily="@font/mmedium"
+                                android:gravity="left"
+                                android:paddingTop="5dp"
+                                android:text="Pemesanan Karcis lama"
+                                android:textSize="14dp"
+                                android:textStyle="bold" />
+
+                            <ImageView
+                                android:visibility="gone"
+                                android:id="@+id/imgBell"
+                                android:layout_width="70dp"
+                                android:layout_height="60dp"
+                                android:layout_gravity="center_horizontal"
+                                android:elevation="4dp"
+                                android:src="@drawable/bell2"
+                                android:textAlignment="textEnd"
+                                tools:ignore="RtlCompat" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:gravity="left"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:text="Pesan Karcis di Tempat Lokasi"
+                            android:textSize="10dp" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/card_pemesanan_karcis_ptgs_new"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/cardview_child"
+                    android:orientation="horizontal"
+                    android:paddingLeft="25dp"
+                    android:paddingRight="25dp"
+                    android:paddingBottom="10dp">
+
+
+                    <ImageView
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/circlebackground3"
+                        android:padding="10dp"
+                        android:src="@drawable/ic_speaker_group_black_24dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="10dp"
+                        android:orientation="vertical"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:paddingStart="5dp"
+                            android:paddingTop="4dp"
+                            android:paddingEnd="5dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="2dp"
+                                android:fontFamily="@font/mmedium"
+                                android:gravity="left"
+                                android:paddingTop="5dp"
+                                android:text="Pemesanan Karcis"
+                                android:textSize="14dp"
+                                android:textStyle="bold" />
+
+                            <ImageView
+                                android:visibility="gone"
+                                android:id="@+id/imgBell"
+                                android:layout_width="70dp"
+                                android:layout_height="60dp"
+                                android:layout_gravity="center_horizontal"
+                                android:elevation="4dp"
+                                android:src="@drawable/bell2"
+                                android:textAlignment="textEnd"
+                                tools:ignore="RtlCompat" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:gravity="left"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:text="Pesan Karcis di Tempat Lokasi"
+                            android:textSize="10dp" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/card_status_karcis_ptgs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/cardview_child"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    android:paddingLeft="25dp"
+                    android:paddingRight="25dp"
+                    android:paddingBottom="10dp">
+
+                    <ImageView
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="@drawable/circlebackground6"
+                        android:padding="10dp"
+                        android:src="@drawable/ic_event_note_black_24dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingStart="5dp"
+                        android:paddingTop="5dp"
+                        android:paddingEnd="5dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:fontFamily="@font/mmedium"
+                            android:gravity="left"
+                            android:paddingTop="10dp"
+                            android:text="Status Karcis"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="left"
+                            android:padding="2dp"
+                            android:text="Lihat Status Karcis Pengunjung Disini"
+                            android:textSize="10sp" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/card_pengajuan_klaim_ptgs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/cardview_child"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    android:paddingLeft="25dp"
+                    android:paddingRight="25dp"
+                    android:paddingBottom="10dp">
+
+                    <ImageView
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/circlebackground5"
+                        android:padding="10dp"
+                        android:src="@drawable/ic_assignment_returned_black_24dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="vertical"
+                        android:paddingStart="5dp"
+                        android:paddingTop="10dp"
+                        android:paddingEnd="5dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_marginStart="10dp"
+                            android:fontFamily="@font/mmedium"
+                            android:gravity="left"
+                            android:paddingTop="10dp"
+                            android:text="Pengajuan Klaim"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="0dp"
+                            android:gravity="left"
+                            android:padding="5dp"
+                            android:text="Ajukan Klaim Pengunjung Disini"
+                            android:textSize="10sp" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/card_ganti_password_ptgs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/cardview_child"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    android:paddingLeft="25dp"
+                    android:paddingRight="25dp"
+                    android:paddingBottom="10dp">
+
+                    <ImageView
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/circlebackground1"
+                        android:padding="10dp"
+                        android:src="@drawable/lock2" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="vertical"
+                        android:paddingStart="5dp"
+                        android:paddingTop="10dp"
+                        android:paddingEnd="5dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_marginStart="10dp"
+                            android:fontFamily="@font/mmedium"
+                            android:gravity="left"
+                            android:paddingTop="10dp"
+                            android:text="Ganti Password"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="0dp"
+                            android:gravity="left"
+                            android:padding="5dp"
+                            android:text="Ganti Password anda Disini"
+                            android:textSize="10sp" />
+
+                    </LinearLayout>
+                </LinearLayout>
+            <LinearLayout
+                android:id="@+id/card_qr_scaner_ptgs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/cardview_child"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:paddingBottom="10dp">
+
+                <ImageView
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/circlebackground3"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_scanner_black_24dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:orientation="vertical"
                     android:paddingStart="5dp"
+                    android:paddingTop="2dp"
                     android:paddingEnd="5dp">
 
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="2dp"
-                    android:fontFamily="@font/mmedium"
-                    android:gravity="left"
-                    android:paddingTop="5dp"
-                    android:text="Pemesanan \nKarcis"
-                    android:textSize="16dp"
-                    android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/mmedium"
+                        android:gravity="left"
+                        android:paddingTop="10dp"
+                        android:text="Scan "
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
-                    <ImageView
-                        android:id="@+id/imgBell"
+                    <TextView
                         android:visibility="gone"
-                        android:textAlignment="textEnd"
-                        android:layout_width="70dp"
-                        android:layout_height="60dp"
-                        android:layout_gravity="center_horizontal"
-                        android:elevation="4dp"
-                        android:src="@drawable/bell2"
-                        tools:ignore="RtlCompat" />
+                        android:id="@+id/text_dashboard_scan"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="0dp"
+                        android:gravity="left"
+                        android:padding="5dp"
+                        android:text="Scan Kode QR Notifikasi Booking Online Pengunjung di Sini"
+                        android:textSize="10sp" />
+                    </LinearLayout>
                 </LinearLayout>
-                <TextView
-                    android:layout_marginStart="5dp"
-                    android:textSize="14dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="left"
-                    android:paddingBottom="10dp"
-                    android:text="Pesan Tiket Untuk Kedatangan Anda" />
-
             </LinearLayout>
 
-
-                </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/card_status_karcis_ptgs"
-            android:background="@drawable/cardview_child"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:paddingLeft="25dp"
-            android:paddingRight="25dp"
-            android:paddingBottom="10dp"
-            android:gravity="center_horizontal"
-            android:layout_marginBottom="20dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="20dp"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:padding="10dp"
-                android:background="@drawable/circlebackground6"
-                android:src="@drawable/ic_event_note_black_24dp"
-                />
-
-            <LinearLayout
-                android:paddingTop="10dp"
+    <LinearLayout
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="5dp"
-                android:paddingEnd="5dp"
-                >
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="10dp"
-                    android:layout_margin="5dp"
-                    android:fontFamily="@font/mmedium"
-                    android:gravity="left"
-                    android:text="Status Karcis"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-
-                <TextView
-                    android:textSize="14sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="left"
-                    android:padding="5dp"
-                    android:text="Lihat Status Karcis Anda Disini" />
-
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/card_pengajuan_klaim_ptgs"
-            android:background="@drawable/cardview_child"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:paddingLeft="25dp"
-            android:paddingRight="25dp"
-            android:paddingBottom="10dp"
-            android:gravity="center_horizontal"
-            android:layout_marginBottom="20dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="10dp"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:padding="10dp"
-                android:background="@drawable/circlebackground5"
-                android:src="@drawable/ic_assignment_returned_black_24dp"
-                />
-
-            <LinearLayout
-                android:paddingTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="5dp"
-                android:paddingEnd="5dp"
-                >
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="10dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_margin="5dp"
-                    android:fontFamily="@font/mmedium"
-                    android:gravity="left"
-                    android:text="Pengajuan Klaim"
-                    android:textSize="16dp"
-                    android:textStyle="bold" />
-
-
-
-                <TextView
-                    android:textSize="14dp"
-                    android:layout_marginStart="0dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="left"
-                    android:padding="5dp"
-                    android:text="Ajukan Klaim Anda Disini" />
-
-            </LinearLayout>
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/card_ganti_password_ptgs"
-            android:background="@drawable/cardview_child"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:paddingLeft="25dp"
-            android:paddingRight="25dp"
-            android:paddingBottom="10dp"
-            android:gravity="center_horizontal"
-            android:layout_marginBottom="20dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="10dp"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:padding="10dp"
-                android:background="@drawable/circlebackground1"
-                android:src="@drawable/lock2"
-                />
-
-            <LinearLayout
-                android:paddingTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="5dp"
-                android:paddingEnd="5dp"
-                >
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="10dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_margin="5dp"
-                    android:fontFamily="@font/mmedium"
-                    android:gravity="left"
-                    android:text="Ganti Password"
-                    android:textSize="16dp"
-                    android:textStyle="bold" />
-
-
-
-                <TextView
-                    android:textSize="14dp"
-                    android:layout_marginStart="0dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="left"
-                    android:padding="5dp"
-                    android:text="Ganti Password anda Disini" />
-
-            </LinearLayout>
-        </LinearLayout>
-
-
-    </LinearLayout>
-
-
-
+                android:layout_height="100dp"
+                tools:ignore="NotSibling">
     <Button
         android:id="@+id/btn_logout_ptgs"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="35dp"
         android:gravity="center"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
@@ -415,10 +535,9 @@
         android:drawableEnd="@drawable/ic_exit_to_app_black_24dp"
         android:text="Logout"
         android:textColor="#FFF"
-        android:textSize="14sp"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        android:textSize="10sp"
         tools:layout_editor_absoluteX="31dp" />
-
+            </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

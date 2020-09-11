@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EditKarcisStatusWisatawanActivity">
-
+    tools:context="com.amanahgithawisata.aga.EditKarcisStatusWisatawanActivity">
 
 
     <View
@@ -13,22 +12,16 @@
         android:layout_height="310dp"
         android:background="@drawable/vector_header"
         />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="810dp"
-        android:background="@drawable/bg_getstarted"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
     <TextView
         android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="70dp"
         android:fontFamily="@font/mregular"
-        android:text="Perubahan Status Karcis"
+        android:text="Detail Pemesanan"
         android:textColor="#fff"
-        android:textSize="24sp"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,7 +34,7 @@
         android:text="Wisatawan"
         android:textAlignment="center"
         android:textColor="#fff"
-        android:textSize="20sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -56,18 +49,16 @@
             android:layout_height="wrap_content">
 
             <LinearLayout
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
-                android:layout_marginTop="155dp"
                 android:id="@+id/linearLayoutwstwn_eks"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
+                android:layout_marginTop="25dp"
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/cardview"
                 android:orientation="vertical"
-                android:paddingTop="25dp"
-                android:paddingBottom="30dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
@@ -76,6 +67,7 @@
                 app:layout_constraintVertical_bias="0.521">
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="24dp"
@@ -84,22 +76,22 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:textStyle="bold"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12dp"
                         android:fontFamily="@font/mlight"
                         android:text="Lokasi Pintu"
                         android:textColor="@color/grayPrimary"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
                     <Spinner
                         android:id="@+id/spinner_lok_pintu_wstwn_eks"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textAlignment="inherit"
                         android:layout_marginBottom="12dp"
                         android:fontFamily="@font/mlight"
+                        android:textAlignment="inherit"
                         android:textColor="@color/grayPrimary"
                         android:textSize="16sp" />
 
@@ -115,14 +107,14 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:textStyle="bold"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12dp"
                         android:fontFamily="@font/mlight"
                         android:text="Karcis Utama"
                         android:textColor="@color/grayPrimary"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
                     <EditText
                         android:id="@+id/karcis_utama_wstwn_eks"
@@ -131,9 +123,9 @@
                         android:background="@drawable/bg_input_edit"
                         android:fontFamily="@font/mmedium"
                         android:inputType="number"
-                        android:textSize="14sp"
                         android:paddingLeft="12dp"
-                        android:textColor="@color/blackPrimary" />
+                        android:textColor="@color/blackPrimary"
+                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -145,14 +137,14 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:textStyle="bold"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12dp"
                         android:fontFamily="@font/mlight"
                         android:text="Karcis Tambahan"
                         android:textColor="@color/grayPrimary"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
 
                     <EditText
@@ -162,9 +154,9 @@
                         android:background="@drawable/bg_input_edit"
                         android:fontFamily="@font/mmedium"
                         android:inputType="number"
-                        android:textSize="14sp"
                         android:paddingLeft="12dp"
-                        android:textColor="@color/blackPrimary" />
+                        android:textColor="@color/blackPrimary"
+                        android:textSize="14sp" />
 
 
                 </LinearLayout>
@@ -193,9 +185,9 @@
                         android:background="@drawable/bg_input_edit"
                         android:fontFamily="@font/mmedium"
                         android:inputType="number"
-                        android:textSize="14sp"
                         android:paddingLeft="12dp"
-                        android:textColor="@color/blackPrimary" />
+                        android:textColor="@color/blackPrimary"
+                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -222,9 +214,9 @@
                         android:background="@drawable/bg_input_edit"
                         android:fontFamily="@font/mmedium"
                         android:inputType="number"
-                        android:textSize="14sp"
                         android:paddingLeft="12dp"
-                        android:textColor="@color/blackPrimary" />
+                        android:textColor="@color/blackPrimary"
+                        android:textSize="14sp" />
 
                 </LinearLayout>
 
@@ -243,9 +235,9 @@
                         android:layout_marginBottom="12dp"
                         android:fontFamily="@font/mlight"
                         android:text="Total Rp."
-                        android:tooltipText="Jumlah X hrg"
                         android:textColor="@color/grayPrimary"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:tooltipText="Jumlah X hrg" />
 
                     <EditText
                         android:id="@+id/ttl_wstwn_eks"
@@ -254,11 +246,10 @@
                         android:background="@drawable/bg_input_edit"
                         android:fontFamily="@font/mmedium"
                         android:inputType="number"
-                        android:textSize="14sp"
                         android:paddingLeft="12dp"
-                        android:textColor="@color/blackPrimary" />
+                        android:textColor="@color/blackPrimary"
+                        android:textSize="14sp" />
                 </LinearLayout>
-
 
 
                 <LinearLayout
@@ -281,14 +272,14 @@
 
                     <EditText
                         android:id="@+id/jml_krcs_wisman_tmbhn_wstwn_eks"
-                        android:inputType="number"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:background="@drawable/bg_input_edit"
                         android:fontFamily="@font/mmedium"
-                        android:textSize="14sp"
+                        android:inputType="number"
                         android:paddingLeft="12dp"
-                        android:textColor="@color/blackPrimary" />
+                        android:textColor="@color/blackPrimary"
+                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -310,14 +301,14 @@
 
                     <EditText
                         android:id="@+id/ttl_tmbhn_wstwn_eks"
-                        android:inputType="number"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:background="@drawable/bg_input_edit"
                         android:fontFamily="@font/mmedium"
-                        android:textSize="14sp"
+                        android:inputType="number"
                         android:paddingLeft="12dp"
-                        android:textColor="@color/blackPrimary" />
+                        android:textColor="@color/blackPrimary"
+                        android:textSize="14sp" />
 
                 </LinearLayout>
 
@@ -341,14 +332,14 @@
 
                     <EditText
                         android:id="@+id/grand_ttl_wstwn_eks"
-                        android:inputType="number"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:background="@drawable/bg_input_edit"
                         android:fontFamily="@font/mmedium"
-                        android:textSize="14sp"
+                        android:inputType="number"
                         android:paddingLeft="12dp"
-                        android:textColor="@color/blackPrimary" />
+                        android:textColor="@color/blackPrimary"
+                        android:textSize="14sp" />
 
                 </LinearLayout>
 
@@ -361,20 +352,20 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:textStyle="bold"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12dp"
                         android:fontFamily="@font/mlight"
                         android:text="Jenis Bayar"
                         android:textColor="@color/grayPrimary"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
                     <Spinner
                         android:id="@+id/spinner_jns_byr_wstwn_eks"
-                        android:textAlignment="inherit"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:textAlignment="inherit" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -386,25 +377,25 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:textStyle="bold"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12dp"
                         android:fontFamily="@font/mlight"
                         android:text="No. Handphone"
                         android:textColor="@color/grayPrimary"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
                     <EditText
                         android:id="@+id/phone_wstwn_eks"
-                        android:inputType="number"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:background="@drawable/bg_input_edit"
                         android:fontFamily="@font/mmedium"
-                        android:textSize="14sp"
+                        android:inputType="number"
                         android:paddingLeft="12dp"
-                        android:textColor="@color/blackPrimary" />
+                        android:textColor="@color/blackPrimary"
+                        android:textSize="14sp" />
 
                 </LinearLayout>
 
@@ -417,14 +408,14 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:textStyle="bold"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12dp"
                         android:fontFamily="@font/mlight"
                         android:text="Email"
                         android:textColor="@color/grayPrimary"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
                     <EditText
                         android:id="@+id/email_pengunjung_wstwn_eks"
@@ -432,30 +423,28 @@
                         android:layout_height="50dp"
                         android:background="@drawable/bg_input_edit"
                         android:fontFamily="@font/mmedium"
-                        android:textSize="14sp"
                         android:paddingLeft="12dp"
-                        android:textColor="@color/blackPrimary" />
+                        android:textColor="@color/blackPrimary"
+                        android:textSize="14sp" />
 
                     <EditText
 
                         android:id="@+id/text_kd_pintu_eksp"
                         android:layout_width="match_parent"
-                        android:layout_height="4dp"
-                        />
+                        android:layout_height="4dp" />
 
                     <EditText
 
                         android:id="@+id/text_jns_byr_eksp"
                         android:layout_width="match_parent"
-                        android:layout_height="4dp"
-                        />
+                        android:layout_height="4dp" />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
                     <ImageView
                         android:id="@+id/btn_psn_karcis_wstwn_eks_back"
@@ -465,26 +454,36 @@
                         android:layout_marginRight="0dp"
                         android:layout_marginBottom="0dp"
                         android:src="@drawable/back_icon"
+                        android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="@+id/view2"
                         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
                         app:layout_constraintVertical_bias="0.267"
                         app:layout_goneMarginTop="0dp" />
 
-                    <Button
-                        android:id="@+id/btn_order_wstwn_eks"
-                        android:layout_width="200dp"
-                        android:layout_height="45dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="45dp"
-                        android:layout_marginBottom="0dp"
-                        android:layout_marginTop="0dp"
-                        android:background="@drawable/bg_btn_blue"
-                        android:text="Ubah"
-                        android:textColor="#FFF"
-                        android:textSize="14sp" />
-
                 </LinearLayout>
+            </LinearLayout>
 
+            <LinearLayout
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayoutwstwn_eks"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="100dp">
+                <Button
+                    android:id="@+id/btn_order_wstwn_eks"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:gravity="center"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/bg_btn_blue"
+                    android:paddingEnd="20dp"
+                    android:drawableEnd="@drawable/ic_event_note_black_24dp"
+                    android:text="Pesan "
+                    android:textColor="#FFF"
+                    android:textSize="10sp"
+                    tools:layout_editor_absoluteX="31dp" />
             </LinearLayout>
 
             <androidx.core.widget.NestedScrollView

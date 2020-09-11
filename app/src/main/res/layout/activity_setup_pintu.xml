@@ -6,6 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".SetupPintuActivity">
 
+     <View
+         android:layout_width="match_parent"
+         android:layout_height="290dp"
+         android:background="@drawable/vector_header" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/mregular"
+        android:text="Setup Pintu"
+        android:textColor="#fff"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <ScrollView
         android:orientation="vertical"
@@ -16,56 +34,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="310dp"
-                android:background="@drawable/vector_header"
-                />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="810dp"
-                android:background="@drawable/bg_getstarted"
-                app:layout_constraintBottom_toBottomOf="parent" />
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="26dp"
-                android:layout_marginTop="80dp"
-                android:fontFamily="@font/mregular"
-                android:text="Setup Pintu"
-                android:textColor="#fff"
-                android:textSize="24sp"
-                app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:fontFamily="@font/mlight"
-                android:lineSpacingExtra="9dp"
-                android:text=""
-                android:textAlignment="center"
-                android:textColor="#fff"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
             <LinearLayout
                 android:id="@+id/linearLayout2"
                 android:layout_width="match_parent"
-                android:layout_height="500dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="80dp"
+                android:layout_marginTop="60dp"
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/cardview"
                 android:orientation="vertical"
                 android:paddingTop="25dp"
-                android:paddingBottom="30dp"
+                android:paddingBottom="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.166"
@@ -75,12 +54,13 @@
 
 
                 <LinearLayout
-                    android:paddingTop="70dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="24dp"
                     android:layout_marginRight="24dp"
-                    android:orientation="vertical">
+                    android:layout_marginBottom="24dp"
+                    android:orientation="vertical"
+                    android:paddingTop="20dp">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -89,18 +69,41 @@
                         android:fontFamily="@font/mlight"
                         android:text="Lokasi Wisata"
                         android:textColor="@color/grayPrimary"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <Spinner
-
                         android:id="@+id/spinner_lok_wisata_setup"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_marginTop="50dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="24dp"
+                    android:layout_marginBottom="24dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:clickable="false"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:fontFamily="@font/mlight"
+                        android:text="Lokasi Pintu"
+                        android:textColor="@color/grayPrimary"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <Spinner
+                        android:id="@+id/spinner_lok_pintu_setup"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="24dp"
@@ -113,70 +116,135 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12dp"
                         android:fontFamily="@font/mlight"
-                        android:text="Lokasi Pintu"
+                        android:text="Jumlah Pengunjung"
                         android:textColor="@color/grayPrimary"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
 
-                    <Spinner
-                        android:id="@+id/spinner_lok_pintu_setup"
+                    <EditText
+                        android:id="@+id/text_jml_semua"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="50dp" />
+                        android:layout_height="40dp"
+                        android:background="@drawable/bg_input_edit"
+                        android:clickable="true"
+                        android:fontFamily="@font/mmedium"
+                        android:inputType="text"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/blackPrimary"
+                        android:textSize="12sp" />
+
                 </LinearLayout>
 
 
                 <LinearLayout
-                    android:layout_marginTop="30dp"
-                    android:gravity="center_horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginRight="24dp"
+                    android:layout_marginBottom="24dp"
+                    android:orientation="vertical">
 
-                    <ImageView
-                        android:id="@+id/btn_setup_pintu_back"
-                        android:layout_width="wrap_content"
-                        android:layout_height="45dp"
-                        android:layout_marginLeft="25dp"
-                        android:layout_marginRight="0dp"
-                        android:layout_marginBottom="0dp"
-                        android:src="@drawable/ic_arrow_back_black_24dp"
-                        app:layout_constraintBottom_toBottomOf="@+id/view2"
-                        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-                        app:layout_constraintVertical_bias="0.267"
-                        app:layout_goneMarginTop="0dp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:fontFamily="@font/mlight"
+                        android:text="Jumlah Berkunjung"
+                        android:textColor="@color/grayPrimary"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
-                    <Button
-                        android:id="@+id/btn_setup_pintu"
-                        android:layout_width="230dp"
-                        android:layout_height="45dp"
-                        android:layout_marginLeft="25dp"
-                        android:layout_marginTop="0dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginBottom="0dp"
-                        android:background="@drawable/bg_btn_blue"
-                        android:text="Submit"
-                        android:textColor="#FFF"
-                        android:textSize="14sp" />
+                    <EditText
+                        android:id="@+id/text_jml_berkunjung"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/bg_input_edit"
+                        android:clickable="true"
+                        android:fontFamily="@font/mmedium"
+                        android:inputType="text"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/blackPrimary"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginRight="24dp"
+                    android:layout_marginBottom="24dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:fontFamily="@font/mlight"
+                        android:text="Selisih Pengunjung"
+                        android:textColor="@color/grayPrimary"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/text_jml_pengunjung"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/bg_input_edit"
+                        android:clickable="true"
+                        android:fontFamily="@font/mmedium"
+                        android:inputType="text"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/blackPrimary"
+                        android:textSize="12sp" />
+
 
                 </LinearLayout>
+
+
 
             </LinearLayout>
 
-            <androidx.core.widget.NestedScrollView
-                android:layout_width="143dp"
-                android:layout_height="78dp"
-                android:fillViewport="true"
-                tools:layout_editor_absoluteX="146dp"
-                tools:layout_editor_absoluteY="1dp">
+            <LinearLayout
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                tools:ignore="NotSibling">
 
-                <LinearLayout
+                <ImageView
+                    android:id="@+id/btn_setup_pintu_back"
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginBottom="0dp"
+                    android:src="@drawable/ic_arrow_back_black_24dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/view2"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+                    app:layout_constraintVertical_bias="0.267"
+                    app:layout_goneMarginTop="0dp" />
+
+
+                <Button
+                    android:visibility="gone"
+                    android:id="@+id/btn_setup_pintu"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical" />
-            </androidx.core.widget.NestedScrollView>
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="25dp"
+                    android:background="@drawable/bg_btn_blue"
+                    android:drawableEnd="@drawable/ic_event_note_black_24dp"
+                    android:gravity="center"
+                    android:paddingEnd="20dp"
+                    android:text="Ubah "
+                    android:textColor="#FFF"
+                    android:textSize="10sp"
+                    tools:layout_editor_absoluteX="31dp" />
 
-
+            </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
     <RelativeLayout

@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="4dp">
+
+
+        <LinearLayout
+            android:background="@drawable/cardview_child"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginTop="40dp"
+            android:orientation="vertical" >
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_marginStart="10dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="Karcis Utama"
+                            android:textColor="#37AF57"
+                            android:textSize="16sp" />
+
+                        <LinearLayout
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="1dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_marginRight="5dp"
+                                android:visibility="visible"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/rate" />
+                            <TextView
+                                android:id="@+id/tv_namaKarcis_ku"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="textview"
+                                android:textSize="12sp" />
+                            <ImageView
+                                android:layout_marginLeft="5dp"
+                                android:visibility="visible"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/rate" />
+                            <ImageView
+                                android:visibility="gone"
+                                android:id="@+id/_tv_img_card_karcis_utama"
+                                android:layout_gravity="center"
+                                android:background="@drawable/cardview"
+                                android:layout_width="320dp"
+                                android:layout_height="120dp"
+                                android:layout_marginStart="20dp"
+                                android:layout_marginEnd="20dp"
+                                />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:layout_marginBottom="2dp"
+                                android:padding="2dp">
+
+                                <TextView
+                                    android:visibility="gone"
+                                    android:id="@+id/tv_id_ku"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=""
+                                    android:textColor="@android:color/black"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:visibility="gone"
+                                    android:id="@+id/tv_tgl_kunj_ku"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=""
+                                    android:textColor="@android:color/black"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+
+                                <TextView
+                                    android:visibility="gone"
+                                    android:id="@+id/tv_kodeKsda_ku"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=""
+                                    android:textColor="@android:color/black"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+                                <TextView
+                                    android:visibility="gone"
+                                    android:id="@+id/tv_nmKsda_ku"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=""
+                                    android:textColor="@android:color/black"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:visibility="gone"
+                                    android:id="@+id/tv_kodeLokasi_ku"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="12sp"
+                                    android:text="" />
+
+                                <TextView
+                                    android:visibility="gone"
+                                    android:id="@+id/tv_nmLokasi_ku"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="12sp"
+                                    android:text="" />
+
+                                <TextView
+                                    android:visibility="gone"
+                                    android:id="@+id/tv_kodeKarcis_ku"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="12sp"
+                                    android:text="" />
+
+
+
+
+                                <Button
+                                    android:id="@+id/buttonH_card_karcis_utama"
+                                    android:layout_width="100dp"
+                                    android:layout_height="20dp"
+                                    android:layout_marginBottom="10dp"
+                                    android:textSize="10sp"
+                                    android:layout_gravity="right"
+                                    android:background="@drawable/bg_btn_blue_square"
+                                    android:text="Pilih"
+                                    android:textColor="@android:color/white" />
+
+                                <TextView
+                                    android:visibility="gone"
+                                    android:id="@+id/tv_kodeLibur_ku"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="12sp"
+                                    android:text="" />
+
+
+                                <TextView
+                                    android:visibility="gone"
+                                    android:id="@+id/tv_harga_karcis_wisata_wisnu_ku"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="12sp"
+                                    android:text="" />
+
+
+                                <TextView
+                                    android:visibility="gone"
+                                    android:id="@+id/tv_harga_karcis_wisata_wisman_ku"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="12sp"
+                                    android:text="" />
+
+                                <TextView
+                                    android:visibility="gone"
+                                    android:id="@+id/tv_harga_karcis_asuransi_wisnu_ku"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="12sp"
+                                    android:text="" />
+
+                                <TextView
+                                    android:visibility="gone"
+                                    android:id="@+id/tv_harga_karcis_asuransi_wisman_ku"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="12sp"
+                                    android:text="" />
+
+                                <TextView
+                                    android:visibility="gone"
+                                    android:id="@+id/tv_result_dt_kdlokPintu2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="12sp"
+                                    android:text="" />
+
+                                <TextView
+                                    android:visibility="gone"
+                                    android:id="@+id/tv_result_dt_textlokPintu2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="12sp"
+                                    android:text="" />
+
+                                <TextView
+                                    android:visibility="gone"
+                                    android:id="@+id/tv_result_dt_kdlokOldPintu2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="12sp"
+                                    android:text="" />
+
+                                <TextView
+                                    android:visibility="gone"
+                                    android:id="@+id/tv_result_dt_nmlokOldPintu2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="12sp"
+                                    android:text="" />
+
+                                <TextView
+                                    android:visibility="gone"
+                                    android:id="@+id/tv_url_img_lokWis"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="12sp"
+                                    android:text="" />
+
+                                <TextView
+                                    android:visibility="gone"
+                                    android:id="@+id/tv_url_img_pintu"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="12sp"
+                                    android:text="" />
+
+                                <TextView
+                                    android:visibility="gone"
+                                    android:id="@+id/tv_url_img_ku"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="12sp"
+                                    android:text="" />
+
+
+
+                                <TextView
+                                    android:visibility="gone"
+                                    style="?android:listSeparatorTextViewStyle"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"/>
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:visibility="gone"
+                            android:id="@+id/krcsUtamaPicasso_xx"
+                            android:layout_gravity="end"
+                            android:layout_alignParentEnd="true"
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:layout_marginTop="40dp"
+                            android:tint="@color/colorPrimaryDark"
+                            app:civ_border_color="@color/colorAccent"
+                            app:civ_border_overlay="true"
+                            app:civ_border_width="1dp" />
+
+
+
+                    </LinearLayout>
+
+
+
+                    <TextView
+                        android:id="@+id/harga_karcis_wisata_wisnu_ku"
+                        android:layout_width="wrap_content"
+                        android:text=""
+                        android:layout_marginLeft="5dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:textColor="#F06A90B5"
+                        android:textSize="12sp"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="1dp">
+                    <ImageView
+                        android:id="@+id/krcsUtamaPicasso"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="2dp"
+                        />
+                </LinearLayout>
+
+
+    </LinearLayout>
+    </LinearLayout>

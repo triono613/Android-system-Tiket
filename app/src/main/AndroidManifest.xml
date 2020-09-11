@@ -1,46 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.aga">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.amanahgithawisata.aga">
 
+    <uses-sdk tools:overrideLibrary="com.google.zxing.client.android" />
+
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" />
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/aga_icon"
-        android:label="AmanahGitha \n Tiket"
+        android:hardwareAccelerated="true"
+        android:icon="@mipmap/jelajah_wisata_ico"
+        android:label="@string/apps_name"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
-        android:usesCleartextTraffic="true">
-        <activity android:name=".BottomNavActivity"></activity>
-        <activity android:name=".EditKarcisStatusWisatawanActivity" />
-        <activity android:name=".LupaPasswordActivity" />
-        <activity android:name=".EditPasswordWisatawanActivity" />
-        <activity android:name=".EditKarcisStatusPetugasActivity" />
-        <activity android:name=".EditPasswordPetugasActivity" />
-        <activity android:name=".SuccessClaimActivity" />
-        <activity android:name=".ClaimPetugasActivity" />
-        <activity android:name=".StatusKarcisPetugasActivity" />
-        <activity android:name=".StatusKarcisWisatawanActivity" />
-        <activity android:name=".SetupPintuActivity" />
-        <activity android:name=".PesanKarcisWisatawanActivity" />
-        <activity android:name=".DashboardWisatawanActivity" />
-        <activity android:name=".DashboardPetugasActivity" />
-        <activity android:name=".PesanKarcisPetugasActivity" />
-        <activity android:name=".PopupActivity" />
-        <activity android:name=".SuccessRegistrasiWisatawanActivity" />
-        <activity android:name=".GetStartedActivity">
+        android:usesCleartextTraffic="true"
+        android:versionCode="2"
+        tools:replace="android:label"
+        tools:targetApi="m">
+        <activity android:name=".PesanKarcisPetugasOldActivity"></activity>
+        <activity android:name=".NotifSuksesActivity" />
+        <activity android:name=".OrderTicketWisatawanActivity" />
+        <activity android:name=".PesanKarcisPetugasNewActivity" />
+        <activity android:name=".PopUpKarcisTambahanActivity" />
+        <activity android:name=".PopUpKarcisUtamaActivity" />
+        <activity android:name=".PopUpPintuActivity" />
+        <activity android:name=".LokasiWisataActivity" />
+        <activity android:name=".LokasiWisataScrollViewActivity" />
+        <activity android:name=".PopUpActivity" />
+        <activity android:name=".Adapter.SessionManager" />
+        <activity android:name=".Adapter.CustomAdapterViewPagerLokasiWisata" />
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.facebook.CustomTabActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="@string/fb_login_protocol_scheme" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".errorPageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".QrCodeScannerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".EditKarcisStatusWisatawanActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LupaPasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".EditPasswordWisatawanActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".EditKarcisStatusPetugasActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".EditPasswordPetugasActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SuccessClaimActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ClaimPetugasActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".StatusKarcisPetugasActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".StatusKarcisWisatawanActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SetupPintuActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PesanKarcisWisatawanOldActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PesanKarcisWisatawanActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DashboardWisatawanActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DashboardPetugasActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PesanKarcisPetugasActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PopupOldActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SuccessRegistrasiWisatawanActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".GetStartedActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterPetugasActivity" />
-        <activity android:name=".SigninActivity" />
-        <activity android:name=".RegisterWisatawanActivity" />
+        <activity
+            android:name=".RegisterPetugasActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SigninActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".RegisterWisatawanActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

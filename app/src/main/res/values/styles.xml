@@ -36,6 +36,18 @@
     <style name="AppTheme.Toolbar" parent="Widget.MaterialComponents.Toolbar">
 
         <item name="titleTextAppearance">@style/TextAppearance.MaterialComponents.Body1</item>
+    </style>
 
+    <style name="SearchView" parent="">
+        <item name="android:editTextColor">@android:color/white</item>
+        <item name="android:textColorHint">@android:color/white</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="BottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottomSheetStyle</item>
+    </style>
+    <style name="BottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
     </style>
 </resources>

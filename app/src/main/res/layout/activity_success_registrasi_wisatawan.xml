@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SuccessRegistrasiWisatawanActivity">
+    tools:context="com.amanahgithawisata.aga.SuccessRegistrasiWisatawanActivity">
 
 
     <View
@@ -12,9 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="310dp"
         android:background="@drawable/vector_header" />
-
-
-
 
 
     <LinearLayout
@@ -45,7 +42,7 @@
                 android:layout_width="260dp"
                 android:layout_height="260dp"
                 app:lottie_autoPlay="true"
-                app:lottie_fileName="01.json"
+                app:lottie_fileName="checklist.json"
                 android:paddingTop="10dp"
                 app:lottie_loop="true"
                 tools:layout_editor_absoluteX="73dp"
@@ -70,7 +67,7 @@
                     android:textAlignment="center"
                     android:text="email test"
                     android:textColor="@color/grayPrimary"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/textview_ket"
@@ -107,7 +104,7 @@
                     <Button
                         android:id="@+id/btn_continue"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="35dp"
                         android:layout_marginStart="24dp"
                         android:layout_marginEnd="24dp"
                         android:layout_marginBottom="5dp"
@@ -115,7 +112,7 @@
                         android:background="@drawable/bg_btn_blue"
                         android:text="Lanjutkan"
                         android:textColor="#FFF"
-                        android:textSize="14sp" />
+                        android:textSize="12sp" />
                 </LinearLayout>
 
             </LinearLayout>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="judul">
+        <item>Google</item>
+        <item>Coding Rakitan</item>
+        <item>Facebook</item>
+    </string-array>
+    <string-array name="text">
+        <item>Google merupakan website mesin pencari ...</item>
+        <item>Coding Rakitan merupakan sebuah blog. . . </item>
+        <item>Salah satu media sosial yang paling . . .</item>
+    </string-array>
+    <string-array name="gambar">
+        <item>a</item>
+        <item>b</item>
+        <item>c</item>
+    </string-array>
+</resources>

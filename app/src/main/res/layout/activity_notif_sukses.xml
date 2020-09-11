@@ -1,0 +1,712 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NotifSuksesActivity">
+
+
+    <ScrollView
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:background="@drawable/cardview_child"
+        android:orientation="vertical"
+        android:paddingTop="20dp"
+        android:layout_marginTop="20dp"
+        android:paddingBottom="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.385">
+
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:visibility="gone"
+            android:layout_gravity="center"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="checklist.json"
+            android:paddingTop="10dp"
+            app:lottie_loop="true"
+            tools:layout_editor_absoluteX="73dp"
+            tools:layout_editor_absoluteY="200dp">
+
+        </com.airbnb.lottie.LottieAnimationView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginBottom="24dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Assalamualaikum warahmatullahi wabarakatuh."
+                    android:textColor="@color/grayPrimary"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Terima kasih atas Booking Online "
+                    android:textColor="@color/grayPrimary"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_marginLeft="1dp"
+                    android:id="@+id/textview_nm_lok_wis"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textColor="@color/grayPrimary"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="dari Wisatawan yang telah dilakukan"
+                    android:textColor="@color/grayPrimary"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Bersama ini konfirmasi data Booking Online sebagai berikut : "
+                    android:textColor="@color/grayPrimary"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+        <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Nomor Virtual Account :"
+                    android:textColor="@color/grayPrimary"
+                    android:textSize="12sp" />
+
+            <TextView
+                android:layout_marginLeft="2dp"
+                android:id="@+id/textview_nmr_va"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:text=""
+                android:textColor="@color/grayPrimary"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Nama Ketua Kelompok :"
+                android:textColor="@color/grayPrimary"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_marginLeft="2dp"
+                android:id="@+id/textview_nm_ket_kelompok"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:textAlignment="textStart"
+                android:textColor="@color/grayPrimary"
+                android:textSize="12sp" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textAlignment="center"
+                    android:text="No Hp. :"
+                    android:textColor="@color/grayPrimary"
+                    android:textSize="12sp" />
+            <TextView
+                android:layout_marginLeft="2dp"
+                android:id="@+id/textview_no_hp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:textAlignment="textStart"
+                android:text="textview_nmr_va"
+                android:textColor="@color/grayPrimary"
+                android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textAlignment="center"
+                    android:text="Email :"
+                    android:textColor="@color/grayPrimary"
+                    android:textSize="12sp" />
+            <TextView
+                android:layout_marginLeft="2dp"
+                android:id="@+id/textview_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:textAlignment="textStart"
+                android:textColor="@color/grayPrimary"
+                android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textAlignment="textStart"
+                    android:text="Jml Peserta Wisnu :"
+                    android:textColor="@color/grayPrimary"
+                    android:textSize="12sp" />
+            <TextView
+                android:layout_marginStart="2dp"
+                android:id="@+id/textview_jml_psrt_wisnu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:textAlignment="textStart"
+                android:textColor="@color/grayPrimary"
+                android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textAlignment="textStart"
+                    android:text="Jml Peserta Wisman :"
+                    android:textColor="@color/grayPrimary"
+                    android:textSize="12sp" />
+            <TextView
+                android:layout_marginStart="2dp"
+                android:id="@+id/textview_jml_psrt_wisman"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:textAlignment="textStart"
+                android:textColor="@color/grayPrimary"
+                android:textSize="12sp" />
+            </LinearLayout>
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/textview_jml_psrt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:textAlignment="textStart"
+                android:text="textview_nmr_va"
+                android:textColor="@color/grayPrimary"
+                android:textSize="12sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textAlignment="textStart"
+                    android:text="Jml Karcis Tambahan :"
+                    android:textColor="@color/grayPrimary"
+                    android:textSize="12sp" />
+            <TextView
+                android:layout_marginStart="2dp"
+                android:id="@+id/textview_jml_krcs_tmbhn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:textAlignment="textStart"
+                android:textColor="@color/grayPrimary"
+                android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textAlignment="center"
+                    android:text="Tgl Pembelian :"
+                    android:textColor="@color/grayPrimary"
+                    android:textSize="12sp" />
+            <TextView
+                android:layout_marginStart="2dp"
+                android:id="@+id/textview_tgl_beli"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:textAlignment="textStart"
+                android:textColor="@color/grayPrimary"
+                android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textAlignment="center"
+                    android:text="Tgl Kunjungan :"
+                    android:textColor="@color/grayPrimary"
+                    android:textSize="12sp" />
+            <TextView
+                android:layout_marginStart="2dp"
+                android:id="@+id/textview_tgl_kunj"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:textAlignment="textStart"
+                android:textColor="@color/grayPrimary"
+                android:textSize="12sp" />
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_marginStart="2dp"
+                android:id="@+id/textview_tgl_plg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textAlignment="center"
+                android:textColor="@color/grayPrimary"
+                android:textSize="12sp" />
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/textview_ket"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textAlignment="center"
+                android:textColor="@color/grayPrimary"
+                android:textSize="12sp" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="4dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/grayPrimary"
+                    android:textStyle="bold"
+                    android:text="Mohon segera lakukan pembayaran sebelum : "
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+
+                <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textAlignment="textStart"
+                android:textColor="@color/grayPrimary"
+                android:textStyle="bold"
+                android:text="Tanggal : "
+                android:textSize="12sp" />
+
+                <TextView
+                    android:textStyle="bold"
+                    android:id="@+id/textview_tgl_red"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/grayPrimary"
+                    android:textSize="12sp" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/grayPrimary"
+                    android:textStyle="bold"
+                    android:text="Pukul : "
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:textStyle="bold"
+                    android:id="@+id/textview_jam_red"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/grayPrimary"
+                    android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:textAlignment="textStart"
+                        android:textStyle="bold"
+                        android:text="WIB"
+                        android:textColor="@color/grayPrimary"
+                        android:textSize="12sp" />
+
+        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/grayPrimary"
+                    android:text="Nomor Virtual Account :"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:textStyle="bold"
+                    android:id="@+id/textview_va_red"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/grayPrimary"
+                    android:textSize="12sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/grayPrimary"
+                    android:text="a.n. :"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:textStyle="bold"
+                    android:id="@+id/textview_nm_red"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/grayPrimary"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:textStyle="bold"
+                    android:id="@+id/textview_bank_red"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/grayPrimary"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/grayPrimary"
+                    android:text="Jumlah yang dibayar Rp: "
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:textStyle="bold"
+                    android:id="@+id/textview_grand_ttl_red"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/grayPrimary"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Mohon dibayarkan sesuai dengan nominal tagihan Booking Online tersebut diatas "
+                    android:textColor="@color/grayPrimary"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textStyle="bold"
+                    android:text="PEMBAYARAN SELAIN MENGGUNAKAN VIRTUAL ACCOUNT AKAN TERTOLAK OLEH SISTEM "
+                    android:textColor="@color/grayPrimary"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Setelah melakukan pembayaran, sistem kami akan memverifikasi pembayaran secara otomatis. "
+                    android:textColor="@color/grayPrimary"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Wassalamualaikum warahmatullahi wabarakatuh. "
+                    android:textColor="@color/grayPrimary"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:visibility="gone"
+                    android:id="@+id/btn_back_regis"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginBottom="0dp"
+                    android:src="@drawable/back_icon"
+                    app:layout_constraintBottom_toBottomOf="@+id/view2"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+                    app:layout_constraintVertical_bias="0.267"
+                    app:layout_goneMarginTop="0dp" />
+                <Button
+                    android:id="@+id/btn_continue"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="0dp"
+                    android:background="@drawable/bg_btn_blue"
+                    android:text="Lanjutkan"
+                    android:textColor="#FFF"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="500dp"
+        android:id="@+id/linearLayoutgroup_ket_succes_reg_wis"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:orientation="vertical"
+        android:paddingTop="25dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.521">
+
+
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/loadingPanel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center" >
+
+        <ProgressBar
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:indeterminate="true" />
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

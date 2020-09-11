@@ -4,14 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SigninActivity">
-
+    tools:context="com.amanahgithawisata.aga.SigninActivity">
 
     <View
         android:id="@+id/view3"
         android:layout_width="match_parent"
-        android:layout_height="310dp"
+        android:layout_height="350dp"
         android:background="@drawable/vector_header" />
+
+<LinearLayout
+    android:id="@+id/linear_logo"
+    app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    >
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="20dp"
+        android:paddingTop="10dp"
+        android:src="@drawable/jelajah_wisata_rev"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</LinearLayout>
+
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -28,7 +50,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.385">
+        app:layout_constraintVertical_bias="0.400">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -45,18 +67,19 @@
                 android:fontFamily="@font/mlight"
                 android:text="Email / Username"
                 android:textColor="@color/grayPrimary"
-                android:textSize="20sp" />
+                android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/txt_login_email"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:background="@drawable/bg_input_edit"
                 android:fontFamily="@font/mmedium"
                 android:inputType="text"
                 android:lines="1"
                 android:paddingLeft="12dp"
-                android:textColor="@color/blackPrimary" />
+                android:textColor="@color/blackPrimary"
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -71,29 +94,41 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
+                android:layout_marginBottom="8dp"
                 android:fontFamily="@font/mlight"
                 android:text="@string/passwd"
                 android:textColor="@color/grayPrimary"
-                android:textSize="20sp" />
+                android:textSize="14sp" />
 
-            <EditText
-                android:id="@+id/txt_login_passwd"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/bg_input_edit"
-                android:fontFamily="@font/mmedium"
-                android:inputType="textPassword"
-                android:lines="1"
-                android:paddingLeft="12dp"
-                android:textColor="@color/blackPrimary" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
+                <EditText
+                    android:id="@+id/txt_login_passwd"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/bg_input_edit"
+                    android:fontFamily="@font/mmedium"
+                    android:inputType="textPassword"
+                    android:lines="1"
+                    android:paddingStart="12dp"
+                    android:textColor="@color/blackPrimary"
+                    android:textSize="14sp" />
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:text="Show Password" />
+            </LinearLayout>
         </LinearLayout>
-
         <Button
             android:id="@+id/btn_login_user"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="40dp"
             android:layout_marginLeft="24dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="24dp"
@@ -102,49 +137,106 @@
             android:textColor="#FFF"
             android:drawableEnd="@drawable/ic_send_black_24dp"
             android:paddingEnd="15dp"
-            android:textSize="14sp" />
+            android:textSize="12sp" />
 
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linear_or_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        tools:layout_editor_absoluteX="24dp">
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:textAlignment="center"
+            android:paddingEnd="30dp"
+            android:textStyle="italic"
+            android:layout_gravity="top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="2dp"
+            android:layout_marginBottom="5dp"
+            android:fontFamily="@font/mmedium"
+            android:text="Atau Login Dengan "
+            android:textSize="12sp"
+            android:textColor="#fff"
+            tools:ignore="RtlCompat" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_grup_btn_ext"
+        app:layout_constraintTop_toBottomOf="@+id/linear_or_login"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <com.google.android.gms.common.SignInButton
+            android:visibility="gone"
+            android:id="@+id/google_sign_in"
+            android:layout_width="160dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="24dp"
+            />
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/facebook_sign_in"
+            android:visibility="gone"
+            android:layout_width="160dp"
+            android:layout_height="70dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="24dp" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linear_lupa_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintTop_toBottomOf="@+id/linear_grup_btn_ext"
         tools:layout_editor_absoluteX="24dp">
 
         <TextView
+            android:layout_marginTop="10dp"
             android:textAlignment="textEnd"
             android:paddingEnd="30dp"
             android:textStyle="italic"
             android:layout_gravity="top"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="20dp"
-            android:layout_marginBottom="12dp"
-            android:fontFamily="@font/mlight"
+            android:paddingTop="2dp"
+            android:layout_marginBottom="5dp"
+            android:fontFamily="@font/mmedium"
             android:text="Lupa Password ! "
-            android:textColor="@color/grayPrimary"
-            android:textSize="20sp" />
+            android:textSize="14sp"
+
+            tools:ignore="RtlCompat" />
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="182dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="112dp"
-        android:src="@drawable/ag"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.462"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
 
+    <LinearLayout
+        android:id="@+id/linear_ilustration_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/linear_grup_btn_ext"
+        >
+
+<ImageView
+    android:visibility="gone"
+    android:layout_gravity="right"
+    android:id="@+id/img_login"
+    android:layout_width="350dp"
+    android:layout_height="500dp"
+    android:src="@drawable/log_in"
+    tools:ignore="RtlHardcoded" />
+    </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/loadingPanel"

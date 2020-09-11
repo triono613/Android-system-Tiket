@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="8dp"
-    tools:context="com.example.aga.CariActivity">
+    tools:context="com.amanahgithawisata.aga.CariActivity">
 
 
     <com.google.android.material.appbar.AppBarLayout

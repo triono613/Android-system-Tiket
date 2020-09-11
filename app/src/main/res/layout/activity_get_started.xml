@@ -28,37 +28,19 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/bg_mountain_cartoon"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/logo_aga_getstarted"
-        android:layout_width="189dp"
-        android:layout_height="49dp"
-        android:src="@drawable/ag"
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:src="@drawable/aga_poweredby"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.833"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.121" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="28dp"
-        android:orientation="vertical"
-        android:paddingTop="0dp"
-        android:paddingBottom="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.076">
-
-    </LinearLayout>
+        app:layout_constraintVertical_bias="0.030" />
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -74,34 +56,35 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.704">
+        app:layout_constraintVertical_bias="0.87">
 
 
         <Button
             android:id="@+id/btn_login"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="40dp"
             android:layout_marginLeft="24dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="24dp"
             android:background="@drawable/bg_btn_blue"
             android:text="@string/login"
             android:textColor="#FFF"
-            android:textSize="14sp" />
-
+            android:textSize="12sp"
+            tools:ignore="SmallSp" />
 
         <Button
-            android:visibility="gone"
             android:id="@+id/btn_pendaftaran_petugas"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="40dp"
             android:layout_marginLeft="24dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="24dp"
             android:background="@drawable/bg_btn_blue"
             android:text="@string/pendaftaran_petugas"
             android:textColor="#FFF"
-            android:textSize="14sp" />
+            android:textSize="12sp"
+            android:visibility="gone"
+            tools:ignore="SmallSp" />
 
         <Button
             android:id="@+id/btn_pendaftaran_wisatawan"
@@ -113,38 +96,75 @@
             android:background="@drawable/bg_btn_blue"
             android:text="Belum punya akun ? Daftar Disini "
             android:textColor="#FFF"
-            android:textSize="14sp" />
+            android:textSize="12sp" />
 
 
     </LinearLayout>
 
     <TextView
+        android:id="@+id/lbl_version"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:orientation="vertical"
+        android:fontFamily="@font/mregular"
+        android:gravity="center"
+        android:text="V2.1"
+        android:textColor="#FFF"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.977" />
+
+    <TextView
+        android:visibility="gone"
         android:id="@+id/lbl_wanawisata_getstarted"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
+        android:layout_marginStart="276dp"
         android:fontFamily="@font/mregular"
-        android:text="Wanawisata"
+        android:text="powered by"
         android:textColor="#FFF"
-        android:textSize="28sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/logo_aga_getstarted"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.287" />
+        app:layout_constraintVertical_bias="1.0" />
+
+<LinearLayout
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    android:orientation="vertical"
+    app:layout_constraintVertical_bias="0.450" >
+
+    <ImageView
+        android:id="@+id/img_utama"
+        android:layout_width="250dp"
+        android:layout_height="220dp"
+        android:fontFamily="@font/mregular"
+        android:gravity="center"
+        android:src="@drawable/jelajah_wisata_rev"
+        />
 
     <TextView
         android:id="@+id/lbl_aga_getstarted"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
         android:fontFamily="@font/mregular"
-        android:text="Amanahgitha"
+        android:gravity="center"
+        android:text="Jelajahi Tujuan Lokasi Wisata Anda"
         android:textColor="#FFF"
-        android:textSize="36sp"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.218" />
+        app:layout_constraintTop_toBottomOf="@+id/img_utama"
+        app:layout_constraintVertical_bias="0.026" />
 
+</LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

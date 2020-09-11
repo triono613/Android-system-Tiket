@@ -4,33 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterPetugasActivity">
+    tools:context="com.amanahgithawisata.aga.RegisterPetugasActivity">
 
-
-
-
-
-<ScrollView
-
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
         <View
             android:layout_width="match_parent"
             android:layout_height="310dp"
             android:background="@drawable/vector_header"
             />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="810dp"
-            android:background="@drawable/bg_getstarted"
-            app:layout_constraintBottom_toBottomOf="parent" />
 
         <TextView
             android:id="@+id/textView3"
@@ -59,6 +40,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
+
+    <ScrollView
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <LinearLayout
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
