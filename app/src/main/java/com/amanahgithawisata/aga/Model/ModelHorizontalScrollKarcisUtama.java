@@ -29,6 +29,10 @@ public class ModelHorizontalScrollKarcisUtama {
     public String result_dt_id_karcis_utama;
     public String result_dt_id_karcis_tmbhn;
 
+    public String  nama_pengunjung;
+    public String  hp_pengunjung;
+    public String  email_pengunjung;
+    public String mode_pembayaran;
 
 
     public ModelHorizontalScrollKarcisUtama(String url_ku,
@@ -57,7 +61,12 @@ public class ModelHorizontalScrollKarcisUtama {
                                             String result_dt_harga_karcis_wisata_tmbhn,
 
                                             String result_dt_id_karcis_utama,
-                                            String result_dt_id_karcis_tmbhn
+                                            String result_dt_id_karcis_tmbhn,
+
+                                            String  nama_pengunjung,
+                                            String  hp_pengunjung,
+                                            String  email_pengunjung,
+                                            String mode_pembayaran
     ) {
 
         this.url_ku = url_ku;
@@ -88,6 +97,42 @@ public class ModelHorizontalScrollKarcisUtama {
         this.result_dt_id_karcis_utama = result_dt_id_karcis_utama;
         this.result_dt_id_karcis_tmbhn = result_dt_id_karcis_tmbhn;
 
+        this.nama_pengunjung = nama_pengunjung;
+        this.hp_pengunjung = hp_pengunjung;
+        this.email_pengunjung = email_pengunjung;
+        this.mode_pembayaran = mode_pembayaran;
+    }
+
+    public String getMode_pembayaran() {
+        return mode_pembayaran;
+    }
+
+    public void setMode_pembayaran(String mode_pembayaran) {
+        this.mode_pembayaran = mode_pembayaran;
+    }
+
+    public String getNama_pengunjung() {
+        return nama_pengunjung;
+    }
+
+    public void setNama_pengunjung(String nama_pengunjung) {
+        this.nama_pengunjung = nama_pengunjung;
+    }
+
+    public String getHp_pengunjung() {
+        return hp_pengunjung;
+    }
+
+    public void setHp_pengunjung(String hp_pengunjung) {
+        this.hp_pengunjung = hp_pengunjung;
+    }
+
+    public String getEmail_pengunjung() {
+        return email_pengunjung;
+    }
+
+    public void setEmail_pengunjung(String email_pengunjung) {
+        this.email_pengunjung = email_pengunjung;
     }
 
     public String getResult_dt_id_karcis_utama() {

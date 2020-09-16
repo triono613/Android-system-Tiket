@@ -16,7 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.amanahgithawisata.aga.Model.ModelHorizontalScrollKarcisUtama;
-import com.amanahgithawisata.aga.PesanKarcisWisatawanActivity;
+import com.amanahgithawisata.aga.PesanKarcisPetugasActivity;
 import com.amanahgithawisata.aga.R;
 import com.amanahgithawisata.aga.bSheetKarcisUtama;
 import com.squareup.picasso.Callback;
@@ -24,13 +24,13 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class CustomAdapterEntityKarcisUtama extends RecyclerView.Adapter<CustomAdapterEntityKarcisUtama.MyViewHolder>  {
+public class CustomAdapterEntityKarcisUtamaPetugas extends RecyclerView.Adapter<CustomAdapterEntityKarcisUtamaPetugas.MyViewHolder>  {
     ArrayList<ModelHorizontalScrollKarcisUtama> modelHorizontalScrollKarcisUtamas;
     Context context;
 
     public bSheetKarcisUtama bSheetKarcisUtama;
 
-    public CustomAdapterEntityKarcisUtama(ArrayList<ModelHorizontalScrollKarcisUtama> modelHorizontalScrollKarcisUtamas, Context context) {
+    public CustomAdapterEntityKarcisUtamaPetugas(ArrayList<ModelHorizontalScrollKarcisUtama> modelHorizontalScrollKarcisUtamas, Context context) {
         this.modelHorizontalScrollKarcisUtamas = modelHorizontalScrollKarcisUtamas;
         this.context = context;
     }
@@ -96,7 +96,7 @@ public class CustomAdapterEntityKarcisUtama extends RecyclerView.Adapter<CustomA
         LayoutInflater li = LayoutInflater.from(parent.getContext());
         View view = li.inflate(R.layout.entity_card_karcis_utama,parent,false);
 //        View view = li.inflate(R.layout.layout_bottom_sheet_inputwisatawan,parent,false);
-        MyViewHolder myViewHolder = new CustomAdapterEntityKarcisUtama.MyViewHolder(view);
+        MyViewHolder myViewHolder = new CustomAdapterEntityKarcisUtamaPetugas.MyViewHolder(view);
 
 
 //        View view =li.inflate(R.layout.layout_bottom_sheet_inputwisatawan,parent,false);
@@ -180,6 +180,7 @@ public class CustomAdapterEntityKarcisUtama extends RecyclerView.Adapter<CustomA
         final String _nama = modelHorizontalScrollKarcisUtamas.get(position).getNama_pengunjung();
         final String _hp = modelHorizontalScrollKarcisUtamas.get(position).getHp_pengunjung();
         final String _email = modelHorizontalScrollKarcisUtamas.get(position).getEmail_pengunjung();
+        final String _mode_pembayaran = modelHorizontalScrollKarcisUtamas.get(position).getMode_pembayaran();
 
 
         Log.i("","_namaKarcis adapter"+_namaKarcis);
@@ -240,7 +241,7 @@ public class CustomAdapterEntityKarcisUtama extends RecyclerView.Adapter<CustomA
             Log.i("","_harga_karcis_wisata_tmbhn "+_harga_karcis_wisata_tmbhn);
 
 
-            Intent i = new Intent(v.getContext(), PesanKarcisWisatawanActivity.class);
+            Intent i = new Intent(v.getContext(), PesanKarcisPetugasActivity.class);
             i.putExtra("result_dt_kodeKarcis", _kodeKarcis);
             i.putExtra("result_dt_namaKarcis",_namaKarcis );
             i.putExtra("result_dt_harga_karcis_wisata_wisnu",_harga_karcis_wisata_wisnu );
@@ -256,6 +257,7 @@ public class CustomAdapterEntityKarcisUtama extends RecyclerView.Adapter<CustomA
             i.putExtra("result_dt_url_img_lokPintuOld",_url_img_pintu);
             i.putExtra("result_dt_url_img_ku",_url_img_ku);
             i.putExtra("result_dt_id_ku",_id_ku);
+            i.putExtra("result_dt_id_kt",_id_karcis_tmbhn);
 
             i.putExtra("result_jml_karcis_wisnu",_jml_karcis_wisnu);
             i.putExtra("result_jml_karcis_wisman",_jml_karcis_wisman);
@@ -270,9 +272,8 @@ public class CustomAdapterEntityKarcisUtama extends RecyclerView.Adapter<CustomA
             i.putExtra("result_dt_nama_pengunjung",_nama);
             i.putExtra("result_dt_hp_pengunjung",_hp);
             i.putExtra("result_dt_email_pengunjung",_email);
-
-
-            i.putExtra("result_dt_flag_ku","flag_ku");
+            i.putExtra("result_dt_flag_ku",true);
+            i.putExtra("result_dt_mode_pembayaran",_mode_pembayaran);
 
 
 

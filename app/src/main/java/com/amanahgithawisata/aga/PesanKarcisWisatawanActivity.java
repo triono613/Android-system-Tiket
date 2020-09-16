@@ -2629,7 +2629,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> obj = new HashMap<String, String>();
-                
+
 
 //                String flag_pemesan = "";
 //                final String key_kode_ksda = (String) sessionManager.getDaftarKarcisWisatawanUtama().get(SessionManager.key_kode_ksda);
@@ -2867,46 +2867,8 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
                                 i.putExtra("result_dt_flag", "checkQuotaTwaOk");
                                 startActivity(i);
 
-                            } else{
-
-
+                            } else {
                                     inputKarcisWisatawan("input_wisatawan");
-
-
-//                                Intent i = new Intent(PesanKarcisWisatawanActivity.this, NotifSuksesActivity.class);
-//                                final String _email = sessionManager.getUserDetail().get(SessionManager.key_email);
-
-//                                String flag_pemesan = "";
-//                                final String key_kode_ksda = _txt_kode_ksda.getText().toString();
-//                                final String key_name =  (String) sessionManager.getUserDetail().get(SessionManager.key_name);
-//                                final String key_email =  (String) sessionManager.getUserDetail().get(SessionManager.key_email);
-//                                final String key_hp =  (String) sessionManager.getUserDetail().get(SessionManager.key_hp);
-//                                final String key_tgl_penjualan =  Help.getDateTime();
-//                                final String tgl_kunjungan =  _txt_tgl_kunjungan_order.getText().toString().trim();
-//                                final String key_kode_lokasi =  _txt_kode_lokasi.getText().toString();
-//                                final String key_id_utama =  _txt_id_karcis_utama.getText().toString();
-//                                final String key_id_tmbhn =   _txt_id_karcis_tmbhn.getText().toString();
-//                                final String jml_wisnu = _txt_jml_krcs_wisnu.getText().toString().trim();
-//                                final String jml_wisman = _txt_jml_krcs_wisman.getText().toString().trim();
-//                                final String jml_tmbhn = _txt_jml_krcs_tmbhn.getText().toString().trim();
-//                                final String key_kode_lok_new = sessionManager.getUserDetail().get(SessionManager.key_kode_lokasi);
-//                                String grand_ttl = _txt_grand_ttl.getText().toString().trim();
-
-//                                i.putExtra("key_kode_ksda", key_kode_ksda);
-//                                i.putExtra("key_name",key_name);
-//                                i.putExtra("key_email", key_email);
-//                                i.putExtra("key_hp", key_hp );
-//                                i.putExtra("key_tgl_penjualan", key_tgl_penjualan );
-//                                i.putExtra("tgl_kunjungan", tgl_kunjungan );
-//                                i.putExtra("key_kode_lokasi", key_kode_lokasi );
-//                                i.putExtra("key_id_utama", key_id_utama );
-//                                i.putExtra("key_id_tmbhn", key_id_tmbhn );
-//                                i.putExtra("jml_wisnu", jml_wisnu );
-//                                i.putExtra("jml_wisman", jml_wisman );
-//                                i.putExtra("jml_tmbhn", jml_tmbhn );
-//                                i.putExtra("key_kode_lok_new", key_kode_lok_new );
-//                                i.putExtra("grand_ttl", grand_ttl );
-//                                startActivity(i);
                             }
                         }
 

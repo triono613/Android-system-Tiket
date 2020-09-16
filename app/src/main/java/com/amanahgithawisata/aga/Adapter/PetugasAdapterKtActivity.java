@@ -1,4 +1,4 @@
-package com.amanahgithawisata.aga;
+package com.amanahgithawisata.aga.Adapter;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -7,10 +7,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.amanahgithawisata.aga.Adapter.CustomAdapterEntityKarcisTambahan;
-import com.amanahgithawisata.aga.Adapter.SessionManager;
 import com.amanahgithawisata.aga.Helper.Help;
 import com.amanahgithawisata.aga.Model.ModelHorizontalScrollKarcisTambahan;
+import com.amanahgithawisata.aga.R;
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -27,14 +26,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PopUpKarcisTambahanActivity extends AppCompatActivity {
+public class PetugasAdapterKtActivity extends AppCompatActivity {
 
 
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     SessionManager sessionManager ;
     ArrayList<ModelHorizontalScrollKarcisTambahan> modelHorizontalScrollKarcisTambahans;
-    CustomAdapterEntityKarcisTambahan customAdapter ;
+    CustomAdapterEntityKarcisTambahanPetugas customAdapter ;
 
     @Override
     public void onBackPressed() {
@@ -44,20 +43,20 @@ public class PopUpKarcisTambahanActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pop_up_karcis_tambahan);
+        setContentView(R.layout.activity_petugas_adapter_kt);
 
-//        findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+
         sessionManager = new SessionManager(getApplicationContext());
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_data_karcis_tambahan);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
 
-        String result_dt_kdlokWis = getIntent().getStringExtra("result_dt_kdlokWis");
-        String result_dt_nmlokWis = getIntent().getStringExtra("result_dt_nmlokWis");
-        String result_dt_kdlokPintu = getIntent().getStringExtra("result_dt_kdlokPintu");
-        String result_dt_nmlokPintu = getIntent().getStringExtra("result_dt_nmlokPintu");
-        String result_dt_tgl_kunj = getIntent().getStringExtra("result_dt_tgl_kunj");
+        String result_dt_kdlokWis = getIntent().getStringExtra("result_dt_kd_lokwis");
+        String result_dt_nmlokWis = getIntent().getStringExtra("result_dt_nm_lokwis");
+        String result_dt_kdlokPintu = getIntent().getStringExtra("result_dt_kd_lokpintu");
+        String result_dt_nmlokPintu = getIntent().getStringExtra("result_dt_nm_lokpintu");
+        String result_dt_tgl_kunj = getIntent().getStringExtra("result_dt_tgl_kunj_lokwis");
         String result_dt_url_img_lokWisOld = getIntent().getStringExtra("result_dt_url_img_lokWisOld");
         String result_dt_url_img_pintu = getIntent().getStringExtra("result_dt_url_img_pintu");
 
@@ -65,18 +64,27 @@ public class PopUpKarcisTambahanActivity extends AppCompatActivity {
         String result_dt_jml_krcs_wisman = getIntent().getStringExtra("result_dt_jml_krcs_wisman");
         String result_dt_ttl_jml_krcs_wisnu_wisman = getIntent().getStringExtra("result_dt_ttl_jml_krcs_wisnu_wisman");
 
-        String result_dt_jml_krcs_tmbhn = getIntent().getStringExtra("result_dt_jml_krcs_tmbhn");
-        String result_dt_ttl_krcs_wisman = getIntent().getStringExtra("result_dt_ttl_krcs_wisman");
-        String result_dt_grand_ttl = getIntent().getStringExtra("result_dt_grand_ttl");
+        String harga_karcis_wisata_wisnu = getIntent().getStringExtra("txt_harga_karcis_wisata_wisnu_ku");
+        String harga_karcis_wisata_wisman = getIntent().getStringExtra("txt_harga_karcis_wisata_wisman_ku");
+        String harga_karcis_wisata_tmbhn = getIntent().getStringExtra("txt_harga_karcis_wisata_kt");
+        String harga_karcis_asuransi_wisnu = getIntent().getStringExtra("txt_harga_karcis_asuransi_wisnu_ku");
+        String harga_karcis_asuransi_wisman = getIntent().getStringExtra("txt_harga_karcis_asuransi_wisman_ku");
 
-        String result_dt_id_karcis_utama = getIntent().getStringExtra("result_dt_id_karcis_utama");
-        String result_dt_id_karcis_tmbhn = getIntent().getStringExtra("result_dt_id_karcis_tmbhn");
 
-        String harga_karcis_wisata_wisnu = getIntent().getStringExtra("hrg_krcs_wisnu");
-        String harga_karcis_wisata_wisman = getIntent().getStringExtra("hrg_krcs_wisman");
-        String harga_karcis_wisata_tmbhn = getIntent().getStringExtra("hrg_krcs_tmbhn");
-        String harga_karcis_asuransi_wisnu = getIntent().getStringExtra("hrg_krcs_asrnsi_wisnu");
-        String harga_karcis_asuransi_wisman = getIntent().getStringExtra("hrg_krcs_asrnsi_wisman");
+
+        String result_dt_jml_karcis_wisnu = getIntent().getStringExtra("txt_krcs_wisnu_ptgs");
+        String result_dt_jml_karcis_wisman = getIntent().getStringExtra("txt_krcs_wisman_ptgs");
+        String result_dt_ttl_wisnu_wisman = getIntent().getStringExtra("txt_ttl_ptgs");
+        String result_dt_jml_karcis_tmbhn = getIntent().getStringExtra("txt_jml_krcs_wisman_tmbhn_ptgs");
+        String result_dt_ttl_karcis_tmbhn = getIntent().getStringExtra("txt_ttl_tmbhn_ptgs");
+        String result_dt_grand_ttl = getIntent().getStringExtra("txt_grand_ttl_ptgs");
+        String result_dt_id_karcis_utama= getIntent().getStringExtra("txt_id_ku");
+        String result_dt_id_karcis_tmbhn= getIntent().getStringExtra("txt_id_kt");
+
+        String nama_pengunjung = getIntent().getStringExtra("nama_pengunjung");
+        String hp_pengunjung = getIntent().getStringExtra("hp_pengunjung");
+        String email_pengunjung = getIntent().getStringExtra("email_pengunjung");
+        String mode_pembayaran = getIntent().getStringExtra("mode_pembayaran");
 
 
         Log.i("","result_dt_tgl_kunj kt "+result_dt_tgl_kunj);
@@ -107,11 +115,11 @@ public class PopUpKarcisTambahanActivity extends AppCompatActivity {
                 result_dt_url_img_lokWisOld,
                 result_dt_url_img_pintu,
 
-                result_dt_jml_krcs_wisnu,
-                result_dt_jml_krcs_wisman,
-                result_dt_ttl_jml_krcs_wisnu_wisman,
-                result_dt_jml_krcs_tmbhn,
-                result_dt_ttl_krcs_wisman,
+                result_dt_jml_karcis_wisnu,
+                result_dt_jml_karcis_wisman,
+                result_dt_ttl_wisnu_wisman,
+                result_dt_jml_karcis_tmbhn,
+                result_dt_ttl_karcis_tmbhn,
                 result_dt_grand_ttl,
                 result_dt_id_karcis_utama,
                 result_dt_id_karcis_tmbhn,
@@ -120,7 +128,12 @@ public class PopUpKarcisTambahanActivity extends AppCompatActivity {
                 harga_karcis_wisata_wisman,
                 harga_karcis_wisata_tmbhn,
                 harga_karcis_asuransi_wisnu,
-                harga_karcis_asuransi_wisman
+                harga_karcis_asuransi_wisman,
+
+                nama_pengunjung,
+                hp_pengunjung,
+                email_pengunjung,
+                mode_pembayaran
         );
 
 
@@ -150,7 +163,12 @@ public class PopUpKarcisTambahanActivity extends AppCompatActivity {
                              String harga_karcis_wisata_wisman,
                              String harga_karcis_wisata_tmbhn,
                              String harga_karcis_asuransi_wisnu,
-                             String harga_karcis_asuransi_wisman
+                             String harga_karcis_asuransi_wisman,
+
+                             String nama_pengunjung,
+                             String hp_pengunjung,
+                             String email_pengunjung,
+                             String mode_pembayaran
 
     ) {
 //        findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
@@ -201,9 +219,9 @@ public class PopUpKarcisTambahanActivity extends AppCompatActivity {
                                             tglKunj,
                                             _id,
                                             _url_kt,
-                                             result_dt_jml_krcs_wisnu,
-                                             result_dt_jml_krcs_wisman,
-                                             result_dt_ttl_jml_krcs_wisnu_wisman,
+                                            result_dt_jml_krcs_wisnu,
+                                            result_dt_jml_krcs_wisman,
+                                            result_dt_ttl_jml_krcs_wisnu_wisman,
                                             result_dt_jml_krcs_tmbhn,
                                             result_dt_ttl_krcs_wisman,
                                             result_dt_grand_ttl,
@@ -216,17 +234,17 @@ public class PopUpKarcisTambahanActivity extends AppCompatActivity {
                                             harga_karcis_asuransi_wisnu,
                                             harga_karcis_asuransi_wisman,
 
-                                            "",
-                                            "",
-                                            "",
-                                            ""
+                                            nama_pengunjung,
+                                            hp_pengunjung,
+                                            email_pengunjung,
+                                            mode_pembayaran
                                     ));
                                 }
 
                                 Log.i("","url_lokWis "+url_lokWis);
                                 Log.i("","url_pintu"+ url_pintu);
 
-                                customAdapter = new CustomAdapterEntityKarcisTambahan( modelHorizontalScrollKarcisTambahans, getApplicationContext() );
+                                customAdapter = new CustomAdapterEntityKarcisTambahanPetugas( modelHorizontalScrollKarcisTambahans, getApplicationContext() );
                                 recyclerView.setAdapter(customAdapter);
                             }
                         }
@@ -257,6 +275,8 @@ public class PopUpKarcisTambahanActivity extends AppCompatActivity {
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         stringRequest.setRetryPolicy(policy);
         requestQueue.add(stringRequest);
-    }
 
+
+
+    }
 }

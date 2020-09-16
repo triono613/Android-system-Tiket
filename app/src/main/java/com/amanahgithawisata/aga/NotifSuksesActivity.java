@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -54,6 +55,8 @@ public class NotifSuksesActivity extends AppCompatActivity {
     Button btn_continue;
     ImageView btn_back_regis;
     SessionManager sessionManager;
+    LinearLayout linearMohonWisatawan;
+    LinearLayout linearMohonPetugas;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -122,12 +125,19 @@ public class NotifSuksesActivity extends AppCompatActivity {
          textview_grand_ttl_red =  findViewById(R.id.textview_grand_ttl_red);
          textview_jam_red =  findViewById(R.id.textview_jam_red);
          textview_nm_lok_wis =  findViewById(R.id.textview_nm_lok_wis);
+         linearMohonWisatawan = findViewById(R.id.linearMohonWisatawan);
+         linearMohonPetugas = findViewById(R.id.linearMohonPetugas);
 
 //        final View vButton = findViewById(R.id.button1);
-        if(result_dt_flag.equals("detailTagihan")){
+        if(result_dt_flag.equals("flagPesanKarcisWisatawan")){
             btn_continue.setText("cek tagihan di email anda");
+            linearMohonWisatawan.setVisibility(View.VISIBLE);
+            linearMohonPetugas.setVisibility(View.GONE);
+
         }else {
             btn_continue.setText("Lanjutkan");
+            linearMohonWisatawan.setVisibility(View.GONE);
+            linearMohonPetugas.setVisibility(View.VISIBLE);
         }
 
         textview_nmr_va.setText( _va_no );

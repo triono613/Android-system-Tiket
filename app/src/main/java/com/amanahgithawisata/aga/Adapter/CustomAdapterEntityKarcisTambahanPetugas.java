@@ -16,18 +16,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.amanahgithawisata.aga.Model.ModelHorizontalScrollKarcisTambahan;
-import com.amanahgithawisata.aga.PesanKarcisWisatawanActivity;
+import com.amanahgithawisata.aga.PesanKarcisPetugasActivity;
 import com.amanahgithawisata.aga.R;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class CustomAdapterEntityKarcisTambahan extends RecyclerView.Adapter<CustomAdapterEntityKarcisTambahan.MyViewHolder> {
+public class CustomAdapterEntityKarcisTambahanPetugas extends RecyclerView.Adapter<CustomAdapterEntityKarcisTambahanPetugas.MyViewHolder> {
     ArrayList<ModelHorizontalScrollKarcisTambahan> modelHorizontalScrollKarcisTambahans;
     Context context;
 
-    public CustomAdapterEntityKarcisTambahan(ArrayList<ModelHorizontalScrollKarcisTambahan> modelHorizontalScrollKarcisTambahans, Context context) {
+    public CustomAdapterEntityKarcisTambahanPetugas(ArrayList<ModelHorizontalScrollKarcisTambahan> modelHorizontalScrollKarcisTambahans, Context context) {
         this.modelHorizontalScrollKarcisTambahans = modelHorizontalScrollKarcisTambahans;
         this.context = context;
     }
@@ -100,7 +100,7 @@ public class CustomAdapterEntityKarcisTambahan extends RecyclerView.Adapter<Cust
 
         LayoutInflater li = LayoutInflater.from(parent.getContext());
         View view = li.inflate(R.layout.entity_card_karcis_tambahan,parent,false);
-        MyViewHolder myViewHolder = new CustomAdapterEntityKarcisTambahan.MyViewHolder(view);
+        MyViewHolder myViewHolder = new CustomAdapterEntityKarcisTambahanPetugas.MyViewHolder(view);
         return myViewHolder;
     }
 
@@ -188,6 +188,11 @@ public class CustomAdapterEntityKarcisTambahan extends RecyclerView.Adapter<Cust
         final String harga_karcis_asuransi_wisman = modelHorizontalScrollKarcisTambahans.get(position).getHarga_karcis_asuransi_wisman();
 
 
+        final String _nama = modelHorizontalScrollKarcisTambahans.get(position).getNama_pengunjung();
+        final String _hp = modelHorizontalScrollKarcisTambahans.get(position).getHp_pengunjung();
+        final String _email = modelHorizontalScrollKarcisTambahans.get(position).getEmail_pengunjung();
+        final String _mode_pembayaran = modelHorizontalScrollKarcisTambahans.get(position).getMode_pembayaran();
+
 
         Log.i("","_url_img_lokWis tambahan adapter"+_url_img_lokWis);
         Log.i("","_url_img_pintu tambahan adapter"+_url_img_pintu);
@@ -243,9 +248,11 @@ public class CustomAdapterEntityKarcisTambahan extends RecyclerView.Adapter<Cust
             Log.i("","_namaKarcis "+_namaKarcis);
 
             Log.i("","_id_kt "+_id_kt);
+            Log.i("","harga_karcis_wisata_tmbhn kt "+harga_karcis_wisata_tmbhn);
 
-            Intent i = new Intent(v.getContext(), PesanKarcisWisatawanActivity.class);
-            i.putExtra("result_dt_id_kt", _id_kt);
+
+            Intent i = new Intent(v.getContext(), PesanKarcisPetugasActivity.class);
+
             i.putExtra("result_dt_kodeKarcis_kt", _kodeKarcis);
             i.putExtra("result_dt_namaKarcis_kt",_namaKarcis );
             i.putExtra("result_dt_harga_karcis_wisata_kt",_harga_karcis_wisata );
@@ -258,30 +265,38 @@ public class CustomAdapterEntityKarcisTambahan extends RecyclerView.Adapter<Cust
             i.putExtra("result_dt_url_img_lokWisOld_kt",_url_img_lokWis);
             i.putExtra("result_dt_url_img_lokPintuOld_kt",_url_img_pintu);
 
-            i.putExtra("result_dt_jml_krcs_wisnu_kt",_jml_krcs_wisnu);
-            i.putExtra("result_dt_jml_krcs_wisman_kt",_jml_krcs_wisman);
-            i.putExtra("result_dt_jml_krcs_wisnu_wisman_kt",_jml_krcs_wisnu_wisman);
 
-            i.putExtra("result_dt_jml_krcs_tmbhn_kt",_jml_krcs_tmbhn);
-            i.putExtra("result_dt_ttl_krcs_tmbhn_kt",_ttl_krcs_tmbhn);
-            i.putExtra("result_dt_grand_ttl",_grand_ttl);
+            i.putExtra("result_jml_karcis_wisnu",_jml_krcs_wisnu);
+            i.putExtra("result_jml_karcis_wisman",_jml_krcs_wisman);
+            i.putExtra("result_jml_karcis_tmbhn",_jml_krcs_tmbhn);
+            i.putExtra("result_ttl_karcis_tmbhn",_ttl_krcs_tmbhn);
+            i.putExtra("result_grand_ttl",_grand_ttl);
 
-            i.putExtra("result_dt_id_karcis_utama",_result_dt_id_karcis_utama);
-            i.putExtra("result_dt_id_karcis_tmbhn",_result_dt_id_karcis_tmbhn);
 
-            i.putExtra("harga_karcis_wisata_wisnu_kt",harga_karcis_wisata_wisnu);
-            i.putExtra("harga_karcis_wisata_wisman_kt",harga_karcis_wisata_wisman);
-            i.putExtra("harga_karcis_wisata_tmbhn_kt",harga_karcis_wisata_tmbhn);
-            i.putExtra("harga_karcis_asuransi_wisnu_kt",harga_karcis_asuransi_wisnu);
-            i.putExtra("harga_karcis_asuransi_wisman_kt",harga_karcis_asuransi_wisman);
+            i.putExtra("result_dt_id_ku",_result_dt_id_karcis_utama);
+            i.putExtra("result_dt_id_kt", _id_kt);
+//            i.putExtra("result_dt_id_karcis_tmbhn",_result_dt_id_karcis_tmbhn);
+
+            i.putExtra("result_dt_harga_karcis_wisata_wisnu",harga_karcis_wisata_wisnu);
+            i.putExtra("result_dt_harga_karcis_wisata_wisman",harga_karcis_wisata_wisman);
+            i.putExtra("result_dt_harga_karcis_wisata_tmbhn",harga_karcis_wisata_tmbhn);
+            i.putExtra("result_dt_harga_karcis_asuransi_wisnu",harga_karcis_asuransi_wisnu);
+            i.putExtra("result_dt_harga_karcis_asuransi_wisman",harga_karcis_asuransi_wisman);
+
+
+            i.putExtra("result_dt_nama_pengunjung",_nama);
+            i.putExtra("result_dt_hp_pengunjung",_hp);
+            i.putExtra("result_dt_email_pengunjung",_email);
+            i.putExtra("result_dt_flag_kt",true);
+            i.putExtra("result_dt_mode_pembayaran",_mode_pembayaran);
 
 
 
             sessionManager.createSessionWisTmbhn(   _kodeKarcis,
-                                                    _namaKarcis,
-                                                    _harga_karcis_wisata,
-                                                    _id_kt,
-                                                    _url_img_kt );
+                    _namaKarcis,
+                    _harga_karcis_wisata,
+                    _id_kt,
+                    _url_img_kt );
 
 //                    i.putExtra("result_dt_berhasil", "false");
 //                    i.putExtra("result_dt_flag", "flagPesanKarcisPetugas");

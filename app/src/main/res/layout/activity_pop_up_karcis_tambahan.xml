@@ -12,8 +12,6 @@
         android:layout_height="wrap_content" />
 
 
-
-
     <LinearLayout
         android:foregroundGravity="center"
         android:id="@+id/linearLayout2"

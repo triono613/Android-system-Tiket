@@ -34,6 +34,12 @@ public class ModelHorizontalScrollKarcisTambahan {
     public String harga_karcis_asuransi_wisnu;
     public String harga_karcis_asuransi_wisman;
 
+    public String  nama_pengunjung;
+    public String  hp_pengunjung;
+    public String  email_pengunjung;
+    public String  mode_pembayaran;
+
+
 
     public ModelHorizontalScrollKarcisTambahan(String url_lokWis,
                                             String url_pintu,
@@ -62,8 +68,14 @@ public class ModelHorizontalScrollKarcisTambahan {
                                             String harga_karcis_wisata_wisman,
                                             String harga_karcis_wisata_tmbhn,
                                             String harga_karcis_asuransi_wisnu,
-                                            String harga_karcis_asuransi_wisman
-                                            )
+                                            String harga_karcis_asuransi_wisman,
+
+                                           String nama_pengunjung,
+                                           String hp_pengunjung,
+                                           String email_pengunjung,
+                                           String mode_pembayaran
+
+                                   )
     {
         this.url_lokWis = url_lokWis;
         this.url_pintu = url_pintu;
@@ -79,12 +91,14 @@ public class ModelHorizontalScrollKarcisTambahan {
         this.tgl_kunj = tgl_kunj;
         this.id = id;
         this.url_img_kt = url_img_kt;
-            this.result_dt_jml_krcs_wisnu = result_dt_jml_krcs_wisnu;
-            this.result_dt_jml_krcs_wisman = result_dt_jml_krcs_wisman;
-            this.result_dt_ttl_jml_krcs_wisnu_wisman = result_dt_ttl_jml_krcs_wisnu_wisman;
+
+        this.result_dt_jml_krcs_wisnu = result_dt_jml_krcs_wisnu;
+        this.result_dt_jml_krcs_wisman = result_dt_jml_krcs_wisman;
+        this.result_dt_ttl_jml_krcs_wisnu_wisman = result_dt_ttl_jml_krcs_wisnu_wisman;
         this.result_dt_jml_krcs_tmbhn = result_dt_jml_krcs_tmbhn;
         this.result_dt_ttl_krcs_tmbhn = result_dt_ttl_krcs_tmbhn;
         this.result_dt_grand_ttl = result_dt_grand_ttl;
+
         this.result_dt_id_karcis_utama = result_dt_id_karcis_utama;
         this.result_dt_id_karcis_tmbhn = result_dt_id_karcis_tmbhn;
 
@@ -93,6 +107,43 @@ public class ModelHorizontalScrollKarcisTambahan {
         this.harga_karcis_wisata_tmbhn = harga_karcis_wisata_tmbhn;
         this.harga_karcis_asuransi_wisnu = harga_karcis_asuransi_wisnu;
         this.harga_karcis_asuransi_wisman = harga_karcis_asuransi_wisman;
+
+        this.nama_pengunjung = nama_pengunjung;
+        this.hp_pengunjung = hp_pengunjung;
+        this.email_pengunjung = email_pengunjung;
+        this.mode_pembayaran =  mode_pembayaran;
+    }
+
+    public String getMode_pembayaran() {
+        return mode_pembayaran;
+    }
+
+    public void setMode_pembayaran(String mode_pembayaran) {
+        this.mode_pembayaran = mode_pembayaran;
+    }
+
+    public String getNama_pengunjung() {
+        return nama_pengunjung;
+    }
+
+    public void setNama_pengunjung(String nama_pengunjung) {
+        this.nama_pengunjung = nama_pengunjung;
+    }
+
+    public String getHp_pengunjung() {
+        return hp_pengunjung;
+    }
+
+    public void setHp_pengunjung(String hp_pengunjung) {
+        this.hp_pengunjung = hp_pengunjung;
+    }
+
+    public String getEmail_pengunjung() {
+        return email_pengunjung;
+    }
+
+    public void setEmail_pengunjung(String email_pengunjung) {
+        this.email_pengunjung = email_pengunjung;
     }
 
     public String getHarga_karcis_wisata_wisnu() {
