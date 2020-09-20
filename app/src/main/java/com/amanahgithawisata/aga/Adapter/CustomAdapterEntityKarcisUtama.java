@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,7 +18,6 @@ import com.amanahgithawisata.aga.Model.ModelHorizontalScrollKarcisUtama;
 import com.amanahgithawisata.aga.PesanKarcisWisatawanActivity;
 import com.amanahgithawisata.aga.R;
 import com.amanahgithawisata.aga.bSheetKarcisUtama;
-import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -216,16 +214,7 @@ public class CustomAdapterEntityKarcisUtama extends RecyclerView.Adapter<CustomA
                 .error(R.mipmap.ic_launcher)
                 .resize(1900,600)
                 .centerCrop()
-                .into(img_kux, new Callback() {
-                    @Override
-                    public void onSuccess() {
-                        Log.d("TAG", "onSuccess");
-                    }
-                    @Override
-                    public void onError() {
-                        Toast.makeText(context, "An error occurred", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                .into(img_kux);
 
 
 

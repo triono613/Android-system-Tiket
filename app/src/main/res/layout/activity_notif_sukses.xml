@@ -138,7 +138,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_regular"
-                    android:text="Nomor Virtual Account :"
+                    android:text="Nomor Virtual Account : "
                     android:textColor="@color/grayPrimary"
                     android:textSize="12sp" />
 
@@ -529,6 +529,7 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:layout_marginStart="5dp"
                     android:textStyle="bold"
                     android:id="@+id/textview_nm_red"
                     android:layout_width="match_parent"
@@ -541,6 +542,68 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linear_email_red"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:textStyle="normal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textAlignment="textStart"
+                    android:text="Alamat e-Mail : "
+                    android:textColor="@color/grayPrimary"
+                    android:textSize="12sp" />
+
+
+                <TextView
+                    android:textStyle="bold"
+                    android:layout_marginStart="5dp"
+                    android:id="@+id/textview_email_red"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/grayPrimary"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_hp_red"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:textStyle="normal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textAlignment="textStart"
+                    android:text="No. Sellular : "
+                    android:textColor="@color/grayPrimary"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:textStyle="bold"
+                    android:id="@+id/textview_hp_red"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginBottom="2dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/grayPrimary"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_nm_bank_red"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal" >
@@ -554,6 +617,25 @@
                     android:fontFamily="@font/roboto_regular"
                     android:textAlignment="textStart"
                     android:textColor="@color/grayPrimary"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_bukti_bayar_red"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:textStyle="bold"
+                    android:id="@+id/textview_bukti_bayar_red"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/grayPrimary"
+                    android:text=" BUKTI PEMBAYARAN "
                     android:textSize="12sp" />
             </LinearLayout>
 
@@ -587,6 +669,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linear_red_nominal_red"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -602,8 +685,26 @@
                     android:textSize="12sp" />
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/linear_red_cash_ptgs_red"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Mohon tidak meng-hapus notifikasi e-mail ini, notifikasi email ini sebagai bukti bahwa sudah membayar dipintu masuk "
+                    android:textColor="@color/grayPrimary"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
 
             <LinearLayout
+                android:id="@+id/linear_va_red"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -619,9 +720,27 @@
                     android:textColor="@color/grayPrimary"
                     android:textSize="12sp" />
             </LinearLayout>
+            <LinearLayout
+                android:id="@+id/linear_cash_red"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textStyle="bold"
+                    android:text="PEMBAYARAN KARCIS VIRTUAL INI DILAKUKAN SECARA TUNAI/CASH. "
+                    android:textColor="@color/grayPrimary"
+                    android:textSize="12sp" />
+            </LinearLayout>
 
 
             <LinearLayout
+                android:id="@+id/linear_va_bottom_red"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -636,6 +755,24 @@
                     android:textColor="@color/grayPrimary"
                     android:textSize="12sp" />
             </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_cash_bottom_red"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Terima kasih telah melakukan pembayaran secara TUNAI, lain waktu boleh dicoba dengan VIRTUAL ACCOUNT. "
+                    android:textColor="@color/grayPrimary"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"

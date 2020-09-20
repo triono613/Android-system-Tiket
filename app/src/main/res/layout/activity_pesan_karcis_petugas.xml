@@ -213,7 +213,7 @@
 
 
                                     <Button
-                                        android:visibility="visible"
+                                        android:visibility="gone"
                                         android:id="@+id/btn_detail"
                                         android:layout_width="25dp"
                                         android:layout_height="20dp"
@@ -363,7 +363,7 @@
                                     android:layout_height="wrap_content">
 
                                     <Button
-                                        android:visibility="visible"
+                                        android:visibility="gone"
                                         android:id="@+id/btn_detail_pintu"
                                         android:layout_width="25dp"
                                         android:layout_height="20dp"

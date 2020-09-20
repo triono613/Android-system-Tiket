@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="60dp"
         android:fontFamily="@font/mregular"
         android:text="Dashboard Petugas"
         android:textColor="#fff"
@@ -74,52 +74,45 @@
                 <LinearLayout
                     android:id="@+id/card_setup_pintu_ptgs"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="80dp"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
-                    android:layout_marginBottom="20dp"
                     android:background="@drawable/cardview_child"
                     android:gravity="center_horizontal"
                     android:orientation="horizontal"
                     android:paddingLeft="25dp"
                     android:paddingRight="25dp"
-                    android:paddingBottom="10dp">
+                    >
 
                     <ImageView
                         android:layout_width="64dp"
                         android:layout_height="64dp"
-                        android:layout_marginStart="0dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="10dp"
+                        android:layout_gravity="center"
                         android:background="@drawable/circlebackground1"
-                        android:padding="10dp"
                         android:src="@drawable/ic_account_balance_wallet_black_24dp" />
 
                     <LinearLayout
+                        android:layout_gravity="center"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:paddingStart="5dp"
-                        android:paddingTop="10dp"
-                        android:paddingEnd="5dp">
+                        >
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
                             android:fontFamily="@font/mmedium"
-                            android:gravity="left"
-                            android:paddingTop="10dp"
+                            android:gravity="center"
+                            android:paddingTop="5dp"
                             android:text="Informasi Pintu"
-                            android:textSize="14sp"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
 
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:gravity="left"
-                            android:padding="5dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
                             android:text="Melihat detail informasi pintu"
                             android:textSize="10sp" />
 
@@ -129,7 +122,7 @@
 
 
                 <LinearLayout
-                    android:visibility="visible"
+                    android:visibility="gone"
                     android:id="@+id/card_pemesanan_karcis_ptgs"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -208,129 +201,110 @@
                 <LinearLayout
                     android:id="@+id/card_pemesanan_karcis_ptgs_new"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="80dp"
                     android:layout_marginStart="15dp"
                     android:layout_marginEnd="15dp"
-                    android:layout_marginBottom="20dp"
                     android:background="@drawable/cardview_child"
                     android:orientation="horizontal"
                     android:paddingLeft="25dp"
                     android:paddingRight="25dp"
-                    android:paddingBottom="10dp">
+                    >
 
 
                     <ImageView
                         android:layout_width="64dp"
                         android:layout_height="64dp"
-                        android:layout_marginStart="0dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="10dp"
+                        android:layout_gravity="center"
                         android:background="@drawable/circlebackground3"
-                        android:padding="10dp"
                         android:src="@drawable/ic_speaker_group_black_24dp" />
 
+
+
                     <LinearLayout
+                        android:layout_gravity="center"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingTop="10dp"
                         android:orientation="vertical"
-                        android:paddingStart="5dp"
-                        android:paddingEnd="5dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:paddingStart="5dp"
-                            android:paddingTop="4dp"
-                            android:paddingEnd="5dp">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="2dp"
-                                android:fontFamily="@font/mmedium"
-                                android:gravity="left"
-                                android:paddingTop="5dp"
-                                android:text="Pemesanan Karcis"
-                                android:textSize="14dp"
-                                android:textStyle="bold" />
-
-                            <ImageView
-                                android:visibility="gone"
-                                android:id="@+id/imgBell"
-                                android:layout_width="70dp"
-                                android:layout_height="60dp"
-                                android:layout_gravity="center_horizontal"
-                                android:elevation="4dp"
-                                android:src="@drawable/bell2"
-                                android:textAlignment="textEnd"
-                                tools:ignore="RtlCompat" />
-                        </LinearLayout>
+                        >
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
-                            android:gravity="left"
-                            android:paddingTop="10dp"
-                            android:paddingBottom="10dp"
-                            android:text="Pesan Karcis di Tempat Lokasi"
-                            android:textSize="10dp" />
+                            android:fontFamily="@font/mmedium"
+                            android:gravity="center"
+                            android:paddingTop="5dp"
+                            android:text="Pemesanan Karcis"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text=" Pesan Karcis di Tempat Lokasi "
+                            android:textSize="10sp" />
 
                     </LinearLayout>
+
+
+                    <RelativeLayout
+                        android:id="@+id/loadingPanel"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center">
+
+                        <ProgressBar
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:indeterminate="true" />
+                    </RelativeLayout>
                 </LinearLayout>
 
 
                 <LinearLayout
                     android:id="@+id/card_status_karcis_ptgs"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="80dp"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
-                    android:layout_marginBottom="20dp"
                     android:background="@drawable/cardview_child"
                     android:gravity="center_horizontal"
                     android:orientation="horizontal"
                     android:paddingLeft="25dp"
                     android:paddingRight="25dp"
-                    android:paddingBottom="10dp">
+                    >
 
                     <ImageView
                         android:layout_width="64dp"
                         android:layout_height="64dp"
-                        android:layout_marginStart="0dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="5dp"
+                        android:layout_gravity="center"
                         android:background="@drawable/circlebackground6"
-                        android:padding="10dp"
                         android:src="@drawable/ic_event_note_black_24dp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:paddingStart="5dp"
-                        android:paddingTop="5dp"
-                        android:paddingEnd="5dp">
+                        android:fontFamily="@font/mmedium"
+                        android:layout_gravity="center"
+                        >
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
                             android:fontFamily="@font/mmedium"
-                            android:gravity="left"
-                            android:paddingTop="10dp"
+                            android:gravity="center"
+                            android:paddingTop="5dp"
                             android:text="Status Karcis"
-                            android:textSize="14sp"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
 
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:gravity="left"
-                            android:padding="2dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
                             android:text="Lihat Status Karcis Pengunjung Disini"
                             android:textSize="10sp" />
 
@@ -340,53 +314,44 @@
                 <LinearLayout
                     android:id="@+id/card_pengajuan_klaim_ptgs"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="80dp"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
-                    android:layout_marginBottom="20dp"
                     android:background="@drawable/cardview_child"
                     android:gravity="center_horizontal"
                     android:orientation="horizontal"
                     android:paddingLeft="25dp"
                     android:paddingRight="25dp"
-                    android:paddingBottom="10dp">
+                    >
 
                     <ImageView
                         android:layout_width="64dp"
                         android:layout_height="64dp"
-                        android:layout_marginStart="0dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="10dp"
+                        android:layout_gravity="center"
                         android:background="@drawable/circlebackground5"
-                        android:padding="10dp"
                         android:src="@drawable/ic_assignment_returned_black_24dp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
+                        android:layout_gravity="center"
                         android:orientation="vertical"
-                        android:paddingStart="5dp"
-                        android:paddingTop="10dp"
-                        android:paddingEnd="5dp">
+                       >
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:layout_marginStart="10dp"
                             android:fontFamily="@font/mmedium"
-                            android:gravity="left"
-                            android:paddingTop="10dp"
+                            android:gravity="center"
+                            android:paddingTop="5dp"
                             android:text="Pengajuan Klaim"
-                            android:textSize="14sp"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="0dp"
-                            android:gravity="left"
+                            android:gravity="center"
                             android:padding="5dp"
                             android:text="Ajukan Klaim Pengunjung Disini"
                             android:textSize="10sp" />
@@ -398,55 +363,45 @@
                 <LinearLayout
                     android:id="@+id/card_ganti_password_ptgs"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="80dp"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
-                    android:layout_marginBottom="20dp"
                     android:background="@drawable/cardview_child"
                     android:gravity="center_horizontal"
                     android:orientation="horizontal"
                     android:paddingLeft="25dp"
                     android:paddingRight="25dp"
-                    android:paddingBottom="10dp">
+                    >
 
                     <ImageView
                         android:layout_width="64dp"
                         android:layout_height="64dp"
-                        android:layout_marginStart="0dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="10dp"
+                        android:layout_gravity="center"
                         android:background="@drawable/circlebackground1"
-                        android:padding="10dp"
                         android:src="@drawable/lock2" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
+                        android:layout_gravity="center"
                         android:orientation="vertical"
-                        android:paddingStart="5dp"
-                        android:paddingTop="10dp"
-                        android:paddingEnd="5dp">
+                      >
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:layout_marginStart="10dp"
+                            android:layout_gravity="center"
                             android:fontFamily="@font/mmedium"
-                            android:gravity="left"
-                            android:paddingTop="10dp"
+                            android:gravity="center"
                             android:text="Ganti Password"
-                            android:textSize="14sp"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
 
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="0dp"
-                            android:gravity="left"
-                            android:padding="5dp"
+                            android:gravity="center"
                             android:text="Ganti Password anda Disini"
                             android:textSize="10sp" />
 
@@ -455,65 +410,107 @@
             <LinearLayout
                 android:id="@+id/card_qr_scaner_ptgs"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="80dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_marginBottom="20dp"
                 android:background="@drawable/cardview_child"
                 android:gravity="center_horizontal"
                 android:orientation="horizontal"
                 android:paddingLeft="25dp"
                 android:paddingRight="25dp"
-                android:paddingBottom="10dp">
+                >
 
                 <ImageView
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_gravity="center"
                     android:background="@drawable/circlebackground3"
-                    android:padding="10dp"
                     android:src="@drawable/ic_scanner_black_24dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
+                    android:layout_gravity="center"
                     android:orientation="vertical"
-                    android:paddingStart="5dp"
-                    android:paddingTop="2dp"
-                    android:paddingEnd="5dp">
+                    >
 
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:layout_marginStart="10dp"
                         android:fontFamily="@font/mmedium"
-                        android:gravity="left"
-                        android:paddingTop="10dp"
+                        android:gravity="center"
                         android:text="Scan "
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:visibility="gone"
                         android:id="@+id/text_dashboard_scan"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="2dp"/>
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="0dp"
-                        android:gravity="left"
-                        android:padding="5dp"
+                        android:gravity="center"
                         android:text="Scan Kode QR Notifikasi Booking Online Pengunjung di Sini"
                         android:textSize="10sp" />
                     </LinearLayout>
                 </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/card_input_quota_ptgs"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/cardview_child"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    android:paddingLeft="25dp"
+                    android:paddingRight="25dp"
+                    >
+
+                    <ImageView
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/circlebackground5"
+                        android:src="@drawable/ic_transfer_within_a_station_black_24dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="vertical"
+                        >
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/mmedium"
+                            android:gravity="center"
+                            android:text="Input Quota "
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:visibility="gone"
+                            android:id="@+id/text_dashboard_scan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="2dp"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Input Quota di Sini"
+                            android:textSize="10sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
             </LinearLayout>
 
     <LinearLayout
@@ -541,19 +538,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
-
-
-    <RelativeLayout
-        android:id="@+id/loadingPanel"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center" >
-
-        <ProgressBar
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:indeterminate="true" />
-    </RelativeLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

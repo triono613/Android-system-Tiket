@@ -1,6 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
+
+    repositories {
+        maven {
+            url "https://jitpack.io"
+        }
+    }
+
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
 
@@ -96,4 +103,8 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
     implementation 'com.mikhaellopez:circularimageview:3.0.2'
+
+    implementation 'de.codecrafters.tableview:tableview:2.2.0'
+
+
 }

@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
@@ -136,10 +137,7 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         _tgl_kunjungan_ptgs.setText(sdf.format(c.getTime()));
 
-
-
         _text_quota = (TextView) findViewById(R.id.text_quota);
-
 
         final String LP = sessionManager.getDataLokWisPesankarcisWisatawan().get(SessionManager.key_kd_lokwis);
 
@@ -149,13 +147,6 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
 
     }
 
-//    @Override
-//    public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
-
-//        outState.putIntArray("SCROLL_POSITION", new int[] {scrollView.getScrollX(),scrollView.getScrollY()} );
-//        super.onSaveInstanceState(outState, outPersistentState);
-//        Log.i("","scrollView.getScrollX() "+scrollView.getScrollX());
-//    }
 
 
     @Override
@@ -164,9 +155,6 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
         outState.putIntArray("SCROLL_POSITION", new int[] {scrollView.getScrollX(),scrollView.getScrollY()} );
         Log.i("","scrollView.getScrollX() "+scrollView.getScrollX());
     }
-
-
-
 
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
@@ -187,9 +175,7 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
 
     @Override
     public void onBackPressed() {
-
 //                super.onBackPressed();
-
         Intent intent = new Intent(PesanKarcisPetugasActivity.this, DashboardPetugasActivity.class)
                 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         finish();
@@ -311,10 +297,10 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
         _harga_karcis_wisata_kt.setVisibility(View.GONE);
 
 
-        RadioGroup rg_cara_bayar = (RadioGroup)findViewById(R.id.rg_cara_bayar);
+        RadioGroup rg_cara_bayarn = (RadioGroup)findViewById(R.id.rg_cara_bayar);
 
         final String[] mode_pembayaran = new String[1];
-        rg_cara_bayar.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        rg_cara_bayarn.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 rbNew = findViewById(checkedId);
@@ -503,7 +489,31 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
             @Override
             public void onClick(View v) {
 
-                inputKarcisPetugas("input_petugas",mode_pembayaran[0]);
+                RadioGroup rg_cara_bayarn = (RadioGroup)findViewById(R.id.rg_cara_bayar);
+
+
+
+
+
+                final  String hp_pengunjung = _hp_pengunjung_ptgs.getText().toString().trim();
+                final String email_pengunjung = _email_pengunjung.getText().toString().trim();
+                final String nama_pengunjung = _nama_pengunjung_ptgs.getText().toString().trim();
+                final String _nama_lokasi = _txt_nmlokwis.getText().toString().trim();
+                final String _jml_krcs_tmbhn = _jml_krcs_wisman_tmbhn_ptgs.getText().toString().trim();
+
+                 if(TextUtils.isEmpty(hp_pengunjung) ) {
+                    _hp_pengunjung_ptgs.setError("Nomor Hp Tidak Boleh Kosong!");
+                }
+                else if(TextUtils.isEmpty(email_pengunjung) ) {
+                    _email_pengunjung.setError("Email Tidak Boleh Kosong!");
+                }
+                else if(TextUtils.isEmpty(nama_pengunjung) ) {
+                    _nama_pengunjung_ptgs.setError("Nama Tidak Boleh Kosong!");
+                }
+
+                else {
+                    inputKarcisPetugas("input_petugas", mode_pembayaran[0],_nama_lokasi, _jml_krcs_tmbhn);
+                }
 
             }
         });
@@ -613,7 +623,7 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
             Log.i("","masuk kesini 1"+result_dt_flag_ku);
 
             apiLokwisPtgsFirst("petugas_daftar_lokasi_wisata",KL);
-            getRbCaraBayar("informasi_mode_pembayaran","");
+            getRbCaraBayar("informasi_mode_pembayaran","","1");
 
         }
 
@@ -663,7 +673,7 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
                     result_dt_jml_karcis_tmbhn
             );
 
-            getRbCaraBayar("informasi_mode_pembayaran",result_dt_mode_pembayaran);
+            getRbCaraBayar("informasi_mode_pembayaran",result_dt_mode_pembayaran,"");
         }
 
 
@@ -717,7 +727,7 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
                     result_dt_jml_karcis_tmbhn
             );
 
-            getRbCaraBayar("informasi_mode_pembayaran",result_dt_mode_pembayaran);
+            getRbCaraBayar("informasi_mode_pembayaran",result_dt_mode_pembayaran,"");
 
         }
 
@@ -731,7 +741,7 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
 
 
         @RequiresApi(api = Build.VERSION_CODES.O)
-        public void getRbCaraBayar(String EP,String mode_pembayaran_par){
+        public void getRbCaraBayar(String EP,String mode_pembayaran_par, String def_value){
 //                rg_cara_bayar.setOrientation(LinearLayout.HORIZONTAL);
 
                 findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
@@ -766,20 +776,27 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
                                                 button.setWidth(700);
                                                 rg_cara_bayar.addView(button);
 
-                                                if( mode_pembayaran.equals(mode_pembayaran_par)){
+                                            if( def_value != null ){
+                                                if( i == 0 ) {
                                                     button.setChecked(true);
                                                     button.setSelected(true);
                                                 }
 
 
+                                            }
+
+                                                if( mode_pembayaran.equals(mode_pembayaran_par)){
+                                                    button.setChecked(true);
+                                                    button.setSelected(true);
+                                                }
+
+                                                Log.i("","def_value "+  def_value);
                                                 Log.i("","rdbtn.getId() "+button.getId());
                                                 Log.i("","rdbtn.getText() "+button.getText());
                                         }
                                     }
                                 }
 
-                                String compareValue = sessionManager.getDataSetupPintu().get(SessionManager.key_index);
-                                Log.i("","compareValue "+compareValue);
                             } catch (JSONException e) {
                                 Log.i("", "error ===" + e.toString() );
                                 e.printStackTrace();
@@ -1738,7 +1755,7 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
 
 
 
-    private void inputKarcisPetugas(String EP,String mode_bayar){
+    private void inputKarcisPetugas(String EP,String mode_bayar, String nama_lokasi, String jml_krcs_tmbhn ){
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
         String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue(PesanKarcisPetugasActivity.this);
@@ -1778,6 +1795,7 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
                                     String _tgl_valid = jsonObject1.getString("tgl_valid");
                                     String _tagihan_total = jsonObject1.getString("tagihan_total");
                                     String _mode_pembayaran = jsonObject1.getString("mode_pembayaran");
+                                    String _nama_pengunjung = jsonObject1.getString("nama_pengunjung");
                                     String _no_hp_pengunjung = jsonObject1.getString("no_hp_pengunjung");
                                     String _email_pengunjung = jsonObject1.getString("email_pengunjung");
 
@@ -1805,8 +1823,13 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
                                     i.putExtra("_tgl_valid", _tgl_valid);
                                     i.putExtra("_tagihan_total", _tagihan_total);
                                     i.putExtra("_txt_nmlokwis", _txt_nmlokwis.getText().toString());
-                                    i.putExtra("_jumlah_tambahan", "");
-                                    i.putExtra("_nama_lokasi", "");
+                                    i.putExtra("_jumlah_tambahan", jml_krcs_tmbhn);
+                                    i.putExtra("_nama_lokasi", nama_lokasi);
+
+                                    i.putExtra("_mode_pembayaran", _mode_pembayaran);
+                                    i.putExtra("_nama_pengunjung", _nama_pengunjung);
+                                    i.putExtra("_no_hp_pengunjung", _no_hp_pengunjung);
+                                    i.putExtra("_email_pengunjung", _email_pengunjung);
 
                                     i.putExtra("result_dt_berhasil", berhasil);
                                     i.putExtra("result_dt_flag", "flagPesanKarcisPetugas");
@@ -1836,7 +1859,7 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
                 Map<String, String> obj = new HashMap<String, String>();
 
                 String flag_pemesan = null;
-                final String key_kode_ksda = (String) sessionManager.getDaftarKarcisWisatawanUtama().get(SessionManager.key_kode_ksda).trim();
+//                final String key_kode_ksda = (String) sessionManager.getDaftarKarcisWisatawanUtama().get(SessionManager.key_kode_ksda).trim();
                 final String key_name =  _nama_pengunjung_ptgs.getText().toString().trim().trim();
                 final String key_email =  _email_pengunjung.getText().toString().trim().trim();
                 final String key_hp =  _hp_pengunjung_ptgs.getText().toString().trim().trim();
@@ -1862,6 +1885,7 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
                 final String email_pengunjung = _email_pengunjung.getText().toString().trim();
                 final String nama_pengunjung = _nama_pengunjung_ptgs.getText().toString().trim();
 
+
                 if(jml_wisnu.equals("")){
                     jml_wisnu = "0";
                 }
@@ -1876,6 +1900,7 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
                 Log.i("tag","jns_byr= " + jns_byr );
                 Log.i("tag","hp_pengunjung= " + hp_pengunjung );
                 Log.i("tag","nama_pengunjung= " + nama_pengunjung );
+                Log.i("tag","email_pengunjung= " + email_pengunjung );
                 Log.i("tag","key_email= " + key_email );
                 Log.i("tag","key_hp= " + key_hp );
                 Log.i("tag","key_tgl_penjualan= " + key_tgl_penjualan );

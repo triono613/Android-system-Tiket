@@ -10,7 +10,7 @@
 
 
         <LinearLayout
-            android:background="@drawable/cardview_child"
+            android:background="@drawable/cardview"
             android:layout_gravity="center"
             android:gravity="center"
             android:layout_width="match_parent"

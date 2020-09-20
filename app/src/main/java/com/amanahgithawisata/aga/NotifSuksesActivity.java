@@ -51,12 +51,27 @@ public class NotifSuksesActivity extends AppCompatActivity {
     TextView textview_jam_red;
     TextView textview_nm_lok_wis;
 
+    TextView textview_mode_pembayaran;
+    TextView textview_nama_pengunjung;
+    TextView textview_no_hp_pengunjung;
+    TextView textview_email_pengunjung;
 
     Button btn_continue;
     ImageView btn_back_regis;
     SessionManager sessionManager;
     LinearLayout linearMohonWisatawan;
     LinearLayout linearMohonPetugas;
+    LinearLayout linear_hp_red;
+    LinearLayout linear_email_red;
+    LinearLayout linear_bukti_bayar_red;
+    LinearLayout linear_nm_bank_red;
+    LinearLayout linear_red_nominal_red;
+    LinearLayout linear_red_cash_ptgs_red;
+    LinearLayout linear_va_red;
+    LinearLayout linear_cash_red;
+    LinearLayout linear_cash_bottom_red;
+    LinearLayout linear_va_bottom_red;
+
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -67,21 +82,6 @@ public class NotifSuksesActivity extends AppCompatActivity {
         findViewById(R.id.loadingPanel).setVisibility(View.GONE);
 
 
-//        String _key_kode_ksda = getIntent().getStringExtra("key_kode_ksda");
-//        String _key_name = getIntent().getStringExtra("key_name");
-//        String _key_email = getIntent().getStringExtra("key_email");
-//        String _key_hp = getIntent().getStringExtra("key_hp");
-//        String _key_tgl_penjualan = getIntent().getStringExtra("key_tgl_penjualan");
-//        String _tgl_kunjungan = getIntent().getStringExtra("tgl_kunjungan");
-//        String _key_kode_lokasi = getIntent().getStringExtra("key_kode_lokasi");
-//        String _key_id_utama = getIntent().getStringExtra("key_id_utama");
-//        String _key_id_tmbhn = getIntent().getStringExtra("key_id_tmbhn");
-//        String _jml_wisnu = getIntent().getStringExtra("jml_wisnu");
-//        String _jml_wisman = getIntent().getStringExtra("jml_wisman");
-//        String _jml_tmbhn = getIntent().getStringExtra("jml_tmbhn");
-//        String _key_kode_lok_new = sessionManager.getUserDetail().get(SessionManager.key_kode_lokasi);
-//        String _grand_ttl = getIntent().getStringExtra("grand_ttl");
-//
 
         String result_dt_ket = getIntent().getStringExtra("result_dt_ket");
         String _id = getIntent().getStringExtra("_id");
@@ -98,11 +98,15 @@ public class NotifSuksesActivity extends AppCompatActivity {
         String _menit_valid = getIntent().getStringExtra("_menit_valid");
         String _tgl_valid = getIntent().getStringExtra("_tgl_valid");
         String _tagihan_total = getIntent().getStringExtra("_tagihan_total");
-        String berhasil = getIntent().getStringExtra("berhasil");
+        String _berhasil = getIntent().getStringExtra("berhasil");
         String result_dt_flag = getIntent().getStringExtra("result_dt_flag");
         String _jumlah_tambahan = getIntent().getStringExtra("_jumlah_tambahan");
         String _nama_lokasi = getIntent().getStringExtra("_nama_lokasi");
 
+        String _mode_pembayaran = getIntent().getStringExtra("_mode_pembayaran");
+        String _nama_pengunjung = getIntent().getStringExtra("_nama_pengunjung");
+        String _no_hp_pengunjung = getIntent().getStringExtra("_no_hp_pengunjung");
+        String _email_pengunjung = getIntent().getStringExtra("_email_pengunjung");
 
          textview_nmr_va = (TextView) findViewById(R.id.textview_nmr_va);
          textview_nm_ket_kelompok = findViewById(R.id.textview_nm_ket_kelompok);
@@ -125,19 +129,105 @@ public class NotifSuksesActivity extends AppCompatActivity {
          textview_grand_ttl_red =  findViewById(R.id.textview_grand_ttl_red);
          textview_jam_red =  findViewById(R.id.textview_jam_red);
          textview_nm_lok_wis =  findViewById(R.id.textview_nm_lok_wis);
-         linearMohonWisatawan = findViewById(R.id.linearMohonWisatawan);
-         linearMohonPetugas = findViewById(R.id.linearMohonPetugas);
+
+        textview_no_hp_pengunjung = findViewById(R.id.textview_hp_red);
+        textview_email_pengunjung = findViewById(R.id.textview_email_red);
+
+        linearMohonWisatawan = findViewById(R.id.linearMohonWisatawan);
+        linearMohonPetugas = findViewById(R.id.linearMohonPetugas);
+        linear_email_red = findViewById(R.id.linear_email_red);
+        linear_hp_red = findViewById(R.id.linear_hp_red);
+        linear_bukti_bayar_red = findViewById(R.id.linear_bukti_bayar_red);
+        linear_nm_bank_red = findViewById(R.id.linear_nm_bank_red);
+        linear_red_nominal_red = findViewById(R.id.linear_red_nominal_red);
+        linear_red_cash_ptgs_red = findViewById(R.id.linear_red_cash_ptgs_red);
+        linear_va_red = findViewById(R.id.linear_va_red);
+        linear_cash_red = findViewById(R.id.linear_cash_red);
+
+        linear_cash_bottom_red = findViewById(R.id.linear_cash_bottom_red);
+        linear_va_bottom_red = findViewById(R.id.linear_va_bottom_red);
+
 
 //        final View vButton = findViewById(R.id.button1);
-        if(result_dt_flag.equals("flagPesanKarcisWisatawan")){
-            btn_continue.setText("cek tagihan di email anda");
+
+        Log.i("","result_dt_flag "+result_dt_flag);
+        Log.i("","_email_pengunjung "+_email_pengunjung);
+        Log.i("","_no_hp_pengunjung "+_no_hp_pengunjung);
+        Log.i("","_mode_pembayaran "+_mode_pembayaran);
+
+
+        linearMohonPetugas.setVisibility(View.GONE);
+        linearMohonWisatawan.setVisibility(View.GONE);
+        linear_hp_red.setVisibility(View.GONE);
+        linear_email_red.setVisibility(View.GONE);
+        linear_nm_bank_red.setVisibility(View.GONE);
+        linear_bukti_bayar_red.setVisibility(View.GONE);
+        linear_red_nominal_red.setVisibility(View.GONE);
+        linear_red_cash_ptgs_red.setVisibility(View.GONE);
+
+        linear_va_red.setVisibility(View.GONE);
+        linear_cash_red.setVisibility(View.GONE);
+
+        linear_va_bottom_red.setVisibility(View.GONE);
+        linear_cash_bottom_red.setVisibility(View.GONE);
+
+
+        textview_no_hp_pengunjung.setText(_no_hp_pengunjung);
+        textview_email_pengunjung.setText(_email_pengunjung);
+
+        if(result_dt_flag.equals("flagPesanKarcisWisatawan")) {
+            Log.i("", "kesini flagPesanKarcisWisatawan " + result_dt_flag);
+            btn_continue.setText("Cek Tagihan di Email Anda");
             linearMohonWisatawan.setVisibility(View.VISIBLE);
             linearMohonPetugas.setVisibility(View.GONE);
+            linear_hp_red.setVisibility(View.GONE);
+            linear_email_red.setVisibility(View.GONE);
+            linear_nm_bank_red.setVisibility(View.VISIBLE);
+            linear_va_bottom_red.setVisibility(View.VISIBLE);
+        }
+         else if(result_dt_flag.equals("detailTagihan")){
+                Log.i("","kesini detailTagihan "+result_dt_flag);
+                btn_continue.setText("Cek Tagihan di Email Anda");
+                linearMohonWisatawan.setVisibility(View.VISIBLE);
+                linearMohonPetugas.setVisibility(View.GONE);
+                linear_hp_red.setVisibility(View.GONE);
+                linear_email_red.setVisibility(View.GONE);
+                linear_nm_bank_red.setVisibility(View.GONE);
+                linear_va_bottom_red.setVisibility(View.VISIBLE);
 
-        }else {
-            btn_continue.setText("Lanjutkan");
-            linearMohonWisatawan.setVisibility(View.GONE);
-            linearMohonPetugas.setVisibility(View.VISIBLE);
+        }else if ( result_dt_flag.equals("flagPesanKarcisPetugas") ) {
+            Log.i("","kesini flagPesanKarcisPetugas "+result_dt_flag);
+            btn_continue.setText("Cek Tagihan di Email Anda");
+            linearMohonWisatawan.setVisibility(View.VISIBLE);
+            linearMohonPetugas.setVisibility(View.GONE);
+            linear_hp_red.setVisibility(View.VISIBLE);
+            linear_email_red.setVisibility(View.VISIBLE);
+            linear_nm_bank_red.setVisibility(View.VISIBLE);
+
+            linear_va_red.setVisibility(View.GONE);
+            linear_cash_red.setVisibility(View.VISIBLE);
+
+            // 1. Cash
+            // 2. Virtual Account
+
+            if(_mode_pembayaran != null && _mode_pembayaran.equals("1")) {
+                linear_red_nominal_red.setVisibility(View.GONE);
+                linear_red_cash_ptgs_red.setVisibility(View.VISIBLE);
+                linear_va_red.setVisibility(View.GONE);
+                linear_cash_red.setVisibility(View.VISIBLE);
+                linear_va_bottom_red.setVisibility(View.GONE);
+                linear_cash_bottom_red.setVisibility(View.VISIBLE);
+
+            }
+            if(_mode_pembayaran != null &&  _mode_pembayaran.equals("2")){
+                linear_red_nominal_red.setVisibility(View.VISIBLE);
+                linear_red_cash_ptgs_red.setVisibility(View.GONE);
+                linear_va_red.setVisibility(View.VISIBLE);
+                linear_cash_red.setVisibility(View.GONE);
+                linear_va_bottom_red.setVisibility(View.VISIBLE);
+                linear_cash_bottom_red.setVisibility(View.GONE);
+
+            }
         }
 
         textview_nmr_va.setText( _va_no );
@@ -181,9 +271,27 @@ public class NotifSuksesActivity extends AppCompatActivity {
 
         btn_continue.setOnClickListener(v -> {
             findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-            Intent a = new Intent(getApplicationContext(), DashboardWisatawanActivity.class);
-            a.putExtra("result_flag_notif", "sukses");
-            startActivity(a);
+
+            Log.i("","result_dt_flag xxx"+result_dt_flag);
+
+            Intent a;
+            switch (result_dt_flag) {
+                case "flagPesanKarcisWisatawan":
+                case "detailTagihan":
+                    a = new Intent(getApplicationContext(), DashboardWisatawanActivity.class);
+                    a.putExtra("result_flag_notif", "sukses");
+                    startActivity(a);
+                    break;
+                case "flagPesanKarcisPetugas":
+                    a = new Intent(getApplicationContext(), DashboardPetugasActivity.class);
+                    a.putExtra("result_flag_notif", "sukses");
+                    startActivity(a);
+                    break;
+
+            }
+
+
+
 
 
             /*

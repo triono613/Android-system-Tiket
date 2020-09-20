@@ -58,6 +58,7 @@ public class DashboardPetugasActivity extends AppCompatActivity implements  ZXin
     LinearLayout _card_pengajuan_klaim_ptgs;
     LinearLayout _card_ganti_password_ptgs;
     LinearLayout _card_qr_scaner_ptgs;
+    LinearLayout _card_input_quota_ptgs;
 
     ZXingScannerView _mScannerView;
     @SuppressLint("StaticFieldLeak")
@@ -66,13 +67,6 @@ public class DashboardPetugasActivity extends AppCompatActivity implements  ZXin
 
     @Override
     public void onBackPressed() {
-
-//        Intent intent = new Intent(DashboardPetugasActivity.this, SigninActivity.class)
-//                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        finish();
-//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//        startActivity(intent);
 
         Intent a = new Intent(Intent.ACTION_MAIN);
         a.addCategory(Intent.CATEGORY_HOME);
@@ -105,15 +99,16 @@ public class DashboardPetugasActivity extends AppCompatActivity implements  ZXin
 
         findViewById(R.id.loadingPanel).setVisibility(View.GONE);
         btn_logout_ptgs = (Button) findViewById(R.id.btn_logout_ptgs);
-        _card_pemesanan_karcis_ptgs_new = (LinearLayout) findViewById(R.id.card_pemesanan_karcis_ptgs_new);
-        _card_pemesanan_karcis_ptgs = (LinearLayout) findViewById(R.id.card_pemesanan_karcis_ptgs);
-        _textview_email_session_ptgs = (TextView) findViewById(R.id.textview_email_session_ptgs);
-        _card_status_karcis_ptgs = (LinearLayout) findViewById(R.id.card_status_karcis_ptgs);
-        _card_setup_pintu_ptgs = (LinearLayout) findViewById(R.id.card_setup_pintu_ptgs);
-        _card_pengajuan_klaim_ptgs = (LinearLayout) findViewById(R.id.card_pengajuan_klaim_ptgs);
-        _card_ganti_password_ptgs = (LinearLayout) findViewById(R.id.card_ganti_password_ptgs);
-        _card_qr_scaner_ptgs = (LinearLayout) findViewById(R.id.card_qr_scaner_ptgs);
-        _text_dashboard_scan = (TextView) findViewById(R.id.text_dashboard_scan);
+        _card_pemesanan_karcis_ptgs_new = findViewById(R.id.card_pemesanan_karcis_ptgs_new);
+        _card_pemesanan_karcis_ptgs = findViewById(R.id.card_pemesanan_karcis_ptgs);
+        _textview_email_session_ptgs = findViewById(R.id.textview_email_session_ptgs);
+        _card_status_karcis_ptgs = findViewById(R.id.card_status_karcis_ptgs);
+        _card_setup_pintu_ptgs = findViewById(R.id.card_setup_pintu_ptgs);
+        _card_pengajuan_klaim_ptgs = findViewById(R.id.card_pengajuan_klaim_ptgs);
+        _card_ganti_password_ptgs =  findViewById(R.id.card_ganti_password_ptgs);
+        _card_qr_scaner_ptgs =  findViewById(R.id.card_qr_scaner_ptgs);
+        _text_dashboard_scan =  findViewById(R.id.text_dashboard_scan);
+        _card_input_quota_ptgs  =  findViewById(R.id.card_input_quota_ptgs);
 
         this.bounceNotif("aa");
 
@@ -180,6 +175,17 @@ public class DashboardPetugasActivity extends AppCompatActivity implements  ZXin
                 AlertDialog alert = builder.create();
                 alert.show();
             }
+        });
+
+        _card_input_quota_ptgs.setOnClickListener(v -> {
+
+            if( sessionManager.isLoggedIn() ) {
+
+                Intent i = new Intent(v.getContext().getApplicationContext(),SuccessRegistrasiWisatawanActivity.class);
+                startActivity(i);
+
+            }
+
         });
 
 

@@ -107,13 +107,13 @@ public class CustomAdapterEntityPetugas extends RecyclerView.Adapter<CustomAdapt
                     i.putExtra("result_dt_email",_email );
                     i.putExtra("result_dt_berhasil", "false");
                     i.putExtra("result_dt_flag", "flagPesanKarcisPetugas");
-                    context.startActivity(i);
+                    v.getContext().startActivity(i);
                 } else {
                     Intent i = new Intent(v.getContext(), EditKarcisStatusPetugasActivity.class);
                     i.putExtra("result_va", _va );
                     i.putExtra("result_status", _status );
                     i.putExtra("result_dt_flag", "fromCustomAdapterEntityPetugas" );
-                    context.startActivity(i);
+                    v.getContext().startActivity(i);
                     Log.i("","_va Entity "+_va);
                 }
             }
@@ -123,7 +123,7 @@ public class CustomAdapterEntityPetugas extends RecyclerView.Adapter<CustomAdapt
             Intent x = new Intent(v.getContext(), ClaimPetugasActivity.class);
             x.putExtra("result_va", _va);
             x.putExtra("result_dt_flag", "fromCustomAdapterEntityPetugas" );
-            context.startActivity(x);
+            v.getContext().startActivity(x);
 
 
         });
