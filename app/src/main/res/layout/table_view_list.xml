@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_btn_blue_square"
+    android:layout_gravity="top">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="top"
+        android:background="@drawable/cardview"
+        >
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/txtId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:background="@drawable/table_content_cell_bg"
+            android:text="id"
+            android:textSize="10sp" />
+
+        <TextView
+            android:layout_gravity="top"
+            android:id="@+id/txtFromDate"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="@drawable/table_content_cell_bg"
+            android:text="From Date "
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/txtThruDate"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="@drawable/table_content_cell_bg"
+            android:text="Thru Date"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/txtQuota"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="@drawable/table_content_cell_bg"
+            android:text="Quota"
+            android:textAlignment="center"
+            android:textSize="10sp" />
+
+    <TextView
+        android:id="@+id/txtQuotaIn"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="@drawable/table_content_cell_bg"
+        android:text="Quota in"
+        android:textAlignment="center"
+        android:textSize="10sp" />
+
+
+    <TextView
+        android:id="@+id/txtQuotaOut"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="@drawable/table_content_cell_bg"
+        android:text="Quota out"
+        android:textAlignment="center"
+        android:textSize="10sp" />
+
+</LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
