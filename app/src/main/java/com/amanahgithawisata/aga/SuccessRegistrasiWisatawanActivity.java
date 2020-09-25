@@ -101,6 +101,8 @@ public class SuccessRegistrasiWisatawanActivity extends AppCompatActivity {
                 case "flagEditPasswordPetugasFalse":
                 case "flagSetupPintu":
                 case "flagPesanKarcisPetugas":
+                case "checkQuotaTwa":
+                case "checkQuotaTwaOk":
                     Intent i = new Intent(SuccessRegistrasiWisatawanActivity.this, DashboardPetugasActivity.class);
                     startActivity(i);
                     break;
@@ -114,13 +116,10 @@ public class SuccessRegistrasiWisatawanActivity extends AppCompatActivity {
                     startActivity(c);
                     sessionManager.logout();
                     break;
-                case "checkQuotaTwa":
-                    Intent f = new Intent(SuccessRegistrasiWisatawanActivity.this, DashboardPetugasActivity.class);
-                    startActivity(f);
-                case "checkQuotaTwaOk":
-                    Intent g = new Intent(SuccessRegistrasiWisatawanActivity.this, DashboardPetugasActivity.class);
-                    startActivity(g);
-
+                case "flagQuotaList":
+                    Intent h = new Intent(SuccessRegistrasiWisatawanActivity.this, TableViewQuotaActivity.class);
+                    startActivity(h);
+                    break;
                 default:
                     Log.i("","logout ini");
                     sessionManager.logout();
@@ -184,6 +183,10 @@ public class SuccessRegistrasiWisatawanActivity extends AppCompatActivity {
                     startActivity(a);
                 }
                 else if ("checkQuotaTwaPetugas".equals(sessionIntentFlag.trim())) {
+                    Intent a = new Intent(SuccessRegistrasiWisatawanActivity.this, DashboardPetugasActivity.class);
+                    startActivity(a);
+                }
+                else if("flagQuotaList".equals(sessionIntentFlag.trim())) {
                     Intent a = new Intent(SuccessRegistrasiWisatawanActivity.this, DashboardPetugasActivity.class);
                     startActivity(a);
                 }

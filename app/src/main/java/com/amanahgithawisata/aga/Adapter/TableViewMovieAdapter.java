@@ -11,16 +11,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.amanahgithawisata.aga.Model.ModelQuotaExample;
 import com.amanahgithawisata.aga.R;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.List;
 
 
 
 
-public class TableViewQuotaAdapter extends RecyclerView.Adapter {
+public class TableViewMovieAdapter extends RecyclerView.Adapter {
+    BottomSheetDialog bottomSheetDialog;
+
     List<ModelQuotaExample> movieList;
 
-    public TableViewQuotaAdapter(List<ModelQuotaExample> movieList) {
+    public TableViewMovieAdapter(List<ModelQuotaExample> movieList) {
         this.movieList = movieList;
     }
 
@@ -66,6 +69,9 @@ public class TableViewQuotaAdapter extends RecyclerView.Adapter {
             rowViewHolder.txtYear.setText(modal.getYear()+"");
             rowViewHolder.txtCost.setText(modal.getBudgetInMillions()+"");
         }
+
+
+
     }
 
     @Override

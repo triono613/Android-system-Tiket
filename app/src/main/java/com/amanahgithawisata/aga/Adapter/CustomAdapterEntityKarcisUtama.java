@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.amanahgithawisata.aga.Model.ModelHorizontalScrollKarcisUtama;
 import com.amanahgithawisata.aga.PesanKarcisWisatawanActivity;
 import com.amanahgithawisata.aga.R;
-import com.amanahgithawisata.aga.bSheetKarcisUtama;
+import com.amanahgithawisata.aga.BSheetListQuota;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -26,7 +26,7 @@ public class CustomAdapterEntityKarcisUtama extends RecyclerView.Adapter<CustomA
     ArrayList<ModelHorizontalScrollKarcisUtama> modelHorizontalScrollKarcisUtamas;
     Context context;
 
-    public bSheetKarcisUtama bSheetKarcisUtama;
+    public BSheetListQuota BSheetListQuota;
 
     public CustomAdapterEntityKarcisUtama(ArrayList<ModelHorizontalScrollKarcisUtama> modelHorizontalScrollKarcisUtamas, Context context) {
         this.modelHorizontalScrollKarcisUtamas = modelHorizontalScrollKarcisUtamas;

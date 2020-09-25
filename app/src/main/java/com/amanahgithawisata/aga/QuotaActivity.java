@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.amanahgithawisata.aga.Adapter.SessionManager;
-import com.amanahgithawisata.aga.Adapter.TableViewAdapter;
+import com.amanahgithawisata.aga.Adapter.TableViewQuotaAdapter;
 import com.amanahgithawisata.aga.Helper.Help;
 import com.amanahgithawisata.aga.Model.ModelQuotaLokWis;
 import com.android.volley.DefaultRetryPolicy;
@@ -39,7 +39,7 @@ public class QuotaActivity extends AppCompatActivity {
     };
 
     SessionManager sessionManager;
-    TableViewAdapter tableViewAdapter;
+    TableViewQuotaAdapter tableViewQuotaAdapter;
     LinearLayoutManager linearLayoutManager;
     RecyclerView recyclerView;
 
@@ -106,8 +106,8 @@ public class QuotaActivity extends AppCompatActivity {
                                     modelQuotaLokWisList.add(new ModelQuotaLokWis(id, from_date,thru_date,quota, quota_in, quota_out));
 
                                 }
-                                tableViewAdapter = new TableViewAdapter(modelQuotaLokWisList);
-                                recyclerView.setAdapter(tableViewAdapter);
+                                tableViewQuotaAdapter = new TableViewQuotaAdapter(modelQuotaLokWisList);
+                                recyclerView.setAdapter(tableViewQuotaAdapter);
 
 
                             }

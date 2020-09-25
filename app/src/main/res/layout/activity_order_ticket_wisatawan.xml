@@ -27,15 +27,15 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/toolbar">
+        android:layout_below="@+id/toolbarx">
 
         <FrameLayout
-            android:id="@+id/frameLayout"
+            android:id="@+id/frameLayoutx"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
         <com.gauravk.bubblenavigation.BubbleNavigationLinearView
-            android:id="@+id/navigationBar"
+            android:id="@+id/navigationBarx"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="bottom"

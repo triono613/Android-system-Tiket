@@ -181,7 +181,9 @@ public class DashboardPetugasActivity extends AppCompatActivity implements  ZXin
 
             if( sessionManager.isLoggedIn() ) {
 
-                Intent i = new Intent(v.getContext().getApplicationContext(),QuotaActivity.class);
+//                Intent i = new Intent(v.getContext().getApplicationContext(),QuotaActivity.class);
+               Intent i = new Intent(v.getContext().getApplicationContext(), TableViewQuotaActivity.class);
+
                 startActivity(i);
 
             }

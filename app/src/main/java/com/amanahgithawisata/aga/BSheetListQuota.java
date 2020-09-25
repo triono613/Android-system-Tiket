@@ -10,9 +10,9 @@ import androidx.annotation.Nullable;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
-public class bSheetKarcisUtama extends BottomSheetDialogFragment {
+public class BSheetListQuota extends BottomSheetDialogFragment {
 
-    public bSheetKarcisUtama(){
+    public BSheetListQuota(){
     }
 
     @Nullable

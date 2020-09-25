@@ -88,7 +88,7 @@ public class PetugasAdapterKuActivity extends AppCompatActivity {
         Log.i("","result_dt_harga_karcis_wisata_tmbhn ku "+result_dt_harga_karcis_wisata_tmbhn);
 
 
-//        bSheetKarcisUtama bSheetKarcisUtamax = new bSheetKarcisUtama();
+//        BSheetListQuota bSheetKarcisUtamax = new BSheetListQuota();
 //        bSheetKarcisUtamax.show(getSupportFragmentManager(),"TAG");
 
 

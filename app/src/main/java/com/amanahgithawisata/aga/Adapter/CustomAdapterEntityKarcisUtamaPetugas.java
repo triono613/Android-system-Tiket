@@ -15,10 +15,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.amanahgithawisata.aga.BSheetListQuota;
 import com.amanahgithawisata.aga.Model.ModelHorizontalScrollKarcisUtama;
 import com.amanahgithawisata.aga.PesanKarcisPetugasActivity;
 import com.amanahgithawisata.aga.R;
-import com.amanahgithawisata.aga.bSheetKarcisUtama;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -28,7 +28,7 @@ public class CustomAdapterEntityKarcisUtamaPetugas extends RecyclerView.Adapter<
     ArrayList<ModelHorizontalScrollKarcisUtama> modelHorizontalScrollKarcisUtamas;
     Context context;
 
-    public bSheetKarcisUtama bSheetKarcisUtama;
+    public BSheetListQuota BSheetListQuota;
 
     public CustomAdapterEntityKarcisUtamaPetugas(ArrayList<ModelHorizontalScrollKarcisUtama> modelHorizontalScrollKarcisUtamas, Context context) {
         this.modelHorizontalScrollKarcisUtamas = modelHorizontalScrollKarcisUtamas;

@@ -94,30 +94,19 @@ public class RegisterWisatawanActivity extends AppCompatActivity implements Date
         wstPsswd2 = (EditText) findViewById(R.id.txt_wisatawan_passwd_2);
 
 
-        btn_pendaftaran_wisatawan_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent goto_getstarted = new Intent(RegisterWisatawanActivity.this, GetStartedActivity.class);
-                startActivity(goto_getstarted);
-            }
+        btn_pendaftaran_wisatawan_back.setOnClickListener(v -> {
+            Intent goto_getstarted = new Intent(RegisterWisatawanActivity.this, GetStartedActivity.class);
+            startActivity(goto_getstarted);
         });
 
-        btn_daftar_wisatawan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getDataPostVolley();
-            }
-        });
+        btn_daftar_wisatawan.setOnClickListener(v -> getDataPostVolley());
 
 
-        txt_wisatawan_tgllhr.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus){
+        txt_wisatawan_tgllhr.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus){
 
-                    DialogFragment datePicker = new DatePickerOneFragment();
-                    datePicker.show(getSupportFragmentManager(),"date picker 1");
-                }
+                DialogFragment datePicker = new DatePickerOneFragment();
+                datePicker.show(getSupportFragmentManager(),"date picker 1");
             }
         });
 
@@ -228,7 +217,7 @@ public class RegisterWisatawanActivity extends AppCompatActivity implements Date
 
                     } catch (JSONException e) {
                         // TODO Auto-generated catch block
-                        Log.i("triono", "error ===" + e.toString() );
+                        Log.i("", "error ===" + e.toString() );
                         e.printStackTrace();
                     }
 
