@@ -19,7 +19,7 @@ public class bSheetKarcisUtama extends BottomSheetDialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view =inflater.inflate(R.layout.entity_card_karcis_utama,container,false);
+        View view =inflater.inflate(R.layout.layout_bottom_sheet_edit_quota,container,false);
 
         return view;
 

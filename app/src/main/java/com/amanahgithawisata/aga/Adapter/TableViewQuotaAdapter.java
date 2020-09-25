@@ -2,6 +2,7 @@ package  com.amanahgithawisata.aga.Adapter;
 
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,29 @@ public class TableViewAdapter extends RecyclerView.Adapter  {
 
     public TableViewAdapter(List<ModelQuotaLokWis> modelQuotaLokWis) {
         this.modelQuotaLokWis = modelQuotaLokWis;
+    }
+
+    public class RowViewHolder extends RecyclerView.ViewHolder {
+        protected TextView txtId;
+        protected TextView txtFromDate;
+        protected TextView txtThruDate;
+        protected TextView txtQuota;
+        protected TextView txtQuotaIn;
+        protected TextView txtQuotaOut;
+
+
+        public RowViewHolder(View itemView) {
+            super(itemView);
+
+            txtId = itemView.findViewById(R.id.txtId);
+            txtFromDate = itemView.findViewById(R.id.txtFromDate);
+            txtThruDate = itemView.findViewById(R.id.txtThruDate);
+            txtQuota = itemView.findViewById(R.id.txtQuota);
+            txtQuotaIn = itemView.findViewById(R.id.txtQuotaIn);
+            txtQuotaOut = itemView.findViewById(R.id.txtQuotaOut);
+
+
+        }
     }
 
     @NonNull
@@ -47,6 +71,16 @@ public class TableViewAdapter extends RecyclerView.Adapter  {
             rowViewHolder.txtFromDate.setBackgroundResource(R.drawable.table_header_cell_bg);
             rowViewHolder.txtThruDate.setBackgroundResource(R.drawable.table_header_cell_bg);
             rowViewHolder.txtQuota.setBackgroundResource(R.drawable.table_header_cell_bg);
+            rowViewHolder.txtQuotaIn.setBackgroundResource(R.drawable.table_header_cell_bg);
+            rowViewHolder.txtQuotaOut.setBackgroundResource(R.drawable.table_header_cell_bg);
+            //#5CC615
+            rowViewHolder.txtFromDate.setTextColor(Color.parseColor("#FFFFFF"));
+            rowViewHolder.txtThruDate.setTextColor(Color.parseColor("#FFFFFF"));
+            rowViewHolder.txtQuota.setTextColor(Color.parseColor("#FFFFFF"));
+            rowViewHolder.txtQuotaIn.setTextColor(Color.parseColor("#FFFFFF"));
+            rowViewHolder.txtQuotaOut.setTextColor(Color.parseColor("#FFFFFF"));
+
+
 
             rowViewHolder.txtId.setText("Id");
             rowViewHolder.txtFromDate.setText("From date");
@@ -60,6 +94,8 @@ public class TableViewAdapter extends RecyclerView.Adapter  {
             rowViewHolder.txtFromDate.setBackgroundResource(R.drawable.table_content_cell_bg);
             rowViewHolder.txtThruDate.setBackgroundResource(R.drawable.table_content_cell_bg);
             rowViewHolder.txtQuota.setBackgroundResource(R.drawable.table_content_cell_bg);
+            rowViewHolder.txtQuotaIn.setBackgroundResource(R.drawable.table_content_cell_bg);
+            rowViewHolder.txtQuotaOut.setBackgroundResource(R.drawable.table_content_cell_bg);
 
             rowViewHolder.txtId.setText(modal.getId()+"");
             rowViewHolder.txtFromDate.setText(modal.getFrom_date());
@@ -76,26 +112,5 @@ public class TableViewAdapter extends RecyclerView.Adapter  {
         return modelQuotaLokWis.size()+1; // one more to add header row
     }
 
-    public class RowViewHolder extends RecyclerView.ViewHolder {
-        protected TextView txtId;
-        protected TextView txtFromDate;
-        protected TextView txtThruDate;
-        protected TextView txtQuota;
-        protected TextView txtQuotaIn;
-        protected TextView txtQuotaOut;
 
-
-        public RowViewHolder(View itemView) {
-            super(itemView);
-
-            txtId = itemView.findViewById(R.id.txtId);
-            txtFromDate = itemView.findViewById(R.id.txtFromDate);
-            txtThruDate = itemView.findViewById(R.id.txtThruDate);
-            txtQuota = itemView.findViewById(R.id.txtQuota);
-            txtQuotaIn = itemView.findViewById(R.id.txtQuotaIn);
-            txtQuotaOut = itemView.findViewById(R.id.txtQuotaOut);
-
-
-        }
-    }
 }
