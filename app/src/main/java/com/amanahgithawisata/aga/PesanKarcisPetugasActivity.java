@@ -1186,14 +1186,11 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
                         }
                         requestQueue.stop();
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.i("triono", "response spinnerLokPintuPtgs=" + error.toString());
-                error.printStackTrace();
-                requestQueue.stop();
-            }
-        }
+                }, (Response.ErrorListener) error -> {
+                    Log.i("triono", "response spinnerLokPintuPtgs=" + error.toString());
+                    error.printStackTrace();
+                    requestQueue.stop();
+                }
         ) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {

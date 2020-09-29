@@ -124,7 +124,7 @@
             android:textSize="14sp" />
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txt_quota"
-
+            android:inputType="number"
             android:textSize="12sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

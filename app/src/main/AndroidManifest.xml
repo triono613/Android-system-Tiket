@@ -27,8 +27,9 @@
         android:versionCode="2"
         tools:replace="android:label"
         tools:targetApi="m">
-        <activity android:name=".TableViewQuotaActivity"></activity>
-        <activity android:name=".QuotaActivity" />
+        <activity android:name=".ReportKarcisActivity"></activity>
+        <activity android:name=".ReportClaimActivity" />
+        <activity android:name=".TableViewQuotaActivity" />
         <activity android:name=".Adapter.PetugasAdapterKtActivity" />
         <activity android:name=".Adapter.PetugasAdapterKuActivity" />
         <activity android:name=".PesanKarcisPetugasOldActivity" />

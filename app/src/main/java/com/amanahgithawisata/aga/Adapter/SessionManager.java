@@ -33,6 +33,8 @@ public class SessionManager extends PreferenceActivity {
     public static final String key_tgl_lhr = "key_tgl_lhr";
     public static final String key_jekel = "key_jekel";
     public static final String key_hp = "key_hp";
+    public static final String key_user_level = "key_user_level";
+    public static  final String key_kode_pintu = "key_kode_pintu";
 
     public static final String key_kode_ksda = "key_kode_ksda";
     public static final String key_kode_lokasi_wist_order = "key_kode_lokasi_wist_order";
@@ -164,9 +166,11 @@ public class SessionManager extends PreferenceActivity {
     }
 
 
-    public void createSession(String email, String flag, String name, String id,
-                              String ket, String kd_lokasi, String nm_lokasi,
-                              String tgllhr, String jekel, String hp) {
+    public void createSessionUserLogin(String email, String flag, String name, String id,
+                                       String ket, String kd_lokasi, String nm_lokasi,
+                                       String tgllhr, String jekel, String hp,
+                                       String user_level ,
+                                       String kode_pintu ) {
         editor.putBoolean(is_login, true);
         editor.putString(key_email, email);
         editor.putString(key_flag, flag);
@@ -178,6 +182,8 @@ public class SessionManager extends PreferenceActivity {
         editor.putString(key_tgl_lhr, tgllhr);
         editor.putString(key_jekel, jekel);
         editor.putString(key_hp, hp);
+        editor.putString(key_user_level, user_level);
+        editor.putString(key_kode_pintu, kode_pintu);
         editor.commit();
         editor.apply();
 
@@ -499,6 +505,8 @@ public class SessionManager extends PreferenceActivity {
         user.put(key_tgl_lhr, pref.getString(key_tgl_lhr, null));
         user.put(key_jekel, pref.getString(key_jekel, null));
         user.put(key_hp, pref.getString(key_hp, null));
+        user.put(key_user_level, pref.getString(key_user_level, null));
+        user.put(key_kode_pintu, pref.getString(key_kode_pintu, null));
         return user;
     }
 

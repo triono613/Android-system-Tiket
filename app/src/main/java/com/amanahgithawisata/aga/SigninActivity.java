@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -101,6 +103,7 @@ public class SigninActivity extends AppCompatActivity implements GoogleApiClient
         return true;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -183,7 +186,7 @@ public class SigninActivity extends AppCompatActivity implements GoogleApiClient
             switch (sessionManager.getFlag())
             {
                 case "1":
-                    if (Objects.equals(sessionManager.getUserDetail().get(SessionManager.key_kode_lokasi), "null")){
+                    if (Objects.equals(sessionManager.getUserDetail().get(SessionManager.key_user_level), "0")){
                         intent = new Intent(SigninActivity.this, DashboardWisatawanActivity.class);
                         break;
                     } else {
@@ -348,6 +351,8 @@ public class SigninActivity extends AppCompatActivity implements GoogleApiClient
                                 String val_tgl_lahir = jObj_child.getString("tgl_lahir");
                                 String val_jenis_kelamin = jObj_child.getString("jenis_kelamin");
                                 String val_sellular_no = jObj_child.getString("sellular_no");
+                                String val_user_level = jObj_child.getString("user_level");
+                                String val_kode_pintu = jObj_child.getString("kode_pintu");
 
                                 Log.i("SigninActivity", "val_flag ===" + val_flag);
                                 Log.i("SigninActivity", "val_kode_lokasi ===" + val_kode_lokasi);
@@ -364,8 +369,18 @@ public class SigninActivity extends AppCompatActivity implements GoogleApiClient
 
                                 } else if (jObj_child.getString("flag").equals("1")) {
 
-                                    sessionManager.createSession( val_email, val_flag, val_name, val_id, val_ket, val_kode_lokasi,
-                                                                val_nama_lokasi, val_tgl_lahir, val_jenis_kelamin, val_sellular_no);
+                                    sessionManager.createSessionUserLogin( val_email,
+                                                                            val_flag,
+                                                                            val_name,
+                                                                            val_id,
+                                                                            val_ket,
+                                                                            val_kode_lokasi,
+                                                                            val_nama_lokasi,
+                                                                            val_tgl_lahir,
+                                                                            val_jenis_kelamin,
+                                                                            val_sellular_no,
+                                                                            val_user_level,
+                                                                            val_kode_pintu);
 
                                     if (jObj_child.getString("kode_lokasi").equals("null")) {
 

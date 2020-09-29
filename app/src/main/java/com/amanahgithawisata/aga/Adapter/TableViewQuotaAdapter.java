@@ -77,7 +77,7 @@ public class TableViewQuotaAdapter extends RecyclerView.Adapter implements DateP
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.
                 from(parent.getContext()).
-                inflate(R.layout.table_view_list, parent, false);
+                inflate(R.layout.table_view_list_quota, parent, false);
 
         return new RowViewHolder(itemView);
 

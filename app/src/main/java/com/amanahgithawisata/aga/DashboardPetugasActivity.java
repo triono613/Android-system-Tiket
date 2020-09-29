@@ -59,6 +59,7 @@ public class DashboardPetugasActivity extends AppCompatActivity implements  ZXin
     LinearLayout _card_ganti_password_ptgs;
     LinearLayout _card_qr_scaner_ptgs;
     LinearLayout _card_input_quota_ptgs;
+    LinearLayout _card_report_karcis_ptgs;
 
     ZXingScannerView _mScannerView;
     @SuppressLint("StaticFieldLeak")
@@ -109,6 +110,7 @@ public class DashboardPetugasActivity extends AppCompatActivity implements  ZXin
         _card_qr_scaner_ptgs =  findViewById(R.id.card_qr_scaner_ptgs);
         _text_dashboard_scan =  findViewById(R.id.text_dashboard_scan);
         _card_input_quota_ptgs  =  findViewById(R.id.card_input_quota_ptgs);
+        _card_report_karcis_ptgs  =  findViewById(R.id.card_report_karcis_ptgs);
 
         this.bounceNotif("aa");
 
@@ -210,58 +212,50 @@ public class DashboardPetugasActivity extends AppCompatActivity implements  ZXin
             }
         });
 
-        _card_status_karcis_ptgs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if( sessionManager.isLoggedIn()) {
-                    Intent i = new Intent(DashboardPetugasActivity.this,StatusKarcisPetugasActivity.class);
-                    startActivity(i);
-                }
+        _card_status_karcis_ptgs.setOnClickListener(v -> {
+            if( sessionManager.isLoggedIn()) {
+                Intent i = new Intent(getApplicationContext(),StatusKarcisPetugasActivity.class);
+                startActivity(i);
             }
         });
 
-        _card_setup_pintu_ptgs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if( sessionManager.isLoggedIn()) {
-                    Intent i = new Intent(DashboardPetugasActivity.this,SetupPintuActivity.class);
-                    startActivity(i);
-                }
+        _card_setup_pintu_ptgs.setOnClickListener(v -> {
+            if( sessionManager.isLoggedIn()) {
+                Intent i = new Intent(getApplicationContext(),SetupPintuActivity.class);
+                startActivity(i);
+            }
 
+        });
+
+        _card_pengajuan_klaim_ptgs.setOnClickListener(v -> {
+            if ( sessionManager.isLoggedIn() ){
+                Intent i = new Intent(getApplicationContext(), ClaimPetugasActivity.class);
+                i.putExtra("result_dt_flag", "fromDashboardPetugas");
+                startActivity(i);
             }
         });
 
-        _card_pengajuan_klaim_ptgs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if ( sessionManager.isLoggedIn() ){
-                    Intent i = new Intent(DashboardPetugasActivity.this, ClaimPetugasActivity.class);
-                    i.putExtra("result_dt_flag", "fromDashboardPetugas");
-                    startActivity(i);
-                }
+        _card_ganti_password_ptgs.setOnClickListener(v -> {
+
+            if( sessionManager.isLoggedIn() ) {
+                Intent i = new Intent(getApplicationContext(), EditPasswordPetugasActivity.class);
+                startActivity(i);
+            }
+
+        });
+
+        _card_qr_scaner_ptgs.setOnClickListener(v -> {
+            if ( sessionManager.isLoggedIn() ){
+                Intent x = new Intent(getApplicationContext(), QrCodeScannerActivity.class);
+                startActivity(x);
             }
         });
 
-        _card_ganti_password_ptgs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        _card_report_karcis_ptgs.setOnClickListener(v -> {
+            if( sessionManager.isLoggedIn()){
+                Intent x = new Intent(getApplicationContext(),ReportKarcisActivity.class);
+                startActivity(x);
 
-                if( sessionManager.isLoggedIn() ) {
-                    Intent i = new Intent(DashboardPetugasActivity.this, EditPasswordPetugasActivity.class);
-                    startActivity(i);
-                }
-
-            }
-        });
-
-        _card_qr_scaner_ptgs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if ( sessionManager.isLoggedIn() ){
-                    Intent x = new Intent(DashboardPetugasActivity.this, QrCodeScannerActivity.class);
-                    startActivity(x);
-//                    generate();
-                }
             }
         });
 

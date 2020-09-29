@@ -476,7 +476,7 @@
                     android:layout_height="64dp"
                     android:layout_gravity="center"
                     android:background="@drawable/circlebackground3"
-                    android:src="@drawable/ic_scanner_black_24dp" />
+                    android:src="@drawable/ic_center_focus_weak_black_24dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -507,6 +507,58 @@
                         android:gravity="center"
                         android:text="Scan Kode QR Notifikasi Booking Online Pengunjung di Sini"
                         android:textSize="10sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/card_report_karcis_ptgs"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/cardview_child"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    android:paddingLeft="25dp"
+                    android:paddingRight="25dp"
+                    >
+
+                    <ImageView
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/circlebackground1"
+                        android:src="@drawable/ic_assessment_black_24dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="vertical"
+                        >
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/mmedium"
+                            android:gravity="center"
+                            android:text="Laporan Karcis  "
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:visibility="gone"
+                            android:id="@+id/text_dashboard_scan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="2dp"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Lpaoran Karcis per Pintu"
+                            android:textSize="10sp" />
                     </LinearLayout>
                 </LinearLayout>
 
