@@ -59,7 +59,9 @@ public class DashboardPetugasActivity extends AppCompatActivity implements  ZXin
     LinearLayout _card_ganti_password_ptgs;
     LinearLayout _card_qr_scaner_ptgs;
     LinearLayout _card_input_quota_ptgs;
-    LinearLayout _card_report_karcis_ptgs;
+    LinearLayout _card_report_karcis_ptgs_L2;
+    LinearLayout _card_report_karcis_ptgs_L3;
+    LinearLayout _card_report_karcis_ptgs_L4;
 
     ZXingScannerView _mScannerView;
     @SuppressLint("StaticFieldLeak")
@@ -110,7 +112,9 @@ public class DashboardPetugasActivity extends AppCompatActivity implements  ZXin
         _card_qr_scaner_ptgs =  findViewById(R.id.card_qr_scaner_ptgs);
         _text_dashboard_scan =  findViewById(R.id.text_dashboard_scan);
         _card_input_quota_ptgs  =  findViewById(R.id.card_input_quota_ptgs);
-        _card_report_karcis_ptgs  =  findViewById(R.id.card_report_karcis_ptgs);
+        _card_report_karcis_ptgs_L2  =  findViewById(R.id.card_report_karcis_ptgs_L2);
+        _card_report_karcis_ptgs_L3  =  findViewById(R.id.card_report_karcis_ptgs_L3);
+        _card_report_karcis_ptgs_L4  =  findViewById(R.id.card_report_karcis_ptgs_L4);
 
         this.bounceNotif("aa");
 
@@ -155,28 +159,63 @@ public class DashboardPetugasActivity extends AppCompatActivity implements  ZXin
 
 
 
-        myDialog = new Dialog(this);
 
-        btn_logout_ptgs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(DashboardPetugasActivity.this);
-                builder.setMessage("Anda Yakin Akan Keluar ?")
-                        .setCancelable(false)
-                        .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
+         _card_pemesanan_karcis_ptgs_new.setVisibility(View.GONE);
+         _card_pemesanan_karcis_ptgs.setVisibility(View.GONE);
+         _card_status_karcis_ptgs.setVisibility(View.GONE);
+         _card_setup_pintu_ptgs.setVisibility(View.GONE);
+         _card_pengajuan_klaim_ptgs.setVisibility(View.GONE);
+         _card_ganti_password_ptgs.setVisibility(View.GONE);
+         _card_qr_scaner_ptgs.setVisibility(View.GONE);
+
+        _card_input_quota_ptgs.setVisibility(View.GONE);
+        _card_report_karcis_ptgs_L2.setVisibility(View.GONE);
+        _card_report_karcis_ptgs_L3.setVisibility(View.GONE);
+        _card_report_karcis_ptgs_L4.setVisibility(View.GONE);
+
+
+        String lv = sessionManager.getUserDetail().get(SessionManager.key_user_level);
+
+        Log.i("","level "+ lv);
+
+        if(lv.equals("2")) {
+            _card_setup_pintu_ptgs.setVisibility(View.VISIBLE);
+            _card_input_quota_ptgs.setVisibility(View.VISIBLE);
+            _card_report_karcis_ptgs_L2.setVisibility(View.VISIBLE);
+        }
+        else if(lv.equals("3")) {
+            _card_report_karcis_ptgs_L3.setVisibility(View.VISIBLE);
+        }
+        else if(lv.equals("4")) {
+            _card_report_karcis_ptgs_L4.setVisibility(View.VISIBLE);
+        }
+        else {
+            _card_pemesanan_karcis_ptgs_new.setVisibility(View.VISIBLE);
+            _card_status_karcis_ptgs.setVisibility(View.VISIBLE);
+            _card_setup_pintu_ptgs.setVisibility(View.VISIBLE);
+            _card_pengajuan_klaim_ptgs.setVisibility(View.VISIBLE);
+            _card_ganti_password_ptgs.setVisibility(View.VISIBLE);
+            _card_qr_scaner_ptgs.setVisibility(View.VISIBLE);
+        }
+
+        myDialog = new Dialog(this);
+        btn_logout_ptgs.setOnClickListener(v -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(DashboardPetugasActivity.this);
+            builder.setMessage("Anda Yakin Akan Keluar ?")
+                    .setCancelable(false)
+                    .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
 //                                DashboardPetugasActivity.this.onSuperBackPressed();
-                                sessionManager.logout();
-                            }
-                        })
-                        .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        });
-                AlertDialog alert = builder.create();
-                alert.show();
-            }
+                            sessionManager.logout();
+                        }
+                    })
+                    .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
         });
 
         _card_input_quota_ptgs.setOnClickListener(v -> {
@@ -251,11 +290,26 @@ public class DashboardPetugasActivity extends AppCompatActivity implements  ZXin
             }
         });
 
-        _card_report_karcis_ptgs.setOnClickListener(v -> {
+        _card_report_karcis_ptgs_L2.setOnClickListener(v -> {
             if( sessionManager.isLoggedIn()){
-                Intent x = new Intent(getApplicationContext(),ReportKarcisActivity.class);
+                Intent x = new Intent(getApplicationContext(), ReportKarcisL2Activity.class);
                 startActivity(x);
 
+            }
+        });
+
+        _card_report_karcis_ptgs_L3.setOnClickListener(v -> {
+            if( sessionManager.isLoggedIn()){
+                Intent x = new Intent(getApplicationContext(), ReportKarcisL3Activity.class);
+                startActivity(x);
+
+            }
+        });
+
+        _card_report_karcis_ptgs_L4.setOnClickListener(v -> {
+            if( sessionManager.isLoggedIn() ) {
+                Intent x = new Intent(getApplicationContext(), ReportKarcisL4Activity.class);
+                startActivity(x);
             }
         });
 

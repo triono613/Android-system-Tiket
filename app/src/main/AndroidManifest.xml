@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <uses-feature android:name="android.hardware.camera" />
 
@@ -27,7 +28,9 @@
         android:versionCode="2"
         tools:replace="android:label"
         tools:targetApi="m">
-        <activity android:name=".ReportKarcisActivity"></activity>
+        <activity android:name=".ReportKarcisL4Activity"></activity>
+        <activity android:name=".ReportKarcisL3Activity" />
+        <activity android:name=".ReportKarcisL2Activity" />
         <activity android:name=".ReportClaimActivity" />
         <activity android:name=".TableViewQuotaActivity" />
         <activity android:name=".Adapter.PetugasAdapterKtActivity" />
@@ -140,6 +143,16 @@
         <activity
             android:name=".RegisterWisatawanActivity"
             android:screenOrientation="portrait" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.amanahgithawisata.aga"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@layout/provider_path" />
+        </provider>
     </application>
 
 </manifest>

@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        >
+        tools:ignore="MissingConstraints">
         <LinearLayout
             android:layout_marginTop="50dp"
             android:id="@+id/linear_ttl"
@@ -28,8 +28,8 @@
                 android:gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_bold"
-                android:text="Laporan Karcis"
+                android:fontFamily="@font/roboto_bolditalic"
+                android:text="Laporan Karcis "
                 android:textColor="#FF9800"
                 android:textSize="24dp"
 
@@ -39,8 +39,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
-                android:fontFamily="@font/roboto_bold"
-                android:text="/ Pintu"
+                android:fontFamily="@font/roboto_bolditalic"
+                android:text="Level 2"
                 android:textColor="#fff"
                 android:textSize="24sp"
                 />
@@ -50,12 +50,11 @@
             android:gravity="end"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_marginBottom="10dp"
             >
-
             <Button
-                android:id="@+id/btn_find_claim"
+                android:id="@+id/btn_export_l2"
                 android:layout_width="100dp"
                 android:layout_height="35dp"
                 android:gravity="center"
@@ -64,7 +63,23 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/bg_btn_blue"
                 android:paddingEnd="20dp"
-                android:drawableEnd="@drawable/ic_location_searching_black_24dp"
+                android:drawableEnd="@drawable/ic_search"
+                android:text="Export "
+                android:textColor="#FFF"
+                android:textSize="10sp"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+                tools:layout_editor_absoluteX="31dp" />
+            <Button
+                android:id="@+id/btn_find_l2"
+                android:layout_width="100dp"
+                android:layout_height="35dp"
+                android:gravity="center"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_btn_blue"
+                android:paddingEnd="20dp"
+                android:drawableEnd="@drawable/ic_search"
                 android:text="Cari "
                 android:textColor="#FFF"
                 android:textSize="10sp"
@@ -79,22 +94,24 @@
 
     <!-- Table View-->
     <HorizontalScrollView
+
         android:id="@+id/hrzRecycleview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="2dp"
-        android:layout_marginEnd="2dp"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/linear_grup_top"
-        >
+        tools:ignore="MissingConstraints">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewReportClaimList"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/recyclerViewReportKarcisL2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:background="@drawable/cardview"
-            android:nestedScrollingEnabled="false"
-            tools:listitem="@layout/table_view_list_report_claim" />
+            android:orientation="horizontal"
+
+            tools:listitem="@layout/table_view_list_report_karcis_l2">
+
+        </androidx.recyclerview.widget.RecyclerView>
 
     </HorizontalScrollView>
 

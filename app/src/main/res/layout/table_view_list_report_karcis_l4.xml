@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_marginStart="170dp"
+        android:gravity="top"
+        android:background="@drawable/cardview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        tools:ignore="UselessParent">
+
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/txt_id"
+            android:layout_width="60dp"
+            android:layout_height="70dp"
+            android:layout_gravity="top"
+            android:background="@drawable/table_content_cell_bg"
+            android:text="Id"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/txt_nama_lokasi_regional"
+            android:layout_width="60dp"
+            android:layout_height="70dp"
+            android:layout_gravity="top"
+            android:background="@drawable/table_content_cell_bg"
+            android:text="Lokasi Regional"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/txt_nama_lokasi_wisata"
+            android:layout_width="60dp"
+            android:layout_height="70dp"
+            android:layout_gravity="top"
+            android:background="@drawable/table_content_cell_bg"
+            android:text="Lokasi Wisata"
+            android:textSize="10sp" />
+
+        <TextView
+            android:layout_gravity="top"
+            android:id="@+id/txt_nama_lokasi_pintu"
+            android:layout_width="60dp"
+            android:layout_height="70dp"
+            android:background="@drawable/table_content_cell_bg"
+            android:text="Lokasi Pintu"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/txt_status_karcis"
+            android:layout_width="60dp"
+            android:layout_height="70dp"
+            android:background="@drawable/table_content_cell_bg"
+            android:text="status_karcis"
+            android:textSize="10sp" />
+
+
+
+        <TextView
+            android:id="@+id/txt_jumlah_transaksi"
+            android:layout_width="60dp"
+            android:layout_height="70dp"
+            android:background="@drawable/table_content_cell_bg"
+            android:text="jml trans"
+            android:textAlignment="center"
+            android:textSize="10sp" />
+
+
+        <TextView
+            android:id="@+id/txt_jumlah_wisnu"
+            android:layout_width="60dp"
+            android:layout_height="70dp"
+            android:background="@drawable/table_content_cell_bg"
+            android:text="jml wisnu"
+            android:textAlignment="center"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/txt_jumlah_tambahan"
+            android:layout_width="60dp"
+            android:layout_height="70dp"
+            android:background="@drawable/table_content_cell_bg"
+            android:text="jml tambahan"
+            android:textAlignment="center"
+            android:textSize="10sp" />
+
+
+        <TextView
+            android:id="@+id/txt_tagihan_wisata"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/table_content_cell_bg"
+            android:text="tagihan wisata"
+            android:textAlignment="center"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/txt_tagihan_asuransi"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/table_content_cell_bg"
+            android:text="tagihan asuransi"
+            android:textAlignment="center"
+            android:textSize="10sp" />
+
+
+    </LinearLayout>
+</LinearLayout>

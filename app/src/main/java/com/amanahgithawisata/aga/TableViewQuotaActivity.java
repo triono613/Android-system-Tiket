@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -46,12 +47,19 @@ public class TableViewQuotaActivity extends AppCompatActivity {
     LinearLayoutManager linearLayoutManager;
     RecyclerView recyclerView;
     Button btn_add;
-    Button btn_update;
+
 
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+
+//        super.onBackPressed();
+        Intent intent = new Intent(getApplicationContext(), DashboardPetugasActivity.class)
+                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        finish();
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 
     @SuppressLint("SetTextI18n")
@@ -62,7 +70,7 @@ public class TableViewQuotaActivity extends AppCompatActivity {
         sessionManager = new SessionManager(getApplicationContext());
 
         btn_add = findViewById(R.id.btn_add);
-        btn_update = findViewById(R.id.btn_update);
+
 
         findViewById(R.id.loadingPanel).setVisibility(View.GONE);
 
@@ -80,6 +88,7 @@ public class TableViewQuotaActivity extends AppCompatActivity {
             TextView quota;
             TextView txtview_update;
             TextView txtview_quota;
+            ProgressBar progressBar;
             Button btn_update;
             TextView id;
 
@@ -94,6 +103,7 @@ public class TableViewQuotaActivity extends AppCompatActivity {
              txtview_update = modelBottomSheet.findViewById(R.id.txtview_update);
              txtview_quota = modelBottomSheet.findViewById(R.id.txtview_quota);
              btn_update = modelBottomSheet.findViewById(R.id.btn_update);
+             progressBar = modelBottomSheet.findViewById(R.id.loadingPanelProgressBar);
 
             txtview_update.setText("Tambah ");
             txtview_quota.setText("Tambah ");
@@ -189,13 +199,15 @@ public class TableViewQuotaActivity extends AppCompatActivity {
         Log.i("","key_kdksda "+key_kdksda);
 
         if (_id != null) {
-
                 update_quota_lokasi_wisata("update_quota_lokasi_wisata",
-                        key_kdksda,_id,_from_date,_thru_date,_quota
+                        key_kdksda,_id,
+                        _from_date,
+                        _thru_date,
+                        _quota
                 );
         }
 
-
+//        recyclerView = findViewById(R.id.recyclerViewDeliveryProductList);
 //        TableViewQuotaAdapter adapter = new TableViewQuotaAdapter(getQuotalist());
 //        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
 //        recyclerView.setLayoutManager(linearLayoutManager);

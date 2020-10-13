@@ -511,7 +511,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/card_report_karcis_ptgs"
+                    android:id="@+id/card_report_karcis_ptgs_L2"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:layout_marginLeft="15dp"
@@ -543,7 +543,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/mmedium"
                             android:gravity="center"
-                            android:text="Laporan Karcis  "
+                            android:text="Laporan Karcis L2 "
                             android:textSize="12sp"
                             android:textStyle="bold" />
 
@@ -557,7 +557,111 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Lpaoran Karcis per Pintu"
+                            android:text="Laporan Karcis per Pintu"
+                            android:textSize="10sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/card_report_karcis_ptgs_L3"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/cardview_child"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    android:paddingLeft="25dp"
+                    android:paddingRight="25dp"
+                    >
+
+                    <ImageView
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/circlebackground6"
+                        android:src="@drawable/ic_assessment_black_24dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="vertical"
+                        >
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/mmedium"
+                            android:gravity="center"
+                            android:text="Laporan Karcis L3 "
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:visibility="gone"
+                            android:id="@+id/text_dashboard_scan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="2dp"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Laporan Karcis per Pintu"
+                            android:textSize="10sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/card_report_karcis_ptgs_L4"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/cardview_child"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    android:paddingLeft="25dp"
+                    android:paddingRight="25dp"
+                    >
+
+                    <ImageView
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/circlebackground2"
+                        android:src="@drawable/ic_assessment_black_24dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="vertical"
+                        >
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/mmedium"
+                            android:gravity="center"
+                            android:text="Laporan Karcis L4 "
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:visibility="gone"
+                            android:id="@+id/text_dashboard_scan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="2dp"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Laporan Karcis per Pintu"
                             android:textSize="10sp" />
                     </LinearLayout>
                 </LinearLayout>
