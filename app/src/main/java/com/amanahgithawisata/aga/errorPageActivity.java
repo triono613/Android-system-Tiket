@@ -108,7 +108,7 @@ public class errorPageActivity extends AppCompatActivity {
                         startActivity(i);
                         break;
                     case "flagPesanKarcisWisatawan":
-                        Intent a = new Intent(errorPageActivity.this, DashboardWisatawanActivity.class);
+                        Intent a = new Intent(errorPageActivity.this, DashboardWisatawanOLdActivity.class);
                         startActivity(a);
                         break;
                     case "flagEditPasswordPetugasTrue":
@@ -137,7 +137,7 @@ public class errorPageActivity extends AppCompatActivity {
 
                 assert sessionIntentFlag != null;
                 if ("checkQuotaTwa".equals(sessionIntentFlag.trim())) {
-                    Intent a = new Intent(errorPageActivity.this, DashboardWisatawanActivity.class);
+                    Intent a = new Intent(errorPageActivity.this, DashboardWisatawanOLdActivity.class);
                     startActivity(a);
                 } else {
                     Log.i("", "finish");

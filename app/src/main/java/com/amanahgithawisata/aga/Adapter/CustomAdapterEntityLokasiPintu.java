@@ -17,7 +17,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.amanahgithawisata.aga.Model.ModelHorizontalScrollLokasiPintu;
 import com.amanahgithawisata.aga.PesanKarcisWisatawanActivity;
 import com.amanahgithawisata.aga.R;
+import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 import java.util.ArrayList;
 
@@ -133,14 +135,18 @@ public class CustomAdapterEntityLokasiPintu extends RecyclerView.Adapter<CustomA
         tv_tgl_kunj_pintux.setText(modelHorizontalScrollLokasiPintus.get(position).tgl_kunj_pintu);
 
 
-        Picasso.with( context )
-                .load( _url_img_pintu )
-                .error(R.mipmap.ic_launcher)
-                .resize(1900,600)
-                .centerCrop()
+
+        Transformation transformation = new RoundedTransformationBuilder()
+                .borderWidthDp(1)
+                .oval(false)
+                .build();
+
+        Picasso.with(context.getApplicationContext())
+                .load(_url_img_pintu)
+                .fit()
+                .placeholder(R.drawable.loading_animation)
+                .transform(transformation)
                 .into(tv_img_pintux);
-
-
 
 
         Log.i("","_url_img_lokWis "+_url_img_lokWis);

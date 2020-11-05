@@ -1,106 +1,94 @@
 package com.amanahgithawisata.aga;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
-import android.view.View;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.amanahgithawisata.aga.Adapter.CustomAdapterFeatured;
 import com.amanahgithawisata.aga.Adapter.SessionManager;
-import com.amanahgithawisata.aga.Helper.Help;
-import com.amanahgithawisata.aga.Model.EntityStatusKarcisWisatawan;
-import com.android.volley.AuthFailureError;
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.RetryPolicy;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.amanahgithawisata.aga.Model.ModelFeatured;
+import com.gauravk.bubblenavigation.BubbleNavigationLinearView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class DashboardWisatawanActivity extends AppCompatActivity {
+
+    TextView txt_jljh_wis;
+    TextView txt_jljh_wis_dec;
+    RecyclerView featuredRecycle,recyclerViewWebView;
+    CustomAdapterFeatured customAdapterFeatured;
+    LinearLayoutManager linearLayoutManager;
+    WebView webView;
+    WebSettings webSettings;
+    ProgressDialog pDialog;
+
     Button btn_logout_wstn;
     LinearLayout _card_pemesanan_karcis_wstn;
     LinearLayout _card_status_karcis_wstn;
     LinearLayout _card_ganti_password_wstwn;
-    LinearLayout _card_horizontal_wstwn;
-    LinearLayout _card_order_ticket;
+    BubbleNavigationLinearView navigationBar;
 
-    SessionManager sessionManager;
-    TextView _textview_email_session;
-    ArrayList<EntityStatusKarcisWisatawan> entityStatusKarcisArrayList;
-
-    RecyclerView recyclerView;
-    RecyclerView.LayoutManager layoutManager;
-
-    @Override
-    public void onBackPressed() {
-//        Toast.makeText(DashboardWisatawanActivity.this,"Back Button wstwn is clicked.", Toast.LENGTH_LONG).show();
-        Intent a = new Intent(Intent.ACTION_MAIN);
-        a.addCategory(Intent.CATEGORY_HOME);
-        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(a);
-//        Toast.makeText(DashboardWisatawanActivity.this, "check session DashboardWisatawanActivity: " + sessionManager.isLoggedIn() + " - " + sessionManager.getFlag() + " - " + (sessionManager.getUserDetail().get(SessionManager.key_kode_lokasi)), Toast.LENGTH_LONG).show();
-    }
-
-
-
-    public void onSuperBackPressed(){
-        super.onBackPressed();
-    }
-
-    @SuppressLint("LongLogTag")
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard_wisatawan);
+        SessionManager sessionManager;
 
-        findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-        btn_logout_wstn =(Button) findViewById(R.id.btn_logout_wstn);
+        TextView txt_jljh_wis = (TextView) findViewById(R.id.txt_jljh_wis);
+        TextView txt_jljh_wis_desc = (TextView) findViewById(R.id.txt_jljh_wis_dec);
+        featuredRecycle = findViewById(R.id.featuredRecycle);
+//        recyclerViewWebView = findViewById(R.id.RecyclerViewWebView);
+
+        SpannableString content = new SpannableString("Jelajah Wisata");
+        SpannableString content_desc = new SpannableString("Jelajah Wisata adalah aplikasi karya anak bangsa yang memuat Lokasi Objek-Objek Wisata resmi yang berada dalam naungan Taman Nasional Indonesia ");
+        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+
+        txt_jljh_wis.setText(content);
+        txt_jljh_wis_desc.setText(content_desc);
+
+
+        
+        featuredRecycle();
+        recyclerViewWebView();
+
+
+
+
+//        btn_logout_wstn =(Button) findViewById(R.id.btn_logout_wstn);
         _card_pemesanan_karcis_wstn = (LinearLayout) findViewById(R.id.card_pemesanan_karcis_wstn);
         _card_status_karcis_wstn = (LinearLayout) findViewById(R.id.card_status_karcis_wstn);
-        _textview_email_session = (TextView) findViewById(R.id.textview_email_session);
         _card_ganti_password_wstwn = (LinearLayout) findViewById(R.id.card_ganti_password_wstwn);
-        _card_horizontal_wstwn = (LinearLayout) findViewById(R.id.card_horizontal_wstwn);
-        _card_order_ticket = (LinearLayout) findViewById(R.id.card_order_ticket);
+
         sessionManager = new SessionManager(getApplicationContext());
 
-        String result_flag_pesan_karcis_sukses = getIntent().getStringExtra("result_flag_pesan_karcis_sukses");
-
-        Log.i("DashboardWisatawanActivity","result_flag_pesan_karcis_sukses dash = "+ result_flag_pesan_karcis_sukses );
-        Log.i("DashboardWisatawanActivity","sessionManager.isLoggedIn() = "+ sessionManager.isLoggedIn() );
-        Log.i("DashboardWisatawanActivity","sessionManager.getFlag= "+ sessionManager.getFlag());
-        Log.i("DashboardWisatawanActivity","SessionManager.key_kode_lokasi= "+  sessionManager.getUserDetail().get(SessionManager.key_kode_lokasi));
 
 
-//        Toast.makeText(DashboardWisatawanActivity.this,"check session : "+sessionManager.isLoggedIn()+" - "+sessionManager.getFlag()+" - "+(sessionManager.getUserDetail().get(SessionManager.key_kode_lokasi)), Toast.LENGTH_LONG).show();
+//        Toast.makeText(DashboardWisatawanOLdActivity.this,"check session : "+sessionManager.isLoggedIn()+" - "+sessionManager.getFlag()+" - "+(sessionManager.getUserDetail().get(SessionManager.key_kode_lokasi)), Toast.LENGTH_LONG).show();
 
-        _card_order_ticket.setOnClickListener(v -> {
-            Intent i = new Intent(DashboardWisatawanActivity.this, OrderTicketWisatawanActivity.class);
-            startActivity(i);
-        });
 
         _card_pemesanan_karcis_wstn.setOnClickListener(v -> {
             Intent intent = new Intent(DashboardWisatawanActivity.this, PesanKarcisWisatawanActivity.class);
-//                Intent intent = new Intent(DashboardWisatawanActivity.this, LokasiWisataScrollViewActivity.class);
+//                Intent intent = new Intent(DashboardWisatawanOLdActivity.this, LokasiWisataScrollViewActivity.class);
 
-
+            String result_flag_pesan_karcis_sukses = getIntent().getStringExtra("result_flag_pesan_karcis_sukses");
             if( result_flag_pesan_karcis_sukses != null ){
                 Log.i("","dashboard sukses");
                 intent.putExtra("result_flag_pesan_karcis_sukses", "sukses");
@@ -112,17 +100,39 @@ public class DashboardWisatawanActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        btn_logout_wstn.setOnClickListener(v -> {
-            AlertDialog.Builder builder = new AlertDialog.Builder(DashboardWisatawanActivity.this);
-            builder.setMessage("Anda Yakin Akan Keluar ?")
-                    .setCancelable(false)
-                    .setPositiveButton("Ya", (dialog, id) -> {
-//                                DashboardPetugasActivity.this.onSuperBackPressed();
-                        sessionManager.logout();
-                    })
-                    .setNegativeButton("Tidak", (dialog, id) -> dialog.cancel());
-            AlertDialog alert = builder.create();
-            alert.show();
+
+
+         navigationBar = findViewById(R.id.navigationBarx);
+        CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) navigationBar.getLayoutParams();
+//        layoutParams.setBehavior(new BottomAppBar.Behavior());
+
+        navigationBar.setNavigationChangeListener((view, position) -> {
+            Log.i("","position= "+position);
+            switch (position){
+                case 1:
+                    Intent a = new Intent(DashboardWisatawanActivity.this, PesanKarcisWisatawanActivity.class);
+                    startActivity(a);
+                    break;
+                case 2:
+                    Intent b = new Intent(DashboardWisatawanActivity.this, StatusKarcisWisatawanActivity.class);
+                    startActivity(b);
+                    break;
+                case 3:
+                    Intent c = new Intent(DashboardWisatawanActivity.this, EditPasswordWisatawanActivity.class);
+                    startActivity(c);
+                    break;
+                case 4:
+                    AlertDialog.Builder builder = new AlertDialog.Builder(DashboardWisatawanActivity.this);
+                    builder.setMessage("Anda Yakin Akan Keluar ?")
+                            .setCancelable(false)
+                            .setPositiveButton("Ya", (dialog, id) -> {
+                                sessionManager.logout();
+                            })
+                            .setNegativeButton("Tidak", (dialog, id) -> dialog.cancel());
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                    break;
+            }
         });
 
         _card_status_karcis_wstn.setOnClickListener(v -> {
@@ -136,115 +146,83 @@ public class DashboardWisatawanActivity extends AppCompatActivity {
             startActivity(x);
         });
 
-        _card_horizontal_wstwn.setOnClickListener(v -> {
 
-            Intent x = new Intent(DashboardWisatawanActivity.this, PesanKarcisWisatawanOldActivity.class);
-            startActivity(x);
-
-        });
-
-
-//        sessionManager = new SessionManager(getApplicationContext());
         String key_name_a = sessionManager.getUserDetail().get(SessionManager.key_name);
         String key_email_a = sessionManager.getUserDetail().get(SessionManager.key_email);
         String is_login_a = sessionManager.getUserDetail().get(SessionManager.is_login);
         String is_flag_a = sessionManager.getUserDetail().get(SessionManager.key_flag);
 
-        _textview_email_session.setText(sessionManager.getUserDetail().get(SessionManager.key_email) );
 
-//        Log.i("triono ","key_name_a " + key_name_a);
-
-        informasiStatusKarcis("informasi_status_karcis");
-
-
+//        informasiStatusKarcis("informasi_status_karcis");
 
 
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
+    private void recyclerViewWebView() {
 
-    private void informasiStatusKarcis(String EP){
-        findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-        String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
-        final RequestQueue requestQueue = Volley.newRequestQueue(DashboardWisatawanActivity.this);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
-                response -> {
-                    Log.i("triono", "response informasiStatusKarcis= " + response );
-                    try {
-                        findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-                        if( Help.isJSONValid(response) ){
-                            ArrayList dx = new ArrayList<>();
-                            JSONObject jsonObject = new JSONObject(response.toString());
-                            if( jsonObject.getBoolean("success") ) {
-                                JSONArray jsonArray = jsonObject.getJSONArray("data");
 
-                                String _va_no;
-                                String _tgl_kunjungan;
-                                String _status;
-                                String _nama;
-                                entityStatusKarcisArrayList = new ArrayList<>();
+        webView = findViewById(R.id.webViewEvent);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings();
+        pDialog = new ProgressDialog(DashboardWisatawanActivity.this);
+        pDialog.setTitle("Load Event");
+        pDialog.setMessage("Loading...");
+        pDialog.setIndeterminate(false);
+        pDialog.setCancelable(false);
 
-                                Log.i("","jsonArray.length()= "+jsonArray.length());
-                                TextView dtSts = (TextView) findViewById(R.id.text_sts_wist);
-                                if( jsonArray.length() > 0 ) {
-                                    dtSts.setText(String.valueOf("Data ditemukan: "+ jsonArray.length()));
-                                    dtSts.setTextColor(Color.parseColor("#ffe458"));
-                                } else{
-                                    dtSts.setText(String.valueOf("Data tidak ditemukan"));
-                                    dtSts.setTextColor(Color.parseColor("#ffe458"));
-                                }
 
-                                for (int i = 0; i <jsonArray.length();i++ ) {
-                                    JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-                                    _va_no = jsonObject1.getString("va_no");
-                                    _tgl_kunjungan = jsonObject1.getString("tgl_kunjungan");
-                                    _status = jsonObject1.getString("status");
-                                    _nama = jsonObject1.getString("nama");
 
-                                    Log.i("","i "+ i);
+        webView.requestFocus();
+        webView.getSettings().setJavaScriptEnabled(true);
+//        String myPdfUrl = "http://157.245.199.148/~kaffahdev2/event_opening_gunung-dikonversi.pdf";
+        String url = "http://www.amanahgitha.com/jenis-jenis-wisata-berdasarkan-tujuan-wisatanya";
+//        String myPdfUrl = "https://mindorks.s3.ap-south-1.amazonaws.com/courses/MindOrks_Android_Online_Professional_Course-Syllabus.pdf";
+//        String myPdfUrl ="https://yukcoding.blogspot.com";
+//        String url = "https://docs.google.com/viewer?embedded=true&url="+myPdfUrl;
 
-                                    Log.i("","_va_no "+_va_no);
-                                    Log.i("","_nama "+ _nama);
-                                    Log.i("","_tgl_kunjungan "+ _tgl_kunjungan);
+//        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(myPdfUrl));
+//        startActivity(browserIntent);
 
-//                                        entityStatusKarcisArrayList.add(new EntityStatusKarcisWisatawan(_va_no,_tgl_kunjungan,_status,_nama));
-                                }
-//                                    CustomAdapterEntityWisatawan customAdapter = new CustomAdapterEntityWisatawan( entityStatusKarcisArrayList, DashboardWisatawanActivity.this);
-//                                    recyclerView.setAdapter(customAdapter);
-                            }
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    requestQueue.stop();
-                }, (Response.ErrorListener) error -> {
-                    Log.i("", "response =" + error.toString());
-                    error.printStackTrace();
-                    requestQueue.stop();
-
-                    findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-                    AlertDialog.Builder builder = new AlertDialog.Builder(DashboardWisatawanActivity.this);
-                    builder.setMessage("Terjadi Gangguan, Refresh ")
-                            .setCancelable(false)
-                            .setPositiveButton("Ya", (dialog, id) -> {
-                                informasiStatusKarcis("informasi_status_karcis");
-                            })
-                            .setNegativeButton("Tidak", (dialog, id) -> dialog.cancel());
-                    AlertDialog alert = builder.create();
-                    alert.show();
-
-                }
-        ) {
+        webView.loadUrl(url);
+        webView.setWebViewClient(new WebViewClient() {
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> obj = new HashMap<String, String>();
-                final String _email =  sessionManager.getUserDetail().get(SessionManager.key_email);
-                obj.put("alamat_email", _email);
-                return obj;
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
             }
-        };
-        int socketTimeout = 0;
-        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-        stringRequest.setRetryPolicy(policy);
-        requestQueue.add(stringRequest);
+        });
+        webView.setWebChromeClient(new WebChromeClient() {
+            public void onProgressChanged(WebView view, int progress) {
+                if (progress < 100) {
+                    pDialog.show();
+                }
+                if (progress == 100) {
+                    pDialog.dismiss();
+                }
+            }
+        });
+
+
     }
+
+    private void featuredRecycle() {
+
+        featuredRecycle.setHasFixedSize(true);
+        featuredRecycle.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false));
+
+//        ArrayList<ModelFeatured> modelFeaturedArrayList = new ArrayList<>();
+        ArrayList<ModelFeatured> modelFeaturedArrayList = new ArrayList<>();
+
+        modelFeaturedArrayList.add(new ModelFeatured(R.drawable.gede,"Gunung Gede Pangrango","Gunung Gede merupakan sebuah gunung api bertipe stratovolcano yang berada di Pulau Jawa, Indonesia. Gunung Gede berada dalam ruang lingkup Taman Nasional Gede Pangrango, yang merupakan salah satu dari lima taman nasional yang pertama kali diumumkan di Indonesia pada tahun 1980. Gunung ini berada di dua wilayah kabupaten yaitu Kabupaten Cianjur dan Sukabumi, dengan ketinggian 1.000 - 2.958 m. dpl. "));
+        modelFeaturedArrayList.add(new ModelFeatured(R.drawable.papandayan,"Gunung Papandayan","Gunung Papandayan adalah gunung api strato yang terletak di Kabupaten Garut, Jawa Barat tepatnya di Kecamatan Cisurupan. Gunung dengan ketinggian 2665 meter di atas permukaan laut itu terletak sekitar 70 km sebelah tenggara Kota Bandung"));
+        modelFeaturedArrayList.add(new ModelFeatured(R.drawable.gede,"Gunung Gede Pangrango","Gunung Gede merupakan sebuah gunung api bertipe stratovolcano yang berada di Pulau Jawa, Indonesia. Gunung Gede berada dalam ruang lingkup Taman Nasional Gede Pangrango, yang merupakan salah satu dari lima taman nasional yang pertama kali diumumkan di Indonesia pada tahun 1980. Gunung ini berada di dua wilayah kabupaten yaitu Kabupaten Cianjur dan Sukabumi, dengan ketinggian 1.000 - 2.958 m. dpl, dan berada pada lintang 106°51' - 107°02' BT dan 64°1' - 65°1 LS. Suhu rata-rata di puncak gunung Gede 18 °C dan di malam hari suhu puncak berkisar 5 °C, dengan curah hujan rata-rata 3.600 mm/tahun. Gerbang utama menuju gunung ini adalah dari Cibodas dan Cipanas."));
+
+        customAdapterFeatured = new CustomAdapterFeatured(modelFeaturedArrayList,getApplicationContext());
+        featuredRecycle.setAdapter(customAdapterFeatured);
+
+
+    }
+
+
 }

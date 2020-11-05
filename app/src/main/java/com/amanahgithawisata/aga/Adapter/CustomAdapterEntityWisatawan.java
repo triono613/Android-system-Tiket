@@ -127,14 +127,7 @@ public class CustomAdapterEntityWisatawan extends RecyclerView.Adapter<CustomAda
 
         });
 
-        btn_detail_tagihan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                tagihan_by_no_va("tagihan_by_no_va", _va);
-
-            }
-        });
+        btn_detail_tagihan.setOnClickListener(v -> tagihan_by_no_va("tagihan_by_no_va", _va));
 
     }
 

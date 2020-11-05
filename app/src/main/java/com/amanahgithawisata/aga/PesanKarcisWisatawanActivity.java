@@ -177,6 +177,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
 
     public void onBackPressed() {
 
+//        Intent intent = new Intent(PesanKarcisWisatawanActivity.this, DashboardWisatawanOLdActivity.class)
         Intent intent = new Intent(PesanKarcisWisatawanActivity.this, DashboardWisatawanActivity.class)
                 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         finish();
@@ -730,6 +731,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
             Transformation transformation = new RoundedTransformationBuilder()
 //                    .borderColor(Color.BLACK)
 //                    .borderWidthDp(3)
+                    .borderWidthDp(1)
                     .oval(false)
                     .build();
 
@@ -737,7 +739,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
                     .load(result_dt_url_img_lokwis_adapter)
                     .fit()
                     .transform(transformation)
-                    .placeholder(R.drawable.ic_image)
+                    .placeholder(R.drawable.loading_animation)
                     .into(img1);
 
 
@@ -793,6 +795,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
             Transformation transformation = new RoundedTransformationBuilder()
 //                    .borderColor(Color.BLACK)
 //                    .borderWidthDp(3)
+                    .borderWidthDp(1)
                     .oval(false)
                     .build();
 
@@ -807,7 +810,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
                     .load(result_dt_url_img_pintu_fromAdapterLokPintu)
                     .fit()
                     .transform(transformation)
-                    .placeholder(R.drawable.ic_image)
+                    .placeholder(R.drawable.loading_animation)
                     .into(img2);
 
             if( result_dt_kdlokPintu2 != null) {
@@ -887,6 +890,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
             Transformation transformation = new RoundedTransformationBuilder()
 //                    .borderColor(Color.BLACK)
 //                    .borderWidthDp(3)
+                    .borderWidthDp(1)
                     .oval(false)
                     .build();
 
@@ -894,14 +898,14 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
                     .load(result_dt_url_img_lokWisOld)
                     .fit()
                     .transform(transformation)
-                    .placeholder(R.drawable.ic_image)
+                    .placeholder(R.drawable.loading_animation)
                     .into(img1);
 
             final ImageView img2 = findViewById(R.id.lokPintuPicasso);
             Picasso.with(getApplicationContext())
                     .load(result_dt_url_img_lokPintuOld)
                     .fit()
-                    .placeholder(R.drawable.ic_image)
+                    .placeholder(R.drawable.loading_animation)
                     .transform(transformation)
                     .into(img2);
 
@@ -909,7 +913,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
             Picasso.with(getApplicationContext())
                     .load(result_dt_url_img_ku)
                     .fit()
-                    .placeholder(R.drawable.ic_image)
+                    .placeholder(R.drawable.loading_animation)
                     .transform(transformation)
                     .into(img3);
 
@@ -967,13 +971,14 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
             Transformation transformation = new RoundedTransformationBuilder()
 //                    .borderColor(Color.BLACK)
 //                    .borderWidthDp(3)
+                    .borderWidthDp(1)
                     .oval(false)
                     .build();
 
             Picasso.with(getApplicationContext())
                     .load(session_url_lok_wis)
                     .fit()
-                    .placeholder(R.drawable.ic_image)
+                    .placeholder(R.drawable.loading_animation)
                     .transform(transformation)
                     .into(img1);
 
@@ -981,7 +986,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
             Picasso.with(getApplicationContext())
                     .load(session_url_lok_pintu)
                     .fit()
-                    .placeholder(R.drawable.ic_image)
+                    .placeholder(R.drawable.loading_animation)
                     .transform(transformation)
                     .into(img2);
 
@@ -990,14 +995,14 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
                     .load(session_url_karcis_utama)
                     .fit()
                     .transform(transformation)
-                    .placeholder(R.drawable.ic_image)
+                    .placeholder(R.drawable.loading_animation)
                     .into(img3);
 
             final ImageView img4 = findViewById(R.id.krcsTmbhnPicasso);
             Picasso.with(getApplicationContext())
                     .load(session_url_img_tmbhn)
                     .fit()
-                    .placeholder(R.drawable.ic_image)
+                    .placeholder(R.drawable.loading_animation)
                     .transform(transformation)
                     .into(img4);
 
@@ -1494,14 +1499,14 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
                                 final ImageView img1 =(ImageView)findViewById(R.id.krcsUtamaPicasso);
                                 Transformation transformation = new RoundedTransformationBuilder()
 //                                        .borderColor()
-//                                        .borderWidthDp(3)
+                                        .borderWidthDp(1)
                                         .oval(false)
                                         .build();
 
                                 Picasso.with(getApplicationContext())
                                         .load(_url_image)
                                         .fit()
-                                        .placeholder(R.drawable.ic_image)
+                                        .placeholder(R.drawable.loading_animation)
                                         .transform(transformation)
                                         .into(img1);
 
@@ -1584,6 +1589,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
 
                                 final ImageView img2 = findViewById(R.id.krcsTmbhnPicasso);
                                 Transformation transformation = new RoundedTransformationBuilder()
+                                        .borderWidthDp(1)
                                         .oval(false)
                                         .build();
 
@@ -1591,7 +1597,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
                                         .load(_url_image)
                                         .fit()
                                         .transform(transformation)
-                                        .placeholder(R.drawable.ic_image)
+                                        .placeholder(R.drawable.loading_animation)
                                         .into(img2);
 
                             }
@@ -1721,6 +1727,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
 //                                        .borderColor(Color.BLACK)
 //                                        .borderWidthDp(3)
 //                                        .cornerRadiusDp(30)
+                                        .borderWidthDp(1)
                                         .oval(false)
                                         .build();
 
@@ -1728,7 +1735,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
                                         .load(_url_image)
                                         .fit()
                                         .transform(transformation)
-                                        .placeholder(R.drawable.ic_image)
+                                        .placeholder(R.drawable.loading_animation)
                                         .into(img2);
 
                             }
@@ -1856,6 +1863,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
 //                                        .borderColor(Color.BLACK)
 //                                        .borderWidthDp(3)
 //                                        .cornerRadiusDp(30)
+                                        .borderWidthDp(1)
                                         .oval(false)
                                         .build();
 
@@ -1863,7 +1871,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
                                         .load(_url_image)
                                         .fit()
                                         .transform(transformation)
-                                        .placeholder(R.drawable.ic_image)
+                                        .placeholder(R.drawable.loading_animation)
                                         .into(img2);
 
                             }
@@ -1964,13 +1972,14 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
                                 Transformation transformation = new RoundedTransformationBuilder()
 //                                        .borderColor()
 //                                        .borderWidthDp(3)
+                                        .borderWidthDp(1)
                                         .oval(false)
                                         .build();
 
                                 Picasso.with(getApplicationContext())
                                         .load(_url_image)
                                         .fit()
-                                        .placeholder(R.drawable.ic_image)
+                                        .placeholder(R.drawable.loading_animation)
                                         .transform(transformation)
                                         .into(img1);
 
@@ -2246,6 +2255,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
                                 Transformation transformation = new RoundedTransformationBuilder()
 //                                        .borderColor(Color.BLUE)
 //                                        .borderWidthDp(5)
+                                        .borderWidthDp(1)
                                         .oval(false)
                                         .build();
 
@@ -2253,7 +2263,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
                                         .load(_url_image)
                                         .fit()
                                         .transform(transformation)
-                                        .placeholder(R.drawable.ic_image)
+                                        .placeholder(R.drawable.loading_animation)
                                         .into(img1);
 
                             }
@@ -2352,6 +2362,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
                                 Transformation transformation = new RoundedTransformationBuilder()
 //                                        .borderColor(Color.BLACK)
 //                                        .borderWidthDp(3)
+                                        .borderWidthDp(1)
                                         .oval(false)
                                         .build();
 
@@ -2359,7 +2370,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
                                         .load(url_image)
                                         .fit()
                                         .transform(transformation)
-                                        .placeholder(R.drawable.ic_image)
+                                        .placeholder(R.drawable.loading_animation)
                                         .into(img1);
 
 //                                }
@@ -2448,6 +2459,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
                                 Transformation transformation = new RoundedTransformationBuilder()
 //                                        .borderColor(Color.BLACK)
 //                                        .borderWidthDp(3)
+                                        .borderWidthDp(1)
                                         .oval(false)
                                         .build();
 
@@ -2455,7 +2467,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
                                         .load(url_image)
                                         .fit()
                                         .transform(transformation)
-                                        .placeholder(R.drawable.ic_image)
+                                        .placeholder(R.drawable.loading_animation)
                                         .into(img1);
 
 //                                }

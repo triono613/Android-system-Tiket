@@ -1,387 +1,515 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#f2f5f8"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.amanahgithawisata.aga.DashboardWisatawanActivity">
+    android:orientation="vertical"
+    tools:context=".DashboardWisatawanActivity">
 
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="310dp"
-        android:background="@drawable/vector_header" />
 
-    <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
+
+        <RelativeLayout
+                android:layout_marginTop="40dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="60dp"
-                android:fontFamily="@font/mregular"
-                android:text="Dashboard Wisatawan"
-                android:textColor="#fff"
-                android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:orientation="horizontal"
+                >
+                <ImageView
+                    android:visibility="gone"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/ic_menu_black_24dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp" />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:src="@drawable/jelajah_wisata_rev"
+                    android:layout_weight="1"
+                    />
+                <ImageView
+                    android:visibility="gone"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/ic_menu_black_24dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp" />
 
-    <TextView
-        android:id="@+id/textview_email_session"
-        android:paddingTop="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="80dp"
-        android:fontFamily="@font/mlight"
-        android:text="email"
-        android:textColor="#fff"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            </RelativeLayout>
 
-
-    <ScrollView
-        android:orientation="vertical"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_height="match_parent"
+        >
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <LinearLayout
-                android:layout_marginTop="60dp"
-                android:id="@+id/linearLayout2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:background="@drawable/cardview"
                 android:orientation="vertical"
-                android:gravity="center"
-                android:paddingTop="40dp"
-                android:paddingBottom="30dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.521">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
+
+                <LinearLayout
+
+                    android:orientation="horizontal"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    >
+
+                    <LinearLayout
+                        android:id="@+id/card_pemesanan_karcis_wstn"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <RelativeLayout
+                            android:elevation="8dp"
+                            android:layout_margin="10dp"
+                            android:background="@drawable/card1"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp">
+
+                            <ImageView
+                                android:layout_centerInParent="true"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_gravity="center"
+                                app:srcCompat="@drawable/ic_speaker_group_black_new_24dp" />
+
+                        </RelativeLayout>
+                        <TextView
+                            android:gravity="center_horizontal"
+                            android:textAlignment="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="Pesan Karcis"
+                            android:textSize="10dp"
+                            />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/card_status_karcis_wstn"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <RelativeLayout
+                            android:elevation="8dp"
+                            android:layout_margin="10dp"
+                            android:background="@drawable/card2"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp">
+
+                            <ImageView
+                                android:layout_centerInParent="true"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_gravity="center"
+                                app:srcCompat="@drawable/ic_date_range_black_new_24dp" />
+
+                        </RelativeLayout>
+                        <TextView
+                            android:gravity="center_horizontal"
+                            android:textAlignment="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="Status Karcis"
+                            android:textSize="10dp"
+                            />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/card_ganti_password_wstwn"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <RelativeLayout
+                            android:elevation="8dp"
+                            android:layout_margin="10dp"
+                            android:background="@drawable/card3"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp">
+
+                            <ImageView
+                                android:layout_centerInParent="true"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_gravity="center"
+                                app:srcCompat="@drawable/ic_lock_black_new_24dp" />
+
+                        </RelativeLayout>
+                        <TextView
+                            android:gravity="center_horizontal"
+                            android:textAlignment="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="Ganti Password"
+                            android:textSize="10dp"
+                            />
+
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:visibility="gone"
-                    android:id="@+id/card_order_ticket"
-                    android:background="@drawable/cardview_child"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:paddingLeft="25dp"
-                    android:paddingRight="25dp"
-                    android:paddingBottom="10dp"
-                    android:gravity="center_horizontal"
-                    android:layout_marginBottom="20dp"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_marginStart="0dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_width="64dp"
-                        android:layout_height="64dp"
-                        android:background="@drawable/circlebackground3"
-                        android:padding="10dp"
-                        android:src="@drawable/ic_speaker_group_black_24dp" />
-
-                    <LinearLayout
-                        android:paddingTop="10dp"
-                        android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="5dp"
-                        android:paddingEnd="5dp"
-                        >
-
-                        <TextView
-                            android:layout_marginStart="10dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingTop="10dp"
-                            android:layout_margin="5dp"
-                            android:fontFamily="@font/mmedium"
-                            android:gravity="left"
-                            android:text="Order ticket"
-                            android:textSize="14dp"
-                            android:textStyle="bold" />
-
-
-                        <TextView
-                            android:layout_marginStart="5dp"
-                            android:textSize="12dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="left"
-                            android:paddingBottom="10dp"
-                            android:text="Pesan Tiket Untuk Kedatangan Anda" />
-
-                    </LinearLayout>
-                </LinearLayout>
-
-
-
-             <LinearLayout
-                android:id="@+id/card_pemesanan_karcis_wstn"
-                android:background="@drawable/cardview_child"
-                android:layout_width="match_parent"
-                 android:layout_height="80dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:paddingLeft="25dp"
-                android:paddingRight="25dp"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_gravity="center"
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:background="@drawable/circlebackground3"
-                    android:src="@drawable/ic_speaker_group_black_24dp" />
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     >
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/mmedium"
-                        android:gravity="center"
-                        android:text="Pemesanan Karcis"
-                        android:textSize="12dp"
-                        android:textStyle="bold" />
-
-
-                    <TextView
-                        android:textSize="12dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="Pesan Tiket Untuk Kedatangan Anda" />
-
-                </LinearLayout>
-            </LinearLayout>
-
-
-                <LinearLayout
-                    android:id="@+id/card_status_karcis_wstn"
-                    android:background="@drawable/cardview_child"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:paddingLeft="25dp"
-                    android:paddingRight="25dp"
-                    android:gravity="center_horizontal"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_gravity="center"
-                        android:layout_width="64dp"
-                        android:layout_height="64dp"
-                        android:background="@drawable/circlebackground6"
-                        android:src="@drawable/ic_event_note_black_24dp"
-                        />
-
                     <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:layout_gravity="center">
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
 
+                        <RelativeLayout
+                            android:elevation="8dp"
+                            android:layout_margin="10dp"
+                            android:background="@drawable/card1"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp">
 
-                            <TextView
-                                android:id="@+id/text_sts_wist"
-                                android:textAlignment="center"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                            <ImageView
+                                android:layout_centerInParent="true"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
                                 android:layout_gravity="center"
-                                android:fontFamily="@font/mmedium"
-                                android:gravity="left"
-                                android:layout_marginEnd="4dp"
-                                android:paddingRight="10dp"
-                                android:text=""
-                                android:textSize="10dp"
-                                android:textStyle="bold" />
+                                app:srcCompat="@drawable/ic_speaker_group_black_new_24dp" />
+
+                        </RelativeLayout>
                         <TextView
-
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/mmedium"
-                            android:gravity="center"
-                            android:text="Status Karcis"
-                            android:textSize="12dp"
-                            android:textStyle="bold"/>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="Lihat Status Karcis Anda Disini"
-                            android:textSize="12dp"
-                            />
-
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/card_ganti_password_wstwn"
-                    android:background="@drawable/cardview_child"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:paddingLeft="25dp"
-                    android:paddingRight="25dp"
-                    android:paddingBottom="10dp"
-                    android:gravity="center_horizontal"
-                    android:layout_marginBottom="20dp"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_gravity="center"
-                        android:layout_width="64dp"
-                        android:layout_height="64dp"
-                        android:background="@drawable/circlebackground1"
-                        android:src="@drawable/lock2"
-                        />
-
-                    <LinearLayout
-                        android:layout_gravity="center"
-                        android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        >
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/mmedium"
-                            android:gravity="center"
-                            android:text="Ganti Password"
-                            android:textSize="12dp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="Ganti Password anda Disini"
-                            android:textSize="12dp" />
-
-                    </LinearLayout>
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:visibility="gone"
-                    android:id="@+id/card_horizontal_wstwn"
-                    android:background="@drawable/cardview_child"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:paddingLeft="25dp"
-                    android:paddingRight="25dp"
-                    android:paddingBottom="10dp"
-                    android:gravity="center_horizontal"
-                    android:layout_marginBottom="20dp"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_marginStart="0dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="10dp"
-                        android:layout_width="64dp"
-                        android:layout_height="64dp"
-                        android:padding="10dp"
-                        android:background="@drawable/circlebackground1"
-                        android:src="@drawable/lock2"
-                        />
-
-                    <LinearLayout
-                        android:paddingTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="5dp"
-                        android:paddingEnd="5dp"
-                        >
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingTop="10dp"
-                            android:layout_marginStart="10dp"
-                            android:layout_margin="5dp"
-                            android:fontFamily="@font/mmedium"
-                            android:gravity="left"
-                            android:text="pesan karcis wisatawan old"
-                            android:textSize="14dp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_marginStart="0dp"
+                            android:gravity="center_horizontal"
+                            android:textAlignment="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="left"
-                            android:padding="5dp"
-                            android:textSize="12dp"
-                            android:text="Ganti Password anda Disini" />
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="Pesan Karcis"
+                            android:textSize="10dp"
+                            />
+
 
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <RelativeLayout
+                            android:elevation="8dp"
+                            android:layout_margin="10dp"
+                            android:background="@drawable/card2"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp">
+
+                            <ImageView
+                                android:layout_centerInParent="true"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_gravity="center"
+                                app:srcCompat="@drawable/ic_date_range_black_new_24dp" />
+
+                        </RelativeLayout>
+                        <TextView
+                            android:gravity="center_horizontal"
+                            android:textAlignment="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="Status Karcis"
+                            android:textSize="10dp"
+                            />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <RelativeLayout
+                            android:elevation="8dp"
+                            android:layout_margin="10dp"
+                            android:background="@drawable/card3"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp">
+
+                            <ImageView
+                                android:layout_centerInParent="true"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_gravity="center"
+                                app:srcCompat="@drawable/ic_lock_black_new_24dp" />
+
+                        </RelativeLayout>
+                        <TextView
+                            android:gravity="center_horizontal"
+                            android:textAlignment="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="Informasi Pintu"
+                            android:textSize="10dp"
+                            />
+
+
+                    </LinearLayout>
+
+
+
                 </LinearLayout>
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="20dp"
+                    android:background="#56F1E9CE"
+                    >
 
+                    <LinearLayout
+                        android:id="@+id/featured_background"
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minWidth="170dp"
+                        android:minHeight="280dp"
+                        android:layout_margin="10dp"
+                        android:background="#f1E9CE"
+                        >
+
+
+                        <TextView
+                            android:id="@+id/txt_jljh_wis"
+                            android:fontFamily="@font/roboto_bold"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:textAllCaps="false"
+                            android:layout_marginStart="10dp"
+                            android:textSize="24sp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="40dp" />
+
+                        <TextView
+                            android:id="@+id/txt_jljh_wis_dec"
+                            android:fontFamily="@font/roboto_regular"
+                            android:textAlignment="textStart"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:text="Jelajah Wisata adalah aplikasi karya anak bangsa yang memuat Lokasi Objek-Objek Wisata resmi yang berada dalam naungan Taman Nasional Indonesia " >
+
+                        </TextView>
+
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/featuredRecycle"
+                        android:layout_width="match_parent"
+                        android:layout_height="320dp"
+                        android:layout_toEndOf="@+id/featured_background"
+                        android:background="#f2f5f8"
+                        >
+
+                    </androidx.recyclerview.widget.RecyclerView>
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="15dp"
+                    android:padding="10dp"
+                    >
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:ignore="UselessParent">
+
+                        <TextView
+                            android:text="Cuaca"
+                            android:id="@+id/txt_lbl"
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="18dp"
+                            android:textAllCaps="true"
+                            android:textColorHint="@color/bluePrimary"
+                            android:fontFamily="@font/roboto_regular"
+                            />
+
+                    </RelativeLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/RecyclerViewCuaca"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+
+                        >
+
+
+
+                    </androidx.recyclerview.widget.RecyclerView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="15dp"
+                    android:padding="10dp"
+                    >
+                    <RelativeLayout
+                        android:layout_marginBottom="6dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:ignore="UselessParent">
+
+                        <TextView
+                            android:text="Event"
+                            android:id="@+id/txt_lbl"
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="18dp"
+                            android:textAllCaps="true"
+                            android:textColorHint="@color/bluePrimary"
+                            android:fontFamily="@font/roboto_regular"
+                            />
+
+                    </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+                                    <WebView
+                                        android:id="@+id/webViewEvent"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+
+                                        />
+
+                </RelativeLayout>
+
+                </LinearLayout>
 
             </LinearLayout>
+        </ScrollView>
 
-            <Button
-                android:id="@+id/btn_logout_wstn"
+        <com.gauravk.bubblenavigation.BubbleNavigationLinearView
+            android:id="@+id/navigationBarx"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom"
+            android:background="@drawable/bg_rounded"
+            android:elevation="50dp"
+            android:padding="5dp">
+
+            <com.gauravk.bubblenavigation.BubbleToggleView
+                android:id="@+id/tabHomeWis"
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:gravity="center"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/bg_btn_blue"
-                android:paddingEnd="20dp"
-                android:drawableEnd="@drawable/ic_exit_to_app_black_24dp"
-                android:text="Logout"
-                android:textColor="#FFF"
-                android:textSize="10sp"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-                tools:layout_editor_absoluteX="31dp" />
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:bt_colorActive="#81c784"
+                app:bt_colorInactive="#78909c"
+                app:bt_icon="@drawable/ic_home_black_24dp"
+                app:bt_shape="@drawable/tab_status_karcis"
+                app:bt_title="Home"
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+                app:bt_titleSize="8sp" />
+
+            <com.gauravk.bubblenavigation.BubbleToggleView
+                android:id="@+id/tabPesanKarcis"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:bt_colorActive="#d4cbe5"
+                app:bt_colorInactive="#78909c"
+                app:bt_icon="@drawable/ic_speaker_group_black_new_24dp"
+                app:bt_shape="@drawable/tab_pesan_karcis"
+                app:bt_title="Pesan Karcis"
+
+                app:bt_titleSize="8sp" />
+
+            <com.gauravk.bubblenavigation.BubbleToggleView
+                android:id="@+id/tabStatusKarcis"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:bt_colorActive="#7adccf"
+                app:bt_colorInactive="#78909c"
+                app:bt_icon="@drawable/ic_date_range_black_new_24dp"
+                app:bt_shape="@drawable/tab_status_karcis"
+                app:bt_title="Status Karis"
+
+                app:bt_titleSize="8sp" />
+
+            <com.gauravk.bubblenavigation.BubbleToggleView
+                android:id="@+id/tabGantiPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:bt_colorActive="#f7c59f"
+                app:bt_colorInactive="#78909c"
+                app:bt_icon="@drawable/ic_lock_black_new_24dp"
+                app:bt_shape="@drawable/tab_ganti_password"
+                app:bt_title="Ganti Password"
+
+                app:bt_titleSize="10sp" />
+
+            <com.gauravk.bubblenavigation.BubbleToggleView
+                android:id="@+id/tabLogout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:bt_colorActive="#f06292"
+                app:bt_colorInactive="#78909c"
+                app:bt_icon="@drawable/ic_exit_to_app_black_24dp"
+                app:bt_shape="@drawable/tab_logout"
+                app:bt_title="Logout"
+                app:bt_titleSize="10sp" />
+
+        </com.gauravk.bubblenavigation.BubbleNavigationLinearView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    </LinearLayout>
 
 
-    <RelativeLayout
-        android:id="@+id/loadingPanel"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center" >
 
-        <ProgressBar
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:indeterminate="true" />
-    </RelativeLayout>
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>

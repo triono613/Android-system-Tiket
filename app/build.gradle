@@ -20,7 +20,9 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
+        vectorDrawables.useSupportLibrary = true
     }
+
 
     useLibrary "org.apache.http.legacy"
 
@@ -40,7 +42,7 @@ android {
         exclude 'META-INF/DEPENDENCIES'
     }
 
-    dataBinding{
+    dataBinding {
         enabled true
     }
 }
@@ -110,6 +112,7 @@ dependencies {
 
     implementation 'de.codecrafters.tableview:tableview:2.2.0'
     implementation group: 'net.sourceforge.jexcelapi', name: 'jxl', version: '2.6'
+    implementation 'com.github.sharish:ShimmerRecyclerView:v1.3'
 
 
 }

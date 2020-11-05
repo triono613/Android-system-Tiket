@@ -113,19 +113,19 @@
                         android:fontFamily="@font/mlight"
                         android:text="Karcis Utama"
                         android:textColor="@color/grayPrimary"
-                        android:textSize="16sp"
+                        android:textSize="12sp"
                         android:textStyle="bold" />
 
                     <EditText
                         android:id="@+id/karcis_utama_wstwn_eks"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="40dp"
                         android:background="@drawable/bg_input_edit"
                         android:fontFamily="@font/mmedium"
                         android:inputType="number"
                         android:paddingLeft="12dp"
                         android:textColor="@color/blackPrimary"
-                        android:textSize="14sp" />
+                        android:textSize="12sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -143,20 +143,20 @@
                         android:fontFamily="@font/mlight"
                         android:text="Karcis Tambahan"
                         android:textColor="@color/grayPrimary"
-                        android:textSize="16sp"
+                        android:textSize="12sp"
                         android:textStyle="bold" />
 
 
                     <EditText
                         android:id="@+id/karcis_tmbhn_wstwn_eks"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="40dp"
                         android:background="@drawable/bg_input_edit"
                         android:fontFamily="@font/mmedium"
                         android:inputType="number"
                         android:paddingLeft="12dp"
                         android:textColor="@color/blackPrimary"
-                        android:textSize="14sp" />
+                        android:textSize="12sp" />
 
 
                 </LinearLayout>
@@ -176,18 +176,18 @@
                         android:fontFamily="@font/mlight"
                         android:text="Jumlah Karcis Wisatawan Nusantara"
                         android:textColor="@color/grayPrimary"
-                        android:textSize="14sp" />
+                        android:textSize="12sp" />
 
                     <EditText
                         android:id="@+id/jml_krcs_wisnu_wstwn_eks"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="40dp"
                         android:background="@drawable/bg_input_edit"
                         android:fontFamily="@font/mmedium"
                         android:inputType="number"
                         android:paddingLeft="12dp"
                         android:textColor="@color/blackPrimary"
-                        android:textSize="14sp" />
+                        android:textSize="12sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -205,18 +205,18 @@
                         android:fontFamily="@font/mlight"
                         android:text="Jumlah Karcis Wisatawan Mancanegara"
                         android:textColor="@color/grayPrimary"
-                        android:textSize="14sp" />
+                        android:textSize="12sp" />
 
                     <EditText
                         android:id="@+id/jml_krcs_wisman_wstwn_eks"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="40dp"
                         android:background="@drawable/bg_input_edit"
                         android:fontFamily="@font/mmedium"
                         android:inputType="number"
                         android:paddingLeft="12dp"
                         android:textColor="@color/blackPrimary"
-                        android:textSize="14sp" />
+                        android:textSize="12sp" />
 
                 </LinearLayout>
 
@@ -236,19 +236,19 @@
                         android:fontFamily="@font/mlight"
                         android:text="Total Rp."
                         android:textColor="@color/grayPrimary"
-                        android:textSize="16sp"
+                        android:textSize="12sp"
                         android:tooltipText="Jumlah X hrg" />
 
                     <EditText
                         android:id="@+id/ttl_wstwn_eks"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="40dp"
                         android:background="@drawable/bg_input_edit"
                         android:fontFamily="@font/mmedium"
                         android:inputType="number"
                         android:paddingLeft="12dp"
                         android:textColor="@color/blackPrimary"
-                        android:textSize="14sp" />
+                        android:textSize="12sp" />
                 </LinearLayout>
 
 
@@ -267,19 +267,19 @@
                         android:fontFamily="@font/mlight"
                         android:text="Jumlah Karcis Tambahan"
                         android:textColor="@color/grayPrimary"
-                        android:textSize="16sp" />
+                        android:textSize="12sp" />
 
 
                     <EditText
                         android:id="@+id/jml_krcs_wisman_tmbhn_wstwn_eks"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="40dp"
                         android:background="@drawable/bg_input_edit"
                         android:fontFamily="@font/mmedium"
                         android:inputType="number"
                         android:paddingLeft="12dp"
                         android:textColor="@color/blackPrimary"
-                        android:textSize="14sp" />
+                        android:textSize="12sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -297,18 +297,18 @@
                         android:fontFamily="@font/mlight"
                         android:text="Total Tambahan Rp."
                         android:textColor="@color/grayPrimary"
-                        android:textSize="16sp" />
+                        android:textSize="12sp" />
 
                     <EditText
                         android:id="@+id/ttl_tmbhn_wstwn_eks"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="40dp"
                         android:background="@drawable/bg_input_edit"
                         android:fontFamily="@font/mmedium"
                         android:inputType="number"
                         android:paddingLeft="12dp"
                         android:textColor="@color/blackPrimary"
-                        android:textSize="14sp" />
+                        android:textSize="12sp" />
 
                 </LinearLayout>
 
@@ -328,18 +328,18 @@
                         android:fontFamily="@font/mlight"
                         android:text="Grand Total Rp."
                         android:textColor="@color/grayPrimary"
-                        android:textSize="16sp" />
+                        android:textSize="12sp" />
 
                     <EditText
                         android:id="@+id/grand_ttl_wstwn_eks"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="40dp"
                         android:background="@drawable/bg_input_edit"
                         android:fontFamily="@font/mmedium"
                         android:inputType="number"
                         android:paddingLeft="12dp"
                         android:textColor="@color/blackPrimary"
-                        android:textSize="14sp" />
+                        android:textSize="12sp" />
 
                 </LinearLayout>
 
@@ -358,7 +358,7 @@
                         android:fontFamily="@font/mlight"
                         android:text="Jenis Bayar"
                         android:textColor="@color/grayPrimary"
-                        android:textSize="16sp"
+                        android:textSize="12sp"
                         android:textStyle="bold" />
 
                     <Spinner
@@ -383,19 +383,19 @@
                         android:fontFamily="@font/mlight"
                         android:text="No. Handphone"
                         android:textColor="@color/grayPrimary"
-                        android:textSize="16sp"
+                        android:textSize="12sp"
                         android:textStyle="bold" />
 
                     <EditText
                         android:id="@+id/phone_wstwn_eks"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="40dp"
                         android:background="@drawable/bg_input_edit"
                         android:fontFamily="@font/mmedium"
                         android:inputType="number"
                         android:paddingLeft="12dp"
                         android:textColor="@color/blackPrimary"
-                        android:textSize="14sp" />
+                        android:textSize="12sp" />
 
                 </LinearLayout>
 
@@ -414,18 +414,18 @@
                         android:fontFamily="@font/mlight"
                         android:text="Email"
                         android:textColor="@color/grayPrimary"
-                        android:textSize="16sp"
+                        android:textSize="12sp"
                         android:textStyle="bold" />
 
                     <EditText
                         android:id="@+id/email_pengunjung_wstwn_eks"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="40dp"
                         android:background="@drawable/bg_input_edit"
                         android:fontFamily="@font/mmedium"
                         android:paddingLeft="12dp"
                         android:textColor="@color/blackPrimary"
-                        android:textSize="14sp" />
+                        android:textSize="12sp" />
 
                     <EditText
 

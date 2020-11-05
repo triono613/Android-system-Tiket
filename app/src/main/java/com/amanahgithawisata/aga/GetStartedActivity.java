@@ -106,31 +106,22 @@ public class GetStartedActivity extends AppCompatActivity {
         }
 
 
-        btn_pendaftaran_petugas.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent goto_regis_petugas = new Intent(GetStartedActivity.this,RegisterPetugasActivity.class);
-                startActivity(goto_regis_petugas);
-            }
+        btn_pendaftaran_petugas.setOnClickListener(v -> {
+            Intent goto_regis_petugas = new Intent(GetStartedActivity.this,RegisterPetugasActivity.class);
+            startActivity(goto_regis_petugas);
         });
 
 
 
-        btn_pendaftaran_wisatawan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent goto_regis_wisatawan = new Intent(GetStartedActivity.this,RegisterWisatawanActivity.class);
-                startActivity(goto_regis_wisatawan);
-            }
+        btn_pendaftaran_wisatawan.setOnClickListener(v -> {
+            Intent goto_regis_wisatawan = new Intent(GetStartedActivity.this,RegisterWisatawanActivity.class);
+            startActivity(goto_regis_wisatawan);
         });
 
 
-        btn_login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent goto_login = new Intent(GetStartedActivity.this,SigninActivity.class);
-                startActivity(goto_login);
-            }
+        btn_login.setOnClickListener(v -> {
+            Intent goto_login = new Intent(GetStartedActivity.this,SigninActivity.class);
+            startActivity(goto_login);
         });
 
 

@@ -130,14 +130,14 @@ public class CustomAdapterEntityLokasiWisata extends RecyclerView.Adapter<Custom
 
         Transformation transformation = new RoundedTransformationBuilder()
 //                                        .borderColor()
-//                                        .borderWidthDp(3)
+                                        .borderWidthDp(1)
                                         .oval(false)
                                         .build();
 
         Picasso.with(context.getApplicationContext())
                 .load(_url_img)
                 .fit()
-                .placeholder(R.drawable.ic_image)
+                .placeholder(R.drawable.loading_animation)
                 .transform(transformation)
                 .into(tv_imgx);
 

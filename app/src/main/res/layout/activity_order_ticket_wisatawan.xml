@@ -29,10 +29,6 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/toolbarx">
 
-        <FrameLayout
-            android:id="@+id/frameLayoutx"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
 
         <com.gauravk.bubblenavigation.BubbleNavigationLinearView
             android:id="@+id/navigationBarx"
@@ -54,7 +50,7 @@
                 app:bt_colorActive="#81c784"
                 app:bt_colorInactive="#78909c"
                 app:bt_icon="@drawable/ic_movie"
-                app:bt_shape="@drawable/tab_movie_color"
+                app:bt_shape="@drawable/tab_pesan_karcis"
                 app:bt_title="Movie"
                 app:bt_titlePadding="5dp"
                 app:bt_titleSize="10sp" />
@@ -67,7 +63,7 @@
                 app:bt_colorActive="#aa86f7"
                 app:bt_colorInactive="#78909c"
                 app:bt_icon="@drawable/ic_live_tv"
-                app:bt_shape="@drawable/tab_tv_color"
+                app:bt_shape="@drawable/tab_status_karcis"
                 app:bt_title="Tv Show"
                 app:bt_titlePadding="5dp"
                 app:bt_titleSize="10sp" />
@@ -80,7 +76,7 @@
                 app:bt_colorActive="#f06292"
                 app:bt_colorInactive="#78909c"
                 app:bt_icon="@drawable/ic_home_black_24dp"
-                app:bt_shape="@drawable/tab_movie_color"
+                app:bt_shape="@drawable/tab_pesan_karcis"
                 app:bt_title="Favorite"
                 app:bt_titlePadding="5dp"
                 app:bt_titleSize="10sp" />

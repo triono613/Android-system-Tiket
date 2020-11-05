@@ -171,7 +171,7 @@ public class SigninActivity extends AppCompatActivity implements GoogleApiClient
             switch (sessionManager.getFlag())
             {
                 case "1":
-                    intent = new Intent(SigninActivity.this, DashboardWisatawanActivity.class);
+                    intent = new Intent(SigninActivity.this, DashboardWisatawanOLdActivity.class);
                     break;
                 case "0":
                     intent = new Intent(SigninActivity.this, DashboardPetugasActivity.class);
@@ -187,6 +187,7 @@ public class SigninActivity extends AppCompatActivity implements GoogleApiClient
             {
                 case "1":
                     if (Objects.equals(sessionManager.getUserDetail().get(SessionManager.key_user_level), "0")){
+//                        intent = new Intent(SigninActivity.this, DashboardWisatawanOLdActivity.class);
                         intent = new Intent(SigninActivity.this, DashboardWisatawanActivity.class);
                         break;
                     } else {

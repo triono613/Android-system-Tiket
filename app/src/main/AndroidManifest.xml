@@ -8,6 +8,8 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -28,23 +30,45 @@
         android:versionCode="2"
         tools:replace="android:label"
         tools:targetApi="m">
-        <activity android:name=".ReportKarcisL4Activity"></activity>
-        <activity android:name=".ReportKarcisL3Activity" />
-        <activity android:name=".ReportKarcisL2Activity" />
-        <activity android:name=".ReportClaimActivity" />
-        <activity android:name=".TableViewQuotaActivity" />
-        <activity android:name=".Adapter.PetugasAdapterKtActivity" />
-        <activity android:name=".Adapter.PetugasAdapterKuActivity" />
-        <activity android:name=".PesanKarcisPetugasOldActivity" />
-        <activity android:name=".NotifSuksesActivity" />
-        <activity android:name=".OrderTicketWisatawanActivity" />
-        <activity android:name=".PesanKarcisPetugasNewActivity" />
-        <activity android:name=".PopUpKarcisTambahanActivity" />
-        <activity android:name=".PopUpKarcisUtamaActivity" />
-        <activity android:name=".PopUpPintuActivity" />
-        <activity android:name=".LokasiWisataActivity" />
-        <activity android:name=".LokasiWisataScrollViewActivity" />
-        <activity android:name=".PopUpActivity" />
+
+        <activity
+            android:name=".DashboardWisatawanActivity"
+            android:screenOrientation="portrait" />
+
+        <activity android:name=".ReportKarcisL4Activity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ReportKarcisL3Activity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ReportKarcisL2Activity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ReportClaimActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".TableViewQuotaActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Adapter.PetugasAdapterKtActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Adapter.PetugasAdapterKuActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".PesanKarcisPetugasOldActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".NotifSuksesActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".OrderTicketWisatawanActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".PesanKarcisPetugasNewActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".PopUpKarcisTambahanActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".PopUpKarcisUtamaActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".PopUpPintuActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".LokasiWisataActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".LokasiWisataScrollViewActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".PopUpActivity"
+            android:screenOrientation="portrait" />
         <activity android:name=".Adapter.SessionManager" />
         <activity android:name=".Adapter.CustomAdapterViewPagerLokasiWisata" />
 
@@ -111,7 +135,7 @@
             android:name=".PesanKarcisWisatawanActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".DashboardWisatawanActivity"
+            android:name=".DashboardWisatawanOLdActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".DashboardPetugasActivity"
@@ -125,6 +149,7 @@
         <activity
             android:name=".SuccessRegistrasiWisatawanActivity"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".GetStartedActivity"
             android:screenOrientation="portrait">
