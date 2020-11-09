@@ -3,6 +3,8 @@ package com.amanahgithawisata.aga;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationListener;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
@@ -21,6 +23,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.amanahgithawisata.aga.Adapter.CustomAdapterFeatured;
 import com.amanahgithawisata.aga.Adapter.SessionManager;
 import com.amanahgithawisata.aga.Model.ModelFeatured;
@@ -28,7 +31,7 @@ import com.gauravk.bubblenavigation.BubbleNavigationLinearView;
 
 import java.util.ArrayList;
 
-public class DashboardWisatawanActivity extends AppCompatActivity {
+public class DashboardWisatawanActivity extends AppCompatActivity implements LocationListener {
 
     TextView txt_jljh_wis;
     TextView txt_jljh_wis_dec;
@@ -68,6 +71,8 @@ public class DashboardWisatawanActivity extends AppCompatActivity {
         
         featuredRecycle();
         recyclerViewWebView();
+
+        weather();
 
 
 
@@ -158,6 +163,66 @@ public class DashboardWisatawanActivity extends AppCompatActivity {
 
     }
 
+    @SuppressLint("SetTextI18n")
+    private void weather() {
+
+        String strDescWeather = "heavy intensity rain";
+        Log.i("","strDescWeather= "+strDescWeather);
+        LottieAnimationView iconTemp ;
+        TextView tvWeather,tvNamaKota,tvTempeatur,tvKecepatanAngin,tvKelembaban;
+
+        iconTemp = findViewById(R.id.iconTemp);
+        tvWeather = findViewById(R.id.tvWeather);
+        tvNamaKota = findViewById(R.id.tvNamaKota);
+        tvTempeatur = findViewById(R.id.tvTempeatur);
+        tvKecepatanAngin = findViewById(R.id.tvKecepatanAngin);
+        tvKelembaban = findViewById(R.id.tvKelembaban);
+
+
+        String strNamaKota ="Jakarta";
+        String dblTemperatur ="32";
+        String strKecepatanAngin = "1.61";
+        String strKelembaban = "66";
+
+        if (strDescWeather == "broken clouds") {
+            iconTemp.setAnimation(R.raw.broken_clouds);
+            tvWeather.setText("Awan Tersebar");
+        } else if (strDescWeather == "light rain") {
+            iconTemp.setAnimation(R.raw.light_rain);
+            tvWeather.setText( "Gerimis");
+        } else if (strDescWeather == "haze") {
+            iconTemp.setAnimation(R.raw.broken_clouds);
+            tvWeather.setText("Berkabut");
+        } else if (strDescWeather == "overcast clouds") {
+            iconTemp.setAnimation(R.raw.overcast_clouds);
+            tvWeather.setText( "Awan Mendung");
+        } else if (strDescWeather == "moderate rain") {
+            iconTemp.setAnimation(R.raw.moderate_rain);
+            tvWeather.setText("Hujan Ringan");
+        } else if (strDescWeather == "few clouds") {
+            iconTemp.setAnimation(R.raw.few_clouds);
+            tvWeather.setText( "Berawan");
+        } else if (strDescWeather == "heavy intensity rain") {
+            iconTemp.setAnimation(R.raw.heavy_intentsity);
+            tvWeather.setText( "Hujan Lebat" );
+        } else if (strDescWeather == "clear sky") {
+            iconTemp.setAnimation(R.raw.clear_sky);
+            tvWeather.setText( "Cerah");
+        } else if (strDescWeather == "scattered clouds") {
+            iconTemp.setAnimation(R.raw.scattered_clouds);
+            tvWeather.setText( "Awan Tersebar");
+        } else {
+            iconTemp.setAnimation(R.raw.unknown);
+            tvWeather.setText( "");
+        }
+
+        tvNamaKota.setText( strNamaKota);
+        tvTempeatur.setText(dblTemperatur + " \u2103 ");
+        tvKecepatanAngin.setText("Kecepatan Angin "+ strKecepatanAngin + "km/j" );
+        tvKelembaban.setText( "Kelembaban $strKelembaban %" );
+
+    }
+
     @SuppressLint("SetJavaScriptEnabled")
     private void recyclerViewWebView() {
 
@@ -225,4 +290,27 @@ public class DashboardWisatawanActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onLocationChanged(Location location) {
+        double lati = location.getLatitude();
+        double longi = location.getLongitude();
+
+        Log.i("","lati= "+ lati);
+        Log.i("","longi= "+ longi);
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
+    }
 }
