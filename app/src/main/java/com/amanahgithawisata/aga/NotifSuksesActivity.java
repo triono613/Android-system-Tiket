@@ -73,6 +73,36 @@ public class NotifSuksesActivity extends AppCompatActivity {
     LinearLayout linear_va_bottom_red;
 
 
+
+@Override
+    public void onBackPressed() {
+    performOperation();
+}
+
+    private void performOperation(  ) {
+        String result_dt_flag = getIntent().getStringExtra("result_dt_flag");
+
+        Intent intent;
+        if ( result_dt_flag.equals("flagPesanKarcisWisatawan") ){
+            intent = new Intent(NotifSuksesActivity.this, DashboardWisatawanActivity.class)
+                    .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        }
+        else if ( result_dt_flag.equals("detailTagihan") ){
+            intent = new Intent(NotifSuksesActivity.this, DashboardWisatawanActivity.class)
+                    .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        }
+        else  {
+            intent = new Intent(NotifSuksesActivity.this, DashboardPetugasActivity.class)
+                    .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        }
+        finish();
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+
+    }
+
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +137,7 @@ public class NotifSuksesActivity extends AppCompatActivity {
         String _nama_pengunjung = getIntent().getStringExtra("_nama_pengunjung");
         String _no_hp_pengunjung = getIntent().getStringExtra("_no_hp_pengunjung");
         String _email_pengunjung = getIntent().getStringExtra("_email_pengunjung");
+
 
          textview_nmr_va = (TextView) findViewById(R.id.textview_nmr_va);
          textview_nm_ket_kelompok = findViewById(R.id.textview_nm_ket_kelompok);

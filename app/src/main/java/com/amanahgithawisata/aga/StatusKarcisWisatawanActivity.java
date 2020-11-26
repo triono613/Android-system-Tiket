@@ -38,6 +38,9 @@ public class StatusKarcisWisatawanActivity extends AppCompatActivity {
     ArrayList<EntityStatusKarcisWisatawan> entityStatusKarcisArrayList;
     CustomAdapterEntityWisatawan customAdapter ;
 
+
+    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

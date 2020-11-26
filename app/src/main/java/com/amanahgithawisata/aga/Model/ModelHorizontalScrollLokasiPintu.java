@@ -13,6 +13,7 @@ public class ModelHorizontalScrollLokasiPintu {
     public String KdLokOld;
     public String NmLokOld;
     public String tgl_kunj_pintu;
+    public String tgl_kunj_pintu_2;
     public String result_dt_url_img_lokwis;
 
     public String result_jml_karcis_wisnu ;
@@ -39,7 +40,8 @@ public class ModelHorizontalScrollLokasiPintu {
                                             String result_jml_karcis_tmbhn ,
                                             String result_ttl_karcis_tmbhn ,
                                             String result_grand_ttl ,
-                                            String txt_harga_karcis_wisata_tmbhn
+                                            String txt_harga_karcis_wisata_tmbhn,
+                                            String tgl_kunj_pintu_2
                                             ) {
         this.judul = judul;
         this.text = text;
@@ -59,7 +61,16 @@ public class ModelHorizontalScrollLokasiPintu {
                 this.result_ttl_karcis_tmbhn 	     = result_ttl_karcis_tmbhn ;
                 this.result_grand_ttl              = result_grand_ttl ;
                 this.txt_harga_karcis_wisata_tmbhn = txt_harga_karcis_wisata_tmbhn;
+                this.tgl_kunj_pintu_2 = tgl_kunj_pintu_2;
 
+    }
+
+    public String getTgl_kunj_pintu_2() {
+        return tgl_kunj_pintu_2;
+    }
+
+    public void setTgl_kunj_pintu_2(String tgl_kunj_pintu_2) {
+        this.tgl_kunj_pintu_2 = tgl_kunj_pintu_2;
     }
 
     public String getResult_jml_karcis_wisnu() {

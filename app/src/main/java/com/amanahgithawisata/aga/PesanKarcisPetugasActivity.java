@@ -53,17 +53,19 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 public class PesanKarcisPetugasActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
-    TextView _tgl_kunjungan_ptgs;
+    TextView _tgl_kunjungan_ptgs,_tgl_kunjungan_ptgs_2;
     TextView _jml_krcs_wisnu_ptgs;
     TextView _jml_krcs_wisman_ptgs;
     TextView _ttl_ptgs;
@@ -107,6 +109,9 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
     TextView _url_image_kt;
 
     Button _btn_order_ptgs;
+    Button btn_detail_ku;
+    Button btn_detail_kt;
+
     ImageView _imgv;
     LinearLayout _linearLayoutKarcisUtama;
     LinearLayout _linearLayoutKarcisTambahan;
@@ -195,6 +200,7 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
         findViewById(R.id.loadingPanel).setVisibility(View.GONE);
 
         _tgl_kunjungan_ptgs = (TextView) findViewById(R.id.tgl_kunjungan_ptgs);
+        _tgl_kunjungan_ptgs_2 = (TextView) findViewById(R.id.tgl_kunjungan_ptgs_2);
         _jml_krcs_wisnu_ptgs = (EditText) findViewById(R.id.jml_krcs_wisnu_ptgs);
         _jml_krcs_wisman_ptgs = (EditText) findViewById(R.id.jml_krcs_wisman_ptgs);
         _jml_krcs_wisman_tmbhn_ptgs = (EditText) findViewById(R.id.jml_krcs_wisman_tmbhn_ptgs);
@@ -234,7 +240,9 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
         _harga_karcis_wisata_kt = findViewById(R.id.harga_karcis_wisata_kt);
         _harga_karcis_asuransi_kt = findViewById(R.id.harga_karcis_asuransi_kt);
         _id_kt = findViewById(R.id.id_kt);
-        _linearLayoutKarcisTambahan= findViewById(R.id.linearLayoutKarcisTambahan);
+        _linearLayoutKarcisTambahan = findViewById(R.id.linearLayoutKarcisTambahan);
+        btn_detail_ku = findViewById(R.id.btn_detail_ku);
+        btn_detail_kt = findViewById(R.id.btn_detail_kt);
 
         Log.i("","savedInstanceState "+savedInstanceState);
 
@@ -318,8 +326,32 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
         });
 
 
-        _linearLayoutKarcisUtama.setOnClickListener(v -> {
 
+
+        _tgl_kunjungan_ptgs_2.setOnFocusChangeListener((v13, hasFocus) -> {
+            if (hasFocus){
+                final Calendar c = Calendar.getInstance();
+                int mYear = c.get(Calendar.YEAR);
+                int mMonth = c.get(Calendar.MONTH);
+                int mDay = c.get(Calendar.DAY_OF_MONTH);
+                @SuppressLint("SetTextI18n") DatePickerDialog datePickerDialog = new DatePickerDialog(v13.getContext(),
+                        (view, year, monthOfYear, dayOfMonth) -> {
+                            @SuppressLint("SimpleDateFormat") SimpleDateFormat fr = new SimpleDateFormat("dd-MM-yyyy");
+                            _tgl_kunjungan_ptgs_2.setText( year + "-" + (monthOfYear + 1)  + "-" +dayOfMonth );
+                            try {
+                                CalculateKarcis();
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+
+                        },mYear , mMonth,mDay );
+                datePickerDialog.show();
+
+            }
+        });
+
+
+        btn_detail_ku.setOnClickListener(v -> {
             Log.i("","mode_pembayaran x"+ mode_pembayaran[0]);
 
             String txt_kdlokwis = _txt_kdlokwis.getText().toString().trim();
@@ -330,6 +362,7 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
             String nama_pengunjung = _nama_pengunjung_ptgs.getText().toString().trim();
             String hp_pengunjung = _hp_pengunjung_ptgs.getText().toString().trim();
             String email_pengunjung = _email_pengunjung.getText().toString().trim();
+            String tgl_kunjungan_ptgs_2 = _tgl_kunjungan_ptgs_2.getText().toString().trim();
 
             String txt_krcs_wisnu_ptgs = _jml_krcs_wisnu_ptgs.getText().toString();
             String txt_krcs_wisman_ptgs = _jml_krcs_wisman_ptgs.getText().toString();
@@ -359,6 +392,8 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
             i.putExtra("result_dt_kd_lokpintu", txt_kdlokPintu);
             i.putExtra("result_dt_nm_lokpintu",txt_nmlokPintu );
             i.putExtra("result_dt_tgl_kunj_lokwis",tgl_kujungan_val);
+            i.putExtra("result_dt_tgl_kunj_2_lokwis",tgl_kunjungan_ptgs_2);
+
 
             i.putExtra("nama_pengunjung",nama_pengunjung);
             i.putExtra("hp_pengunjung",hp_pengunjung);
@@ -386,152 +421,151 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
             i.putExtra("txt_harga_karcis_wisata_kt", txt_harga_karcis_wisata_kt);
             i.putExtra("txt_harga_karcis_asuransi_kt", txt_harga_karcis_asuransi_kt);
             i.putExtra("mode_pembayaran", mode_pembayaran[0]);
-
-
             startActivity(i);
         });
 
 
-        _linearLayoutKarcisTambahan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        btn_detail_kt.setOnClickListener(v -> {
 
-                String txt_kdlokwis = _txt_kdlokwis.getText().toString().trim();
-                String txt_nmlokWis = _txt_nmlokwis.getText().toString().trim();
-                String txt_kdlokPintu = _txt_kdlokPintu.getText().toString().trim();
-                String txt_nmlokPintu = _txt_nmlokPintu.getText().toString().trim();
-                String tgl_kujungan_val = _txt_tgl_kunjungan_order.getText().toString().trim();
-                String nama_pengunjung = _nama_pengunjung_ptgs.getText().toString().trim();
-                String hp_pengunjung = _hp_pengunjung_ptgs.getText().toString().trim();
-                String email_pengunjung = _email_pengunjung.getText().toString().trim();
-
-                String txt_krcs_wisnu_ptgs = _jml_krcs_wisnu_ptgs.getText().toString();
-                String txt_krcs_wisman_ptgs = _jml_krcs_wisman_ptgs.getText().toString();
-                String txt_ttl_ptgs = _ttl_ptgs.getText().toString().trim();
-                String txt_jml_krcs_wisman_tmbhn_ptgs = _jml_krcs_wisman_tmbhn_ptgs.getText().toString().trim();
-                String txt_ttl_tmbhn_ptgs = _ttl_tmbhn_ptgs.getText().toString().trim();
-                String txt_grand_ttl_ptgs = _grand_ttl_ptgs.getText().toString().trim();
-
-                String	  txt_kode_ksda_ku = _kode_ksda_ku.getText().toString().trim();
-                String    txt_kode_lokasi_ku = _kode_lokasi_ku.getText().toString().trim();
-                String    txt_kode_karcis_ku = _kode_karcis_ku.getText().toString().trim();
-                String    txt_nama_karcis_ku = _nama_karcis_ku.getText().toString().trim();
-                String    txt_kode_libur_ku = _kode_libur_ku.getText().toString().trim();
-                String    txt_harga_karcis_wisata_wisnu_ku = _harga_karcis_wisata_wisnu_ku.getText().toString().trim();
-                String    txt_harga_karcis_wisata_wisman_ku = _harga_karcis_wisata_wisman_ku.getText().toString().trim();
-                String    txt_harga_karcis_asuransi_wisnu_ku = _harga_karcis_asuransi_wisnu_ku.getText().toString().trim();
-                String    txt_harga_karcis_asuransi_wisman_ku = _harga_karcis_asuransi_wisman_ku.getText().toString().trim();
-                String    txt_id_ku = _id_ku.getText().toString().trim();;
-                String    txt_id_kt = _id_kt.getText().toString().trim();;
-
-                String txt_kode_ksda_kt = _kode_ksda_kt.getText().toString().trim();
-                String txt_kode_lokasi_kt = _kode_lokasi_kt.getText().toString().trim();
-                String txt_kode_karcis_kt = _kode_karcis_kt.getText().toString().trim();
-                String txt_nama_karcis_kt = _nama_karcis_kt.getText().toString().trim();
-                String txt_kode_libur_kt = _kode_libur_kt.getText().toString().trim();
-                String txt_harga_karcis_wisata_kt = _harga_karcis_wisata_kt.getText().toString().trim();
-                String txt_harga_karcis_asuransi_kt = _harga_karcis_asuransi_kt.getText().toString().trim();
+            String txt_kdlokwis = _txt_kdlokwis.getText().toString().trim();
+            String txt_nmlokWis = _txt_nmlokwis.getText().toString().trim();
+            String txt_kdlokPintu = _txt_kdlokPintu.getText().toString().trim();
+            String txt_nmlokPintu = _txt_nmlokPintu.getText().toString().trim();
+            String tgl_kujungan_val = _txt_tgl_kunjungan_order.getText().toString().trim();
+            String nama_pengunjung = _nama_pengunjung_ptgs.getText().toString().trim();
+            String hp_pengunjung = _hp_pengunjung_ptgs.getText().toString().trim();
+            String email_pengunjung = _email_pengunjung.getText().toString().trim();
+            String tgl_kunjungan_ptgs_2 = _tgl_kunjungan_ptgs_2.getText().toString().trim();
 
 
-                Log.i("","result_dt_kd_lokpintu kt"+txt_kdlokPintu);
-                Log.i("","txt_harga_karcis_wisata_kt kt"+txt_harga_karcis_wisata_kt);
+            String txt_krcs_wisnu_ptgs = _jml_krcs_wisnu_ptgs.getText().toString();
+            String txt_krcs_wisman_ptgs = _jml_krcs_wisman_ptgs.getText().toString();
+            String txt_ttl_ptgs = _ttl_ptgs.getText().toString().trim();
+            String txt_jml_krcs_wisman_tmbhn_ptgs = _jml_krcs_wisman_tmbhn_ptgs.getText().toString().trim();
+            String txt_ttl_tmbhn_ptgs = _ttl_tmbhn_ptgs.getText().toString().trim();
+            String txt_grand_ttl_ptgs = _grand_ttl_ptgs.getText().toString().trim();
+
+            String	  txt_kode_ksda_ku = _kode_ksda_ku.getText().toString().trim();
+            String    txt_kode_lokasi_ku = _kode_lokasi_ku.getText().toString().trim();
+            String    txt_kode_karcis_ku = _kode_karcis_ku.getText().toString().trim();
+            String    txt_nama_karcis_ku = _nama_karcis_ku.getText().toString().trim();
+            String    txt_kode_libur_ku = _kode_libur_ku.getText().toString().trim();
+            String    txt_harga_karcis_wisata_wisnu_ku = _harga_karcis_wisata_wisnu_ku.getText().toString().trim();
+            String    txt_harga_karcis_wisata_wisman_ku = _harga_karcis_wisata_wisman_ku.getText().toString().trim();
+            String    txt_harga_karcis_asuransi_wisnu_ku = _harga_karcis_asuransi_wisnu_ku.getText().toString().trim();
+            String    txt_harga_karcis_asuransi_wisman_ku = _harga_karcis_asuransi_wisman_ku.getText().toString().trim();
+            String    txt_id_ku = _id_ku.getText().toString().trim();;
+            String    txt_id_kt = _id_kt.getText().toString().trim();;
+
+            String txt_kode_ksda_kt = _kode_ksda_kt.getText().toString().trim();
+            String txt_kode_lokasi_kt = _kode_lokasi_kt.getText().toString().trim();
+            String txt_kode_karcis_kt = _kode_karcis_kt.getText().toString().trim();
+            String txt_nama_karcis_kt = _nama_karcis_kt.getText().toString().trim();
+            String txt_kode_libur_kt = _kode_libur_kt.getText().toString().trim();
+            String txt_harga_karcis_wisata_kt = _harga_karcis_wisata_kt.getText().toString().trim();
+            String txt_harga_karcis_asuransi_kt = _harga_karcis_asuransi_kt.getText().toString().trim();
 
 
-                Intent i = new Intent(v.getContext(), PetugasAdapterKtActivity.class);
-
-                i.putExtra("txt_kode_ksda_kt", txt_kode_ksda_kt);
-                i.putExtra("txt_kode_lokasi_kt", txt_kode_lokasi_kt);
-                i.putExtra("txt_kode_karcis_kt", txt_kode_karcis_kt);
-                i.putExtra("txt_nama_karcis_kt", txt_nama_karcis_kt);
-                i.putExtra("txt_kode_libur_kt", txt_kode_libur_kt);
-                i.putExtra("txt_harga_karcis_wisata_kt", txt_harga_karcis_wisata_kt);
-                i.putExtra("txt_harga_karcis_asuransi_kt", txt_harga_karcis_asuransi_kt);
-                i.putExtra("txt_id_kt", txt_id_kt);
-                i.putExtra("txt_id_ku", txt_id_ku);
-
-                i.putExtra("result_dt_kd_lokwis", txt_kdlokwis);
-                i.putExtra("result_dt_nm_lokwis",txt_nmlokWis );
-                i.putExtra("result_dt_kd_lokpintu", txt_kdlokPintu);
-                i.putExtra("result_dt_nm_lokpintu",txt_nmlokPintu );
-                i.putExtra("result_dt_tgl_kunj_lokwis",tgl_kujungan_val);
-
-                i.putExtra("nama_pengunjung",nama_pengunjung);
-                i.putExtra("hp_pengunjung",hp_pengunjung);
-                i.putExtra("email_pengunjung",email_pengunjung);
-
-                i.putExtra("txt_kode_ksda_ku", txt_kode_ksda_ku);
-                i.putExtra("txt_kode_lokasi_ku", txt_kode_lokasi_ku);
-                i.putExtra("txt_kode_karcis_ku", txt_kode_karcis_ku);
-                i.putExtra("txt_nama_karcis_ku", txt_nama_karcis_ku);
-                i.putExtra("txt_kode_libur_ku", txt_kode_libur_ku);
-                i.putExtra("txt_harga_karcis_wisata_wisnu_ku", txt_harga_karcis_wisata_wisnu_ku);
-                i.putExtra("txt_harga_karcis_wisata_wisman_ku", txt_harga_karcis_wisata_wisman_ku);
-                i.putExtra("txt_harga_karcis_asuransi_wisnu_ku", txt_harga_karcis_asuransi_wisnu_ku);
-                i.putExtra("txt_harga_karcis_asuransi_wisman_ku", txt_harga_karcis_asuransi_wisman_ku);
-                i.putExtra("txt_id_ku", txt_id_ku);
-
-                i.putExtra("txt_krcs_wisnu_ptgs", txt_krcs_wisnu_ptgs);
-                i.putExtra("txt_krcs_wisman_ptgs", txt_krcs_wisman_ptgs);
-                i.putExtra("txt_ttl_ptgs", txt_ttl_ptgs);
-                i.putExtra("txt_jml_krcs_wisman_tmbhn_ptgs", txt_jml_krcs_wisman_tmbhn_ptgs);
-                i.putExtra("txt_ttl_tmbhn_ptgs", txt_ttl_tmbhn_ptgs);
-                i.putExtra("txt_grand_ttl_ptgs", txt_grand_ttl_ptgs);
-                i.putExtra("mode_pembayaran", mode_pembayaran[0]);
+            Log.i("","result_dt_kd_lokpintu kt"+txt_kdlokPintu);
+            Log.i("","txt_harga_karcis_wisata_kt kt"+txt_harga_karcis_wisata_kt);
 
 
-                startActivity(i);
+            Intent i = new Intent(v.getContext(), PetugasAdapterKtActivity.class);
 
-            }
+            i.putExtra("txt_kode_ksda_kt", txt_kode_ksda_kt);
+            i.putExtra("txt_kode_lokasi_kt", txt_kode_lokasi_kt);
+            i.putExtra("txt_kode_karcis_kt", txt_kode_karcis_kt);
+            i.putExtra("txt_nama_karcis_kt", txt_nama_karcis_kt);
+            i.putExtra("txt_kode_libur_kt", txt_kode_libur_kt);
+            i.putExtra("txt_harga_karcis_wisata_kt", txt_harga_karcis_wisata_kt);
+            i.putExtra("txt_harga_karcis_asuransi_kt", txt_harga_karcis_asuransi_kt);
+            i.putExtra("txt_id_kt", txt_id_kt);
+            i.putExtra("txt_id_ku", txt_id_ku);
+            i.putExtra("tgl_kunjungan_ptgs_2",tgl_kunjungan_ptgs_2);
+
+
+            i.putExtra("result_dt_kd_lokwis", txt_kdlokwis);
+            i.putExtra("result_dt_nm_lokwis",txt_nmlokWis );
+            i.putExtra("result_dt_kd_lokpintu", txt_kdlokPintu);
+            i.putExtra("result_dt_nm_lokpintu",txt_nmlokPintu );
+            i.putExtra("result_dt_tgl_kunj_lokwis",tgl_kujungan_val);
+
+            i.putExtra("nama_pengunjung",nama_pengunjung);
+            i.putExtra("hp_pengunjung",hp_pengunjung);
+            i.putExtra("email_pengunjung",email_pengunjung);
+
+            i.putExtra("txt_kode_ksda_ku", txt_kode_ksda_ku);
+            i.putExtra("txt_kode_lokasi_ku", txt_kode_lokasi_ku);
+            i.putExtra("txt_kode_karcis_ku", txt_kode_karcis_ku);
+            i.putExtra("txt_nama_karcis_ku", txt_nama_karcis_ku);
+            i.putExtra("txt_kode_libur_ku", txt_kode_libur_ku);
+            i.putExtra("txt_harga_karcis_wisata_wisnu_ku", txt_harga_karcis_wisata_wisnu_ku);
+            i.putExtra("txt_harga_karcis_wisata_wisman_ku", txt_harga_karcis_wisata_wisman_ku);
+            i.putExtra("txt_harga_karcis_asuransi_wisnu_ku", txt_harga_karcis_asuransi_wisnu_ku);
+            i.putExtra("txt_harga_karcis_asuransi_wisman_ku", txt_harga_karcis_asuransi_wisman_ku);
+            i.putExtra("txt_id_ku", txt_id_ku);
+
+            i.putExtra("txt_krcs_wisnu_ptgs", txt_krcs_wisnu_ptgs);
+            i.putExtra("txt_krcs_wisman_ptgs", txt_krcs_wisman_ptgs);
+            i.putExtra("txt_ttl_ptgs", txt_ttl_ptgs);
+            i.putExtra("txt_jml_krcs_wisman_tmbhn_ptgs", txt_jml_krcs_wisman_tmbhn_ptgs);
+            i.putExtra("txt_ttl_tmbhn_ptgs", txt_ttl_tmbhn_ptgs);
+            i.putExtra("txt_grand_ttl_ptgs", txt_grand_ttl_ptgs);
+            i.putExtra("mode_pembayaran", mode_pembayaran[0]);
+
+
+            startActivity(i);
+
         });
 
 
-        _btn_order_ptgs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        _btn_order_ptgs.setOnClickListener((View.OnClickListener) v -> {
 
-                RadioGroup rg_cara_bayarn = (RadioGroup)findViewById(R.id.rg_cara_bayar);
+            RadioGroup rg_cara_bayarn1 = (RadioGroup)findViewById(R.id.rg_cara_bayar);
+            final  String hp_pengunjung = _hp_pengunjung_ptgs.getText().toString().trim();
+            final String email_pengunjung = _email_pengunjung.getText().toString().trim();
+            final String nama_pengunjung = _nama_pengunjung_ptgs.getText().toString().trim();
+            final String _nama_lokasi = _txt_nmlokwis.getText().toString().trim();
+            final String _jml_krcs_tmbhn = _jml_krcs_wisman_tmbhn_ptgs.getText().toString().trim();
+            String tgl_kunjungan_ptgs_2 = _tgl_kunjungan_ptgs_2.getText().toString().trim();
 
-
-
-
-
-                final  String hp_pengunjung = _hp_pengunjung_ptgs.getText().toString().trim();
-                final String email_pengunjung = _email_pengunjung.getText().toString().trim();
-                final String nama_pengunjung = _nama_pengunjung_ptgs.getText().toString().trim();
-                final String _nama_lokasi = _txt_nmlokwis.getText().toString().trim();
-                final String _jml_krcs_tmbhn = _jml_krcs_wisman_tmbhn_ptgs.getText().toString().trim();
-
-                 if(TextUtils.isEmpty(hp_pengunjung) ) {
-                    _hp_pengunjung_ptgs.setError("Nomor Hp Tidak Boleh Kosong!");
-                }
-                else if(TextUtils.isEmpty(email_pengunjung) ) {
-                    _email_pengunjung.setError("Email Tidak Boleh Kosong!");
-                }
-                else if(TextUtils.isEmpty(nama_pengunjung) ) {
-                    _nama_pengunjung_ptgs.setError("Nama Tidak Boleh Kosong!");
-                }
-
-                else {
-                    inputKarcisPetugas("input_petugas", mode_pembayaran[0],_nama_lokasi, _jml_krcs_tmbhn);
-                }
-
+             if(TextUtils.isEmpty(hp_pengunjung) ) {
+                _hp_pengunjung_ptgs.setError("Nomor Hp Tidak Boleh Kosong!");
             }
+            else if(TextUtils.isEmpty(email_pengunjung) ) {
+                _email_pengunjung.setError("Email Tidak Boleh Kosong!");
+            }
+            else if(TextUtils.isEmpty(nama_pengunjung) ) {
+                _nama_pengunjung_ptgs.setError("Nama Tidak Boleh Kosong!");
+            }
+            else if( TextUtils.isEmpty(tgl_kunjungan_ptgs_2) ) {
+                 _tgl_kunjungan_ptgs_2.setError("Rentang Tgl Tidak Boleh Kosong!");
+                 _tgl_kunjungan_ptgs_2.requestFocus();
+             }
+            else {
+                 try {
+                     inputKarcisPetugas("new_input_petugas", mode_pembayaran[0],_nama_lokasi, _jml_krcs_tmbhn,get_selisih_day());
+                 } catch (ParseException e) {
+                     e.printStackTrace();
+                 }
+             }
+
         });
 
         _jml_krcs_wisnu_ptgs.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
-
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
             }
-
             @Override
             public void afterTextChanged(Editable s) {
-                CalculateKarcis();
+                try {
+                    CalculateKarcis();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -539,16 +573,17 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
         _jml_krcs_wisman_ptgs.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
-
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
             }
-
             @Override
             public void afterTextChanged(Editable s) {
-                CalculateKarcis();
+                try {
+                    CalculateKarcis();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -557,15 +592,24 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 //                CalculateKarcis();
             }
-
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
             }
-
             @Override
-            public void afterTextChanged(Editable s) {  CalculateKarcis();  }
+            public void afterTextChanged(Editable s) {
+                try {
+                    CalculateKarcis();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
         });
+
+
+
+
+
+
 
         /* this for adapter karcis utama */
         String result_dt_jml_karcis_wisnu = getIntent().getStringExtra("result_jml_karcis_wisnu");
@@ -579,6 +623,7 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
         String result_dt_hp_pengunjung = getIntent().getStringExtra("result_dt_hp_pengunjung");
         String result_dt_email_pengunjung = getIntent().getStringExtra("result_dt_email_pengunjung");
         boolean result_dt_flag_ku = getIntent().getBooleanExtra("result_dt_flag_ku",false);
+        String result_dt_tgl_kunj_2 = getIntent().getStringExtra("result_dt_tgl_kunj_2");
 
         String result_dt_id_ku = getIntent().getStringExtra("result_dt_id_ku");
         String result_dt_kodeKarcis_ku = getIntent().getStringExtra("result_dt_kodeKarcis");
@@ -597,6 +642,7 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
         String result_dt_url_img_lokWis_ku = getIntent().getStringExtra("result_dt_url_img_lokWisOld");
         boolean result_dt_flag_kt = getIntent().getBooleanExtra("result_dt_flag_kt",false);
         String result_dt_mode_pembayaran = getIntent().getStringExtra("result_dt_mode_pembayaran");
+        String result_dt_tgl_kunjungan_ptgs_2_kt_ptgs = getIntent().getStringExtra("result_dt_tgl_kunjungan_ptgs_2_kt_ptgs");
 
 
         /*  this for adapter karcis tambahan  */
@@ -651,6 +697,7 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
             _nama_pengunjung_ptgs.setText(result_dt_nama_pengunjung);
             _ttl_tmbhn_ptgs.setText(result_dt_ttl_karcis_tmbhn);
             _grand_ttl_ptgs.setText(result_dt_grand_ttl);
+            _tgl_kunjungan_ptgs_2.setText(result_dt_tgl_kunj_2);
 
             _id_kt.setText(result_dt_id_kt);
 
@@ -695,6 +742,7 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
             _nama_pengunjung_ptgs.setText(result_dt_nama_pengunjung);
             _ttl_tmbhn_ptgs.setText(result_dt_ttl_karcis_tmbhn);
             _grand_ttl_ptgs.setText(result_dt_grand_ttl);
+            _tgl_kunjungan_ptgs_2.setText(result_dt_tgl_kunjungan_ptgs_2_kt_ptgs);
 
             Log.i("","result_dt_kdlokPintu_kt kt"+result_dt_kdlokPintu_kt);
             Log.i("","result_dt_id_ku kt"+result_dt_id_ku);
@@ -825,18 +873,10 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
         }
 
 
-    public void CalculateKarcis(){
+    public void CalculateKarcis() throws ParseException {
         final double _jml_krcs_wisnu = Help.ParseDouble(((EditText) findViewById(R.id.jml_krcs_wisnu_ptgs)).getText().toString());
         final double _jml_krcs_wisman = Help.ParseDouble(((EditText) findViewById(R.id.jml_krcs_wisman_ptgs)).getText().toString());
         final double _jml_krcs_tmbhn = Help.ParseDouble(((EditText) findViewById(R.id.jml_krcs_wisman_tmbhn_ptgs)).getText().toString());
-
-
-//        final double hrg_krcs_wisnu = Help.ParseDouble(sessionManager.getDaftarKarcisWisatawanUtama().get(SessionManager.key_harga_karcis_wisata_wisnu));
-//        final double hrg_krcs_wisman = Help.ParseDouble(sessionManager.getDaftarKarcisWisatawanUtama().get(SessionManager.key_harga_karcis_wisata_wisman));
-//        final double hrg_krcs_tmbhn = Help.ParseDouble(sessionManager.getDaftarKarcisWisatawanTmbhn().get(SessionManager.key_harga_karcis_wisata_tmbhn));
-//        final double hrg_krcs_asrnsi_wisnu = Help.ParseDouble(sessionManager.getDaftarKarcisWisatawanUtama().get(SessionManager.key_harga_karcis_asuransi_wisnu));
-//        final double hrg_krcs_asrnsi_wisman = Help.ParseDouble(sessionManager.getDaftarKarcisWisatawanUtama().get(SessionManager.key_harga_karcis_asuransi_wisman));
-
 
         final double hrg_krcs_wisnu = Help.ParseDouble(((TextView) findViewById(R.id.harga_karcis_wisata_wisnu_ku)).getText().toString());
         final double hrg_krcs_wisman = Help.ParseDouble(((TextView) findViewById(R.id.harga_karcis_wisata_wisman_ku)).getText().toString());
@@ -844,35 +884,93 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
         final double hrg_krcs_asrnsi_wisnu = Help.ParseDouble(((TextView) findViewById(R.id.harga_karcis_asuransi_wisnu_ku)).getText().toString());
         final double hrg_krcs_asrnsi_wisman = Help.ParseDouble(((TextView) findViewById(R.id.harga_karcis_asuransi_wisman_ku)).getText().toString());
 
+//        final int  ttl_wisnu = (int) ((hrg_krcs_wisnu+hrg_krcs_asrnsi_wisnu)*_jml_krcs_wisnu);
+//        final int   ttl_wisman =(int) ((hrg_krcs_wisman+hrg_krcs_asrnsi_wisman)*_jml_krcs_wisman);
+//        final int ttl_wisnu_wisman = (ttl_wisnu+ttl_wisman);
+//        final int ttl_tmbhn = (int) (hrg_krcs_tmbhn*_jml_krcs_tmbhn);
+//        final int grand_ttl =(int) (ttl_wisnu_wisman+ttl_tmbhn);
 
-        Log.i("tag","hrg_krcs_tmbhn= "+ hrg_krcs_tmbhn);
+        final int  ttl_wisnu ;
+        final int   ttl_wisman;
+        final int ttl_wisnu_wisman ;
+        final int ttl_tmbhn ;
+        final int grand_ttl ;
+
+
+        long selisih_day = get_selisih_day();
+        Log.i("","selisih_day calc"+selisih_day);
+
+        /* Rumus perhitungan karcis dan biaya asuransi  */
+        int new_ttl;
+        if( selisih_day >0 ){
+            ttl_wisnu = (int) ((hrg_krcs_wisnu+hrg_krcs_asrnsi_wisnu)*_jml_krcs_wisnu)* (int) selisih_day;
+            ttl_wisman =(int) ((hrg_krcs_wisman+hrg_krcs_asrnsi_wisman)*_jml_krcs_wisman * (int) selisih_day);
+        } else {
+            ttl_wisnu = (int) ((hrg_krcs_wisnu+hrg_krcs_asrnsi_wisnu)*_jml_krcs_wisnu);
+            ttl_wisman =(int) ((hrg_krcs_wisman+hrg_krcs_asrnsi_wisman)*_jml_krcs_wisman);
+        }
+
+
+        ttl_wisnu_wisman = (ttl_wisnu+ttl_wisman);
+        if( selisih_day >0 ){
+            ttl_tmbhn = (int) ((hrg_krcs_tmbhn*_jml_krcs_tmbhn)*  (int) selisih_day);
+        } else {
+            ttl_tmbhn = (int) (hrg_krcs_tmbhn*_jml_krcs_tmbhn);
+        }
+
+        grand_ttl =(int) (ttl_wisnu_wisman+ttl_tmbhn);
+
         Log.i("tag","_jml_krcs_wisnu= "+ _jml_krcs_wisnu);
         Log.i("tag","_jml_krcs_wisman= "+ _jml_krcs_wisman);
-        Log.i("tag","_jml_krcs_tmbhn= "+ _jml_krcs_tmbhn);
+        Log.i("tag","calc _jml_krcs_tmbhn= "+ _jml_krcs_tmbhn);
 
         Log.i("tag","hrg_krcs_wisnu= "+ hrg_krcs_wisnu);
         Log.i("tag","hrg_krcs_wisman= "+ hrg_krcs_wisman);
-
+        Log.i("tag","hrg_krcs_tmbhn= "+ hrg_krcs_tmbhn);
         Log.i("tag","hrg_krcs_asrnsi_wisnu= "+ hrg_krcs_asrnsi_wisnu);
         Log.i("tag","hrg_krcs_asrnsi_wisman= "+ hrg_krcs_asrnsi_wisman);
 
-        final int  ttl_wisnu = (int) ((hrg_krcs_wisnu+hrg_krcs_asrnsi_wisnu)*_jml_krcs_wisnu);
-        final int   ttl_wisman =(int) ((hrg_krcs_wisman+hrg_krcs_asrnsi_wisman)*_jml_krcs_wisman);
-        final int ttl_wisnu_wisman = (ttl_wisnu+ttl_wisman);
-        final int ttl_tmbhn = (int) (hrg_krcs_tmbhn*_jml_krcs_tmbhn);
-        final int grand_ttl =(int) (ttl_wisnu_wisman+ttl_tmbhn);
+        Log.i("tag","calc ttl_wisnu= "+ ttl_wisnu);
+        Log.i("tag","calc ttl_wisman= "+ ttl_wisman);
+        Log.i("tag","ttl_wisnu_wisman= "+ttl_wisnu_wisman);
+        Log.i("tag","ttl_tmbhn = "+ttl_tmbhn);
+        Log.i("tag","grand_ttl = "+grand_ttl);
 
         _ttl_ptgs.setText(String.valueOf(ttl_wisnu_wisman));
         _ttl_tmbhn_ptgs.setText(String.valueOf(ttl_tmbhn));
         _grand_ttl_ptgs.setText(String.valueOf(grand_ttl));
 
-        Log.i("tag","ttl_wisnu= "+ ttl_wisnu);
-        Log.i("tag","ttl_wisman= "+ ttl_wisman);
-        Log.i("tag","ttl_wisnu_wisman= "+ttl_wisnu_wisman);
-        Log.i("tag","ttl_tmbhn = "+ttl_tmbhn);
-        Log.i("tag","grand_ttl = "+grand_ttl);
+//        _txt_day.setText(" x "+ selisih_day +" Hari.");
+
+//        _ttl_ptgs.setText(String.valueOf(ttl_wisnu_wisman));
+//        _ttl_tmbhn_ptgs.setText(String.valueOf(ttl_tmbhn));
+//        _grand_ttl_ptgs.setText(String.valueOf(grand_ttl));
+
     }
 
+
+    public long get_selisih_day() throws ParseException {
+        final String TGL =  _txt_tgl_kunjungan_order.getText().toString().trim();
+        final String TGL2 =  _tgl_kunjungan_ptgs_2.getText().toString().trim();
+        String dateStr1 = TGL;
+        String dateStr2 = TGL2;
+
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date dateOne = sdf.parse(dateStr1);
+        Date dateTwo = sdf.parse(dateStr2);
+
+        long timeOne = dateOne.getTime();
+        long timeTwo = dateTwo.getTime();
+        long oneDay = 1000 * 60 * 60 * 24;
+        long selisih_hari = ((timeTwo - timeOne) / oneDay)+1;
+
+//    Log.i("","calc selisih_hari fn "+selisih_hari);
+//    Log.i("","TGL "+TGL);
+//    Log.i("","TGL2 "+TGL2);
+
+        return selisih_hari;
+
+    }
 
     private void quotaTwa(String EP,String KSDA){
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
@@ -1320,15 +1418,6 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
                                         String _harga_karcis_asuransi = jsonObject1.getString("harga_karcis_asuransi");
                                         String _id = jsonObject1.getString("id");
 
-//                                        sessionManager.createSessionWisTmbhn(_kode_ksda,
-//                                                                            _kode_lokasi,
-//                                                                            _kode_karcis,
-//                                                                            _nama_karcis,
-//                                                                            _kode_libur,
-//                                                                            _harga_karcis_wisata,
-//                                                                            _harga_karcis_asuransi,
-//                                                                            _id );
-
 
                                             _id_kt.setText(_id);
                                             _kode_ksda_kt.setText(_kode_ksda);
@@ -1458,22 +1547,46 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
                                             final double hrg_krcs_asrnsi_wisman = Help.ParseDouble(harga_karcis_asuransi_wisman_ku);
 
 
-                                            Log.i("tag","hrg_krcs_tmbhn lin= "+ hrg_krcs_tmbhn);
-                                            Log.i("tag","_jml_krcs_wisnu lin= "+ _jml_krcs_wisnu);
-                                            Log.i("tag","_jml_krcs_wisman lin= "+ _jml_krcs_wisman);
-                                            Log.i("tag","_jml_krcs_tmbhn lin= "+ _jml_krcs_tmbhn);
+//                                            final int  ttl_wisnu = (int) ((hrg_krcs_wisnu+hrg_krcs_asrnsi_wisnu)*_jml_krcs_wisnu);
+//                                            final int   ttl_wisman =(int) ((hrg_krcs_wisman+hrg_krcs_asrnsi_wisman)*_jml_krcs_wisman);
+//                                            final int ttl_wisnu_wisman = (ttl_wisnu+ttl_wisman);
+//                                            final int ttl_tmbhn = (int) (hrg_krcs_tmbhn*_jml_krcs_tmbhn);
+//                                            final int grand_ttl =(int) (ttl_wisnu_wisman+ttl_tmbhn);
+//
+//                                            _ttl_ptgs.setText(String.valueOf(ttl_wisnu_wisman));
+//                                            _ttl_tmbhn_ptgs.setText(String.valueOf(ttl_tmbhn));
+//                                            _grand_ttl_ptgs.setText(String.valueOf(grand_ttl));
 
-                                            Log.i("tag","hrg_krcs_wisnu lin= "+ hrg_krcs_wisnu);
-                                            Log.i("tag","hrg_krcs_wisman lin= "+ hrg_krcs_wisman);
 
-                                            Log.i("tag","hrg_krcs_asrnsi_wisnu lin= "+ hrg_krcs_asrnsi_wisnu);
-                                            Log.i("tag","hrg_krcs_asrnsi_wisman lin= "+ hrg_krcs_asrnsi_wisman);
+                                            final int  ttl_wisnu ;
+                                            final int   ttl_wisman;
+                                            final int ttl_wisnu_wisman ;
+                                            final int ttl_tmbhn ;
+                                            final int grand_ttl ;
 
-                                            final int  ttl_wisnu = (int) ((hrg_krcs_wisnu+hrg_krcs_asrnsi_wisnu)*_jml_krcs_wisnu);
-                                            final int   ttl_wisman =(int) ((hrg_krcs_wisman+hrg_krcs_asrnsi_wisman)*_jml_krcs_wisman);
-                                            final int ttl_wisnu_wisman = (ttl_wisnu+ttl_wisman);
-                                            final int ttl_tmbhn = (int) (hrg_krcs_tmbhn*_jml_krcs_tmbhn);
-                                            final int grand_ttl =(int) (ttl_wisnu_wisman+ttl_tmbhn);
+
+                                            long selisih_day = get_selisih_day();
+                                            Log.i("","selisih_day calc"+selisih_day);
+
+                                            /* Rumus perhitungan karcis dan biaya asuransi  */
+                                            int new_ttl;
+                                            if( selisih_day >0 ){
+                                                ttl_wisnu = (int) ((hrg_krcs_wisnu+hrg_krcs_asrnsi_wisnu)*_jml_krcs_wisnu)* (int) selisih_day;
+                                                ttl_wisman =(int) ((hrg_krcs_wisman+hrg_krcs_asrnsi_wisman)*_jml_krcs_wisman * (int) selisih_day);
+                                            } else {
+                                                ttl_wisnu = (int) ((hrg_krcs_wisnu+hrg_krcs_asrnsi_wisnu)*_jml_krcs_wisnu);
+                                                ttl_wisman =(int) ((hrg_krcs_wisman+hrg_krcs_asrnsi_wisman)*_jml_krcs_wisman);
+                                            }
+
+
+                                            ttl_wisnu_wisman = (ttl_wisnu+ttl_wisman);
+                                            if( selisih_day >0 ){
+                                                ttl_tmbhn = (int) ((hrg_krcs_tmbhn*_jml_krcs_tmbhn)*  (int) selisih_day);
+                                            } else {
+                                                ttl_tmbhn = (int) (hrg_krcs_tmbhn*_jml_krcs_tmbhn);
+                                            }
+
+                                            grand_ttl =(int) (ttl_wisnu_wisman+ttl_tmbhn);
 
                                             _ttl_ptgs.setText(String.valueOf(ttl_wisnu_wisman));
                                             _ttl_tmbhn_ptgs.setText(String.valueOf(ttl_tmbhn));
@@ -1492,7 +1605,7 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
                                 }
                             }
 
-                        } catch (JSONException e) {
+                        } catch (JSONException | ParseException e) {
                             e.printStackTrace();
                         }
                         requestQueue.stop();
@@ -1580,7 +1693,6 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
                                             final double _jml_krcs_wisman = Help.ParseDouble( jml_karcis_wisman );
                                             final double _jml_krcs_tmbhn = Help.ParseDouble( jml_karcis_tmbhn );
 
-
                                             final double hrg_krcs_wisnu = Help.ParseDouble( harga_karcis_wisata_wisnu_ku);
                                             final double hrg_krcs_wisman = Help.ParseDouble(harga_karcis_wisata_wisman_ku);
                                             final double hrg_krcs_tmbhn = Help.ParseDouble(_harga_karcis_wisata);
@@ -1588,27 +1700,48 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
                                             final double hrg_krcs_asrnsi_wisman = Help.ParseDouble(harga_karcis_asuransi_wisman_ku);
 
 
-                                            Log.i("tag","hrg_krcs_tmbhn lin= "+ hrg_krcs_tmbhn);
-                                            Log.i("tag","_jml_krcs_wisnu lin= "+ _jml_krcs_wisnu);
-                                            Log.i("tag","_jml_krcs_wisman lin= "+ _jml_krcs_wisman);
-                                            Log.i("tag","_jml_krcs_tmbhn lin= "+ _jml_krcs_tmbhn);
+//                                            final int  ttl_wisnu = (int) ((hrg_krcs_wisnu+hrg_krcs_asrnsi_wisnu)*_jml_krcs_wisnu);
+//                                            final int   ttl_wisman =(int) ((hrg_krcs_wisman+hrg_krcs_asrnsi_wisman)*_jml_krcs_wisman);
+//                                            final int ttl_wisnu_wisman = (ttl_wisnu+ttl_wisman);
+//                                            final int ttl_tmbhn = (int) (hrg_krcs_tmbhn*_jml_krcs_tmbhn);
+//                                            final int grand_ttl =(int) (ttl_wisnu_wisman+ttl_tmbhn);
+//
+//                                            _ttl_ptgs.setText(String.valueOf(ttl_wisnu_wisman));
+//                                            _ttl_tmbhn_ptgs.setText(String.valueOf(ttl_tmbhn));
+//                                            _grand_ttl_ptgs.setText(String.valueOf(grand_ttl));
 
-                                            Log.i("tag","hrg_krcs_wisnu lin= "+ hrg_krcs_wisnu);
-                                            Log.i("tag","hrg_krcs_wisman lin= "+ hrg_krcs_wisman);
+                                            final int  ttl_wisnu ;
+                                            final int   ttl_wisman;
+                                            final int ttl_wisnu_wisman ;
+                                            final int ttl_tmbhn ;
+                                            final int grand_ttl ;
 
-                                            Log.i("tag","hrg_krcs_asrnsi_wisnu lin= "+ hrg_krcs_asrnsi_wisnu);
-                                            Log.i("tag","hrg_krcs_asrnsi_wisman lin= "+ hrg_krcs_asrnsi_wisman);
+                                            long selisih_day = get_selisih_day();
+                                            Log.i("","selisih_day calc"+selisih_day);
 
-                                            final int  ttl_wisnu = (int) ((hrg_krcs_wisnu+hrg_krcs_asrnsi_wisnu)*_jml_krcs_wisnu);
-                                            final int   ttl_wisman =(int) ((hrg_krcs_wisman+hrg_krcs_asrnsi_wisman)*_jml_krcs_wisman);
-                                            final int ttl_wisnu_wisman = (ttl_wisnu+ttl_wisman);
-                                            final int ttl_tmbhn = (int) (hrg_krcs_tmbhn*_jml_krcs_tmbhn);
-                                            final int grand_ttl =(int) (ttl_wisnu_wisman+ttl_tmbhn);
+                                            /* Rumus perhitungan karcis dan biaya asuransi  */
+                                            int new_ttl;
+                                            if( selisih_day >0 ){
+                                                ttl_wisnu = (int) ((hrg_krcs_wisnu+hrg_krcs_asrnsi_wisnu)*_jml_krcs_wisnu)* (int) selisih_day;
+                                                ttl_wisman =(int) ((hrg_krcs_wisman+hrg_krcs_asrnsi_wisman)*_jml_krcs_wisman * (int) selisih_day);
+                                            } else {
+                                                ttl_wisnu = (int) ((hrg_krcs_wisnu+hrg_krcs_asrnsi_wisnu)*_jml_krcs_wisnu);
+                                                ttl_wisman =(int) ((hrg_krcs_wisman+hrg_krcs_asrnsi_wisman)*_jml_krcs_wisman);
+                                            }
+
+
+                                            ttl_wisnu_wisman = (ttl_wisnu+ttl_wisman);
+                                            if( selisih_day >0 ){
+                                                ttl_tmbhn = (int) ((hrg_krcs_tmbhn*_jml_krcs_tmbhn)*  (int) selisih_day);
+                                            } else {
+                                                ttl_tmbhn = (int) (hrg_krcs_tmbhn*_jml_krcs_tmbhn);
+                                            }
+
+                                            grand_ttl =(int) (ttl_wisnu_wisman+ttl_tmbhn);
 
                                             _ttl_ptgs.setText(String.valueOf(ttl_wisnu_wisman));
                                             _ttl_tmbhn_ptgs.setText(String.valueOf(ttl_tmbhn));
                                             _grand_ttl_ptgs.setText(String.valueOf(grand_ttl));
-
 
                                         }
 
@@ -1623,7 +1756,7 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
                                 }
                             }
 
-                        } catch (JSONException e) {
+                        } catch (JSONException | ParseException e) {
                             Log.i("triono", "error ===" + e.toString() );
                             e.printStackTrace();
                         }
@@ -1661,37 +1794,32 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
 
 
 
-
-
-
     private void spinnerWisatawanTambahan(String EP, String LP){
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
         String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue(PesanKarcisPetugasActivity.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
+                response -> {
 
-                        try {
-                            if( Help.isJSONValid(response) ){
-                                JSONObject jsonObject = new JSONObject(response.toString());
-                                Log.i("tag","success= " + jsonObject.getBoolean("success") );
-                                findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-                                if( jsonObject.getBoolean("success") ) {
-                                    JSONArray jsonArray = jsonObject.getJSONArray("data");
+                    try {
+                        if( Help.isJSONValid(response) ){
+                            JSONObject jsonObject = new JSONObject(response.toString());
+                            Log.i("tag","success= " + jsonObject.getBoolean("success") );
+                            findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+                            if( jsonObject.getBoolean("success") ) {
+                                JSONArray jsonArray = jsonObject.getJSONArray("data");
 
-                                    arrKarcisTambahan.clear();
-                                    for (int i = 0; i <jsonArray.length();i++ ) {
-                                        JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-                                        String _kode_ksda = jsonObject1.getString("kode_ksda");
-                                        String _kode_lokasi = jsonObject1.getString("kode_lokasi");
-                                        String _kode_karcis = jsonObject1.getString("kode_karcis");
-                                        String _nama_karcis = jsonObject1.getString("nama_karcis");
-                                        String _kode_libur = jsonObject1.getString("kode_libur");
-                                        String _harga_karcis_wisata = jsonObject1.getString("harga_karcis_wisata");
-                                        String _harga_karcis_asuransi = jsonObject1.getString("harga_karcis_asuransi");
-                                        String _id = jsonObject1.getString("id");
+                                arrKarcisTambahan.clear();
+                                for (int i = 0; i <jsonArray.length();i++ ) {
+                                    JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                                    String _kode_ksda = jsonObject1.getString("kode_ksda");
+                                    String _kode_lokasi = jsonObject1.getString("kode_lokasi");
+                                    String _kode_karcis = jsonObject1.getString("kode_karcis");
+                                    String _nama_karcis = jsonObject1.getString("nama_karcis");
+                                    String _kode_libur = jsonObject1.getString("kode_libur");
+                                    String _harga_karcis_wisata = jsonObject1.getString("harga_karcis_wisata");
+                                    String _harga_karcis_asuransi = jsonObject1.getString("harga_karcis_asuransi");
+                                    String _id = jsonObject1.getString("id");
 
 //                                        sessionManager.createSessionWisTmbhn(_kode_ksda,
 //                                                                            _kode_lokasi,
@@ -1704,25 +1832,24 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
 
 //                                        arrListTambahanPtgs.add(i, "Rp."+ (_harga_karcis_wisata) + " - (" + _nama_karcis + ") ");
 //                                        arrKarcisTambahan.add(i, _nama_karcis );
-                                        arrKarcisTambahan.add(new SpinnerKarcisTambahan(_kode_karcis,_nama_karcis,_harga_karcis_wisata, _id));
+                                    arrKarcisTambahan.add(new SpinnerKarcisTambahan(_kode_karcis,_nama_karcis,_harga_karcis_wisata, _id));
 
-                                        Log.i("","tambahan _kode_ksda "+_kode_ksda);
-                                        Log.i("","tambahan _kode_lokasi "+_kode_lokasi);
-                                        Log.i("","tambahan _kode_karcis "+_kode_karcis);
-                                        Log.i("","tambahan _nama_karcis "+_nama_karcis);
-                                        Log.i("","tambahan _kode_libur "+_kode_libur);
-                                        Log.i("","tambahan _harga_karcis_wisata "+_harga_karcis_wisata);
-                                        Log.i("","tambahan _harga_karcis_asuransi "+_harga_karcis_asuransi);
-                                    }
+                                    Log.i("","tambahan _kode_ksda "+_kode_ksda);
+                                    Log.i("","tambahan _kode_lokasi "+_kode_lokasi);
+                                    Log.i("","tambahan _kode_karcis "+_kode_karcis);
+                                    Log.i("","tambahan _nama_karcis "+_nama_karcis);
+                                    Log.i("","tambahan _kode_libur "+_kode_libur);
+                                    Log.i("","tambahan _harga_karcis_wisata "+_harga_karcis_wisata);
+                                    Log.i("","tambahan _harga_karcis_asuransi "+_harga_karcis_asuransi);
                                 }
                             }
-
-                        } catch (JSONException e) {
-                            Log.i("triono", "error ===" + e.toString() );
-                            e.printStackTrace();
                         }
-                        requestQueue.stop();
+
+                    } catch (JSONException e) {
+                        Log.i("triono", "error ===" + e.toString() );
+                        e.printStackTrace();
                     }
+                    requestQueue.stop();
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
@@ -1752,49 +1879,51 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
 
 
 
-    private void inputKarcisPetugas(String EP,String mode_bayar, String nama_lokasi, String jml_krcs_tmbhn ){
+    private void inputKarcisPetugas(String EP,String mode_bayar,
+                                    String nama_lokasi,
+                                    String jml_krcs_tmbhn,
+                                    long selisih_day
+    ){
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
         String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue(PesanKarcisPetugasActivity.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Log.i("tag","response= " + response );
-                        try {
-                            findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-                            if( Help.isJSONValid(response) ) {
+                (Response.Listener<String>) response -> {
+                    Log.i("tag","response= " + response );
+                    try {
+                        findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+                        if( Help.isJSONValid(response) ) {
 
-                                JSONObject jObj = new JSONObject(response);
-                                String data = jObj.getString("data");
-                                JSONObject jsonObject1 = new JSONObject(data);
-                                boolean berhasil = jsonObject1.getBoolean("berhasil");
+                            JSONObject jObj = new JSONObject(response);
+                            String data = jObj.getString("data");
+                            JSONObject jsonObject1 = new JSONObject(data);
+                            boolean berhasil = jsonObject1.getBoolean("berhasil");
 
-                                Log.i("tag","success= " + jObj.getBoolean("success") );
-                                Log.i("tag","data= " + data );
-                                Log.i("tag","berhasil= " + berhasil );
+                            Log.i("tag","success= " + jObj.getBoolean("success") );
+                            Log.i("tag","data= " + data );
+                            Log.i("tag","berhasil= " + berhasil );
 
 
-                                if( berhasil ) {
+                            if( berhasil ) {
 
-                                    String _id = jsonObject1.getString("id");
-                                    String _va_no = jsonObject1.getString("va_no");
-                                    String _va_no_berlaku_sd = jsonObject1.getString("va_no_berlaku_sd");
-                                    String _vnama = jsonObject1.getString("nama");
-                                    String _alamat_email = jsonObject1.getString("alamat_email");
-                                    String _sellular_no = jsonObject1.getString("sellular_no");
-                                    String _jumlah_wisnu = jsonObject1.getString("jumlah_wisnu");
-                                    String _jumlah_wisman = jsonObject1.getString("jumlah_wisman");
-                                    String _jumlah_karcis = jsonObject1.getString("jumlah_karcis");
-                                    String _tgl_penjualan = jsonObject1.getString("tgl_penjualan");
-                                    String _tgl_kunjungan = jsonObject1.getString("tgl_kunjungan");
-                                    String _menit_valid = jsonObject1.getString("menit_valid");
-                                    String _tgl_valid = jsonObject1.getString("tgl_valid");
-                                    String _tagihan_total = jsonObject1.getString("tagihan_total");
-                                    String _mode_pembayaran = jsonObject1.getString("mode_pembayaran");
-                                    String _nama_pengunjung = jsonObject1.getString("nama_pengunjung");
-                                    String _no_hp_pengunjung = jsonObject1.getString("no_hp_pengunjung");
-                                    String _email_pengunjung = jsonObject1.getString("email_pengunjung");
+                                String _id = jsonObject1.getString("id");
+                                String _va_no = jsonObject1.getString("va_no");
+                                String _va_no_berlaku_sd = jsonObject1.getString("va_no_berlaku_sd");
+                                String _vnama = jsonObject1.getString("nama");
+                                String _alamat_email = jsonObject1.getString("alamat_email");
+                                String _sellular_no = jsonObject1.getString("sellular_no");
+                                String _jumlah_wisnu = jsonObject1.getString("jumlah_wisnu");
+                                String _jumlah_wisman = jsonObject1.getString("jumlah_wisman");
+                                String _jumlah_karcis = jsonObject1.getString("jumlah_karcis");
+                                String _tgl_penjualan = jsonObject1.getString("tgl_penjualan");
+                                String _tgl_kunjungan = jsonObject1.getString("tgl_kunjungan");
+                                String _menit_valid = jsonObject1.getString("menit_valid");
+                                String _tgl_valid = jsonObject1.getString("tgl_valid");
+                                String _tagihan_total = jsonObject1.getString("tagihan_total");
+                                String _mode_pembayaran = jsonObject1.getString("mode_pembayaran");
+                                String _nama_pengunjung = jsonObject1.getString("nama_pengunjung");
+                                String _no_hp_pengunjung = jsonObject1.getString("no_hp_pengunjung");
+                                String _email_pengunjung = jsonObject1.getString("email_pengunjung");
 
 //                                    Intent i = new Intent(PesanKarcisPetugasActivity.this, SuccessRegistrasiWisatawanActivity.class);
 //                                    i.putExtra("result_dt_ket","Pesanan Karcis berhasil, harap check email Anda");
@@ -1803,53 +1932,47 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
 //                                    i.putExtra("result_dt_flag", "flagPesanKarcisPetugas");
 //                                    startActivity(i);
 
-                                    Intent i = new Intent(getApplicationContext(), NotifSuksesActivity.class);
-                                    i.putExtra("result_dt_ket", "Pemesanan Anda Berhasil Silahkan Cek email!");
-                                    i.putExtra("_id", _id);
-                                    i.putExtra("_va_no", _va_no);
-                                    i.putExtra("_va_no_berlaku_sd", _va_no_berlaku_sd);
-                                    i.putExtra("_vnama", _vnama);
-                                    i.putExtra("_alamat_email", _alamat_email);
-                                    i.putExtra("_sellular_no", _sellular_no);
-                                    i.putExtra("_jumlah_wisnu", _jumlah_wisnu);
-                                    i.putExtra("_jumlah_wisman", _jumlah_wisman);
-                                    i.putExtra("_jumlah_karcis", _jumlah_karcis);
-                                    i.putExtra("_tgl_penjualan", _tgl_penjualan);
-                                    i.putExtra("_tgl_kunjungan", _tgl_kunjungan);
-                                    i.putExtra("_menit_valid", _menit_valid);
-                                    i.putExtra("_tgl_valid", _tgl_valid);
-                                    i.putExtra("_tagihan_total", _tagihan_total);
-                                    i.putExtra("_txt_nmlokwis", _txt_nmlokwis.getText().toString());
-                                    i.putExtra("_jumlah_tambahan", jml_krcs_tmbhn);
-                                    i.putExtra("_nama_lokasi", nama_lokasi);
+                                Intent i = new Intent(getApplicationContext(), NotifSuksesActivity.class);
+                                i.putExtra("result_dt_ket", "Pemesanan Anda Berhasil Silahkan Cek email!");
+                                i.putExtra("_id", _id);
+                                i.putExtra("_va_no", _va_no);
+                                i.putExtra("_va_no_berlaku_sd", _va_no_berlaku_sd);
+                                i.putExtra("_vnama", _vnama);
+                                i.putExtra("_alamat_email", _alamat_email);
+                                i.putExtra("_sellular_no", _sellular_no);
+                                i.putExtra("_jumlah_wisnu", _jumlah_wisnu);
+                                i.putExtra("_jumlah_wisman", _jumlah_wisman);
+                                i.putExtra("_jumlah_karcis", _jumlah_karcis);
+                                i.putExtra("_tgl_penjualan", _tgl_penjualan);
+                                i.putExtra("_tgl_kunjungan", _tgl_kunjungan);
+                                i.putExtra("_menit_valid", _menit_valid);
+                                i.putExtra("_tgl_valid", _tgl_valid);
+                                i.putExtra("_tagihan_total", _tagihan_total);
+                                i.putExtra("_txt_nmlokwis", _txt_nmlokwis.getText().toString());
+                                i.putExtra("_jumlah_tambahan", jml_krcs_tmbhn);
+                                i.putExtra("_nama_lokasi", nama_lokasi);
 
-                                    i.putExtra("_mode_pembayaran", _mode_pembayaran);
-                                    i.putExtra("_nama_pengunjung", _nama_pengunjung);
-                                    i.putExtra("_no_hp_pengunjung", _no_hp_pengunjung);
-                                    i.putExtra("_email_pengunjung", _email_pengunjung);
+                                i.putExtra("_mode_pembayaran", _mode_pembayaran);
+                                i.putExtra("_nama_pengunjung", _nama_pengunjung);
+                                i.putExtra("_no_hp_pengunjung", _no_hp_pengunjung);
+                                i.putExtra("_email_pengunjung", _email_pengunjung);
 
-                                    i.putExtra("result_dt_berhasil", berhasil);
-                                    i.putExtra("result_dt_flag", "flagPesanKarcisPetugas");
-                                    startActivity(i);
+                                i.putExtra("result_dt_berhasil", berhasil);
+                                i.putExtra("result_dt_flag", "flagPesanKarcisPetugas");
+                                startActivity(i);
 
-
-
-                                }
                             }
-                        } catch (JSONException e) {
-                            Log.i("triono", "error ===" + e.toString() );
-                            e.printStackTrace();
                         }
-                        requestQueue.stop();
+                    } catch (JSONException e) {
+                        Log.i("triono", "error ===" + e.toString() );
+                        e.printStackTrace();
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.i("tag", "response inputKarcisPetugas=" + error.toString());
-                error.printStackTrace();
-                requestQueue.stop();
-            }
-        }
+                    requestQueue.stop();
+                }, (Response.ErrorListener) error -> {
+                    Log.i("tag", "response inputKarcisPetugas=" + error.toString());
+                    error.printStackTrace();
+                    requestQueue.stop();
+                }
         ) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
@@ -1881,7 +2004,7 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
                 final  String hp_pengunjung = _hp_pengunjung_ptgs.getText().toString().trim();
                 final String email_pengunjung = _email_pengunjung.getText().toString().trim();
                 final String nama_pengunjung = _nama_pengunjung_ptgs.getText().toString().trim();
-
+                final String tgl_kunjungan_sd =  _tgl_kunjungan_ptgs_2.getText().toString();
 
                 if(jml_wisnu.equals("")){
                     jml_wisnu = "0";
@@ -1909,6 +2032,8 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
                 Log.i("tag","jml_wisman= " + jml_wisman );
                 Log.i("tag","jml_tmhn= " + jml_tmhn );
                 Log.i("tag","flag_pemesan= " + flag_pemesan );
+                Log.i("tag","tgl_kunjungan_sd= " + tgl_kunjungan_sd );
+                Log.i("tag","selisih_day= " + selisih_day);
 
 
                 obj.put("registration_by", key_email);
@@ -1929,6 +2054,9 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
                 obj.put("no_hp_pengunjung", hp_pengunjung);
                 obj.put("email_pengunjung", email_pengunjung);
                 obj.put("nama_pengunjung", nama_pengunjung);
+                obj.put("tgl_kunjungan",tgl_kunjungan);
+                obj.put("tgl_kunjungan_sd",tgl_kunjungan_sd);
+                obj.put("jumlah_hari", String.valueOf(selisih_day) );
 
                 return obj;
             }

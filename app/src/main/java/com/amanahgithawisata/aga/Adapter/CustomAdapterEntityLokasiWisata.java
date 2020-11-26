@@ -3,6 +3,7 @@ package com.amanahgithawisata.aga.Adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.amanahgithawisata.aga.Model.ModelHorizontalScrollLokasiWisata;
 import com.amanahgithawisata.aga.PesanKarcisWisatawanActivity;
 import com.amanahgithawisata.aga.R;
+import com.facebook.shimmer.Shimmer;
+import com.facebook.shimmer.ShimmerDrawable;
 import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
@@ -89,7 +92,6 @@ public class CustomAdapterEntityLokasiWisata extends RecyclerView.Adapter<Custom
 
         SessionManager sessionManager ;
         sessionManager = new SessionManager(context.getApplicationContext());
-
         tv_tgl_kunj_lokwisx.setVisibility(View.GONE);
 
 //        tv_url_img_kux.setVisibility(View.GONE);
@@ -114,6 +116,8 @@ public class CustomAdapterEntityLokasiWisata extends RecyclerView.Adapter<Custom
         final String txt_harga_karcis_wisata_tmbhn = modelHorizontalScrollLokasiWisatas.get(position).getTxt_harga_karcis_wisata_tmbhn();
         final String txt_id_karcis_utama = modelHorizontalScrollLokasiWisatas.get(position).getTxt_id_karcis_utama();
         final String txt_id_karcis_tmbhn = modelHorizontalScrollLokasiWisatas.get(position).getTxt_id_karcis_tmbhn();
+        final String txt_tgl_kunj_2_lokwis = modelHorizontalScrollLokasiWisatas.get(position).getTgl_kunj_2_lokwis();
+
 
 
         tv_judulx.setText(modelHorizontalScrollLokasiWisatas.get(position).judul);
@@ -124,9 +128,17 @@ public class CustomAdapterEntityLokasiWisata extends RecyclerView.Adapter<Custom
         tv_kotax.setText(modelHorizontalScrollLokasiWisatas.get(position).kota);
 
 
+        Shimmer shimmer = new Shimmer
+                .ColorHighlightBuilder()
+                .setBaseColor(Color.parseColor("#F3F3F3"))
+                .setBaseAlpha(1)
+                .setHighlightColor(Color.parseColor("#E7E7E7"))
+                .setHighlightAlpha(1)
+                .setDropoff(10)
+                .build();
 
-
-
+        ShimmerDrawable shimmerDrawable = new ShimmerDrawable();
+        shimmerDrawable.setShimmer(shimmer);
 
         Transformation transformation = new RoundedTransformationBuilder()
 //                                        .borderColor()
@@ -139,6 +151,7 @@ public class CustomAdapterEntityLokasiWisata extends RecyclerView.Adapter<Custom
                 .fit()
                 .placeholder(R.drawable.loading_animation)
                 .transform(transformation)
+//                .placeholder(shimmerDrawable)
                 .into(tv_imgx);
 
 
@@ -161,6 +174,8 @@ public class CustomAdapterEntityLokasiWisata extends RecyclerView.Adapter<Custom
             i.putExtra("result_dt_kota_adapter",_kota );
             i.putExtra("result_dt_url_img_lokwis_adapter", _url_img );
             i.putExtra("result_dt_tgl_kunj_lokwis_adapter", _tgl_kunj_lokwis );
+            i.putExtra("result_dt_tgl_kunj_lokwis_2_adapter", txt_tgl_kunj_2_lokwis );
+
 
 
             i.putExtra("txt_kdlokPintu",txt_kdlokPintu);

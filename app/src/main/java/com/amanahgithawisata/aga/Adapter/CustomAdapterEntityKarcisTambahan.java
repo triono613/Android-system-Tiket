@@ -3,6 +3,7 @@ package com.amanahgithawisata.aga.Adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,7 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.amanahgithawisata.aga.Model.ModelHorizontalScrollKarcisTambahan;
 import com.amanahgithawisata.aga.PesanKarcisWisatawanActivity;
 import com.amanahgithawisata.aga.R;
-import com.squareup.picasso.Callback;
+import com.facebook.shimmer.Shimmer;
+import com.facebook.shimmer.ShimmerDrawable;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -179,20 +180,20 @@ public class CustomAdapterEntityKarcisTambahan extends RecyclerView.Adapter<Cust
         final String _id_kt= modelHorizontalScrollKarcisTambahans.get(position).getId();
 
         final String _result_dt_id_karcis_utama= modelHorizontalScrollKarcisTambahans.get(position).getResult_dt_id_karcis_utama();
-        final String _result_dt_id_karcis_tmbhn= modelHorizontalScrollKarcisTambahans.get(position).getResult_dt_id_karcis_tmbhn();
+//        final String _result_dt_id_karcis_tmbhn= modelHorizontalScrollKarcisTambahans.get(position).getResult_dt_id_karcis_tmbhn();
+        final String _result_dt_id_karcis_tmbhn= modelHorizontalScrollKarcisTambahans.get(position).getId();
 
         final String harga_karcis_wisata_wisnu = modelHorizontalScrollKarcisTambahans.get(position).getHarga_karcis_wisata_wisnu();
         final String harga_karcis_wisata_wisman = modelHorizontalScrollKarcisTambahans.get(position).getHarga_karcis_wisata_wisman();
         final String harga_karcis_wisata_tmbhn = modelHorizontalScrollKarcisTambahans.get(position).getHarga_karcis_wisata_tmbhn();
         final String harga_karcis_asuransi_wisnu = modelHorizontalScrollKarcisTambahans.get(position).getHarga_karcis_asuransi_wisnu();
         final String harga_karcis_asuransi_wisman = modelHorizontalScrollKarcisTambahans.get(position).getHarga_karcis_asuransi_wisman();
-
+        final String tgl_kujungan_2_val = modelHorizontalScrollKarcisTambahans.get(position).getTgl_kujungan_2_val();
 
 
         Log.i("","_url_img_lokWis tambahan adapter"+_url_img_lokWis);
         Log.i("","_url_img_pintu tambahan adapter"+_url_img_pintu);
         Log.i("","_namaKarcis tambahan adapter"+_namaKarcis);
-
 
         tv_dt_jml_krcs_tmbhnx.setText(modelHorizontalScrollKarcisTambahans.get(position).result_dt_jml_krcs_tmbhn);
         tv_dt_ttl_krcs_tmbhnx.setText(modelHorizontalScrollKarcisTambahans.get(position).result_dt_ttl_krcs_tmbhn);
@@ -218,21 +219,25 @@ public class CustomAdapterEntityKarcisTambahan extends RecyclerView.Adapter<Cust
         tv_id_ktx.setText(modelHorizontalScrollKarcisTambahans.get(position).id);
 
 
+        Shimmer shimmer = new Shimmer
+                .ColorHighlightBuilder()
+                .setBaseColor(Color.parseColor("#F3F3F3"))
+                .setBaseAlpha(1)
+                .setHighlightColor(Color.parseColor("#E7E7E7"))
+                .setHighlightAlpha(1)
+                .setDropoff(10)
+                .build();
+
+        ShimmerDrawable shimmerDrawable = new ShimmerDrawable();
+        shimmerDrawable.setShimmer(shimmer);
+
         Picasso.with( context )
                 .load( _url_img_kt )
                 .error(R.mipmap.ic_launcher)
                 .resize(1900,600)
                 .centerCrop()
-                .into(tv_img_ktx, new Callback() {
-                    @Override
-                    public void onSuccess() {
-                        Log.d("TAG", "onSuccess");
-                    }
-                    @Override
-                    public void onError() {
-                        Toast.makeText(context, "An error occurred", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                .placeholder(R.drawable.loading_animation)
+                .into(tv_img_ktx);
 
         btn_entity_edit.setOnClickListener(v -> {
 //                Snackbar.make(v, "Clicked element ", Snackbar.LENGTH_LONG).show();
@@ -274,6 +279,7 @@ public class CustomAdapterEntityKarcisTambahan extends RecyclerView.Adapter<Cust
             i.putExtra("harga_karcis_wisata_tmbhn_kt",harga_karcis_wisata_tmbhn);
             i.putExtra("harga_karcis_asuransi_wisnu_kt",harga_karcis_asuransi_wisnu);
             i.putExtra("harga_karcis_asuransi_wisman_kt",harga_karcis_asuransi_wisman);
+            i.putExtra("tgl_kujungan_2_kt",tgl_kujungan_2_val);
 
 
 

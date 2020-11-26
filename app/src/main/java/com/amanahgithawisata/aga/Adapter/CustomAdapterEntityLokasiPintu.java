@@ -3,6 +3,7 @@ package com.amanahgithawisata.aga.Adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.amanahgithawisata.aga.Model.ModelHorizontalScrollLokasiPintu;
 import com.amanahgithawisata.aga.PesanKarcisWisatawanActivity;
 import com.amanahgithawisata.aga.R;
+import com.facebook.shimmer.Shimmer;
+import com.facebook.shimmer.ShimmerDrawable;
 import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
@@ -124,6 +127,7 @@ public class CustomAdapterEntityLokasiPintu extends RecyclerView.Adapter<CustomA
         final String result_ttl_karcis_tmbhn = modelHorizontalScrollLokasiPintus.get(position).getResult_ttl_karcis_tmbhn();
         final String result_grand_ttl = modelHorizontalScrollLokasiPintus.get(position).getResult_grand_ttl();
         final String txt_harga_karcis_wisata_tmbhn = modelHorizontalScrollLokasiPintus.get(position).getTxt_harga_karcis_wisata_tmbhn();
+        final String tgl_kunj_pintu_2 = modelHorizontalScrollLokasiPintus.get(position).getTgl_kunj_pintu_2();
 
 
         tv_judulx.setText(modelHorizontalScrollLokasiPintus.get(position).judul);
@@ -135,6 +139,17 @@ public class CustomAdapterEntityLokasiPintu extends RecyclerView.Adapter<CustomA
         tv_tgl_kunj_pintux.setText(modelHorizontalScrollLokasiPintus.get(position).tgl_kunj_pintu);
 
 
+        Shimmer shimmer = new Shimmer
+                .ColorHighlightBuilder()
+                .setBaseColor(Color.parseColor("#F3F3F3"))
+                .setBaseAlpha(1)
+                .setHighlightColor(Color.parseColor("#E7E7E7"))
+                .setHighlightAlpha(1)
+                .setDropoff(10)
+                .build();
+
+        ShimmerDrawable shimmerDrawable = new ShimmerDrawable();
+        shimmerDrawable.setShimmer(shimmer);
 
         Transformation transformation = new RoundedTransformationBuilder()
                 .borderWidthDp(1)
@@ -154,11 +169,6 @@ public class CustomAdapterEntityLokasiPintu extends RecyclerView.Adapter<CustomA
 
 
         btn_entity_edit.setOnClickListener(v -> {
-//                Snackbar.make(v, "Clicked element ", Snackbar.LENGTH_LONG).show();
-
-            final String _email =  sessionManager.getUserDetail().get(SessionManager.key_email);
-
-            Log.i("","_judulx pintu"+_judul);
 
 
             Intent i = new Intent(v.getContext(), PesanKarcisWisatawanActivity.class);
@@ -178,7 +188,7 @@ public class CustomAdapterEntityLokasiPintu extends RecyclerView.Adapter<CustomA
             i.putExtra("result_ttl_karcis_tmbhn_lp",result_ttl_karcis_tmbhn);
             i.putExtra("result_grand_ttl_lp",result_grand_ttl);
             i.putExtra("txt_harga_karcis_wisata_tmbhn_lp",txt_harga_karcis_wisata_tmbhn);
-
+            i.putExtra("result_dt_tgl_kunj_pintu_2",tgl_kunj_pintu_2);
 
             sessionManager.createSessionLokPintuPesankarcisWisatawan(_judul,_text,_url_img_pintu);
 

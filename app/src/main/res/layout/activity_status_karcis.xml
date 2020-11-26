@@ -16,7 +16,7 @@
 
 
 
-    <LinearLayout
+    <RelativeLayout
 
         android:id="@+id/linearLayout2"
         android:layout_marginStart="5dp"
@@ -46,7 +46,7 @@
             >
 
         </androidx.recyclerview.widget.RecyclerView>
-    </LinearLayout>
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/loadingPanel"

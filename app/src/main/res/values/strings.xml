@@ -14,6 +14,31 @@
     <string name="lokasi_wisata">Lokasi Wisata</string>
     <string name="lanjutkan">Lanjutkan</string>
     <string name="apps_name">Jelajah \n Wisata</string>
+    <string name="tc_1">
+Selamat datang di Aplikasi Amanahku yang disediakan oleh PT. AJS Amanahjiwa Giri Artha ("Amanah Githa"). Kami harap Anda membaca dengan seksama Syarat dan Ketentuan dari penggunaan Aplikasi Amanahku. Dengan mengakses aplikasi, situs dan setiap halaman dari Aplikasi Amanahku, artinya Anda sudah memahami serta menyetujui untuk terikat oleh Syarat dan Ketentuan pada penggunaan Aplikasi Amanahku. Mohon untuk tidak mengakses aplikasi, situs atau setiap halaman jika Anda tidak menyetujui Syarat dan Ketentuan penggunaan aplikasi Amanahku.
+Syarat dan Ketentuan penggunaan Aplikasi Amanahku ini dapat berubah sesuai dengan berjalannya waktu. Merupakan tanggung jawab Anda untuk memperhatikan setiap perubahan yang akan terjadi kedepannya.
+A. Istilah
+ 	1.	Asuransi jiwa syariah adalah perjanjian antara dua pihak, yaitu Perusahaan Asuransi dan Pemegang Polis sesuai dengan syariat dan akad yang telah disepakati, yang menjadi dasar bagi penerimaan kontribusi oleh perusahaan asuransi jiwa syariah sesuai dengan tarif yang disetujui kedua pihak untuk memberikan pembayaran yang didasarkan pada risiko yang dialami oleh Pihak Yang Diasuransikan, sebagaimana dimaksud dalam Undang-Undang Nomor 40 Tahun 2014 tentang Perasuransian.
+ 	2.	Aplikasi Amanahku selanjutnya disebut “Amanahku” adalah aplikasi pemasaran produk asuransi secara online yang dimiliki dan disediakan oleh Amanah Githa. Amanahku dapat diakses secara langsung oleh semua pengguna smartphone berbasis Android dan iOS dengan cara mengunduh aplikasi Amanahku terlebih dahulu pada Google Playstore dan Apple Store.
+ 	3.	Akun Amanahku adalah akun Pengguna yang telah terdaftar untuk melakukan transaksi di AmanahKu.
+ 	4.	Pengguna atau Sobat Amanahku adalah sebutan bagi para pengguna yang menginstall dan menggunakan Amanahku
+ 	5.	Penyedia Layanan adalah PT. AJS Amanahjiwa Giri Artha ("Amanah Githa").
+B. Registrasi dan Aktivasi Akun
+ 	1.	Pengguna dapat mengakses Amanahku dengan cara membuka dan mengunduh Amanahku pada smartphone Amanahku dapat diunduh dari Google Playstore untuk smartphone berbasis sistem operasi Android dan Apple Store untuk smartphone berbasis sistem operasi iOS. Pada saat mengakses Amanahku, Pengguna perlu memastikan smartphone atau perangkat sejenis telah terhubung dengan jaringan internet.
+ 	2.	Untuk penggunaan pertama Amanahku , setiap Pengguna wajib melakukan pendaftaran akun Amanahku dengan menekan tombol "Daftar" dan mengisi data yang sebenarnya. Pengguna harus memastikan nomor telepon genggam yang dipergunakan aktif.
+ 	3.	Satu Pengguna hanya berhak mendaftarkan satu akun saja untuk setiap pendaftaran Amanahku .
+C. Ketentuan Penggunaan
+ 	1.	Sebagai Pengguna, Anda bertanggung jawab penuh untuk menjaga kerahasiaan informasi yang tersimpan dalam Akun Amanahku , termasuk kata sandi, dan setiap aktivitas yang terjadi di dalam Akun Amanahku Anda.
+ 	2.	Sobat Amanahku dapat menggunakan fasilitas Amanahku untuk mendapatkan informasi mengenai produk asuransi serta membeli produk asuransi.
+ 	3.	Melalui Amanahku , Sobat Amanahku dapat mengakses:
+ 	 
+a.	Penawaran produk asuransi yang tersedia di Amanahku
+b.	Polis Asuransi yang telah dibeli Sobat Amanahku melalui Amanahku
+c.	Daftar teman yang telah terhubung dengan Amanahku
+ 	4.	Untuk beberapa fitur Amanahku, Anda diwajibkan untuk mengunggah foto dokumen pendukung. Khusus untuk pengajuan klaim, Anda diwajibkan untuk mengirimkan dokumen asli sebagai syarat pengajuan klaim sesuai dengan ketentuan pada masing-masing produk asuransi.
+D. Penyampaian Informasi
+ 	1.	Semua data dan informasi yang telah Penyedia Layanan dapatkan melalui pengisian data oleh Pengguna dari Amanahku adalah sah secara hukum dan telah berdasarkan pada peraturan perundang-undangan serta ketentuan yang berlaku di Republik Indonesia.
+ 	2.	Pengguna memberikan izin pada Penyedia Layanan untuk menggunakan data, informasi dan dokumen yang telah dimasukkan ke dalam akun Amanahku maupun dokumen asli yang Pengguna kirimkan untuk memproses pengajuan klaim yang diajukan oleh Pengguna.</string>
 
 
     <string-array name="dt_obj_wis">

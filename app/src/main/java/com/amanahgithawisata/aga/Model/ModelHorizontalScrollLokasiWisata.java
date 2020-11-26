@@ -29,8 +29,10 @@ public class ModelHorizontalScrollLokasiWisata {
     public String txt_harga_karcis_wisata_tmbhn ;
     public String txt_id_karcis_utama ;
     public String txt_id_karcis_tmbhn ;
+    public String tgl_kunj_2_lokwis ;
 
-    public ModelHorizontalScrollLokasiWisata(String judul, String text, String url_gambar, int gambar, String almt, String kota, String kd_lokwis, String nm_lokwis, String tgl_kunj_lokwis, String txt_kdlokPintu, String txt_kdlokWis, String txt_nmlokPintux, String txt_url_img_lokwisOld, String txt_url_img_lokPintu, String result_dt_jml_karcis_wisnu, String result_dt_jml_karcis_wisman, String result_dt_ttl_wisnu_wisman, String result_dt_jml_karcis_tmbhn, String result_dt_ttl_karcis_tmbhn, String result_dt_grand_ttl, String txt_harga_karcis_wisata_tmbhn, String txt_id_karcis_utama, String txt_id_karcis_tmbhn) {
+
+    public ModelHorizontalScrollLokasiWisata(String judul, String text, String url_gambar, int gambar, String almt, String kota, String kd_lokwis, String nm_lokwis, String tgl_kunj_lokwis, String tgl_kunj_2_lokwis,String txt_kdlokPintu, String txt_kdlokWis, String txt_nmlokPintux, String txt_url_img_lokwisOld, String txt_url_img_lokPintu, String result_dt_jml_karcis_wisnu, String result_dt_jml_karcis_wisman, String result_dt_ttl_wisnu_wisman, String result_dt_jml_karcis_tmbhn, String result_dt_ttl_karcis_tmbhn, String result_dt_grand_ttl, String txt_harga_karcis_wisata_tmbhn, String txt_id_karcis_utama, String txt_id_karcis_tmbhn) {
         this.text = text;
         this.judul = judul;
         this.url_gambar = url_gambar;
@@ -54,6 +56,8 @@ public class ModelHorizontalScrollLokasiWisata {
         this.txt_harga_karcis_wisata_tmbhn = txt_harga_karcis_wisata_tmbhn;
         this.txt_id_karcis_utama = txt_id_karcis_utama;
         this.txt_id_karcis_tmbhn = txt_id_karcis_tmbhn;
+        this.tgl_kunj_2_lokwis = tgl_kunj_2_lokwis;
+
     }
 
     public String getTxt_kdlokPintu() {
@@ -241,5 +245,13 @@ public class ModelHorizontalScrollLokasiWisata {
 
     public void setTgl_kunj_lokwis(String tgl_kunj_lokwis) {
         this.tgl_kunj_lokwis = tgl_kunj_lokwis;
+    }
+
+    public String getTgl_kunj_2_lokwis() {
+        return tgl_kunj_2_lokwis;
+    }
+
+    public void setTgl_kunj_2_lokwis(String tgl_kunj_2_lokwis) {
+        this.tgl_kunj_2_lokwis = tgl_kunj_2_lokwis;
     }
 }

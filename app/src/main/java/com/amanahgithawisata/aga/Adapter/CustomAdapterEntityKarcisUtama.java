@@ -3,6 +3,7 @@ package com.amanahgithawisata.aga.Adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +19,11 @@ import com.amanahgithawisata.aga.Model.ModelHorizontalScrollKarcisUtama;
 import com.amanahgithawisata.aga.PesanKarcisWisatawanActivity;
 import com.amanahgithawisata.aga.R;
 import com.amanahgithawisata.aga.BSheetListQuota;
+import com.facebook.shimmer.Shimmer;
+import com.facebook.shimmer.ShimmerDrawable;
+import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 import java.util.ArrayList;
 
@@ -178,6 +183,7 @@ public class CustomAdapterEntityKarcisUtama extends RecyclerView.Adapter<CustomA
         final String _nama = modelHorizontalScrollKarcisUtamas.get(position).getNama_pengunjung();
         final String _hp = modelHorizontalScrollKarcisUtamas.get(position).getHp_pengunjung();
         final String _email = modelHorizontalScrollKarcisUtamas.get(position).getEmail_pengunjung();
+        final String _tgl_kunj_2 = modelHorizontalScrollKarcisUtamas.get(position).getResult_dt_tgl_kunj_2();
 
 
         Log.i("","_namaKarcis adapter"+_namaKarcis);
@@ -207,27 +213,40 @@ public class CustomAdapterEntityKarcisUtama extends RecyclerView.Adapter<CustomA
 
 
 
+        Shimmer shimmer = new Shimmer
+                .ColorHighlightBuilder()
+                .setBaseColor(Color.parseColor("#F3F3F3"))
+                .setBaseAlpha(1)
+                .setHighlightColor(Color.parseColor("#E7E7E7"))
+                .setHighlightAlpha(1)
+                .setDropoff(10)
+                .build();
+
+        ShimmerDrawable shimmerDrawable = new ShimmerDrawable();
+        shimmerDrawable.setShimmer(shimmer);
+//        shimmerDrawable.stopShimmer();
 
 
-        Picasso.with( context )
-                .load( _url_img_ku )
-                .error(R.mipmap.ic_launcher)
-                .resize(1900,600)
-                .centerCrop()
+        Transformation transformation = new RoundedTransformationBuilder()
+//                                        .borderColor()
+                .borderWidthDp(1)
+                .oval(false)
+                .build();
+
+        Picasso.with(context.getApplicationContext())
+                .load(_url_img_ku)
+                .fit()
+//                .placeholder(R.drawable.loading_animation)
+                .transform(transformation)
+                .placeholder(shimmerDrawable)
                 .into(img_kux);
 
 
-
         btn_entity_edit.setOnClickListener(v -> {
-//                Snackbar.make(v, "Clicked element ", Snackbar.LENGTH_LONG).show();
-
-//                final String _email =  sessionManager.getUserDetail().get(SessionManager.key_email);
-
 
             Log.i("","tv_kode_karcisx "+_kodeKarcis);
             Log.i("","_ttl_karcis_tmbhn "+_ttl_karcis_tmbhn);
             Log.i("","_harga_karcis_wisata_tmbhn "+_harga_karcis_wisata_tmbhn);
-
 
             Intent i = new Intent(v.getContext(), PesanKarcisWisatawanActivity.class);
             i.putExtra("result_dt_kodeKarcis", _kodeKarcis);
@@ -259,6 +278,7 @@ public class CustomAdapterEntityKarcisUtama extends RecyclerView.Adapter<CustomA
             i.putExtra("result_dt_nama_pengunjung",_nama);
             i.putExtra("result_dt_hp_pengunjung",_hp);
             i.putExtra("result_dt_email_pengunjung",_email);
+            i.putExtra("result_dt_tgl_kunj_2_ku",_tgl_kunj_2);
 
 
             i.putExtra("result_dt_flag_ku","flag_ku");

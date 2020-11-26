@@ -16,6 +16,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -23,7 +24,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
-import androidx.viewpager.widget.ViewPager;
 
 import com.amanahgithawisata.aga.Adapter.CustomAdapterViewPagerLokasiPintu;
 import com.amanahgithawisata.aga.Adapter.CustomAdapterViewPagerLokasiWisata;
@@ -43,6 +43,7 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
@@ -51,9 +52,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -61,7 +64,7 @@ import java.util.Map;
 
 //public class PesanKarcisWisatawanActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener  {
 public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  DatePickerDialog.OnDateSetListener  {
-    TextView _txt_tgl_kunjungan_order;
+    TextView _txt_tgl_kunjungan_order, _txt_tgl_kunjungan_2_order;
     TextView _txt_jml_krcs_wisnu;
     TextView _txt_jml_krcs_wisman;
     TextView _txt_ttl;
@@ -103,6 +106,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
     TextView _txt_harga_karcis_wisata_tmbhn;
     TextView _txt_harga_karcis_asuransi_tmbhn;
     TextView _txt_url_karcis_tmbhn;
+    TextView _txt_day;
 
     LinearLayout _linearLayoutKdLok;
     TextView _txt_kdlokPintu;
@@ -112,7 +116,13 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
     LinearLayout _linearLayoutKarcisUtama;
     LinearLayout _linearLayoutKarcisTmbhn;
 
+    Button btn_detail_lokwis;
+    Button btn_detail_pintu;
+    Button btn_detail_ku;
+    Button btn_detail_kt;
     RadioButton rb;
+    ProgressBar progress_bar_popup;
+    ShimmerFrameLayout shimmer_layout_popup;
 
 //    CustomAdapterViewPagerLokasiWisata customAdapterViewPagerLokasiWisata;
     CustomAdapterViewPagerLokasiWisata _adapter_1 = new CustomAdapterViewPagerLokasiWisata();
@@ -163,21 +173,21 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
         if(TextUtils.isEmpty(tgl_kunj_val) ) {
             _txt_tgl_kunjungan_order.setError("Tgl Masih Kosong!");
         } else {
+            Log.i("","tgl_kunj_val="+tgl_kunj_val);
             quotaTwa("quota_per_twa",KSDA,tgl_kunj_val);
             _txt_tgl_kunjungan_order.setError(null);
+        }
+        try {
+            CalculateKarcis();
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
 
     }
 
-    TextView a1, b1;
-    TextView a2, b2;
-    ViewPager pagerViewLokasiWisata;
-    ViewPager pagerViewLokasiPintu;
-
 
     public void onBackPressed() {
 
-//        Intent intent = new Intent(PesanKarcisWisatawanActivity.this, DashboardWisatawanOLdActivity.class)
         Intent intent = new Intent(PesanKarcisWisatawanActivity.this, DashboardWisatawanActivity.class)
                 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         finish();
@@ -185,14 +195,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
 
-//        Intent a = new Intent(Intent.ACTION_MAIN);
-//        a.addCategory(Intent.CATEGORY_HOME);
-//        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//        startActivity(a);
-
         ClearCalculateKarcis();
-//        sessionManager.clear_key_TtlKarcisWisnuWisman();
-//        sessionManager.clear_key_JmlKarcisTmbhn();
     }
 
     @Override
@@ -203,6 +206,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
         findViewById(R.id.loadingPanel).setVisibility(View.GONE);
 
         _txt_tgl_kunjungan_order = (TextView) findViewById(R.id.txt_tgl_kunjungan_order);
+        _txt_tgl_kunjungan_2_order = (TextView) findViewById(R.id.txt_tgl_kunjungan_2_order);
 
         _spinner_lok_wis = (Spinner) findViewById(R.id.spinner_lok_ksda_order);
         _spiner_krc_utm_wstwn_order = (Spinner) findViewById(R.id.spinner_karcis_utama_order);
@@ -254,9 +258,16 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
 
 
         _linearLayoutKarcisUtama = findViewById(R.id.linearKarcisUtama);
-        _linearLayoutKarcisTmbhn= findViewById(R.id.linearKarcisTambahan);
+        _linearLayoutKarcisTmbhn = findViewById(R.id.linearKarcisTambahan);
 
+        btn_detail_lokwis = findViewById(R.id.btn_detail_lokwis);
+        btn_detail_pintu = findViewById(R.id.btn_detail_pintu);
+        btn_detail_ku = findViewById(R.id.btn_detail_ku);
+        btn_detail_kt = findViewById(R.id.btn_detail_kt);
 
+        progress_bar_popup = findViewById(R.id.progress_bar_popup);
+        shimmer_layout_popup = findViewById(R.id.shimmer_layout_popup);
+        _txt_day = findViewById(R.id.txt_day);
 
 
         /*  ini di hide  */
@@ -322,6 +333,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
         String result_dt_kota_adapter = getIntent().getStringExtra("result_dt_kota_adapter");
         String result_dt_url_img_lokwis_adapter = getIntent().getStringExtra("result_dt_url_img_lokwis_adapter");
         String result_dt_tgl_kunj_lokwis_adapter = getIntent().getStringExtra("result_dt_tgl_kunj_lokwis_adapter");
+        String result_dt_tgl_kunj_lokwis_2_adapter = getIntent().getStringExtra("result_dt_tgl_kunj_lokwis_2_adapter");
 
 
         String result_dt_judul_pintu = getIntent().getStringExtra("result_dt_judul_pintu");
@@ -362,6 +374,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
         String result_dt_url_img_pintu_fromAdapterLokPintu = getIntent().getStringExtra("result_dt_url_img_pintu_fromAdapterLokPintu");
         String result_dt_url_img_lokWisOld_fromAdapterLokPintu = getIntent().getStringExtra("result_dt_url_img_lokWisOld_fromAdapterLokPintu");
         String result_dt_tgl_kunj_pintux = getIntent().getStringExtra("result_dt_tgl_kunj_pintux");
+        String result_dt_tgl_kunj_pintu_2 = getIntent().getStringExtra("result_dt_tgl_kunj_pintu_2");
 
         String result_jml_karcis_wisnu_lp = getIntent().getStringExtra("result_jml_karcis_wisnu_lp");
         String result_jml_karcis_wisman_lp = getIntent().getStringExtra("result_jml_karcis_wisman_lp");
@@ -386,6 +399,8 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
         String result_dt_url_img_lokPintuOld = getIntent().getStringExtra("result_dt_url_img_lokPintuOld");
         String result_dt_url_img_ku = getIntent().getStringExtra("result_dt_url_img_ku");
         String result_dt_id_ku = getIntent().getStringExtra("result_dt_id_ku");
+        String result_dt_tgl_kunj_2_ku = getIntent().getStringExtra("result_dt_tgl_kunj_2_ku");
+
 
         String result_jml_karcis_wisnu_ku = getIntent().getStringExtra("result_jml_karcis_wisnu");
         String result_jml_karcis_wisman_ku = getIntent().getStringExtra("result_jml_karcis_wisman");
@@ -435,20 +450,16 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
         String harga_karcis_wisata_tmbhn_kt = getIntent().getStringExtra("harga_karcis_wisata_tmbhn_kt");
         String harga_karcis_asuransi_wisnu_kt = getIntent().getStringExtra("harga_karcis_asuransi_wisnu_kt");
         String harga_karcis_asuransi_wisman_kt = getIntent().getStringExtra("harga_karcis_asuransi_wisman_kt");
+        String tgl_kunj_2_kt = getIntent().getStringExtra("tgl_kujungan_2_kt");
 
-
-//        String parnew = sessionManager.getDataHorizontalPintu().get(SessionManager.key_kd_ksda_horz_1);;
 
         Log.i("","result_dt_id_kt= "+result_dt_id_kt);
         Log.i("","result_dt_jml_krcs_wisnu_kt= "+result_dt_jml_krcs_wisnu_kt);
         Log.i("","result_dt_jml_krcs_wisman_kt= "+result_dt_jml_krcs_wisman_kt);
-
         Log.i("","result_dt_harga_karcis_tmbhn_kt= "+result_dt_harga_karcis_tmbhn_kt);
         Log.i("","result_dt_harga_karcis_asuransi_kt= "+result_dt_harga_karcis_asuransi_kt);
         Log.i("","result_dt_tgl_kunj_kt= "+result_dt_tgl_kunj_kt);
-
         Log.i("","_jml_krcs_wisnu_wisman= "+_jml_krcs_wisnu_wisman);
-
         Log.i("","result_dt_kd_lokwis_adapter= "+result_dt_kd_lokwis_adapter);
         Log.i("","result_dt_judul_pintu x= "+result_dt_judul_pintu);
         Log.i("","sessionIntentKdOldPintu= "+sessionIntentKdOldPintu);
@@ -573,109 +584,12 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
         _txt_ttl_tmbhn.setText("0");
         _txt_grand_ttl.setText("0");
 
-//        ClearCalculateKarcis();
-//        sessionManager.clear_key_TtlKarcisWisnuWisman();
-//        sessionManager.clear_key_JmlKarcisTmbhn();
-//        CalculateKarcis();
 
         String ksda_par;
         String kode_pintu;
         String sess_ksda_par;
 
-        /*
-        if(session_JmlKarcisWisnu_state == null || session_JmlKarcisWisnu_state.equals("")) {
-            Log.i("","sini 1");
-            if(result_flag_pesan_karcis_sukses == null || result_flag_pesan_karcis_sukses.equals("")){
-                Log.i("","sini 2");
-                _txt_jml_krcs_wisnu.setText(session_JmlKarcisWisnu_state);
-            } else {
-                ClearCalculateKarcis();
-            }
-            CalculateKarcis();
-        }
-         if(session_JmlKarcisWisman_state == null || session_JmlKarcisWisman_state.equals("") ) {
-
-            if(result_flag_pesan_karcis_sukses == null){
-                _txt_jml_krcs_wisman.setText(session_JmlKarcisWisman_state);
-            } else {
-                ClearCalculateKarcis();
-            }
-        }
-
-        if(session_TtlKarcisWisnuWisman_state == null || session_TtlKarcisWisnuWisman_state.equals("")) {
-
-            if(result_flag_pesan_karcis_sukses == null){
-                _txt_ttl.setText(session_TtlKarcisWisnuWisman_state);
-            } else {
-                ClearCalculateKarcis();
-            }
-        }
-
-        if(session_JmlKarcisTmbhn_state == null || session_JmlKarcisTmbhn_state.equals("")) {
-
-            if(result_flag_pesan_karcis_sukses == null){
-                _txt_jml_krcs_tmbhn.setText(session_JmlKarcisTmbhn_state);
-            } else {
-                ClearCalculateKarcis();
-            }
-        }
-
-        if(session_TtlKarcisTmbhn_state == null || session_TtlKarcisTmbhn_state.equals("")) {
-            if(result_flag_pesan_karcis_sukses == null){
-                _txt_ttl_tmbhn.setText(session_TtlKarcisTmbhn_state);
-            } else {
-                ClearCalculateKarcis();
-            }
-        }
-
-        if(session_GrandTtlKarcis_state == null || session_GrandTtlKarcis_state.equals("")) {
-            if(result_flag_pesan_karcis_sukses == null){
-                _txt_grand_ttl.setText(session_GrandTtlKarcis_state);
-            } else {
-                ClearCalculateKarcis();
-            }
-        }
-        */
-
-        /*  this for lokasi wisata  */
-//        if( session_kd_lok_wis != null ) {
-//            _txt_kdlokwis.setText(session_kd_lok_wis);
-//        }
-//        if( session_nm_lok_wis != null ) {
-//            _txt_nmlokwis.setText(session_nm_lok_wis);
-//        }
-
-
-        /*  this for lokasi pintu  */
-//        if( session_kd_lok_pintu != null ) {
-//            _txt_kdlokPintu.setText(session_kd_lok_pintu);
-//        }
-//        if( session_nm_lok_pintu != null ) {
-//            _txt_nmlokPintu.setText(session_nm_lok_pintu);
-//        }
-//
-//        if( session_hrg_krcs_wisnu != 0 ) {
-//            _txt_harga_karcis_wisata_wisnu.setText(String.valueOf(session_hrg_krcs_wisnu));
-//        }
-//        if( session_hrg_krcs_wisman != 0 ) {
-//            _txt_harga_karcis_wisata_wisman.setText(String.valueOf(session_hrg_krcs_wisman));
-//        }
-//        if( session_hrg_krcs_asrnsi_wisnu != 0 ) {
-//            _txt_harga_karcis_asuransi_wisnu.setText( String.valueOf(session_hrg_krcs_asrnsi_wisnu));
-//        }
-//        if( session_hrg_krcs_asrnsi_wisman != 0 ) {
-//            _txt_harga_karcis_asuransi_wisman.setText( String.valueOf(session_hrg_krcs_asrnsi_wisman));
-//        }
-//
-//        if( session_TtlKarcisTmbhn_state != null ) {
-//            Log.i("","session_TtlKarcisTmbhn_state awal"+session_TtlKarcisTmbhn_state);
-//            _txt_ttl_tmbhn.setText( session_TtlKarcisTmbhn_state );
-//        }
-
         _txt_jml_krcs_tmbhn.performClick();
-
-
-
 
         /*  this when first time load activity PesanKarcis*/
         if( result_dt_kodeKarcis == null &&  result_dt_kd_lokwis_adapter == null && result_dt_judul_pintu == null && result_dt_kdlokPintu2 == null && result_dt_kodeKarcis_kt == null) {
@@ -721,10 +635,16 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
 
                 final String KSDA = sessionManager.getDataLokWisPesankarcisWisatawan().get(SessionManager.key_kd_lokwis);
 
+                Log.i("","result_dt_tgl_kunj_lokwis_adapter "+result_dt_tgl_kunj_lokwis_adapter);
+
                 quotaTwa("quota_per_twa",KSDA,result_dt_tgl_kunj_lokwis_adapter);
                 _txt_tgl_kunjungan_order.setError(null);
 
             }
+            if( result_dt_tgl_kunj_lokwis_adapter != null ){
+                _txt_tgl_kunjungan_2_order.setText(result_dt_tgl_kunj_lokwis_2_adapter);
+            }
+
 
 
            final ImageView img1 = findViewById(R.id.lokwisPicasso);
@@ -755,11 +675,16 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
 
             horizontalLokasiPintuForWisata("daftar_lokasi_pintu", sess_ksda_par, getApplicationContext(),"","","null");
 
+
+
             if( result_dt_txt_kdlokPintu_adapter != null) {
                 kode_pintu = result_dt_txt_kdlokPintu_adapter;
             } else {
                 kode_pintu ="00011";
             }
+
+
+
 
         }
 
@@ -789,6 +714,10 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
                 final String KSDA = sessionManager.getDataLokWisPesankarcisWisatawan().get(SessionManager.key_kd_lokwis);
                 quotaTwa("quota_per_twa",result_dt_kdlokOldPintu2,session_tgl_kunj);
                 _txt_tgl_kunjungan_order.setError(null);
+            }
+            if( result_dt_tgl_kunj_pintu_2 != null ) {
+                _txt_tgl_kunjungan_2_order.setText(result_dt_tgl_kunj_pintu_2);
+
             }
 
             final ImageView img1 =(ImageView)findViewById(R.id.lokwisPicasso);
@@ -822,6 +751,11 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
             horizontalKarcisWisatawanUtamaFirst("daftar_karcis_wisatawan_utama",kode_pintu);
             horizontalKarcisWisatawanTambahanFirst("daftar_karcis_wisatawan_tambahan",kode_pintu);
 
+            try {
+                CalculateKarcis();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
 
         }
 
@@ -853,6 +787,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
             _txt_urlLokWis.setText(result_dt_url_img_lokWisOld);
             _txt_urlLokPintu.setText(result_dt_url_img_lokPintuOld);
             _txt_tgl_kunjungan_order.setText(result_dt_tgl_kunj);
+            _txt_tgl_kunjungan_2_order.setText(result_dt_tgl_kunj_2_ku);
 
 
             _txt_kode_ksda.setText(result_dt_kdlokWis);
@@ -884,6 +819,10 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
                 quotaTwa("quota_per_twa",result_dt_kdlokWis,result_dt_tgl_kunj);
                 _txt_tgl_kunjungan_order.setError(null);
             }
+            if ( result_dt_tgl_kunj_2_ku != null ) {
+                _txt_tgl_kunjungan_2_order.setText(result_dt_tgl_kunj_2_ku);
+            }
+
 
             final ImageView img1 =(ImageView)findViewById(R.id.lokwisPicasso);
 
@@ -924,7 +863,11 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
             }
 
             horizontalKarcisWisatawanTambahanFirst("daftar_karcis_wisatawan_tambahan",kode_pintu);
-            CalculateKarcis();
+            try {
+                CalculateKarcis();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
 
         }
 
@@ -958,13 +901,15 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
 
             Log.i("","session_TtlKarcisTmbhn_state entity karcis tambahan"+session_TtlKarcisTmbhn_state);
 
-            if ( result_dt_tgl_kunj_kt != null ) {
+                    if ( result_dt_tgl_kunj_kt != null ) {
+                        _txt_tgl_kunjungan_order.setText( result_dt_tgl_kunj_kt );
+                        quotaTwa("quota_per_twa",result_dt_kdlokWis_kt,result_dt_tgl_kunj_kt);
+                        _txt_tgl_kunjungan_order.setError(null);
+                    }
 
-                _txt_tgl_kunjungan_order.setText( result_dt_tgl_kunj_kt );
-
-                quotaTwa("quota_per_twa",result_dt_kdlokWis_kt,result_dt_tgl_kunj_kt);
-                _txt_tgl_kunjungan_order.setError(null);
-            }
+                    if( tgl_kunj_2_kt != null ) {
+                        _txt_tgl_kunjungan_2_order.setText( tgl_kunj_2_kt );
+                    }
 
 
             final ImageView img1 =(ImageView)findViewById(R.id.lokwisPicasso);
@@ -1025,29 +970,38 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
             final double hrg_krcs_asrnsi_wisnu = Help.ParseDouble(harga_karcis_asuransi_wisnu_kt);
             final double hrg_krcs_asrnsi_wisman = Help.ParseDouble(harga_karcis_asuransi_wisman_kt);
 
-            /* Rumus perhitungan karcis dan biaya asuransi  */
-            final int  ttl_wisnu = (int) ((hrg_krcs_wisnu+hrg_krcs_asrnsi_wisnu)*_jml_krcs_wisnu);
-            final int   ttl_wisman =(int) ((hrg_krcs_wisman+hrg_krcs_asrnsi_wisman)*_jml_krcs_wisman);
-            final int ttl_wisnu_wisman = (ttl_wisnu+ttl_wisman);
-            final int ttl_tmbhn = (int) (hrg_krcs_tmbhn*_jml_krcs_tmbhn);
-            final int grand_ttl =(int) (ttl_wisnu_wisman+ttl_tmbhn);
+
+            final int ttl_wisnu ;
+            final int ttl_wisman;
+            final int ttl_wisnu_wisman ;
+            final int ttl_tmbhn ;
+            final int grand_ttl ;
+            long selisih_day = 0;
+            try {
+                selisih_day = get_selisih_day();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            int new_ttl;
+            if( selisih_day >0 ){
+
+                ttl_wisnu = (int) ((hrg_krcs_wisnu+hrg_krcs_asrnsi_wisnu)*_jml_krcs_wisnu)* (int) selisih_day;
+                ttl_wisman =(int) ((hrg_krcs_wisman+hrg_krcs_asrnsi_wisman)*_jml_krcs_wisman * (int) selisih_day);
+            } else {
+                ttl_wisnu = (int) ((hrg_krcs_wisnu+hrg_krcs_asrnsi_wisnu)*_jml_krcs_wisnu);
+                ttl_wisman =(int) ((hrg_krcs_wisman+hrg_krcs_asrnsi_wisman)*_jml_krcs_wisman);
+            }
 
 
-            Log.i("tag","_jml_krcs_wisnu= "+ _jml_krcs_wisnu);
-            Log.i("tag","_jml_krcs_wisman= "+ _jml_krcs_wisman);
-            Log.i("tag","calc _jml_krcs_tmbhn= "+ _jml_krcs_tmbhn);
+            ttl_wisnu_wisman = (ttl_wisnu+ttl_wisman);
+            if( selisih_day >0 ){
+                ttl_tmbhn = (int) ((hrg_krcs_tmbhn*_jml_krcs_tmbhn)*  (int) selisih_day);
+            } else {
+                ttl_tmbhn = (int) (hrg_krcs_tmbhn*_jml_krcs_tmbhn);
+            }
 
-            Log.i("tag","hrg_krcs_wisnu xz= "+ hrg_krcs_wisnu);
-            Log.i("tag","hrg_krcs_wisman= "+ hrg_krcs_wisman);
-            Log.i("tag","hrg_krcs_tmbhn xx= "+ hrg_krcs_tmbhn);
-            Log.i("tag","hrg_krcs_asrnsi_wisnu= "+ hrg_krcs_asrnsi_wisnu);
-            Log.i("tag","hrg_krcs_asrnsi_wisman= "+ hrg_krcs_asrnsi_wisman);
-
-            Log.i("tag","calc ttl_wisnu= "+ ttl_wisnu);
-            Log.i("tag","calc ttl_wisman= "+ ttl_wisman);
-            Log.i("tag","ttl_wisnu_wisman= "+ttl_wisnu_wisman);
-            Log.i("tag","ttl_tmbhn = "+ttl_tmbhn);
-            Log.i("tag","grand_ttl tmbhn = "+grand_ttl);
+            grand_ttl =(int) (ttl_wisnu_wisman+ttl_tmbhn);
 
             _txt_ttl.setText(String.valueOf(ttl_wisnu_wisman));
             _txt_ttl_tmbhn.setText(String.valueOf(ttl_tmbhn));
@@ -1057,43 +1011,73 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
 
 
 
-        _txt_tgl_kunjungan_order.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus){
-                    DialogFragment datePicker = new DatePickerPesanKarcisWstwn();
-                    datePicker.show(getSupportFragmentManager(),"date picker PesanKarcisWstwn");
-                }
-            }
-        });
-        _txt_tgl_kunjungan_order.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        _txt_tgl_kunjungan_order.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus){
                 DialogFragment datePicker = new DatePickerPesanKarcisWstwn();
                 datePicker.show(getSupportFragmentManager(),"date picker PesanKarcisWstwn");
             }
         });
+        _txt_tgl_kunjungan_order.setOnClickListener(v -> {
+            DialogFragment datePicker = new DatePickerPesanKarcisWstwn();
+            datePicker.show(getSupportFragmentManager(),"date picker PesanKarcisWstwn");
+        });
 
-        _btn_order_wist.setOnClickListener(v -> {
-            final String tgl_kunj_val1 = _txt_tgl_kunjungan_order.getText().toString();
-            final String key_kd_lokwis = _txt_kdlokwis.getText().toString().trim();
-            if( TextUtils.isEmpty(tgl_kunj_val1) ) {
-                _txt_tgl_kunjungan_order.setError("Tgl Kunjungan Harus Diisi");
-                _txt_tgl_kunjungan_order.requestFocus();
 
-            } else {
-                quotaTwaForBtnOrderWist("quota_per_twa",key_kd_lokwis,tgl_kunj_val1);
+
+
+
+        _txt_tgl_kunjungan_2_order.setOnFocusChangeListener((v13, hasFocus) -> {
+            if (hasFocus){
+                final Calendar c = Calendar.getInstance();
+                int mYear = c.get(Calendar.YEAR);
+                int mMonth = c.get(Calendar.MONTH);
+                int mDay = c.get(Calendar.DAY_OF_MONTH);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(v13.getContext(),
+                        (view, year, monthOfYear, dayOfMonth) -> {
+                            @SuppressLint("SimpleDateFormat") SimpleDateFormat fr = new SimpleDateFormat("dd-MM-yyyy");
+                            _txt_tgl_kunjungan_2_order.setText( year + "-" + (monthOfYear + 1)  + "-" +dayOfMonth );
+                            try {
+                                CalculateKarcis();
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+
+                        },mYear , mMonth,mDay );
+                datePickerDialog.show();
+
             }
         });
 
 
-        _txt_jml_krcs_wisnu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CalculateKarcis();
-                sessionManager.createSessionStateJmlKarcisWisnu( _txt_jml_krcs_wisnu.getText().toString() );
-                Log.i("Ram = ", "_txt_jml_krcs_wisnu ONcLICK"+ _txt_jml_krcs_wisnu.getText().toString());
+
+        _btn_order_wist.setOnClickListener(v -> {
+            final String tgl_kunj_val1 = _txt_tgl_kunjungan_order.getText().toString();
+            final String tgl_kunj_val2 = _txt_tgl_kunjungan_2_order.getText().toString();
+            final String key_kd_lokwis = _txt_kdlokwis.getText().toString().trim();
+            if( TextUtils.isEmpty(tgl_kunj_val1) ) {
+                _txt_tgl_kunjungan_order.setError("Tgl Kunjungan Harus Diisi");
+                _txt_tgl_kunjungan_order.requestFocus();
             }
+            else if( TextUtils.isEmpty(tgl_kunj_val2) ){
+                _txt_tgl_kunjungan_2_order.setError("Tgl Rentang Kunjungan Harus Diisi");
+                _txt_tgl_kunjungan_2_order.requestFocus();
+            }
+            else {
+                quotaTwaForBtnOrderWist("quota_per_twa",key_kd_lokwis,tgl_kunj_val1,tgl_kunj_val2);
+            }
+        });
+
+
+
+
+        _txt_jml_krcs_wisnu.setOnClickListener(v -> {
+            try {
+                CalculateKarcis();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            sessionManager.createSessionStateJmlKarcisWisnu( _txt_jml_krcs_wisnu.getText().toString() );
+            Log.i("Ram = ", "_txt_jml_krcs_wisnu ONcLICK"+ _txt_jml_krcs_wisnu.getText().toString());
         });
 
 
@@ -1101,11 +1085,19 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
         _txt_jml_krcs_wisnu.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                CalculateKarcis();
+                try {
+                    CalculateKarcis();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 sessionManager.createSessionStateJmlKarcisWisnu( _txt_jml_krcs_wisnu.getText().toString() );
                 if (s.toString().length() > 0) {
                     Log.i("Ram = ", "_txt_jml_krcs_wisnu not Empty 1 TEXTcHANGED"+ _txt_jml_krcs_wisnu.getText().toString());
-                    CalculateKarcis();
+                    try {
+                        CalculateKarcis();
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
                 }
 
             }
@@ -1113,50 +1105,90 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
                 Log.i("Ram = ", "_txt_jml_krcs_wisnu not Empty 2");
-                CalculateKarcis();
+                try {
+                    CalculateKarcis();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 sessionManager.createSessionStateJmlKarcisWisnu( _txt_jml_krcs_wisnu.getText().toString() );
                 sessionManager.createSessionStateTtlKarcisWisnuWisman( _txt_ttl.getText().toString() );
                 sessionManager.createSessionStateGrandTtlKarcis( _txt_grand_ttl.getText().toString() );
-                CalculateKarcis();
+                try {
+                    CalculateKarcis();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
             @Override
             public void afterTextChanged(Editable s) {
                 Log.i("Ram = ", "_txt_jml_krcs_wisnu not Empty 3");
-                CalculateKarcis();
+                try {
+                    CalculateKarcis();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 sessionManager.createSessionStateJmlKarcisWisnu( _txt_jml_krcs_wisnu.getText().toString() );
                 sessionManager.createSessionStateTtlKarcisWisnuWisman( _txt_ttl.getText().toString() );
                 sessionManager.createSessionStateGrandTtlKarcis( _txt_grand_ttl.getText().toString() );
                 sessionManager.createSessionStateGrandTtlKarcis( _txt_grand_ttl.getText().toString() );
-                CalculateKarcis();
+                try {
+                    CalculateKarcis();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
         _txt_jml_krcs_wisman.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                CalculateKarcis();
+                try {
+                    CalculateKarcis();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 sessionManager.createSessionStateJmlKarcisWisman( _txt_jml_krcs_wisman.getText().toString() );
                 if (s.toString().length() > 0) {
                     Log.i("Ram = ", "not Empty");
-                    CalculateKarcis();
+                    try {
+                        CalculateKarcis();
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
                 }
 
             }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                CalculateKarcis();
+                try {
+                    CalculateKarcis();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 sessionManager.createSessionStateJmlKarcisWisman( _txt_jml_krcs_wisman.getText().toString() );
                 sessionManager.createSessionStateTtlKarcisWisnuWisman( _txt_ttl.getText().toString() );
                 sessionManager.createSessionStateGrandTtlKarcis( _txt_grand_ttl.getText().toString() );
-                CalculateKarcis();
+                try {
+                    CalculateKarcis();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
             @Override
             public void afterTextChanged(Editable s) {
-                CalculateKarcis();
+                try {
+                    CalculateKarcis();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 sessionManager.createSessionStateJmlKarcisWisman( _txt_jml_krcs_wisman.getText().toString() );
                 sessionManager.createSessionStateTtlKarcisWisnuWisman( _txt_ttl.getText().toString() );
                 sessionManager.createSessionStateGrandTtlKarcis( _txt_grand_ttl.getText().toString() );
-                CalculateKarcis();
+                try {
+                    CalculateKarcis();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -1168,7 +1200,11 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
                 sessionManager.createSessionStateTtlKarcisTmbhn( _txt_ttl_tmbhn.getText().toString() );
                 sessionManager.createSessionStateGrandTtlKarcis( _txt_grand_ttl.getText().toString() );
                 Log.i("","kesini oke 2");
-                CalculateKarcis();
+                try {
+                    CalculateKarcis();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -1176,7 +1212,11 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
                 sessionManager.createSessionStateTtlKarcisTmbhn( _txt_ttl_tmbhn.getText().toString() );
                 sessionManager.createSessionStateGrandTtlKarcis( _txt_grand_ttl.getText().toString() );
                 Log.i("","kesini oke 3");
-                CalculateKarcis();
+                try {
+                    CalculateKarcis();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
             @Override
             public void afterTextChanged(Editable s) {
@@ -1184,18 +1224,23 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
                 sessionManager.createSessionStateTtlKarcisTmbhn( _txt_ttl_tmbhn.getText().toString() );
                 sessionManager.createSessionStateGrandTtlKarcis( _txt_grand_ttl.getText().toString() );
                 Log.i("","kesini oke 4");
-                CalculateKarcis();
+                try {
+                    CalculateKarcis();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
 
 
 
-        _linearLayoutKdLok.setOnClickListener(v -> {
+        btn_detail_lokwis.setOnClickListener(v -> {
             String txt_kdlokwis = _txt_kdlokwis.getText().toString().trim();
             String txt_nmlokWis = _txt_nmlokwis.getText().toString().trim();
             String txt_url_img_lokwis = _txt_urlLokWis.getText().toString().trim();
             String tgl_kujungan_val = _txt_tgl_kunjungan_order.getText().toString().trim();
+            String tgl_kujungan_2_val = _txt_tgl_kunjungan_2_order.getText().toString().trim();
 
             String txt_id_karcis_utama = _txt_id_karcis_utama.getText().toString().trim();
             String txt_id_karcis_tmbhn = _txt_id_karcis_tmbhn.getText().toString().trim();
@@ -1219,6 +1264,8 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
             i.putExtra("result_dt_nm_lokwis",txt_nmlokWis );
             i.putExtra("result_dt_url_img_lokwis", txt_url_img_lokwis);
             i.putExtra("result_dt_tgl_kunj_lokwis",tgl_kujungan_val);
+            i.putExtra("result_dt_tgl_kunj_2_lokwis",tgl_kujungan_2_val);
+
 
             i.putExtra("txt_id_karcis_utama", txt_id_karcis_utama);
             i.putExtra("txt_kdlokPintu",txt_kdlokPintu);
@@ -1242,7 +1289,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
 
         });
 
-        _linearLayoutKdPintu.setOnClickListener(v -> {
+        btn_detail_pintu.setOnClickListener(v -> {
             String txt_kdlokPintu = _txt_kdlokPintu.getText().toString().trim();
             String txt_kdlokWis = _txt_kdlokwis.getText().toString().trim();
             String txt_nmlokWis = _txt_nmlokwis.getText().toString().trim();
@@ -1250,6 +1297,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
 
             String txt_url_img_lokPintu = _txt_urlLokPintu.getText().toString().trim();
             String tgl_kujungan_val = _txt_tgl_kunjungan_order.getText().toString().trim();
+            String tgl_kujungan_2_val = _txt_tgl_kunjungan_2_order.getText().toString().trim();
 
             String result_jml_karcis_wisnu = _txt_jml_krcs_wisnu.getText().toString().trim();
             String result_jml_karcis_wisman = _txt_jml_krcs_wisman.getText().toString().trim();
@@ -1266,6 +1314,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
             i.putExtra("result_dt_url_img_lokwis",txt_url_img_lokwis);
             i.putExtra("result_dt_url_img_lokPintu",txt_url_img_lokPintu);
             i.putExtra("result_dt_tgl_kunj_pintu",tgl_kujungan_val);
+            i.putExtra("tgl_kujungan_2_val", tgl_kujungan_2_val);
 
             i.putExtra("result_jml_karcis_wisnu", result_jml_karcis_wisnu);
             i.putExtra("result_jml_karcis_wisman", result_jml_karcis_wisman);
@@ -1282,9 +1331,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
 
         });
 
-
-
-        _linearLayoutKarcisUtama.setOnClickListener(v -> {
+        btn_detail_ku.setOnClickListener(v -> {
 
             String txt_id_karcis_utama = _txt_id_karcis_utama.getText().toString().trim();
             String txt_kdlokPintu = _txt_kdlokPintu.getText().toString().trim();
@@ -1294,6 +1341,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
             String txt_nmlokPintux =  _txt_nmlokPintu.getText().toString().trim();
             String txt_url_img_lokwisOld = _txt_urlLokWis.getText().toString().trim();
             String txt_url_img_lokPintu = _txt_urlLokPintu.getText().toString().trim();
+            String tgl_kujungan_2_val = _txt_tgl_kunjungan_2_order.getText().toString().trim();
 
             String result_dt_jml_karcis_wisnu = _txt_jml_krcs_wisnu.getText().toString().trim();
             String result_dt_jml_karcis_wisman = _txt_jml_krcs_wisman.getText().toString().trim();
@@ -1329,7 +1377,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
             i.putExtra("result_dt_harga_karcis_wisata_tmbhn",txt_harga_karcis_wisata_tmbhn);
             i.putExtra("result_dt_id_karcis_utama",txt_id_karcis_utama);
             i.putExtra("result_dt_id_karcis_tmbhn", txt_id_karcis_tmbhn);
-
+            i.putExtra("result_dt_tgl_kunj_2",tgl_kujungan_2_val);
 
 
 
@@ -1348,14 +1396,15 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
 
         });
 
-        _linearLayoutKarcisTmbhn.setOnClickListener( v -> {
+        btn_detail_kt.setOnClickListener( v -> {
+//        _linearLayoutKarcisTmbhn.setOnClickListener( v -> {
 
-//            String txt_kdlokPintu = _txt_kode_lokasi_tmbhn.getText().toString().trim();
             String txt_kdlokPintu = _txt_kdlokPintu.getText().toString().trim();
             String txt_nmlokPintu =  _txt_nmlokPintu.getText().toString().trim();
             String txt_kdlokWis = _txt_kdlokwis.getText().toString().trim();
             String txt_nmlokWis = _txt_nmlokwis.getText().toString().trim();
             String tgl_kujungan_val = _txt_tgl_kunjungan_order.getText().toString().trim();
+            String tgl_kujungan_2_val = _txt_tgl_kunjungan_2_order.getText().toString().trim();
 
             String txt_url_img_lokwisOld = _txt_urlLokWis.getText().toString().trim();
             String txt_url_img_lokPintu = _txt_urlLokPintu.getText().toString().trim();
@@ -1376,9 +1425,6 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
             String  hrg_krcs_tmbhn =  "";
             String  hrg_krcs_asrnsi_wisnu = _txt_harga_karcis_asuransi_wisnu.getText().toString();
             String  hrg_krcs_asrnsi_wisman = _txt_harga_karcis_asuransi_wisman.getText().toString();
-
-
-//            @SuppressLint("CutPasteId") EditText _txt_jml_krcs_wisnu2 = (EditText) findViewById(R.id.txt_jml_krcs_wisnu);
 
             String __txt_jml_krcs_wisnu = _txt_jml_krcs_wisnu.getText().toString().trim();
             String __txt_jml_krcs_wisman= _txt_jml_krcs_wisman.getText().toString().trim();
@@ -1427,6 +1473,8 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
             i.putExtra("hrg_krcs_tmbhn", hrg_krcs_tmbhn);
             i.putExtra("hrg_krcs_asrnsi_wisnu", hrg_krcs_asrnsi_wisnu);
             i.putExtra("hrg_krcs_asrnsi_wisman", hrg_krcs_asrnsi_wisman);
+            i.putExtra("tgl_kujungan_2_val", tgl_kujungan_2_val);
+
 
             startActivity(i);
 
@@ -1451,7 +1499,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
                             if( jsonObject.getBoolean("success") ) {
                                 JSONArray jsonArray = jsonObject.getJSONArray("data");
 
-                                Log.i("tag"," dt jsonArray First: "+jsonArray.toString());
+                                Log.i("tag"," dt jsonArray First 1: "+jsonArray.toString());
 
 //                                for (int i = 0; i <jsonArray.length();i++ ) {
                                     JSONObject jsonObject1 = jsonArray.getJSONObject(0);
@@ -1559,7 +1607,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
                             if( jsonObject.getBoolean("success") ) {
                                 JSONArray jsonArray = jsonObject.getJSONArray("data");
 
-                                Log.i("tag"," dt jsonArray: "+jsonArray.toString());
+                                Log.i("tag"," dt jsonArray Tambahan: "+jsonArray.toString());
 
 //                                for (int i = 0; i <jsonArray.length();i++ ) {
 
@@ -1798,7 +1846,6 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
                                     String _harga_karcis_wisata = jsonObject1.getString("harga_karcis_wisata");
                                     String _harga_karcis_asuransi = jsonObject1.getString("harga_karcis_asuransi");
 
-//                                    arrKarcisTambahan.add(new SpinnerKarcisTambahan(_kode_karcis,_nama_karcis,_harga_karcis_wisata, _id));
 
                                     _txt_id_karcis_tmbhn.setText(_id);
                                     _txt_kode_ksda_tmbhn.setText( _kode_ksda );
@@ -1812,7 +1859,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
                                     Log.i("","_harga_karcis_wisata lokwis "+_harga_karcis_wisata);
 
 
-
+                                long selisih_hari = get_selisih_day();
                                 final double _jml_krcs_wisnu = Help.ParseDouble(((EditText) findViewById(R.id.txt_jml_krcs_wisnu_ori)).getText().toString());
                                 final double _jml_krcs_wisman = Help.ParseDouble(((EditText) findViewById(R.id.txt_jml_krcs_wisman_ori)).getText().toString());
                                 final double _jml_krcs_tmbhn = Help.ParseDouble(((EditText) findViewById(R.id.txt_jml_krcs_wisman_tmbhn_ori)).getText().toString());
@@ -1827,35 +1874,36 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
 
 
                                 /* Rumus perhitungan karcis dan biaya asuransi  */
-                                final int  ttl_wisnu = (int) ((hrg_krcs_wisnu+hrg_krcs_asrnsi_wisnu)*_jml_krcs_wisnu);
-                                final int   ttl_wisman =(int) ((hrg_krcs_wisman+hrg_krcs_asrnsi_wisman)*_jml_krcs_wisman);
-                                final int ttl_wisnu_wisman = (ttl_wisnu+ttl_wisman);
-                                final int ttl_tmbhn = (int) (hrg_krcs_tmbhn*_jml_krcs_tmbhn);
-                                final int grand_ttl =(int) (ttl_wisnu_wisman+ttl_tmbhn);
+                                final int  ttl_wisnu ;
+                                final int   ttl_wisman;
+                                final int ttl_wisnu_wisman ;
+                                final int ttl_tmbhn ;
+                                final int grand_ttl ;
 
-                                Log.i("tag","_jml_krcs_wisnu= "+ _jml_krcs_wisnu);
-                                Log.i("tag","_jml_krcs_wisman= "+ _jml_krcs_wisman);
-                                Log.i("tag","calc _jml_krcs_tmbhn= "+ _jml_krcs_tmbhn);
+                                long selisih_day = get_selisih_day();
+                                Log.i("","selisih_day calc"+selisih_day);
 
-                                Log.i("tag","hrg_krcs_wisnu= "+ hrg_krcs_wisnu);
-                                Log.i("tag","hrg_krcs_wisman= "+ hrg_krcs_wisman);
-                                Log.i("tag","hrg_krcs_tmbhn= "+ hrg_krcs_tmbhn);
-                                Log.i("tag","hrg_krcs_asrnsi_wisnu= "+ hrg_krcs_asrnsi_wisnu);
-                                Log.i("tag","hrg_krcs_asrnsi_wisman= "+ hrg_krcs_asrnsi_wisman);
+                                int new_ttl;
+                                if( selisih_day >0 ){
+                                    ttl_wisnu = (int) ((hrg_krcs_wisnu+hrg_krcs_asrnsi_wisnu)*_jml_krcs_wisnu)* (int) selisih_day;
+                                    ttl_wisman =(int) ((hrg_krcs_wisman+hrg_krcs_asrnsi_wisman)*_jml_krcs_wisman * (int) selisih_day);
+                                } else {
+                                    ttl_wisnu = (int) ((hrg_krcs_wisnu+hrg_krcs_asrnsi_wisnu)*_jml_krcs_wisnu);
+                                    ttl_wisman =(int) ((hrg_krcs_wisman+hrg_krcs_asrnsi_wisman)*_jml_krcs_wisman);
+                                }
 
-                                Log.i("tag","calc ttl_wisnu= "+ ttl_wisnu);
-                                Log.i("tag","calc ttl_wisman= "+ ttl_wisman);
-                                Log.i("tag","ttl_wisnu_wisman= "+ttl_wisnu_wisman);
-        Log.i("tag","ttl_tmbhn = "+ttl_tmbhn);
-        Log.i("tag","grand_ttl xx = "+grand_ttl);
+                                ttl_wisnu_wisman = (ttl_wisnu+ttl_wisman);
+                                if( selisih_day >0 ){
+                                    ttl_tmbhn = (int) ((hrg_krcs_tmbhn*_jml_krcs_tmbhn)*  (int) selisih_day);
+                                } else {
+                                    ttl_tmbhn = (int) (hrg_krcs_tmbhn*_jml_krcs_tmbhn);
+                                }
 
-
+                                grand_ttl =(int) (ttl_wisnu_wisman+ttl_tmbhn);
 
                                 _txt_ttl.setText(String.valueOf(ttl_wisnu_wisman));
                                 _txt_ttl_tmbhn.setText(String.valueOf(ttl_tmbhn));
                                 _txt_grand_ttl.setText(String.valueOf(grand_ttl));
-
-
 
 
                                 final ImageView img2 = findViewById(R.id.krcsTmbhnPicasso);
@@ -1877,7 +1925,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
                             }
                         }
 
-                    } catch (JSONException e) {
+                    } catch (JSONException | ParseException e) {
                         Log.i("", "error horizontalKarcisWisatawanUtama=" + e.toString() );
                         e.printStackTrace();
                     }
@@ -1919,7 +1967,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
                             if( jsonObject.getBoolean("success") ) {
                                 JSONArray jsonArray = jsonObject.getJSONArray("data");
 
-                                Log.i("tag"," dt jsonArray First: "+jsonArray.toString());
+                                Log.i("tag"," dt jsonArray First 2: "+jsonArray.toString());
 
 //                                for (int i = 0; i <jsonArray.length();i++ ) {
                                 JSONObject jsonObject1 = jsonArray.getJSONObject(0);
@@ -2251,6 +2299,8 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
 
                                 sessionManager.createSessionLokWisPesankarcisWisatawan(_kd_lokasi,_nm_obj_wisata,_alamat,_kota,_url_image);
 
+
+
                                 ImageView img1 =(ImageView)findViewById(R.id.lokwisPicasso);
                                 Transformation transformation = new RoundedTransformationBuilder()
 //                                        .borderColor(Color.BLUE)
@@ -2501,7 +2551,8 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
 
 
 
-    public void CalculateKarcis(){
+    @SuppressLint("SetTextI18n")
+    public void CalculateKarcis() throws ParseException {
         final double _jml_krcs_wisnu = Help.ParseDouble(((EditText) findViewById(R.id.txt_jml_krcs_wisnu_ori)).getText().toString());
         final double _jml_krcs_wisman = Help.ParseDouble(((EditText) findViewById(R.id.txt_jml_krcs_wisman_ori)).getText().toString());
         final double _jml_krcs_tmbhn = Help.ParseDouble(((EditText) findViewById(R.id.txt_jml_krcs_wisman_tmbhn_ori)).getText().toString());
@@ -2514,13 +2565,54 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
         final double hrg_krcs_asrnsi_wisnu = Help.ParseDouble(((TextView) findViewById(R.id.txt_harga_karcis_asuransi_wisnu)).getText().toString());
         final double hrg_krcs_asrnsi_wisman = Help.ParseDouble(((TextView) findViewById(R.id.txt_harga_karcis_asuransi_wisman)).getText().toString());
 
+        final int  ttl_wisnu ;
+        final int   ttl_wisman;
+        final int ttl_wisnu_wisman ;
+        final int ttl_tmbhn ;
+        final int grand_ttl ;
 
-         /* Rumus perhitungan karcis dan biaya asuransi  */
-        final int  ttl_wisnu = (int) ((hrg_krcs_wisnu+hrg_krcs_asrnsi_wisnu)*_jml_krcs_wisnu);
-        final int   ttl_wisman =(int) ((hrg_krcs_wisman+hrg_krcs_asrnsi_wisman)*_jml_krcs_wisman);
-        final int ttl_wisnu_wisman = (ttl_wisnu+ttl_wisman);
-        final int ttl_tmbhn = (int) (hrg_krcs_tmbhn*_jml_krcs_tmbhn);
-        final int grand_ttl =(int) (ttl_wisnu_wisman+ttl_tmbhn);
+
+//        final  String TGL = findViewById(R.id.txt_tgl_kunjungan_order);
+//        final String TGL =  _txt_tgl_kunjungan_order.getText().toString().trim();
+//        final String TGL2 =  _txt_tgl_kunjungan_2_order.getText().toString().trim();
+//        String dateStr1 = TGL;
+//        String dateStr2 = TGL2;
+//
+//        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//        Date dateOne = sdf.parse(dateStr1);
+//        Date dateTwo = sdf.parse(dateStr2);
+//
+//        long timeOne = dateOne.getTime();
+//        long timeTwo = dateTwo.getTime();
+//        long oneDay = 1000 * 60 * 60 * 24;
+//        long selisih_hari = (timeTwo - timeOne) / oneDay;
+//
+//        Log.i("","calc selisih_hari "+selisih_hari);
+//        Log.i("","TGL "+TGL);
+//        Log.i("","TGL2 "+TGL2);
+
+        long selisih_day = get_selisih_day();
+        Log.i("","selisih_day calc"+selisih_day);
+
+        /* Rumus perhitungan karcis dan biaya asuransi  */
+        int new_ttl;
+        if( selisih_day >0 ){
+            ttl_wisnu = (int) ((hrg_krcs_wisnu+hrg_krcs_asrnsi_wisnu)*_jml_krcs_wisnu)* (int) selisih_day;
+            ttl_wisman =(int) ((hrg_krcs_wisman+hrg_krcs_asrnsi_wisman)*_jml_krcs_wisman * (int) selisih_day);
+        } else {
+            ttl_wisnu = (int) ((hrg_krcs_wisnu+hrg_krcs_asrnsi_wisnu)*_jml_krcs_wisnu);
+            ttl_wisman =(int) ((hrg_krcs_wisman+hrg_krcs_asrnsi_wisman)*_jml_krcs_wisman);
+        }
+
+
+        ttl_wisnu_wisman = (ttl_wisnu+ttl_wisman);
+        if( selisih_day >0 ){
+            ttl_tmbhn = (int) ((hrg_krcs_tmbhn*_jml_krcs_tmbhn)*  (int) selisih_day);
+        } else {
+            ttl_tmbhn = (int) (hrg_krcs_tmbhn*_jml_krcs_tmbhn);
+        }
+
+        grand_ttl =(int) (ttl_wisnu_wisman+ttl_tmbhn);
 
         Log.i("tag","_jml_krcs_wisnu= "+ _jml_krcs_wisnu);
         Log.i("tag","_jml_krcs_wisman= "+ _jml_krcs_wisman);
@@ -2538,11 +2630,11 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
         Log.i("tag","ttl_tmbhn = "+ttl_tmbhn);
         Log.i("tag","grand_ttl = "+grand_ttl);
 
-
-
         _txt_ttl.setText(String.valueOf(ttl_wisnu_wisman));
         _txt_ttl_tmbhn.setText(String.valueOf(ttl_tmbhn));
         _txt_grand_ttl.setText(String.valueOf(grand_ttl));
+
+//        _txt_day.setText(" x "+ selisih_day +" Hari.");
 
     }
 
@@ -2558,9 +2650,30 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
 
     }
 
+public long get_selisih_day() throws ParseException {
+    final String TGL =  _txt_tgl_kunjungan_order.getText().toString().trim();
+    final String TGL2 =  _txt_tgl_kunjungan_2_order.getText().toString().trim();
+    String dateStr1 = TGL;
+    String dateStr2 = TGL2;
 
+    @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    Date dateOne = sdf.parse(dateStr1);
+    Date dateTwo = sdf.parse(dateStr2);
 
-    private void inputKarcisWisatawan(String EP){
+    long timeOne = dateOne.getTime();
+    long timeTwo = dateTwo.getTime();
+    long oneDay = 1000 * 60 * 60 * 24;
+    long selisih_hari = ((timeTwo - timeOne) / oneDay)+1;
+
+//    Log.i("","calc selisih_hari fn "+selisih_hari);
+//    Log.i("","TGL "+TGL);
+//    Log.i("","TGL2 "+TGL2);
+
+    return selisih_hari;
+
+}
+
+    private void inputKarcisWisatawan(String EP, long selisih_hari){
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
         String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue(PesanKarcisWisatawanActivity.this);
@@ -2667,6 +2780,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
                 final String key_hp =  (String) sessionManager.getUserDetail().get(SessionManager.key_hp);
                 final String key_tgl_penjualan =  Help.getDateTime();
                 final String tgl_kunjungan =  _txt_tgl_kunjungan_order.getText().toString().trim();
+                final String tgl_kunjungan_sd =  _txt_tgl_kunjungan_2_order.getText().toString().trim();
                 final String key_kode_lokasi =  _txt_kode_lokasi.getText().toString();
                 final String key_id_utama =  _txt_id_karcis_utama.getText().toString();
                 final String key_id_tmbhn =   _txt_id_karcis_tmbhn.getText().toString();
@@ -2674,6 +2788,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
                 String jml_wisman = _txt_jml_krcs_wisman.getText().toString().trim();
                 String jml_tmbhn = _txt_jml_krcs_tmbhn.getText().toString().trim();
                 String key_kode_lok_new = sessionManager.getUserDetail().get(SessionManager.key_kode_lokasi);
+                String jumlah_hari = String.valueOf(selisih_hari);
 
                 Log.e("tag","SessionManager.key_kode_lokasi= "+sessionManager.getUserDetail().get(SessionManager.key_kode_lokasi));
                 Log.e("","key_kode_lok_new= "+key_kode_lok_new);
@@ -2711,6 +2826,8 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
                 Log.i("tag","key_hp= " + key_hp );
                 Log.i("tag","key_tgl_penjualan= " + key_tgl_penjualan );
                 Log.i("tag","tgl_kunjungan= " + tgl_kunjungan );
+                Log.i("tag","tgl_kunjungan_sd= " + tgl_kunjungan_sd );
+
                 Log.i("tag","key_kode_lokasi= " + key_kode_lokasi );
                 Log.i("tag","key_id_utama= " + key_id_utama );
                 Log.i("tag","key_id_tmbhn= " + key_id_tmbhn );
@@ -2718,6 +2835,8 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
                 Log.i("tag","jml_wisman= " + jml_wisman );
                 Log.i("tag","jml_tmbhn= " + jml_tmbhn );
                 Log.i("tag","flag_pemesan= " + flag_pemesan );
+                Log.i("tag","jumlah_hari= " + jumlah_hari );
+
 
 
 //                obj.put("registration_by","triono.triono1@gmail.com");
@@ -2742,12 +2861,14 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
                 obj.put("alamat_email",key_email);
                 obj.put("tgl_penjualan",key_tgl_penjualan);
                 obj.put("tgl_kunjungan",tgl_kunjungan);
+                obj.put("tgl_kunjungan_sd",tgl_kunjungan_sd);
                 obj.put("kode_lokasi",key_kode_lokasi);
                 obj.put("id_karcis_utama",key_id_utama);
                 obj.put("id_karcis_tambahan",key_id_tmbhn);
                 obj.put("jumlah_wisnu",jml_wisnu);
                 obj.put("jumlah_wisman",jml_wisman);
                 obj.put("jumlah_tambahan",jml_tmbhn);
+                obj.put("jumlah_hari",jumlah_hari);
                 return obj;
             }
         };
@@ -2760,18 +2881,13 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
 
     private void quotaTwa(String EP,String KSDA, String TGL){
 
-        findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-        String server_url_q = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
-        final RequestQueue requestQueue_q = Volley.newRequestQueue(PesanKarcisWisatawanActivity.this);
-
-        StringRequest stringRequest_q = new StringRequest(Request.Method.POST, server_url_q,
-                new Response.Listener<String>() {
-                    @SuppressLint("SetTextI18n")
-                    @Override
-                    public void onResponse(String response) {
-                        Log.i("tag", "response quotaTwa =" + response );
-                        try {
-
+                            findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
+                            String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+                            final RequestQueue requestQueue = Volley.newRequestQueue(PesanKarcisWisatawanActivity.this);
+                            StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
+                                    (Response.Listener<String>) response -> {
+                                        Log.i("tag","response= " + response );
+                         try {
                             if( Help.isJSONValid(response) ){
                                 findViewById(R.id.loadingPanel).setVisibility(View.GONE);
                                 JSONObject jsonObject = new JSONObject(response);
@@ -2813,23 +2929,20 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
                             Log.i("", "error =" + e.toString() );
                             e.printStackTrace();
                         }
-                        requestQueue_q.stop();
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.i("", "response =" + error.toString());
-                error.printStackTrace();
-                requestQueue_q.stop();
-            }
-        }
-        ) {
+                        requestQueue.stop();
+
+                }, error -> {
+                    Log.i("", "response =" + error.toString());
+                    error.printStackTrace();
+                    requestQueue.stop();
+                }
+                            ) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> obj = new HashMap<String, String>();
 
-                Log.i("","quota KSDA"+KSDA);
-                Log.i("","quota TGL"+TGL);
+                Log.i("","quota KSDA 2"+KSDA);
+                Log.i("","quota TGL 2"+TGL);
 
                 obj.put("kode_ksda", KSDA);
                 obj.put("tgl_quota", TGL);
@@ -2838,11 +2951,11 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
         };
         int socketTimeout = 0;
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-        stringRequest_q.setRetryPolicy(policy);
-        requestQueue_q.add(stringRequest_q);
+        stringRequest.setRetryPolicy(policy);
+        requestQueue.add(stringRequest);
     }
 
-    private void quotaTwaForBtnOrderWist(String EP,String KSDA, String TGL){
+    private void quotaTwaForBtnOrderWist(String EP,String KSDA, String TGL, String TGL2){
 
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
         String server_url_q = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
@@ -2880,11 +2993,32 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
                                 startActivity(i);
 
                             } else {
-                                    inputKarcisWisatawan("input_wisatawan");
+//                                String dateStr1 = "2020-11-15";
+//                                String dateStr2 = "2020-11-20";
+//                                String dateStr1 = TGL;
+//                                String dateStr2 = TGL2;
+//
+//                                 @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//                                 Date dateOne = sdf.parse(dateStr1);
+//                                 Date dateTwo = sdf.parse(dateStr2);
+//
+//                                long timeOne = dateOne.getTime();
+//                                long timeTwo = dateTwo.getTime();
+//                                long oneDay = 1000 * 60 * 60 * 24;
+//                                long selisih_hari = (timeTwo - timeOne) / oneDay;
+//
+//                                Log.i("","selisih_hari "+selisih_hari);
+//                                Log.i("","TGL "+TGL);
+//                                Log.i("","TGL2 "+TGL2);
+
+                                long selisih_day = get_selisih_day();
+                                Log.i("","selisih_day "+selisih_day);
+
+                                inputKarcisWisatawan("input_wisatawan",selisih_day);
                             }
                         }
 
-                    } catch (JSONException e) {
+                    } catch (JSONException | ParseException e) {
                         Log.i("", "error =" + e.toString() );
                         e.printStackTrace();
                     }
@@ -2902,8 +3036,8 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> obj = new HashMap<String, String>();
 
-                Log.i("","quota KSDA"+KSDA);
-                Log.i("","quota TGL"+TGL);
+                Log.i("","quota KSDA 1"+KSDA);
+                Log.i("","quota TGL 1"+TGL);
 
                 obj.put("kode_ksda", KSDA);
                 obj.put("tgl_quota", TGL);

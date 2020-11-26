@@ -2,6 +2,7 @@ package com.amanahgithawisata.aga;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +20,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.RetryPolicy;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.facebook.shimmer.ShimmerFrameLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,6 +38,7 @@ public class PopUpKarcisUtamaActivity extends AppCompatActivity {
     SessionManager sessionManager ;
     ArrayList<ModelHorizontalScrollKarcisUtama> modelHorizontalScrollKarcisUtamas;
     CustomAdapterEntityKarcisUtama customAdapter ;
+    ShimmerFrameLayout shimmerFrameLayout;
 
     @Override
     public void onBackPressed() {
@@ -56,8 +59,10 @@ public class PopUpKarcisUtamaActivity extends AppCompatActivity {
 //        findViewById(R.id.loadingPanel).setVisibility(View.GONE);
         sessionManager = new SessionManager(getApplicationContext());
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_data_karcis_utama);
+        shimmerFrameLayout =  findViewById(R.id.shimmer_layout_popup);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+
 
 
         String result_dt_kdlokWis = getIntent().getStringExtra("result_dt_kdlokWis");
@@ -77,6 +82,8 @@ public class PopUpKarcisUtamaActivity extends AppCompatActivity {
         String result_dt_harga_karcis_wisata_tmbhn = getIntent().getStringExtra("result_dt_harga_karcis_wisata_tmbhn");
         String result_dt_id_karcis_utama= getIntent().getStringExtra("result_dt_id_karcis_utama");
         String result_dt_id_karcis_tmbhn= getIntent().getStringExtra("result_dt_id_karcis_tmbhn");
+        String result_dt_tgl_kunj_2= getIntent().getStringExtra("result_dt_tgl_kunj_2");
+
 
 
 
@@ -111,7 +118,8 @@ public class PopUpKarcisUtamaActivity extends AppCompatActivity {
                         result_dt_grand_ttl,
                         result_dt_harga_karcis_wisata_tmbhn,
                         result_dt_id_karcis_utama,
-                        result_dt_id_karcis_tmbhn
+                        result_dt_id_karcis_tmbhn,
+                        result_dt_tgl_kunj_2
 
         );
 
@@ -133,7 +141,8 @@ public class PopUpKarcisUtamaActivity extends AppCompatActivity {
                              String result_dt_grand_ttl,
                              String result_dt_harga_karcis_wisata_tmbhn,
                              String result_dt_id_karcis_utama,
-                             String result_dt_id_karcis_tmbhn
+                             String result_dt_id_karcis_tmbhn,
+                             String result_dt_tgl_kunj_2
     ) {
 //        findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
         String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
@@ -144,6 +153,10 @@ public class PopUpKarcisUtamaActivity extends AppCompatActivity {
                     try {
 //                        findViewById(R.id.loadingPanel).setVisibility(View.GONE);
                         if( Help.isJSONValid(response) ){
+
+                            shimmerFrameLayout.stopShimmer();
+                            shimmerFrameLayout.setVisibility(View.GONE);
+
                             ArrayList dx = new ArrayList<>();
                             JSONObject jsonObject = new JSONObject(response.toString());
                             if( jsonObject.getBoolean("success") ) {
@@ -200,7 +213,8 @@ public class PopUpKarcisUtamaActivity extends AppCompatActivity {
                                             "",
                                             "",
                                             "",
-                                            ""
+                                            "",
+                                            result_dt_tgl_kunj_2
                                             ));
 
                                     Log.i("","_url_ku popup"+ _url_ku);

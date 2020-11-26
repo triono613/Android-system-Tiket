@@ -74,6 +74,7 @@ public class PetugasAdapterKuActivity extends AppCompatActivity {
         String hp_pengunjung = getIntent().getStringExtra("hp_pengunjung");
         String email_pengunjung = getIntent().getStringExtra("email_pengunjung");
         String mode_pembayaran = getIntent().getStringExtra("mode_pembayaran");
+        String result_dt_tgl_kunj_2_lokwis = getIntent().getStringExtra("result_dt_tgl_kunj_2_lokwis");
 
 
 
@@ -116,8 +117,8 @@ public class PetugasAdapterKuActivity extends AppCompatActivity {
                 nama_pengunjung,
                 hp_pengunjung,
                 email_pengunjung,
-                mode_pembayaran
-
+                mode_pembayaran,
+                result_dt_tgl_kunj_2_lokwis
         );
     }
 
@@ -139,7 +140,8 @@ public class PetugasAdapterKuActivity extends AppCompatActivity {
                              String nama_pengunjung,
                              String hp_pengunjung,
                              String email_pengunjung,
-                             String mode_pembayaran
+                             String mode_pembayaran,
+                             String result_dt_tgl_kunj_2_lokwis
     ) {
 //        findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
         String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
@@ -207,7 +209,8 @@ public class PetugasAdapterKuActivity extends AppCompatActivity {
                                             nama_pengunjung,
                                             hp_pengunjung,
                                             email_pengunjung,
-                                            mode_pembayaran
+                                            mode_pembayaran,
+                                            result_dt_tgl_kunj_2_lokwis
                                     ));
 
                                     Log.i("","_url_ku popup"+ _url_ku);

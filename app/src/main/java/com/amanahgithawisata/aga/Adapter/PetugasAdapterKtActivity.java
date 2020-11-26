@@ -70,8 +70,6 @@ public class PetugasAdapterKtActivity extends AppCompatActivity {
         String harga_karcis_asuransi_wisnu = getIntent().getStringExtra("txt_harga_karcis_asuransi_wisnu_ku");
         String harga_karcis_asuransi_wisman = getIntent().getStringExtra("txt_harga_karcis_asuransi_wisman_ku");
 
-
-
         String result_dt_jml_karcis_wisnu = getIntent().getStringExtra("txt_krcs_wisnu_ptgs");
         String result_dt_jml_karcis_wisman = getIntent().getStringExtra("txt_krcs_wisman_ptgs");
         String result_dt_ttl_wisnu_wisman = getIntent().getStringExtra("txt_ttl_ptgs");
@@ -85,7 +83,7 @@ public class PetugasAdapterKtActivity extends AppCompatActivity {
         String hp_pengunjung = getIntent().getStringExtra("hp_pengunjung");
         String email_pengunjung = getIntent().getStringExtra("email_pengunjung");
         String mode_pembayaran = getIntent().getStringExtra("mode_pembayaran");
-
+        String tgl_kunjungan_ptgs_2 = getIntent().getStringExtra("tgl_kunjungan_ptgs_2");
 
         Log.i("","result_dt_tgl_kunj kt "+result_dt_tgl_kunj);
         Log.i("","result_dt_kdlokWis kt "+result_dt_kdlokWis);
@@ -133,7 +131,8 @@ public class PetugasAdapterKtActivity extends AppCompatActivity {
                 nama_pengunjung,
                 hp_pengunjung,
                 email_pengunjung,
-                mode_pembayaran
+                mode_pembayaran,
+                tgl_kunjungan_ptgs_2
         );
 
 
@@ -168,7 +167,8 @@ public class PetugasAdapterKtActivity extends AppCompatActivity {
                              String nama_pengunjung,
                              String hp_pengunjung,
                              String email_pengunjung,
-                             String mode_pembayaran
+                             String mode_pembayaran,
+                             String tgl_kunjungan_ptgs_2
 
     ) {
 //        findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
@@ -237,12 +237,14 @@ public class PetugasAdapterKtActivity extends AppCompatActivity {
                                             nama_pengunjung,
                                             hp_pengunjung,
                                             email_pengunjung,
-                                            mode_pembayaran
+                                            mode_pembayaran,
+                                            tgl_kunjungan_ptgs_2
                                     ));
                                 }
 
                                 Log.i("","url_lokWis "+url_lokWis);
                                 Log.i("","url_pintu"+ url_pintu);
+                                Log.i("","tgl_kunjungan_ptgs_2 zzz ="+tgl_kunjungan_ptgs_2);
 
                                 customAdapter = new CustomAdapterEntityKarcisTambahanPetugas( modelHorizontalScrollKarcisTambahans, getApplicationContext() );
                                 recyclerView.setAdapter(customAdapter);

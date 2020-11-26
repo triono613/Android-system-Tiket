@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,7 +18,6 @@ import com.amanahgithawisata.aga.BSheetListQuota;
 import com.amanahgithawisata.aga.Model.ModelHorizontalScrollKarcisUtama;
 import com.amanahgithawisata.aga.PesanKarcisPetugasActivity;
 import com.amanahgithawisata.aga.R;
-import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -181,6 +179,7 @@ public class CustomAdapterEntityKarcisUtamaPetugas extends RecyclerView.Adapter<
         final String _hp = modelHorizontalScrollKarcisUtamas.get(position).getHp_pengunjung();
         final String _email = modelHorizontalScrollKarcisUtamas.get(position).getEmail_pengunjung();
         final String _mode_pembayaran = modelHorizontalScrollKarcisUtamas.get(position).getMode_pembayaran();
+        final String result_dt_tgl_kunj_2 = modelHorizontalScrollKarcisUtamas.get(position).getResult_dt_tgl_kunj_2();
 
 
         Log.i("","_namaKarcis adapter"+_namaKarcis);
@@ -216,24 +215,14 @@ public class CustomAdapterEntityKarcisUtamaPetugas extends RecyclerView.Adapter<
                 .load( _url_img_ku )
                 .error(R.mipmap.ic_launcher)
                 .resize(1900,600)
+                .placeholder(R.drawable.loading_animation)
                 .centerCrop()
-                .into(img_kux, new Callback() {
-                    @Override
-                    public void onSuccess() {
-                        Log.d("TAG", "onSuccess");
-                    }
-                    @Override
-                    public void onError() {
-                        Toast.makeText(context, "An error occurred", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                .into(img_kux);
 
 
 
         btn_entity_edit.setOnClickListener(v -> {
 //                Snackbar.make(v, "Clicked element ", Snackbar.LENGTH_LONG).show();
-
-//                final String _email =  sessionManager.getUserDetail().get(SessionManager.key_email);
 
 
             Log.i("","tv_kode_karcisx "+_kodeKarcis);
@@ -274,6 +263,7 @@ public class CustomAdapterEntityKarcisUtamaPetugas extends RecyclerView.Adapter<
             i.putExtra("result_dt_email_pengunjung",_email);
             i.putExtra("result_dt_flag_ku",true);
             i.putExtra("result_dt_mode_pembayaran",_mode_pembayaran);
+            i.putExtra("result_dt_tgl_kunj_2",result_dt_tgl_kunj_2);
 
 
 

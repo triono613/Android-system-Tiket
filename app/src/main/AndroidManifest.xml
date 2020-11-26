@@ -30,7 +30,8 @@
         android:versionCode="2"
         tools:replace="android:label"
         tools:targetApi="m">
-        <activity android:name=".WeatherActivity"></activity>
+        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".WeatherActivity" />
         <activity
             android:name=".DashboardWisatawanActivity"
             android:screenOrientation="portrait" />

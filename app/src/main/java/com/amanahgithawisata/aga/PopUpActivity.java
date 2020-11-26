@@ -26,6 +26,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.RetryPolicy;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.facebook.shimmer.ShimmerFrameLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -45,6 +46,7 @@ public class PopUpActivity extends AppCompatActivity {
     ArrayList<ModelHorizontalScrollLokasiWisata> modelHorizontalScrollLokasiWisatas;
     CustomAdapterEntityLokasiWisata customAdapter ;
     Toolbar _toolbar;
+    ShimmerFrameLayout shimmerFrameLayout;
 
 
     @Override
@@ -60,6 +62,7 @@ public class PopUpActivity extends AppCompatActivity {
 
 
 
+    @SuppressLint("CutPasteId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +73,7 @@ public class PopUpActivity extends AppCompatActivity {
 //        findViewById(R.id.loadingPanel).setVisibility(View.GONE);
         sessionManager = new SessionManager(getApplicationContext());
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_data_lokasi_wisata);
+        shimmerFrameLayout =  findViewById(R.id.shimmer_layout_popup);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
@@ -80,6 +84,7 @@ public class PopUpActivity extends AppCompatActivity {
         String result_dt_nm_lokwis = getIntent().getStringExtra("result_dt_nm_lokwis");
         String result_dt_url_img_lokwis = getIntent().getStringExtra("result_dt_url_img_lokwis");
         String result_dt_tgl_kunj_lokwis = getIntent().getStringExtra("result_dt_tgl_kunj_lokwis");
+        String result_dt_tgl_kunj_2_lokwis = getIntent().getStringExtra("result_dt_tgl_kunj_2_lokwis");
 
         String txt_kdlokPintu = getIntent().getStringExtra("txt_kdlokPintu");
         String txt_kdlokWis = getIntent().getStringExtra("txt_kdlokWis");
@@ -104,7 +109,7 @@ public class PopUpActivity extends AppCompatActivity {
                 result_dt_nm_lokwis,
                 result_dt_url_img_lokwis,
                 result_dt_tgl_kunj_lokwis,
-
+                result_dt_tgl_kunj_2_lokwis,
                 txt_kdlokPintu,
                 txt_kdlokWis,
                 txt_nmlokPintux,
@@ -125,8 +130,12 @@ public class PopUpActivity extends AppCompatActivity {
 
 
 
-    private void jsonrequest(String EP, String kd_lokwis, String nm_lokwis, String url_lokwis,String tgl_kunj_lokwis,
-
+    private void jsonrequest(String EP,
+                             String kd_lokwis,
+                             String nm_lokwis,
+                             String url_lokwis,
+                             String tgl_kunj_lokwis,
+                             String tgl_kunj_2_lokwis,
                              String txt_kdlokPintu,
                              String txt_kdlokWis,
                              String txt_nmlokPintux,
@@ -155,6 +164,9 @@ public class PopUpActivity extends AppCompatActivity {
                             ArrayList dx = new ArrayList<>();
                             JSONObject jsonObject = new JSONObject(response.toString());
                             if( jsonObject.getBoolean("success") ) {
+
+                                shimmerFrameLayout.stopShimmer();
+
                                 JSONArray jsonArray = jsonObject.getJSONArray("data");
                                 Log.i("triono", "jsonObject.getBoolean() ===" + jsonObject.getBoolean("success") );
                                 String _kode_ksda;
@@ -184,6 +196,8 @@ public class PopUpActivity extends AppCompatActivity {
                                             kd_lokwis,
                                             nm_lokwis,
                                             tgl_kunj_lokwis,
+                                            tgl_kunj_2_lokwis,
+
                                             txt_kdlokPintu,
                                             txt_kdlokWis,
                                             txt_nmlokPintux,

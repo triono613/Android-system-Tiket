@@ -2,6 +2,7 @@ package com.amanahgithawisata.aga;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +20,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.RetryPolicy;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.facebook.shimmer.ShimmerFrameLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,6 +38,7 @@ public class PopUpPintuActivity extends AppCompatActivity {
     SessionManager sessionManager ;
     ArrayList<ModelHorizontalScrollLokasiPintu> modelHorizontalScrollLokasiPintus;
     CustomAdapterEntityLokasiPintu customAdapter ;
+    ShimmerFrameLayout shimmerFrameLayout;
 
     @Override
     public void onBackPressed() {
@@ -50,6 +53,7 @@ public class PopUpPintuActivity extends AppCompatActivity {
 //        findViewById(R.id.loadingPanel).setVisibility(View.GONE);
         sessionManager = new SessionManager(getApplicationContext());
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_data_lokasi_pintu);
+        shimmerFrameLayout =  findViewById(R.id.shimmer_layout_popup);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
@@ -60,6 +64,7 @@ public class PopUpPintuActivity extends AppCompatActivity {
         String result_dt_url_img_lokwis = getIntent().getStringExtra("result_dt_url_img_lokwis");
         String result_dt_url_img_lokPintu = getIntent().getStringExtra("result_dt_url_img_lokPintu");
         String tgl_kunj_pintu = getIntent().getStringExtra("result_dt_tgl_kunj_pintu");
+        String tgl_kunj_pintu_2 = getIntent().getStringExtra("tgl_kujungan_2_val");
 
 
 
@@ -86,6 +91,7 @@ public class PopUpPintuActivity extends AppCompatActivity {
                 result_dt_url_img_lokwis,
                 result_dt_url_img_lokPintu,
                 tgl_kunj_pintu,
+                tgl_kunj_pintu_2,
 
                  result_jml_karcis_wisnu ,
                  result_jml_karcis_wisman ,
@@ -107,6 +113,7 @@ public class PopUpPintuActivity extends AppCompatActivity {
                              String result_dt_url_img_lokwis,
                              String result_dt_url_img_lokPintu,
                              String tgl_kunj_pintu,
+                             String tgl_kunj_pintu_2,
 
 				             String result_jml_karcis_wisnu ,
                              String result_jml_karcis_wisman ,
@@ -126,6 +133,10 @@ public class PopUpPintuActivity extends AppCompatActivity {
                     try {
 //                        findViewById(R.id.loadingPanel).setVisibility(View.GONE);
                         if( Help.isJSONValid(response) ){
+
+                            shimmerFrameLayout.stopShimmer();
+                            shimmerFrameLayout.setVisibility(View.GONE);
+
                             ArrayList dx = new ArrayList<>();
                             JSONObject jsonObject = new JSONObject(response.toString());
 
@@ -168,7 +179,8 @@ public class PopUpPintuActivity extends AppCompatActivity {
                                             result_jml_karcis_tmbhn ,
                                             result_ttl_karcis_tmbhn ,
                                             result_grand_ttl ,
-                                            txt_harga_karcis_wisata_tmbhn
+                                            txt_harga_karcis_wisata_tmbhn,
+                                            tgl_kunj_pintu_2
                                     ));
                                 }
 

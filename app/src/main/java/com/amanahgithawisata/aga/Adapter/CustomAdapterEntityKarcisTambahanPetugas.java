@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.amanahgithawisata.aga.Model.ModelHorizontalScrollKarcisTambahan;
 import com.amanahgithawisata.aga.PesanKarcisPetugasActivity;
 import com.amanahgithawisata.aga.R;
-import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -192,11 +190,12 @@ public class CustomAdapterEntityKarcisTambahanPetugas extends RecyclerView.Adapt
         final String _hp = modelHorizontalScrollKarcisTambahans.get(position).getHp_pengunjung();
         final String _email = modelHorizontalScrollKarcisTambahans.get(position).getEmail_pengunjung();
         final String _mode_pembayaran = modelHorizontalScrollKarcisTambahans.get(position).getMode_pembayaran();
-
+        final String _tgl_kunjungan_ptgs_2 = modelHorizontalScrollKarcisTambahans.get(position).getTgl_kujungan_2_val();
 
         Log.i("","_url_img_lokWis tambahan adapter"+_url_img_lokWis);
         Log.i("","_url_img_pintu tambahan adapter"+_url_img_pintu);
         Log.i("","_namaKarcis tambahan adapter"+_namaKarcis);
+        Log.i("","_tgl_kunjungan_ptgs_2 zzz"+_tgl_kunjungan_ptgs_2);
 
 
         tv_dt_jml_krcs_tmbhnx.setText(modelHorizontalScrollKarcisTambahans.get(position).result_dt_jml_krcs_tmbhn);
@@ -228,28 +227,9 @@ public class CustomAdapterEntityKarcisTambahanPetugas extends RecyclerView.Adapt
                 .error(R.mipmap.ic_launcher)
                 .resize(1900,600)
                 .centerCrop()
-                .into(tv_img_ktx, new Callback() {
-                    @Override
-                    public void onSuccess() {
-                        Log.d("TAG", "onSuccess");
-                    }
-                    @Override
-                    public void onError() {
-                        Toast.makeText(context, "An error occurred", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                .into(tv_img_ktx);
 
         btn_entity_edit.setOnClickListener(v -> {
-//                Snackbar.make(v, "Clicked element ", Snackbar.LENGTH_LONG).show();
-
-//                final String _email =  sessionManager.getUserDetail().get(SessionManager.key_email);
-
-            Log.i("","tv_kode_karcisx "+_kodeKarcis);
-            Log.i("","_namaKarcis "+_namaKarcis);
-
-            Log.i("","_id_kt "+_id_kt);
-            Log.i("","harga_karcis_wisata_tmbhn kt "+harga_karcis_wisata_tmbhn);
-
 
             Intent i = new Intent(v.getContext(), PesanKarcisPetugasActivity.class);
 
@@ -265,17 +245,14 @@ public class CustomAdapterEntityKarcisTambahanPetugas extends RecyclerView.Adapt
             i.putExtra("result_dt_url_img_lokWisOld_kt",_url_img_lokWis);
             i.putExtra("result_dt_url_img_lokPintuOld_kt",_url_img_pintu);
 
-
             i.putExtra("result_jml_karcis_wisnu",_jml_krcs_wisnu);
             i.putExtra("result_jml_karcis_wisman",_jml_krcs_wisman);
             i.putExtra("result_jml_karcis_tmbhn",_jml_krcs_tmbhn);
             i.putExtra("result_ttl_karcis_tmbhn",_ttl_krcs_tmbhn);
             i.putExtra("result_grand_ttl",_grand_ttl);
 
-
             i.putExtra("result_dt_id_ku",_result_dt_id_karcis_utama);
             i.putExtra("result_dt_id_kt", _id_kt);
-//            i.putExtra("result_dt_id_karcis_tmbhn",_result_dt_id_karcis_tmbhn);
 
             i.putExtra("result_dt_harga_karcis_wisata_wisnu",harga_karcis_wisata_wisnu);
             i.putExtra("result_dt_harga_karcis_wisata_wisman",harga_karcis_wisata_wisman);
@@ -283,13 +260,12 @@ public class CustomAdapterEntityKarcisTambahanPetugas extends RecyclerView.Adapt
             i.putExtra("result_dt_harga_karcis_asuransi_wisnu",harga_karcis_asuransi_wisnu);
             i.putExtra("result_dt_harga_karcis_asuransi_wisman",harga_karcis_asuransi_wisman);
 
-
             i.putExtra("result_dt_nama_pengunjung",_nama);
             i.putExtra("result_dt_hp_pengunjung",_hp);
             i.putExtra("result_dt_email_pengunjung",_email);
             i.putExtra("result_dt_flag_kt",true);
             i.putExtra("result_dt_mode_pembayaran",_mode_pembayaran);
-
+            i.putExtra("result_dt_tgl_kunjungan_ptgs_2_kt_ptgs",_tgl_kunjungan_ptgs_2);
 
 
             sessionManager.createSessionWisTmbhn(   _kodeKarcis,
@@ -298,8 +274,7 @@ public class CustomAdapterEntityKarcisTambahanPetugas extends RecyclerView.Adapt
                     _id_kt,
                     _url_img_kt );
 
-//                    i.putExtra("result_dt_berhasil", "false");
-//                    i.putExtra("result_dt_flag", "flagPesanKarcisPetugas");
+
             v.getContext().startActivity(i);
         });
     }

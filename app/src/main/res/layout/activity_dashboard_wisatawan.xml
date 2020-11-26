@@ -10,7 +10,7 @@
 
 
 
-        <RelativeLayout
+        <LinearLayout
                 android:layout_marginTop="40dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
@@ -39,7 +39,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp" />
 
-            </RelativeLayout>
+            </LinearLayout>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -77,21 +77,23 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
-                        <RelativeLayout
-                            android:elevation="8dp"
+                        <LinearLayout
+                            android:gravity="center"
                             android:layout_margin="10dp"
                             android:background="@drawable/card1"
                             android:layout_width="60dp"
                             android:layout_height="60dp">
 
                             <ImageView
-                                android:layout_centerInParent="true"
+                                android:textAlignment="center"
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
                                 android:layout_gravity="center"
-                                app:srcCompat="@drawable/ic_speaker_group_black_new_24dp" />
+                                android:background="@drawable/ic_speaker_group_black_new_24dp"
+                                android:contentDescription="TODO" />
 
-                        </RelativeLayout>
+
+                        </LinearLayout>
                         <TextView
                             android:gravity="center_horizontal"
                             android:textAlignment="center"
@@ -112,8 +114,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
-                        <RelativeLayout
-                            android:elevation="8dp"
+                        <LinearLayout
+                            android:gravity="center"
                             android:layout_margin="10dp"
                             android:background="@drawable/card2"
                             android:layout_width="60dp"
@@ -126,7 +128,7 @@
                                 android:layout_gravity="center"
                                 app:srcCompat="@drawable/ic_date_range_black_new_24dp" />
 
-                        </RelativeLayout>
+                        </LinearLayout>
                         <TextView
                             android:gravity="center_horizontal"
                             android:textAlignment="center"
@@ -147,8 +149,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
-                        <RelativeLayout
-                            android:elevation="8dp"
+                        <LinearLayout
+                            android:gravity="center"
                             android:layout_margin="10dp"
                             android:background="@drawable/card3"
                             android:layout_width="60dp"
@@ -161,7 +163,7 @@
                                 android:layout_gravity="center"
                                 app:srcCompat="@drawable/ic_lock_black_new_24dp" />
 
-                        </RelativeLayout>
+                        </LinearLayout>
                         <TextView
                             android:gravity="center_horizontal"
                             android:textAlignment="center"
@@ -179,122 +181,9 @@
 
                 </LinearLayout>
 
+
+
                 <LinearLayout
-                    android:visibility="gone"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="20dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    >
-
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:gravity="center"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-                        <RelativeLayout
-                            android:elevation="8dp"
-                            android:layout_margin="10dp"
-                            android:background="@drawable/card1"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp">
-
-                            <ImageView
-                                android:layout_centerInParent="true"
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:layout_gravity="center"
-                                app:srcCompat="@drawable/ic_speaker_group_black_new_24dp" />
-
-                        </RelativeLayout>
-                        <TextView
-                            android:gravity="center_horizontal"
-                            android:textAlignment="center"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto_bold"
-                            android:text="Pesan Karcis"
-                            android:textSize="10dp"
-                            />
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:gravity="center"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-                        <RelativeLayout
-                            android:elevation="8dp"
-                            android:layout_margin="10dp"
-                            android:background="@drawable/card2"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp">
-
-                            <ImageView
-                                android:layout_centerInParent="true"
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:layout_gravity="center"
-                                app:srcCompat="@drawable/ic_date_range_black_new_24dp" />
-
-                        </RelativeLayout>
-                        <TextView
-                            android:gravity="center_horizontal"
-                            android:textAlignment="center"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto_bold"
-                            android:text="Status Karcis"
-                            android:textSize="10dp"
-                            />
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:gravity="center"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-                        <RelativeLayout
-                            android:elevation="8dp"
-                            android:layout_margin="10dp"
-                            android:background="@drawable/card3"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp">
-
-                            <ImageView
-                                android:layout_centerInParent="true"
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:layout_gravity="center"
-                                app:srcCompat="@drawable/ic_lock_black_new_24dp" />
-
-                        </RelativeLayout>
-                        <TextView
-                            android:gravity="center_horizontal"
-                            android:textAlignment="center"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto_bold"
-                            android:text="Informasi Pintu"
-                            android:textSize="10dp"
-                            />
-
-
-                    </LinearLayout>
-
-
-
-                </LinearLayout>
-
-                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
@@ -338,17 +227,19 @@
 
                     </LinearLayout>
 
-                    <androidx.recyclerview.widget.RecyclerView
+
+
+                    <com.cooltechworks.views.shimmer.ShimmerRecyclerView
+
                         android:id="@+id/featuredRecycle"
+                        android:layout_toEndOf="@+id/featured_background"
                         android:layout_width="match_parent"
                         android:layout_height="320dp"
-                        android:layout_toEndOf="@+id/featured_background"
-                        android:background="#f2f5f8"
-                        >
+                        app:shimmer_demo_angle="20"
+                        app:shimmer_demo_shimmer_color="#73ffffff"
+                        />
 
-                    </androidx.recyclerview.widget.RecyclerView>
-
-                </RelativeLayout>
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -357,7 +248,7 @@
                     android:layout_marginTop="15dp"
                     android:padding="10dp"
                     >
-                    <RelativeLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         tools:ignore="UselessParent">
@@ -370,18 +261,18 @@
                             android:layout_width="match_parent"/>
 
                         <TextView
-                            android:text="Cuaca"
                             android:id="@+id/txt_lbl_cuaca"
-                            android:textStyle="bold"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="18dp"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="Cuaca"
+                            android:layout_marginStart="0dp"
                             android:textAllCaps="true"
                             android:textColorHint="@color/bluePrimary"
-                            android:fontFamily="@font/roboto_regular"
-                            />
+                            android:textSize="18dp"
+                            android:textStyle="bold" />
 
-                    </RelativeLayout>
+                    </LinearLayout>
 
                     <androidx.core.widget.NestedScrollView
                         android:layout_width="match_parent"
@@ -396,9 +287,9 @@
                             <androidx.cardview.widget.CardView
                                 android:layout_width="match_parent"
                                 android:layout_height="300dp"
-                                android:layout_marginStart="10dp"
-                                android:layout_marginEnd="10dp"
-                                android:layout_marginBottom="10dp"
+                                android:layout_marginStart="0dp"
+                                android:layout_marginEnd="0dp"
+                                android:layout_marginBottom="5dp"
                                 app:cardBackgroundColor="#6452f0"
                                 app:cardCornerRadius="20dp"
                                 app:cardElevation="5dp">
@@ -416,8 +307,9 @@
                                         android:layout_gravity="center"
                                         android:layout_marginTop="20dp"
                                         android:text="20^"
+                                        android:fontFamily="@font/roboto_bold"
                                         android:textColor="@android:color/white"
-                                        android:textSize="40sp"
+                                        android:textSize="35sp"
                                         android:textStyle="bold" />
 
                                     <TextView
@@ -425,10 +317,11 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center"
-                                        android:layout_marginTop="10dp"
+                                        android:layout_marginTop="8dp"
                                         android:text="Hujan"
+                                        android:fontFamily="@font/roboto_bold"
                                         android:textColor="@android:color/white"
-                                        android:textSize="20sp"
+                                        android:textSize="16sp"
                                         android:textStyle="bold" />
 
                                     <LinearLayout
@@ -444,6 +337,7 @@
                                             android:layout_height="wrap_content"
                                             android:gravity="center"
                                             android:text="Kamis, 20 Oktober"
+                                            android:fontFamily="@font/roboto_regular"
                                             android:textColor="@android:color/white"
                                             android:textSize="14sp" />
 
@@ -454,6 +348,7 @@
                                             android:layout_marginTop="20dp"
                                             android:gravity="center"
                                             android:text="kecepatan angin"
+                                            android:fontFamily="@font/roboto_regular"
                                             android:textColor="@android:color/white"
                                             android:textSize="12sp" />
 
@@ -464,6 +359,7 @@
                                             android:layout_marginTop="5dp"
                                             android:gravity="center"
                                             android:text="kelembaban"
+                                            android:fontFamily="@font/roboto_regular"
                                             android:textColor="@android:color/white"
                                             android:textSize="12sp" />
 
@@ -473,36 +369,16 @@
 
                                 <com.airbnb.lottie.LottieAnimationView
                                     android:id="@+id/iconTemp"
-                                    android:layout_width="150dp"
-                                    android:layout_height="150dp"
+                                    android:layout_width="170dp"
+                                    android:layout_height="170dp"
                                     android:layout_gravity="end|bottom"
-                                    android:layout_marginEnd="10dp"
+                                    android:layout_marginEnd="8dp"
                                     app:lottie_autoPlay="true"
                                     app:lottie_loop="true" />
 
                             </androidx.cardview.widget.CardView>
-
-
-
-                            <androidx.recyclerview.widget.RecyclerView
-                                android:id="@+id/rvListWeather"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent" />
-
                         </LinearLayout>
-
                     </androidx.core.widget.NestedScrollView>
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/RecyclerViewCuaca"
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp"
-
-                        />
-
-
-
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -512,7 +388,7 @@
                     android:layout_marginTop="15dp"
                     android:padding="10dp"
                     >
-                    <RelativeLayout
+                    <LinearLayout
                         android:layout_marginBottom="6dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -530,10 +406,10 @@
                             android:fontFamily="@font/roboto_regular"
                             />
 
-                    </RelativeLayout>
+                    </LinearLayout>
 
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" >
                                     <WebView
@@ -543,7 +419,7 @@
 
                                         />
 
-                </RelativeLayout>
+                </LinearLayout>
 
                 </LinearLayout>
 
@@ -564,63 +440,31 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:bt_colorActive="#81c784"
-                app:bt_colorInactive="#78909c"
-                app:bt_icon="@drawable/ic_home_black_24dp"
+                app:bt_icon="@drawable/ic_baseline_home_24"
                 app:bt_shape="@drawable/tab_status_karcis"
                 app:bt_title="Home"
-
                 app:bt_titleSize="8sp" />
 
-            <com.gauravk.bubblenavigation.BubbleToggleView
-                android:id="@+id/tabPesanKarcis"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:bt_colorActive="#d4cbe5"
-                app:bt_colorInactive="#78909c"
-                app:bt_icon="@drawable/ic_speaker_group_black_new_24dp"
-                app:bt_shape="@drawable/tab_pesan_karcis"
-                app:bt_title="Pesan Karcis"
-
-                app:bt_titleSize="8sp" />
 
             <com.gauravk.bubblenavigation.BubbleToggleView
-                android:id="@+id/tabStatusKarcis"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:bt_colorActive="#7adccf"
-                app:bt_colorInactive="#78909c"
-                app:bt_icon="@drawable/ic_date_range_black_new_24dp"
-                app:bt_shape="@drawable/tab_status_karcis"
-                app:bt_title="Status Karis"
-
-                app:bt_titleSize="8sp" />
-
-            <com.gauravk.bubblenavigation.BubbleToggleView
-                android:id="@+id/tabGantiPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:bt_colorActive="#f7c59f"
-                app:bt_colorInactive="#78909c"
-                app:bt_icon="@drawable/ic_lock_black_new_24dp"
-                app:bt_shape="@drawable/tab_ganti_password"
-                app:bt_title="Ganti Password"
-
-                app:bt_titleSize="10sp" />
-
-            <com.gauravk.bubblenavigation.BubbleToggleView
+                android:visibility="visible"
                 android:id="@+id/tabLogout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:bt_colorActive="#f06292"
-                app:bt_colorInactive="#78909c"
                 app:bt_icon="@drawable/ic_exit_to_app_black_24dp"
-                app:bt_shape="@drawable/tab_logout"
+                app:bt_shape="@drawable/tab_status_karcis"
                 app:bt_title="Logout"
+                app:bt_titleSize="10sp" />
+
+            <com.gauravk.bubblenavigation.BubbleToggleView
+                android:id="@+id/tabProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:bt_icon="@drawable/ic_person_black_24dp"
+                app:bt_shape="@drawable/tab_status_karcis"
+                app:bt_title="Profile"
                 app:bt_titleSize="10sp" />
 
         </com.gauravk.bubblenavigation.BubbleNavigationLinearView>

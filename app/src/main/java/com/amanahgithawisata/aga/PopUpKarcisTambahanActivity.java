@@ -2,6 +2,7 @@ package com.amanahgithawisata.aga;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,6 +19,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.RetryPolicy;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.facebook.shimmer.ShimmerFrameLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,6 +37,7 @@ public class PopUpKarcisTambahanActivity extends AppCompatActivity {
     SessionManager sessionManager ;
     ArrayList<ModelHorizontalScrollKarcisTambahan> modelHorizontalScrollKarcisTambahans;
     CustomAdapterEntityKarcisTambahan customAdapter ;
+    ShimmerFrameLayout shimmerFrameLayout;
 
     @Override
     public void onBackPressed() {
@@ -49,6 +52,7 @@ public class PopUpKarcisTambahanActivity extends AppCompatActivity {
 //        findViewById(R.id.loadingPanel).setVisibility(View.GONE);
         sessionManager = new SessionManager(getApplicationContext());
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_data_karcis_tambahan);
+        shimmerFrameLayout =  findViewById(R.id.shimmer_layout_popup);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
@@ -77,6 +81,8 @@ public class PopUpKarcisTambahanActivity extends AppCompatActivity {
         String harga_karcis_wisata_tmbhn = getIntent().getStringExtra("hrg_krcs_tmbhn");
         String harga_karcis_asuransi_wisnu = getIntent().getStringExtra("hrg_krcs_asrnsi_wisnu");
         String harga_karcis_asuransi_wisman = getIntent().getStringExtra("hrg_krcs_asrnsi_wisman");
+        String tgl_kujungan_2_val = getIntent().getStringExtra("tgl_kujungan_2_val");
+
 
 
         Log.i("","result_dt_tgl_kunj kt "+result_dt_tgl_kunj);
@@ -120,7 +126,8 @@ public class PopUpKarcisTambahanActivity extends AppCompatActivity {
                 harga_karcis_wisata_wisman,
                 harga_karcis_wisata_tmbhn,
                 harga_karcis_asuransi_wisnu,
-                harga_karcis_asuransi_wisman
+                harga_karcis_asuransi_wisman,
+                tgl_kujungan_2_val
         );
 
 
@@ -150,7 +157,8 @@ public class PopUpKarcisTambahanActivity extends AppCompatActivity {
                              String harga_karcis_wisata_wisman,
                              String harga_karcis_wisata_tmbhn,
                              String harga_karcis_asuransi_wisnu,
-                             String harga_karcis_asuransi_wisman
+                             String harga_karcis_asuransi_wisman,
+                             String tgl_kujungan_2_val
 
     ) {
 //        findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
@@ -158,7 +166,7 @@ public class PopUpKarcisTambahanActivity extends AppCompatActivity {
         final RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext() );
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
                 response -> {
-                    Log.i("triono", "response jsonrequest popupKarcisUtamaActivity" + response );
+                    Log.i("", "response jsonrequest popupKarcisUtamaActivity" + response );
                     try {
 //                        findViewById(R.id.loadingPanel).setVisibility(View.GONE);
                         if( Help.isJSONValid(response) ){
@@ -167,6 +175,8 @@ public class PopUpKarcisTambahanActivity extends AppCompatActivity {
                             if( jsonObject.getBoolean("success") ) {
                                 JSONArray jsonArray = jsonObject.getJSONArray("data");
 
+                                shimmerFrameLayout.stopShimmer();
+                                shimmerFrameLayout.setVisibility(View.GONE);
 
                                 Log.i("", "nmLokWis=" +nmLokWis );
                                 Log.i("", "nmlokPintu=" +nmlokPintu );
@@ -219,7 +229,8 @@ public class PopUpKarcisTambahanActivity extends AppCompatActivity {
                                             "",
                                             "",
                                             "",
-                                            ""
+                                            "",
+                                            tgl_kujungan_2_val
                                     ));
                                 }
 
