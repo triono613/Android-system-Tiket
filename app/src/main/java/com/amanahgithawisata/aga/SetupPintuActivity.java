@@ -47,7 +47,7 @@ public class SetupPintuActivity extends AppCompatActivity {
     Button _btn_setup_pintu;
 
     ArrayList<SpinnerListWisataKsdaPetugas> lokWisListKsda = new ArrayList<SpinnerListWisataKsdaPetugas>();
-    ArrayList<SpinnerListWisata> lokPintuList = new ArrayList<SpinnerListWisata>();
+    ArrayList<SpinnerListWisata> lokPintuList = new ArrayList<>();
     SessionManager sessionManager;
 
     @Override
@@ -75,9 +75,6 @@ public class SetupPintuActivity extends AppCompatActivity {
         String compareValue = sessionManager.getDataSetupPintu().get(SessionManager.key_index);
 
 
-
-
-
         _spinner_lok_wisata_setup.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -87,7 +84,7 @@ public class SetupPintuActivity extends AppCompatActivity {
                 SpinnerListWisataKsdaPetugas item = (SpinnerListWisataKsdaPetugas) parent.getItemAtPosition(position);
                 sessionManager.createSessionLokWisPesankarcisWisatawanKsda(item.getKdksda(),item.getNmlok());
                 Log.i("","item.getKdksda= "+item.getKdksda());
-                spinnerLokWisataWisatawan("daftar_lokasi_pintu",item.getKdksda());
+//                spinnerLokPintu("daftar_lokasi_pintu",item.getKdksda());
 
 //                _spinner_lok_wisata_setup.setSelection(1);
 
@@ -119,11 +116,7 @@ public class SetupPintuActivity extends AppCompatActivity {
             }
         });
 
-
-
     }
-
-
 
 
 
@@ -132,79 +125,79 @@ public class SetupPintuActivity extends AppCompatActivity {
         String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue(SetupPintuActivity.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Log.i("triono", "response spinnerLokWisata===" + response );
-                        try {
-                            findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-                            String nama ;
-                            String kode_ksda;
-                            String ttl_pengunjung;
-                            String ttl_berkunjung;
-                            String ttl_berkunjung_semua;
+                response -> {
+                    Log.i("", "response spinnerLokWisata===" + response );
+                    try {
+                        findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+                        String nama ;
+                        String kode_ksda;
+                        String ttl_pengunjung;
+                        String ttl_berkunjung;
+                        String ttl_berkunjung_semua;
 
-                            lokWisListKsda.clear();
-                            if( Help.isJSONValid(response) ){
-                                JSONObject jsonObject = new JSONObject(response);
+                        lokWisListKsda.clear();
+                        if( Help.isJSONValid(response) ){
+                            JSONObject jsonObject = new JSONObject(response);
 
-                                if( jsonObject.getBoolean("success") ) {
-                                    JSONArray jsonArray = jsonObject.getJSONArray("data");
+                            if( jsonObject.getBoolean("success") ) {
+                                JSONArray jsonArray = jsonObject.getJSONArray("data");
 
-                                    int has =  jsonArray.length();
+                                int has =  jsonArray.length();
 
-                                        for (int i = 0; i <jsonArray.length();i++ ) {
-                                            JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-                                            kode_ksda = jsonObject1.getString("kode_ksda");
-                                            nama = jsonObject1.getString("nama");
-                                            ttl_pengunjung = jsonObject1.getString("total_pengunjung");
-                                            ttl_berkunjung = jsonObject1.getString("total_berkunjung");
-                                            ttl_berkunjung_semua = jsonObject1.getString("total_semua");
-                                            Log.i("tag","kode_ksda= "+kode_ksda);
-                                            Log.i("tag","nama= "+nama);
-                                            Log.i("tag","ttl_pengunjung= "+ttl_pengunjung);
-                                            Log.i("tag","ttl_berkunjung= "+ttl_berkunjung);
-                                            Log.i("tag","ttl_berkunjung_semua= "+ttl_berkunjung_semua);
-                                            lokWisListKsda.add(new SpinnerListWisataKsdaPetugas(kode_ksda,nama,ttl_pengunjung,ttl_berkunjung,
-                                                                                        ttl_berkunjung_semua));
+                                    for (int i = 0; i <jsonArray.length();i++ ) {
+                                        JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                                        kode_ksda = jsonObject1.getString("kode_ksda");
+                                        nama = jsonObject1.getString("nama");
+                                        ttl_pengunjung = jsonObject1.getString("total_pengunjung");
+                                        ttl_berkunjung = jsonObject1.getString("total_berkunjung");
+                                        ttl_berkunjung_semua = jsonObject1.getString("total_semua");
 
-                                            _text_jml_pengunjung.setText(ttl_pengunjung.trim());
-                                            _text_jml_berkunjung.setText(ttl_berkunjung.trim());
-                                            _text_jml_semua.setText(ttl_berkunjung_semua.trim());
+                                        String id  = jsonObject1.getString("id");
+                                        String alamat  = jsonObject1.getString("alamat");
+                                        String kota  = jsonObject1.getString("kota");
+                                        String email1  = jsonObject1.getString("email1");
+                                        String email2  = jsonObject1.getString("email2");
+                                        String email3  = jsonObject1.getString("email3");
+                                        String android_flag  = jsonObject1.getString("android_flag");
+                                        String detail_flag  = jsonObject1.getString("detail_flag");
+                                        String lokasi_pintu  = jsonObject1.getString("lokasi_pintu");
+                                        String nama_pintu  = jsonObject1.getString("nama_pintu");
 
-                                        }
-                                        _spinner_lok_wisata_setup.setEnabled(false);
-                                }
-                                _spinner_lok_wisata_setup.setAdapter(new ArrayAdapter<SpinnerListWisataKsdaPetugas>(SetupPintuActivity.this, android.R.layout.simple_spinner_dropdown_item,lokWisListKsda) );
+                                        lokPintuList.add(new SpinnerListWisata(lokasi_pintu,nama_pintu,"","",""));
+
+                                        Log.i("tag","kode_ksda= "+kode_ksda);
+                                        Log.i("tag","nama= "+nama);
+                                        Log.i("tag","ttl_pengunjung= "+ttl_pengunjung);
+                                        Log.i("tag","ttl_berkunjung= "+ttl_berkunjung);
+                                        Log.i("tag","ttl_berkunjung_semua= "+ttl_berkunjung_semua);
+                                        lokWisListKsda.add(new SpinnerListWisataKsdaPetugas(kode_ksda,nama,ttl_pengunjung,ttl_berkunjung,
+                                                                                    ttl_berkunjung_semua));
+
+                                        _text_jml_pengunjung.setText(ttl_pengunjung.trim());
+                                        _text_jml_berkunjung.setText(ttl_berkunjung.trim());
+                                        _text_jml_semua.setText(ttl_berkunjung_semua.trim());
+
+                                    }
+                                    _spinner_lok_wisata_setup.setEnabled(false);
                             }
-                        } catch (JSONException e) {
-                            Log.i("triono", "error ===" + e.toString() );
-                            e.printStackTrace();
+
+                            _spinner_lok_wisata_setup.setAdapter(new ArrayAdapter<>(SetupPintuActivity.this, android.R.layout.simple_spinner_dropdown_item, lokWisListKsda) );
+                            _spinner_lok_pintu_setup.setAdapter(new ArrayAdapter<>(SetupPintuActivity.this, android.R.layout.simple_spinner_dropdown_item, lokPintuList) );
                         }
-                        requestQueue.stop();
+                    } catch (JSONException e) {
+                        Log.i("triono", "error ===" + e.toString() );
+                        e.printStackTrace();
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.i("triono", "response =" + error.toString());
-                error.printStackTrace();
-                requestQueue.stop();
-                findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-                AlertDialog.Builder builder = new AlertDialog.Builder(SetupPintuActivity.this);
-                builder.setMessage("Terjadi Gangguan, Refresh Halaman")
-                        .setCancelable(false)
-                        .setPositiveButton("Ya", (dialog, id) -> {
-                            finish();
-                            startActivity(getIntent());
-                        })
-                        .setNegativeButton("Tidak", (dialog, id) -> dialog.cancel());
-                AlertDialog alert = builder.create();
-                alert.show();
-            }
-        }
+                    requestQueue.stop();
+                }, error -> {
+                    Log.i("triono", "response =" + error.toString());
+                    error.printStackTrace();
+                    requestQueue.stop();
+
+                }
         ) {
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams() {
                 Map<String, String> obj = new HashMap<String, String>();
                 final String key_email =  sessionManager.getUserDetail().get(SessionManager.key_email);
                 obj.put("alamat_email", key_email.trim());
@@ -219,82 +212,78 @@ public class SetupPintuActivity extends AppCompatActivity {
 
 
 
-    private void spinnerLokWisataWisatawan(String EP,String KSDA){
+    private void spinnerLokPintu(String EP,String KSDA){
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
         String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue(SetupPintuActivity.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Log.i("triono", "response 1 ===" + response );
-                        try {
-                            findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-                            if( Help.isJSONValid(response) ){
-                                JSONObject jsonObject = new JSONObject(response.toString());
+                response -> {
+                    Log.i("triono", "response 1 ===" + response );
+                    try {
+                        findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+                        if( Help.isJSONValid(response) ){
+                            JSONObject jsonObject = new JSONObject(response.toString());
 
-                                String nm_obj_wisata;
-                                String kd_lokasi;
-                                lokPintuList.clear();
+                            String nm_obj_wisata;
+                            String kd_lokasi;
+                            lokPintuList.clear();
 
-                                if( jsonObject.getBoolean("success") ) {
-                                    JSONArray jsonArray = jsonObject.getJSONArray("data");
-                                    for (int i = 0; i <jsonArray.length();i++ ) {
-                                        JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-                                        nm_obj_wisata = jsonObject1.getString("nama");
-                                        kd_lokasi = jsonObject1.getString("kode_lokasi");
+                            if( jsonObject.getBoolean("success") ) {
+                                JSONArray jsonArray = jsonObject.getJSONArray("data");
+                                for (int i = 0; i <jsonArray.length();i++ ) {
+                                    JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                                    nm_obj_wisata = jsonObject1.getString("nama");
+                                    kd_lokasi = jsonObject1.getString("kode_lokasi");
 
-                                        Log.i("","kd_lokasi= "+kd_lokasi);
-                                        Log.i("","nm_obj_wisata= "+nm_obj_wisata);
+                                    Log.i("","kd_lokasi= "+kd_lokasi);
+                                    Log.i("","nm_obj_wisata= "+nm_obj_wisata);
 
-                                        lokPintuList.add(new SpinnerListWisata(kd_lokasi,nm_obj_wisata,"","",""));
-                                    }
-                                } else {
+//                                    lokPintuList.add(new SpinnerListWisata(kd_lokasi,nm_obj_wisata,"","",""));
 
                                 }
                             } else {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(SetupPintuActivity.this);
-                                builder.setMessage("Format Json Error !")
-                                        .setCancelable(false)
-                                        .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog, int id) {
-                                                sessionManager.logout();
-                                            }
-                                        });
-                                AlertDialog alert = builder.create();
-                                alert.show();
+
                             }
-                            _spinner_lok_pintu_setup.setAdapter(new ArrayAdapter<SpinnerListWisata>(SetupPintuActivity.this, android.R.layout.simple_spinner_dropdown_item,lokPintuList) );
-                        } catch (JSONException e) {
-                            Log.i("triono", "error ===" + e.toString() );
-                            e.printStackTrace();
+                        } else {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(SetupPintuActivity.this);
+                            builder.setMessage("Format Json Error !")
+                                    .setCancelable(false)
+                                    .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            sessionManager.logout();
+                                        }
+                                    });
+                            AlertDialog alert = builder.create();
+                            alert.show();
                         }
-                        requestQueue.stop();
+//                        lokPintuList.add(new SpinnerListWisata("","","","",""));
+                        _spinner_lok_pintu_setup.setAdapter(new ArrayAdapter<>(SetupPintuActivity.this, android.R.layout.simple_spinner_dropdown_item, lokPintuList) );
+                    } catch (JSONException e) {
+                        Log.i("triono", "error ===" + e.toString() );
+                        e.printStackTrace();
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.i("triono", "response =" + error.toString());
-                error.printStackTrace();
-                requestQueue.stop();
-                findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-                AlertDialog.Builder builder = new AlertDialog.Builder(SetupPintuActivity.this);
-                builder.setMessage("Terjadi Gangguan, Refresh Halaman")
-                        .setCancelable(false)
-                        .setPositiveButton("Ya", (dialog, id) -> {
-                            finish();
-                            startActivity(getIntent());
-                        })
-                        .setNegativeButton("Tidak", (dialog, id) -> dialog.cancel());
-                AlertDialog alert = builder.create();
-                alert.show();
-            }
-        }
+                    requestQueue.stop();
+                }, error -> {
+                    Log.i("triono", "response =" + error.toString());
+                    error.printStackTrace();
+                    requestQueue.stop();
+                    findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(SetupPintuActivity.this);
+                    builder.setMessage("Terjadi Gangguan, Refresh Halaman")
+                            .setCancelable(false)
+                            .setPositiveButton("Ya", (dialog, id) -> {
+                                finish();
+                                startActivity(getIntent());
+                            })
+                            .setNegativeButton("Tidak", (dialog, id) -> dialog.cancel());
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                }
         ) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> obj = new HashMap<String, String>();
-                final String ksda_val =  sessionManager.getDataLokWisPesankarcisWisatawanKsda().get(SessionManager.key_kd_ksda);
+
                 Log.i("","ksda_val pintu= "+ KSDA);
                 obj.put("kode_ksda", KSDA.trim());
                 return obj;

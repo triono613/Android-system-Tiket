@@ -39,7 +39,7 @@ public class StatusKarcisWisatawanActivity extends AppCompatActivity {
     CustomAdapterEntityWisatawan customAdapter ;
 
 
-    
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

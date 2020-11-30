@@ -600,13 +600,13 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
 
             horizontalLokasiWisata("daftar_lokasi_wisata","","","","");
 
-            ksda_par ="0001";
-            horizontalLokasiPintu("daftar_lokasi_pintu", ksda_par, getApplicationContext(),"","","null");
+//            ksda_par ="0001";
+//            horizontalLokasiPintu("daftar_lokasi_pintu", ksda_par, getApplicationContext(),"","","null");
 
             kode_pintu ="00011";
 
-            horizontalKarcisWisatawanUtamaFirst("daftar_karcis_wisatawan_utama",kode_pintu);
-            horizontalKarcisWisatawanTambahanFirst("daftar_karcis_wisatawan_tambahan",kode_pintu);
+//            horizontalKarcisWisatawanUtamaFirst("daftar_karcis_wisatawan_utama",kode_pintu);
+//            horizontalKarcisWisatawanTambahanFirst("daftar_karcis_wisatawan_tambahan",kode_pintu);
 
         }
         /*  this after click adapter Entity Lokasi Wisata */
@@ -2287,6 +2287,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
                                     Log.i("","_kd_lokasi= "+_kd_lokasi);
                                     Log.i("","_nm_obj_wisata= "+_nm_obj_wisata);
 
+                                horizontalLokasiPintu("daftar_lokasi_pintu", _kd_lokasi, getApplicationContext(),"","","null");
 
                                 final String session_kd_lok_wis = sessionManager.getDataLokWisPesankarcisWisatawan().get(SessionManager.key_kd_lokwis);
                                 final String session_nm_lok_wis = sessionManager.getDataLokWisPesankarcisWisatawan().get(SessionManager.key_nm_lokwis);
@@ -2387,9 +2388,10 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
 
 //                                    Log.i("","kd_lokasi pintu= "+kd_lokasi_pintu);
                                     Log.i("","url_image pintu= "+url_image);
-
-
                                 _txt_urlLokWisOld.setText(url_img_lokwis);
+
+                                horizontalKarcisWisatawanUtamaFirst("daftar_karcis_wisatawan_utama",kd_lokasi_pintu);
+                                horizontalKarcisWisatawanTambahanFirst("daftar_karcis_wisatawan_tambahan",kd_lokasi_pintu);
 
                                 final String session_kd_lok_pintu = sessionManager.getDataLokPintuPesankarcisWisatawan().get(SessionManager.key_kd_lokPintu);
                                 final String session_nm_lok_pintu = sessionManager.getDataLokPintuPesankarcisWisatawan().get(SessionManager.key_nm_lokPintu);
@@ -2711,6 +2713,7 @@ public long get_selisih_day() throws ParseException {
                                 String _nama_lokasi = jsonObject1.getString("nama_lokasi");
                                 String _jumlah_tambahan = jsonObject1.getString("jumlah_tambahan");
 
+                                final String tgl_kunjungan_sd =  _txt_tgl_kunjungan_2_order.getText().toString().trim();
 
                                 Intent i = new Intent(PesanKarcisWisatawanActivity.this, NotifSuksesActivity.class);
                                 i.putExtra("result_dt_ket", "Pemesanan Anda Berhasil Silahkan Cek email!");
@@ -2731,7 +2734,8 @@ public long get_selisih_day() throws ParseException {
                                 i.putExtra("_txt_nmlokwis", _txt_nmlokwis.getText().toString());
                                 i.putExtra("_jumlah_tambahan", _jumlah_tambahan);
                                 i.putExtra("_nama_lokasi", _nama_lokasi);
-
+                                i.putExtra("_tgl_kunjungan_sd", tgl_kunjungan_sd);
+                                i.putExtra("_selisih_hari", String.valueOf(selisih_hari) );
                                 i.putExtra("result_dt_berhasil", berhasil);
                                 i.putExtra("result_dt_flag", "flagPesanKarcisWisatawan");
                                 startActivity(i);

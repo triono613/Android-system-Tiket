@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.SearchView;
 
@@ -166,6 +167,7 @@ public class PopUpActivity extends AppCompatActivity {
                             if( jsonObject.getBoolean("success") ) {
 
                                 shimmerFrameLayout.stopShimmer();
+                                shimmerFrameLayout.setVisibility(View.GONE);
 
                                 JSONArray jsonArray = jsonObject.getJSONArray("data");
                                 Log.i("triono", "jsonObject.getBoolean() ===" + jsonObject.getBoolean("success") );

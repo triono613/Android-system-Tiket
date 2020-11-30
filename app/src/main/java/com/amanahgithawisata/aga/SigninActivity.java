@@ -31,7 +31,6 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.facebook.AccessToken;
@@ -419,29 +418,26 @@ public class SigninActivity extends AppCompatActivity implements GoogleApiClient
 
                         requestQueue.stop();
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.i("", "response =" + error.toString());
-//                Toast.makeText(SigninActivity.this,"Kesalahan Network= "+ error.toString(), Toast.LENGTH_LONG).show();
-                findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-                btn_login_user.setEnabled(true);
-                btn_login_user.setText("Login");
+                }, (Response.ErrorListener) error -> {
+                    Log.i("", "response =" + error.toString());
+    //                Toast.makeText(SigninActivity.this,"Kesalahan Network= "+ error.toString(), Toast.LENGTH_LONG).show();
+                    findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+                    btn_login_user.setEnabled(true);
+                    btn_login_user.setText("Login");
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(SigninActivity.this);
-                builder.setMessage("Terjadi Gangguan, Refresh ")
-                        .setCancelable(false)
-                        .setPositiveButton("Ya", (dialog, id) -> {
-                            newPostLogin();
-                        })
-                        .setNegativeButton("Tidak", (dialog, id) -> dialog.cancel());
-                AlertDialog alert = builder.create();
-                alert.show();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(SigninActivity.this);
+                    builder.setMessage("Terjadi Gangguan, Refresh ")
+                            .setCancelable(false)
+                            .setPositiveButton("Ya", (dialog, id) -> {
+                                newPostLogin();
+                            })
+                            .setNegativeButton("Tidak", (dialog, id) -> dialog.cancel());
+                    AlertDialog alert = builder.create();
+                    alert.show();
 
-                error.printStackTrace();
-                requestQueue.stop();
-            }
-        }
+                    error.printStackTrace();
+                    requestQueue.stop();
+                }
         ){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {

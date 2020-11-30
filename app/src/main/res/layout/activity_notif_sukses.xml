@@ -358,6 +358,54 @@
                 android:textSize="12sp" />
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textAlignment="center"
+                    android:text="Tgl Kunjungan sd :"
+                    android:textColor="@color/grayPrimary"
+                    android:textSize="12sp" />
+                <TextView
+                    android:layout_marginStart="2dp"
+                    android:id="@+id/textview_tgl_kunj_sd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/grayPrimary"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textAlignment="center"
+                    android:text="Jml Hari:"
+                    android:textColor="@color/grayPrimary"
+                    android:textSize="12sp" />
+                <TextView
+                    android:layout_marginStart="2dp"
+                    android:id="@+id/textview_jml_hari"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/grayPrimary"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
 
             <TextView
                 android:layout_marginStart="2dp"

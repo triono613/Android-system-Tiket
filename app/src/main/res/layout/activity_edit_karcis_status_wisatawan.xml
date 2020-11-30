@@ -128,38 +128,6 @@
                         android:textSize="12sp" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="24dp"
-                    android:layout_marginRight="24dp"
-                    android:layout_marginBottom="24dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="12dp"
-                        android:fontFamily="@font/mlight"
-                        android:text="Karcis Tambahan"
-                        android:textColor="@color/grayPrimary"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
-
-
-                    <EditText
-                        android:id="@+id/karcis_tmbhn_wstwn_eks"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:background="@drawable/bg_input_edit"
-                        android:fontFamily="@font/mmedium"
-                        android:inputType="number"
-                        android:paddingLeft="12dp"
-                        android:textColor="@color/blackPrimary"
-                        android:textSize="12sp" />
-
-
-                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -251,6 +219,38 @@
                         android:textSize="12sp" />
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginRight="24dp"
+                    android:layout_marginBottom="24dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:fontFamily="@font/mlight"
+                        android:text="Karcis Tambahan"
+                        android:textColor="@color/grayPrimary"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+
+                    <EditText
+                        android:id="@+id/karcis_tmbhn_wstwn_eks"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/bg_input_edit"
+                        android:fontFamily="@font/mmedium"
+                        android:inputType="number"
+                        android:paddingLeft="12dp"
+                        android:textColor="@color/blackPrimary"
+                        android:textSize="12sp" />
+
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"

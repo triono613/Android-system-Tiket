@@ -315,10 +315,14 @@ public class DashboardPetugasActivity extends AppCompatActivity implements  ZXin
 
         String key_name_a = sessionManager.getUserDetail().get(SessionManager.key_name);
         String key_flag = sessionManager.getUserDetail().get(SessionManager.key_flag);
+        String pref_name = sessionManager.getUserDetail().get(SessionManager.pref_name);
 //        Log.i("DashboardPetugasActivity ","sessionManager.isLoggedIn() " + sessionManager.isLoggedIn());
 //        Log.i("DashboardPetugasActivity ","key_flag " + key_flag);
 
-        _textview_email_session_ptgs.setText(sessionManager.getUserDetail().get(SessionManager.key_email) );
+//        _textview_email_session_ptgs.setText(sessionManager.getUserDetail().get(SessionManager.key_email) );
+        _textview_email_session_ptgs.setText(key_name_a) ;
+        Log.i("","key_name_a="+key_name_a);
+        Log.i("","key_name_a="+pref_name);
 
     }
 

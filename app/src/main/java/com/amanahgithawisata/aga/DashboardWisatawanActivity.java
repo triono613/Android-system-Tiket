@@ -1,3 +1,4 @@
+
 package com.amanahgithawisata.aga;
 
 import android.Manifest;
@@ -15,10 +16,8 @@ import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
-import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -31,9 +30,11 @@ import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.amanahgithawisata.aga.Adapter.CustomAdapterApiWeather;
 import com.amanahgithawisata.aga.Adapter.CustomAdapterFeatured;
 import com.amanahgithawisata.aga.Adapter.SessionManager;
 import com.amanahgithawisata.aga.Helper.Help;
+import com.amanahgithawisata.aga.Model.ModelApiWeather;
 import com.amanahgithawisata.aga.Model.ModelFeatured;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -56,8 +57,9 @@ public class DashboardWisatawanActivity extends AppCompatActivity implements Loc
 
     TextView txt_jljh_wis;
     TextView txt_jljh_wis_dec;
-    ShimmerRecyclerView  featuredRecycle,recyclerViewWebView;
+    ShimmerRecyclerView  featuredRecycle,recyclerViewWebView,ShimmerRecyclerView_cuaca;
     CustomAdapterFeatured customAdapterFeatured;
+    CustomAdapterApiWeather customAdapterApiWeather;
     LinearLayoutManager linearLayoutManager;
     WebView webView;
     WebSettings webSettings;
@@ -79,21 +81,23 @@ public class DashboardWisatawanActivity extends AppCompatActivity implements Loc
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard_wisatawan);
         SessionManager sessionManager;
-
+        sessionManager = new SessionManager(getApplicationContext());
         TextView txt_jljh_wis = (TextView) findViewById(R.id.txt_jljh_wis);
         TextView txt_jljh_wis_desc = (TextView) findViewById(R.id.txt_jljh_wis_dec);
 //        featuredRecycle = findViewById(R.id.featuredRecycle);
 //        featuredRecycle = (ShimmerRecyclerView) findViewById(R.id.featuredRecycle);
 
 
-        SpannableString content = new SpannableString("Jelajah Wisata");
-        SpannableString content_desc = new SpannableString("Jelajah Wisata adalah aplikasi karya anak bangsa yang memuat Lokasi Objek-Objek Wisata resmi yang berada dalam naungan Taman Nasional Indonesia ");
+        SpannableString content = new SpannableString("Jelajah Wisata Kedu Utara");
+//        SpannableString content_desc = new SpannableString("Jelajah Wisata adalah aplikasi karya anak bangsa yang memuat Lokasi Objek-Objek Wisata resmi yang berada dalam naungan Taman Nasional Indonesia ");
+        SpannableString content_desc = new SpannableString("Perum Perhutani Kesatuan Pemangku Hutan (KPH) Kedu Utara, Jawa Tengah, terus mengembangkan objek wisata alam di kawasan hutan bersama lembaga masyarakat desa hutan Hingga sekarang sudah ada 59 objek wisata di kawasan hutan di wilayah KPH Kedu Utara ");
         content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
 
         txt_jljh_wis.setText(content);
@@ -103,7 +107,8 @@ public class DashboardWisatawanActivity extends AppCompatActivity implements Loc
         
         featuredRecycleLokasiWisata();
         recyclerViewWebView();
-        getLatlong();
+//        getLatlong();
+        ShimmerRecyclerViewApiCuaca();
 
 
 
@@ -113,11 +118,8 @@ public class DashboardWisatawanActivity extends AppCompatActivity implements Loc
         _card_status_karcis_wstn = (LinearLayout) findViewById(R.id.card_status_karcis_wstn);
         _card_ganti_password_wstwn = (LinearLayout) findViewById(R.id.card_ganti_password_wstwn);
 
-        sessionManager = new SessionManager(getApplicationContext());
 
 
-
-//        Toast.makeText(DashboardWisatawanOLdActivity.this,"check session : "+sessionManager.isLoggedIn()+" - "+sessionManager.getFlag()+" - "+(sessionManager.getUserDetail().get(SessionManager.key_kode_lokasi)), Toast.LENGTH_LONG).show();
 
 
         _card_pemesanan_karcis_wstn.setOnClickListener(v -> {
@@ -190,26 +192,22 @@ public class DashboardWisatawanActivity extends AppCompatActivity implements Loc
         });
 
 
-        String key_name_a = sessionManager.getUserDetail().get(SessionManager.key_name);
-        String key_email_a = sessionManager.getUserDetail().get(SessionManager.key_email);
-        String is_login_a = sessionManager.getUserDetail().get(SessionManager.is_login);
-        String is_flag_a = sessionManager.getUserDetail().get(SessionManager.key_flag);
-
-
-//        informasiStatusKarcis("informasi_status_karcis");
 
 
     }
 
 
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void apiWeather(double lati, double longi, long strDate ) {
 
+        longi = 110.21811895868531;
+        lati = -7.47354348665495;
         String server_url = "https://api.openweathermap.org/data/2.5/weather?lat="+lati+"&lon="+longi+"&units=metric&appid=8ef3b88b48346e6c2d46df2ce0aea96f";
         final RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         @SuppressLint("SetTextI18n") StringRequest stringRequest = new StringRequest(Request.Method.GET, server_url,
                 response -> {
-                    Log.i("triono", "response apiWeather= " + response );
+                    Log.i("", "response apiWeather= " + response );
                     try {
 
                         if( Help.isJSONValid(response) ){
@@ -296,7 +294,8 @@ public class DashboardWisatawanActivity extends AppCompatActivity implements Loc
                                 tvWeather.setText( "else");
                             }
 
-                            tvNamaKota.setText( strNamaKota);
+//                            tvNamaKota.setText( strNamaKota);
+                            tvNamaKota.setText( "Kedu Utara" );
                             tvTempeatur.setText(strTemperatur+ " \u2103 ");
                             tvKecepatanAngin.setText("Kecepatan Angin "+ strKecepatanAngin + "km/j" );
                             tvKelembaban.setText( "Kelembaban "+ strKelembaban+ "%" );
@@ -304,11 +303,6 @@ public class DashboardWisatawanActivity extends AppCompatActivity implements Loc
 //                            tvDate.setText(DateFormat.getDateInstance(DateFormat.FULL).format(tgl));
                             tvDate.setText(getToday());
 
-
-
-
-//                                    CustomAdapterEntityWisatawan customAdapter = new CustomAdapterEntityWisatawan( entityStatusKarcisArrayList, DashboardWisatawanOLdActivity.this);
-//                                    recyclerView.setAdapter(customAdapter);
 
                         }
                     } catch (JSONException e) {
@@ -372,6 +366,98 @@ public class DashboardWisatawanActivity extends AppCompatActivity implements Loc
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private void ShimmerRecyclerViewApiCuaca() {
+        ShimmerRecyclerView_cuaca = (ShimmerRecyclerView) findViewById(R.id.ShimmerRecyclerView_cuaca);
+        ShimmerRecyclerView_cuaca.setHasFixedSize(true);
+        ShimmerRecyclerView_cuaca.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        ArrayList<ModelApiWeather> modelApiWeatherArrayList = new ArrayList<>();
+
+
+        modelApiWeatherArrayList.add(new ModelApiWeather(0, "few clouds", "Vanaprasta", "Ambarawa", "58", "30", "3.1"));
+        modelApiWeatherArrayList.add(new ModelApiWeather(0, "few clouds", "Umbul Jumprit", "Wonosobo", "58", "25.22", "3.1"));
+        modelApiWeatherArrayList.add(new ModelApiWeather(0, "few clouds", "Gunung Kembang via blembem", "Wonosobo", "87", "21.11", "1.66"));
+
+
+
+//        this.getApix(110.21811895868531,-7.47354348665495);
+
+        //vanaprasta
+//        this.getApix( 110.34249441399055, -7.206357147014595);
+//        umbul jumprit
+//        this.getApix( 110.01714073541483, -7.254147271866619);
+//        gunung kembang via blembem
+//        this.getApix(109.9692783612453,-7.3353438254413 );
+
+        customAdapterApiWeather = new CustomAdapterApiWeather(modelApiWeatherArrayList, getApplicationContext());
+        ShimmerRecyclerView_cuaca.setAdapter(customAdapterApiWeather);
+    }
+    public void getApix(double a, double b){
+        double longi = a;
+        double lati = b;
+        String server_url = "https://api.openweathermap.org/data/2.5/weather?lat="+lati+"&lon="+longi+"&units=metric&appid=8ef3b88b48346e6c2d46df2ce0aea96f";
+        final RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        @SuppressLint("SetTextI18n") StringRequest stringRequest = new StringRequest(Request.Method.GET, server_url,
+                response -> {
+                    Log.i("", "response cuaca= " + response );
+                    try {
+                        ArrayList<ModelApiWeather> modelApiWeatherArrayList = new ArrayList<>();
+                        if( Help.isJSONValid(response) ){
+                            ArrayList dx = new ArrayList<>();
+                            JSONObject JO = new JSONObject(response);
+
+                            JSONArray jsonArrayWeather = JO.getJSONArray("weather");
+                            JSONObject jo_main = JO.getJSONObject("main");
+                            JSONObject jo_wind = JO.getJSONObject("wind");
+                            String coord = JO.getString("coord");
+                            String strNamaKota = JO.getString("name");
+                            String strKelembaban  = jo_main.getString("humidity");
+                            String strTemperatur = jo_main.getString("temp");
+                            String strKecepatanAngin = jo_wind.getString("speed");
+
+                            Log.i("", "response jsonArrayWeather= " + jsonArrayWeather );
+                            Log.i("", "response coord= " + coord );
+                            Log.i("", "strNamaKota= " + strNamaKota );
+                            Log.i("", "strKelembaban= " + strKelembaban );
+                            Log.i("", "strTemperatur= " + strTemperatur );
+                            Log.i("", "strKecepatanAngin= " + strKecepatanAngin );
+
+                            String strMainWeather=null;
+                            String strDescWeather=null;
+                            String strIconWeather=null;
+                            for (int i = 0; i <jsonArrayWeather.length();i++ ) {
+                                JSONObject jsonObject1 = jsonArrayWeather.getJSONObject(i);
+                                strMainWeather = jsonObject1.getString("main");
+                                strDescWeather = jsonObject1.getString("description");
+                                strIconWeather = jsonObject1.getString("icon");
+                            }
+                            modelApiWeatherArrayList.add(new ModelApiWeather(0,strDescWeather,coord,strNamaKota,strKelembaban,strTemperatur,strKecepatanAngin));
+                        }
+                        customAdapterApiWeather = new CustomAdapterApiWeather( modelApiWeatherArrayList, getApplicationContext() );
+                        ShimmerRecyclerView_cuaca.setAdapter(customAdapterApiWeather);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    requestQueue.stop();
+                }, error -> {
+            Log.i("", "response =" + error.toString());
+            error.printStackTrace();
+            requestQueue.stop();
+
+        }
+        ) ;
+        int socketTimeout = 0;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        stringRequest.setRetryPolicy(policy);
+        requestQueue.add(stringRequest);
+
+
+//        customAdapterApiWeather = new CustomAdapterApiWeather(modelApiWeatherArrayList,getApplicationContext());
+//        featuredRecycle.setAdapter(customAdapterApiWeather);
+    }
+
+
+
     private void featuredRecycleLokasiWisata() {
         featuredRecycle = (ShimmerRecyclerView) findViewById(R.id.featuredRecycle);
         featuredRecycle.setHasFixedSize(true);
@@ -380,9 +466,10 @@ public class DashboardWisatawanActivity extends AppCompatActivity implements Loc
 //        ArrayList<ModelFeatured> modelFeaturedArrayList = new ArrayList<>();
         ArrayList<ModelFeatured> modelFeaturedArrayList = new ArrayList<>();
 
-        modelFeaturedArrayList.add(new ModelFeatured(R.drawable.gede,"Gunung Gede Pangrango","Gunung Gede merupakan sebuah gunung api bertipe stratovolcano yang berada di Pulau Jawa, Indonesia. Gunung Gede berada dalam ruang lingkup Taman Nasional Gede Pangrango, yang merupakan salah satu dari lima taman nasional yang pertama kali diumumkan di Indonesia pada tahun 1980. Gunung ini berada di dua wilayah kabupaten yaitu Kabupaten Cianjur dan Sukabumi, dengan ketinggian 1.000 - 2.958 m. dpl. "));
-        modelFeaturedArrayList.add(new ModelFeatured(R.drawable.papandayan,"Gunung Papandayan","Gunung Papandayan adalah gunung api strato yang terletak di Kabupaten Garut, Jawa Barat tepatnya di Kecamatan Cisurupan. Gunung dengan ketinggian 2665 meter di atas permukaan laut itu terletak sekitar 70 km sebelah tenggara Kota Bandung"));
-        modelFeaturedArrayList.add(new ModelFeatured(R.drawable.gede,"Gunung Gede Pangrango","Gunung Gede merupakan sebuah gunung api bertipe stratovolcano yang berada di Pulau Jawa, Indonesia. Gunung Gede berada dalam ruang lingkup Taman Nasional Gede Pangrango, yang merupakan salah satu dari lima taman nasional yang pertama kali diumumkan di Indonesia pada tahun 1980. Gunung ini berada di dua wilayah kabupaten yaitu Kabupaten Cianjur dan Sukabumi, dengan ketinggian 1.000 - 2.958 m. dpl, dan berada pada lintang 106°51' - 107°02' BT dan 64°1' - 65°1 LS. Suhu rata-rata di puncak gunung Gede 18 °C dan di malam hari suhu puncak berkisar 5 °C, dengan curah hujan rata-rata 3.600 mm/tahun. Gerbang utama menuju gunung ini adalah dari Cibodas dan Cipanas."));
+        modelFeaturedArrayList.add(new ModelFeatured(R.drawable.vanaprasta,"Vanaprastha Gedong Songo Park","Vanaprastha Gedong Songo Park terletak di Kawasan Candi Gedong Songo, Bandungan, Semarang, Jawa Tengah. Vanaprastha Gedong Songo Park bisa jadi destinasi pilihan berlibur yang cocok bagi kamu yang ingin merasakan suasana hutan yang masih asri. "));
+        modelFeaturedArrayList.add(new ModelFeatured(R.drawable.jumprit,"Umbul Jumprit","Umbul Jumprit adalah sebuah sumber mata air di Kecamatan Ngadirejo, Kabupaten Temanggung, Jawa Tengah. Tempat ini dikaitkan dengan sang Nujum dari Majapahit yang disebutkan dalam Serat Centhini. Dari sang Nujum inilah Jumprit mendapatkan namanya."));
+        modelFeaturedArrayList.add(new ModelFeatured(R.drawable.kembang_blembem,"Gunung Kembang via Blembem","Gunung Kembang merupakan salah satu gunung yang berada di Jawa Tengah, tepatnya di Dukuh Blembem Kaliurip, Desa Damarkasihan, Kecamatan Kertek, Kabupaten Wonosobo. ... Camp hanya diperbolehkan di puncak gunung kembang. Gunung Kembang hanya memiliki satu base camp resmi yaitu base camp Blembem."));
+//        modelFeaturedArrayList.add(new ModelFeatured(R.drawable.gede,"Gunung Gede Pangrango","Gunung Gede merupakan sebuah gunung api bertipe stratovolcano yang berada di Pulau Jawa, Indonesia. Gunung Gede berada dalam ruang lingkup Taman Nasional Gede Pangrango, yang merupakan salah satu dari lima taman nasional yang pertama kali diumumkan di Indonesia pada tahun 1980. Gunung ini berada di dua wilayah kabupaten yaitu Kabupaten Cianjur dan Sukabumi, dengan ketinggian 1.000 - 2.958 m. dpl, dan berada pada lintang 106°51' - 107°02' BT dan 64°1' - 65°1 LS. Suhu rata-rata di puncak gunung Gede 18 °C dan di malam hari suhu puncak berkisar 5 °C, dengan curah hujan rata-rata 3.600 mm/tahun. Gerbang utama menuju gunung ini adalah dari Cibodas dan Cipanas."));
 
         customAdapterFeatured = new CustomAdapterFeatured(modelFeaturedArrayList,getApplicationContext());
 
@@ -391,6 +478,7 @@ public class DashboardWisatawanActivity extends AppCompatActivity implements Loc
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void getLatlong() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
                 PackageManager.PERMISSION_GRANTED &&
@@ -414,6 +502,7 @@ public class DashboardWisatawanActivity extends AppCompatActivity implements Loc
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onLocationChanged(Location location) {
         double lati = location.getLatitude();

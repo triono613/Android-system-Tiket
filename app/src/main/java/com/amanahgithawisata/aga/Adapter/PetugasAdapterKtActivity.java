@@ -2,6 +2,7 @@ package com.amanahgithawisata.aga.Adapter;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,6 +18,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.RetryPolicy;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.facebook.shimmer.ShimmerFrameLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,6 +36,7 @@ public class PetugasAdapterKtActivity extends AppCompatActivity {
     SessionManager sessionManager ;
     ArrayList<ModelHorizontalScrollKarcisTambahan> modelHorizontalScrollKarcisTambahans;
     CustomAdapterEntityKarcisTambahanPetugas customAdapter ;
+    ShimmerFrameLayout shimmerFrameLayout;
 
     @Override
     public void onBackPressed() {
@@ -48,6 +51,7 @@ public class PetugasAdapterKtActivity extends AppCompatActivity {
 
         sessionManager = new SessionManager(getApplicationContext());
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_data_karcis_tambahan);
+        shimmerFrameLayout =  findViewById(R.id.shimmer_layout_popup);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
@@ -171,24 +175,22 @@ public class PetugasAdapterKtActivity extends AppCompatActivity {
                              String tgl_kunjungan_ptgs_2
 
     ) {
-//        findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
+        findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
         String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext() );
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
                 response -> {
                     Log.i("triono", "response jsonrequest popupKarcisUtamaActivity" + response );
                     try {
-//                        findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+                        findViewById(R.id.loadingPanel).setVisibility(View.GONE);
                         if( Help.isJSONValid(response) ){
                             ArrayList dx = new ArrayList<>();
                             JSONObject jsonObject = new JSONObject(response.toString());
                             if( jsonObject.getBoolean("success") ) {
                                 JSONArray jsonArray = jsonObject.getJSONArray("data");
 
-
-                                Log.i("", "nmLokWis=" +nmLokWis );
-                                Log.i("", "nmlokPintu=" +nmlokPintu );
-
+                                shimmerFrameLayout.stopShimmer();
+                                shimmerFrameLayout.setVisibility(View.GONE);
 
                                 modelHorizontalScrollKarcisTambahans = new ArrayList<>();
 

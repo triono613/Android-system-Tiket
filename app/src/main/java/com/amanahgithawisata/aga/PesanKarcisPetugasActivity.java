@@ -128,11 +128,7 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-
         TextView _tgl_kunjungan_order = (TextView) findViewById(R.id.tgl_kunjungan_ptgs);
-
-//        _txt_tgl_kunjungan_order.clearComposingText();
-
         Calendar c = Calendar.getInstance();
         c.set(Calendar.YEAR, year);
         c.set(Calendar.MONTH, month);
@@ -252,12 +248,7 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
             Log.i("","position "+ Arrays.toString(position));
 
             if (position != null ) {
-                scrollView.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        scrollView.scrollTo(position[0], position[1]);
-                    }
-                });
+                scrollView.post(() -> scrollView.scrollTo(position[0], position[1]));
             }
 
         } else {
@@ -308,20 +299,17 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
         RadioGroup rg_cara_bayarn = (RadioGroup)findViewById(R.id.rg_cara_bayar);
 
         final String[] mode_pembayaran = new String[1];
-        rg_cara_bayarn.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                rbNew = findViewById(checkedId);
-                boolean isChecked = rbNew.isChecked();
+        rg_cara_bayarn.setOnCheckedChangeListener((group, checkedId) -> {
+            rbNew = findViewById(checkedId);
+            boolean isChecked = rbNew.isChecked();
 
 
-                if( isChecked ) {
-                    Log.i("","isChecked "+rbNew.getText() );
-                    Log.i("","isChecked "+rbNew.getId() );
-                    mode_pembayaran[0] = String.valueOf(rbNew.getId());
-                } else {
-                    mode_pembayaran[0] = "";
-                }
+            if( isChecked ) {
+                Log.i("","isChecked "+rbNew.getText() );
+                Log.i("","isChecked "+rbNew.getId() );
+                mode_pembayaran[0] = String.valueOf(rbNew.getId());
+            } else {
+                mode_pembayaran[0] = "";
             }
         });
 
@@ -544,7 +532,29 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
              }
             else {
                  try {
-                     inputKarcisPetugas("new_input_petugas", mode_pembayaran[0],_nama_lokasi, _jml_krcs_tmbhn,get_selisih_day());
+//                     inputKarcisPetugas("new_input_petugas", mode_pembayaran[0],_nama_lokasi, _jml_krcs_tmbhn,get_selisih_day());
+
+                     if (mode_pembayaran[0].equals("1")){
+                         AlertDialog.Builder builder = new AlertDialog.Builder(PesanKarcisPetugasActivity.this);
+                         builder.setMessage("Print Struk")
+                                 .setCancelable(false)
+                                 .setPositiveButton("Ya", (dialog, id) -> {
+
+                                 })
+                                 .setNegativeButton("Tidak", (dialog, id) -> {
+                                     try {
+                                         inputKarcisPetugas("new_input_petugas", mode_pembayaran[0],_nama_lokasi, _jml_krcs_tmbhn,get_selisih_day());
+                                     } catch (ParseException e) {
+                                         e.printStackTrace();
+                                     }
+                                 });
+//                                 .setNegativeButton("Tidak", (dialog, id) -> dialog.cancel());
+                         AlertDialog alert = builder.create();
+                         alert.show();
+                     } else {
+                         inputKarcisPetugas("new_input_petugas", mode_pembayaran[0],_nama_lokasi, _jml_krcs_tmbhn,get_selisih_day());
+                     }
+
                  } catch (ParseException e) {
                      e.printStackTrace();
                  }
@@ -667,6 +677,7 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
         if(!result_dt_flag_ku && !result_dt_flag_kt) {
 
             Log.i("","masuk kesini 1"+result_dt_flag_ku);
+            Log.i("","masuk kesini kl 1"+KL);
 
             apiLokwisPtgsFirst("petugas_daftar_lokasi_wisata",KL);
             getRbCaraBayar("informasi_mode_pembayaran","","1");
@@ -701,7 +712,7 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
 
             _id_kt.setText(result_dt_id_kt);
 
-
+            findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
             apiLokwisPtgs("petugas_daftar_lokasi_wisata",
                     sessionManager.getUserDetail().get(SessionManager.key_kode_lokasi),
                     result_dt_kdlokPintu_ku
@@ -1063,103 +1074,97 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
         String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue(PesanKarcisPetugasActivity.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Log.i("tag", "response apiLokwisPtgs =" + response );
-                        try {
+                (Response.Listener<String>) response -> {
+                    Log.i("tag", "response apiLokwisPtgs =" + response );
+                    try {
 
-                            if( Help.isJSONValid(response) ){
-                                JSONObject jsonObject = new JSONObject(response);
+                        if( Help.isJSONValid(response) ){
+                            JSONObject jsonObject = new JSONObject(response);
 
-                                Log.i("","apiLokwisPtgs= "+response);
+                            Log.i("","apiLokwisPtgs= "+response);
 
-                                arrListWisata.clear();
+                            arrListWisata.clear();
 
-                                findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-                                if( jsonObject.getBoolean("success") ) {
+                            findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+                            if( jsonObject.getBoolean("success") ) {
 
-                                    JSONArray jsonArray = jsonObject.getJSONArray("data");
-                                    for (int i = 0; i <jsonArray.length();i++ ) {
-                                        JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                                JSONArray jsonArray = jsonObject.getJSONArray("data");
+                                for (int i = 0; i <jsonArray.length();i++ ) {
+                                    JSONObject jsonObject1 = jsonArray.getJSONObject(i);
 
-                                        String id =  jsonObject1.getString("id");
-                                        final String kode_ksda =  jsonObject1.getString("kode_ksda");
-                                        String nama =  jsonObject1.getString("nama");
-                                        String alamat =  jsonObject1.getString("alamat");
-                                        String kota =  jsonObject1.getString("kota");
-                                        String email1 =  jsonObject1.getString("email1");
-                                        String email2 =  jsonObject1.getString("email2");
-                                        String email3 =  jsonObject1.getString("email3");
-                                        String android_flag =  jsonObject1.getString("android_flag");
-                                        String detail_flag =  jsonObject1.getString("detail_flag");
-                                        String url_image =  jsonObject1.getString("url_image");
-                                        String lokasi_pintu =  jsonObject1.getString("lokasi_pintu");
-                                        String nama_pintu = jsonObject1.getString("nama_pintu");
-                                        String total_pengunjung =  jsonObject1.getString("total_pengunjung");
-                                        String total_berkunjung = jsonObject1.getString("total_berkunjung");
-                                        String total_semua =  jsonObject1.getString("total_semua");
-                                        String url_image_pintu =  jsonObject1.getString("url_image_pintu");
+                                    String id =  jsonObject1.getString("id");
+                                    final String kode_ksda =  jsonObject1.getString("kode_ksda");
+                                    String nama =  jsonObject1.getString("nama");
+                                    String alamat =  jsonObject1.getString("alamat");
+                                    String kota =  jsonObject1.getString("kota");
+                                    String email1 =  jsonObject1.getString("email1");
+                                    String email2 =  jsonObject1.getString("email2");
+                                    String email3 =  jsonObject1.getString("email3");
+                                    String android_flag =  jsonObject1.getString("android_flag");
+                                    String detail_flag =  jsonObject1.getString("detail_flag");
+                                    String url_image =  jsonObject1.getString("url_image");
+                                    String lokasi_pintu =  jsonObject1.getString("lokasi_pintu");
+                                    String nama_pintu = jsonObject1.getString("nama_pintu");
+                                    String total_pengunjung =  jsonObject1.getString("total_pengunjung");
+                                    String total_berkunjung = jsonObject1.getString("total_berkunjung");
+                                    String total_semua =  jsonObject1.getString("total_semua");
+                                    String url_image_pintu =  jsonObject1.getString("url_image_pintu");
 
-                                        _txt_kdlokwis.setText(kode_ksda);
-                                        _txt_nmlokwis.setText(nama);
-                                        _txt_kdlokPintu.setText(lokasi_pintu);
-                                        _txt_nmlokPintu.setText(nama_pintu);
+                                    _txt_kdlokwis.setText(kode_ksda);
+                                    _txt_nmlokwis.setText(nama);
+                                    _txt_kdlokPintu.setText(lokasi_pintu);
+                                    _txt_nmlokPintu.setText(nama_pintu);
 
+                                    sessionManager.createSessionEksp(kode_ksda,nama_pintu);
 
-
-
-                                        sessionManager.createSessionEksp(kode_ksda,nama_pintu);
-
-                                        Log.i("tag","kode_ksda= "+kode_ksda);
-                                        Log.i("tag","nama= "+nama);
-                                        Log.i("tag","lokasi_pintu= "+lokasi_pintu);
-                                        Log.i("tag","nama_pintu= "+nama_pintu);
+                                    Log.i("tag","kode_ksda= "+kode_ksda);
+                                    Log.i("tag","nama= "+nama);
+                                    Log.i("tag","lokasi_pintu= "+lokasi_pintu);
+                                    Log.i("tag","nama_pintu= "+nama_pintu);
 
 
 //                                        arrListWisata.add(new SpinnerListWisata(lokasi_pintu,nama_pintu,"","",""));
 
-                                        quotaTwa("quota_per_twa",kode_ksda);
+                                    quotaTwa("quota_per_twa",kode_ksda);
 
 
-                                        ImageView img1 =(ImageView)findViewById(R.id.lokwisPicasso);
-                                        Transformation transformation = new RoundedTransformationBuilder()
-                                                .oval(false)
-                                                .build();
+                                    ImageView img1 =(ImageView)findViewById(R.id.lokwisPicasso);
+                                    Transformation transformation = new RoundedTransformationBuilder()
+                                            .oval(false)
+                                            .build();
 
-                                        Picasso.with(getApplicationContext())
-                                                .load(url_image)
-                                                .fit()
-                                                .transform(transformation)
-                                                .placeholder(R.drawable.ic_image)
-                                                .into(img1);
+                                    Picasso.with(getApplicationContext())
+                                            .load(url_image)
+                                            .fit()
+                                            .transform(transformation)
+                                            .placeholder(R.drawable.ic_image)
+                                            .into(img1);
 
-                                        ImageView img2 =(ImageView)findViewById(R.id.lokPintuPicasso);
+                                    ImageView img2 =(ImageView)findViewById(R.id.lokPintuPicasso);
 
-                                        Picasso.with(getApplicationContext())
-                                                .load(url_image_pintu)
-                                                .fit()
-                                                .transform(transformation)
-                                                .placeholder(R.drawable.ic_image)
-                                                .into(img2);
+                                    Picasso.with(getApplicationContext())
+                                            .load(url_image_pintu)
+                                            .fit()
+                                            .transform(transformation)
+                                            .placeholder(R.drawable.ic_image)
+                                            .into(img2);
 
-                                        Log.i("","kdlokPintu x"+kdlokPintu);
+                                    Log.i("","kdlokPintu x"+kdlokPintu);
 
 //                                        apiWisatawanUtamaFirst("daftar_karcis_wisatawan_utama",kdlokPintu);
 //                                        apiWisatawanTambahanFirst("daftar_karcis_wisatawan_tambahan",lokasi_pintu);
 
-                                    }
                                 }
                             }
-
-                            String compareValue = sessionManager.getDataSetupPintu().get(SessionManager.key_index);
-                            Log.i("","compareValue "+compareValue);
-                        } catch (JSONException e) {
-                            Log.i("", "error ===" + e.toString() );
-                            e.printStackTrace();
                         }
-                        requestQueue.stop();
+
+                        String compareValue = sessionManager.getDataSetupPintu().get(SessionManager.key_index);
+                        Log.i("","compareValue "+compareValue);
+                    } catch (JSONException e) {
+                        Log.i("", "error ===" + e.toString() );
+                        e.printStackTrace();
                     }
+                    requestQueue.stop();
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
@@ -1932,6 +1937,9 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
 //                                    i.putExtra("result_dt_flag", "flagPesanKarcisPetugas");
 //                                    startActivity(i);
 
+
+                                final String tgl_kunjungan_sd =  _tgl_kunjungan_ptgs_2.getText().toString().trim();
+
                                 Intent i = new Intent(getApplicationContext(), NotifSuksesActivity.class);
                                 i.putExtra("result_dt_ket", "Pemesanan Anda Berhasil Silahkan Cek email!");
                                 i.putExtra("_id", _id);
@@ -1951,11 +1959,13 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
                                 i.putExtra("_txt_nmlokwis", _txt_nmlokwis.getText().toString());
                                 i.putExtra("_jumlah_tambahan", jml_krcs_tmbhn);
                                 i.putExtra("_nama_lokasi", nama_lokasi);
-
                                 i.putExtra("_mode_pembayaran", _mode_pembayaran);
                                 i.putExtra("_nama_pengunjung", _nama_pengunjung);
                                 i.putExtra("_no_hp_pengunjung", _no_hp_pengunjung);
                                 i.putExtra("_email_pengunjung", _email_pengunjung);
+
+                                i.putExtra("_tgl_kunjungan_sd", tgl_kunjungan_sd);
+                                i.putExtra("_selisih_hari", String.valueOf(selisih_day) );
 
                                 i.putExtra("result_dt_berhasil", berhasil);
                                 i.putExtra("result_dt_flag", "flagPesanKarcisPetugas");

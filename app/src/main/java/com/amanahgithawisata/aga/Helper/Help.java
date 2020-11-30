@@ -1,6 +1,9 @@
 package com.amanahgithawisata.aga.Helper;
 
 import android.annotation.SuppressLint;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -8,6 +11,7 @@ import org.json.JSONObject;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Pattern;
 
@@ -71,7 +75,11 @@ public class Help {
         }
 
 
-
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public static  String getToday() {
+        Date date = Calendar.getInstance().getTime();
+        return new android.icu.text.SimpleDateFormat("EEEE, dd MMMM yyyy",new java.util.Locale("id")).format(date);
+    }
 
 
 }
