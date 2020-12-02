@@ -17,15 +17,15 @@
                 android:layout_height="310dp"
                 android:background="@drawable/vector_header"
                 />
-
-
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginBottom="5dp"
-        android:paddingTop="5dp">
+        android:paddingTop="5dp"
+        tools:ignore="MissingConstraints">
 
             <TextView
                 android:id="@+id/textView3"
@@ -44,7 +44,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingTop="70dp">
+        android:paddingTop="70dp"
+        tools:ignore="MissingConstraints">
 
         <TextView
             android:layout_width="wrap_content"
@@ -76,11 +77,13 @@
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     </LinearLayout>
+
     <ScrollView
         android:id="@+id/scrollview_ptgs"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         tools:ignore="MissingConstraints">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -108,20 +111,20 @@
 
                 <LinearLayout
                     android:id="@+id/linearLayoutLokWis"
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="12dp"
-                    android:background="@drawable/cardview"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="2dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
                     android:layout_marginBottom="10dp"
-                    >
+                    android:background="@drawable/cardview"
+                    android:orientation="horizontal"
+                    android:padding="12dp">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical" >
+                        android:orientation="vertical">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -132,6 +135,7 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:baselineAligned="false"
                                 android:orientation="horizontal">
 
                                 <LinearLayout
@@ -142,28 +146,30 @@
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:layout_marginBottom="5dp"
                                         android:fontFamily="@font/roboto_regular"
                                         android:text="Taman / Wana Wisata"
                                         android:textColor="#37AF57"
-                                        android:layout_marginBottom="5dp"
                                         android:textSize="16sp" />
 
                                     <LinearLayout
-                                        android:layout_marginTop="4dp"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:layout_marginTop="4dp"
                                         android:orientation="horizontal">
 
                                         <ImageView
-                                            android:visibility="visible"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:src="@drawable/rate" />
+                                            android:src="@drawable/rate"
+                                            android:visibility="visible" />
+
                                         <ImageView
-                                            android:visibility="visible"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:src="@drawable/rate" />
+                                            android:src="@drawable/rate"
+                                            android:visibility="visible" />
+
                                         <TextView
                                             android:id="@+id/txt_kdlokwis"
                                             android:layout_width="wrap_content"
@@ -171,30 +177,30 @@
                                             android:fontFamily="@font/roboto_regular"
                                             android:textColor="#37AF57"
                                             android:textSize="12sp" />
+
                                         <TextView
                                             android:id="@+id/txt_nmlokwis"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:fontFamily="@font/roboto_regular"
                                             android:layout_marginStart="10dp"
                                             android:layout_marginEnd="10dp"
+                                            android:fontFamily="@font/roboto_regular"
                                             android:text=""
                                             android:textColor="#37AF57"
                                             android:textSize="12sp" />
 
                                         <ImageView
-                                            android:visibility="visible"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginStart="2dp"
+                                            android:src="@drawable/rate"
+                                            android:visibility="visible" />
+
+                                        <ImageView
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:src="@drawable/rate"
-                                            android:layout_marginStart="2dp" />
-
-                                        <ImageView
-                                            android:visibility="visible"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:src="@drawable/rate" />
-
+                                            android:visibility="visible" />
 
 
                                     </LinearLayout>
@@ -202,36 +208,34 @@
                                 </LinearLayout>
 
 
-
                                 <LinearLayout
-                                    android:gravity="end"
-                                    android:layout_marginEnd="10dp"
                                     android:layout_width="0dp"
-                                    android:orientation="vertical"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="10dp"
                                     android:layout_weight="1"
-                                    android:layout_height="wrap_content">
+                                    android:gravity="end"
+                                    android:orientation="vertical">
 
 
                                     <Button
-                                        android:visibility="gone"
                                         android:id="@+id/btn_detail"
                                         android:layout_width="25dp"
                                         android:layout_height="20dp"
-                                        android:gravity="center"
                                         android:layout_marginStart="10dp"
-                                        android:layout_marginEnd="5dp"
                                         android:layout_marginTop="2dp"
+                                        android:layout_marginEnd="5dp"
                                         android:background="@drawable/bg_btn_blue"
-                                        android:textColorHighlight="#fdb501"
                                         android:drawableEnd="@drawable/ic_chevron_right_white_24dp"
+                                        android:gravity="center"
                                         android:text=" "
                                         android:textColor="#FFF"
+                                        android:textColorHighlight="#fdb501"
                                         android:textSize="8sp"
+                                        android:visibility="gone"
                                         tools:layout_editor_absoluteX="31dp" />
 
                                 </LinearLayout>
                             </LinearLayout>
-
 
 
                         </LinearLayout>
@@ -247,12 +251,9 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="100dp"
                                 android:layout_gravity="center"
-                                android:layout_marginTop="2dp"
-                                />
+                                android:layout_marginTop="2dp" />
                         </LinearLayout>
                     </LinearLayout>
-
-
 
 
                 </LinearLayout>
@@ -260,16 +261,16 @@
 
                 <LinearLayout
                     android:id="@+id/linearLayoutLokPintu"
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:background="@drawable/cardview"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="2dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
                     android:layout_marginBottom="10dp"
-                    >
+                    android:background="@drawable/cardview"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -295,92 +296,91 @@
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:layout_marginBottom="5dp"
                                         android:fontFamily="@font/roboto_regular"
                                         android:text="Lokasi Pintu"
                                         android:textColor="#37AF57"
-                                        android:layout_marginBottom="5dp"
                                         android:textSize="16sp" />
 
                                     <LinearLayout
-                                        android:layout_marginTop="4dp"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:layout_marginTop="4dp"
                                         android:orientation="horizontal">
 
                                         <ImageView
-                                            android:visibility="visible"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:src="@drawable/rate" />
-
-                                        <ImageView
-                                            android:visibility="visible"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:src="@drawable/rate"
-                                            android:layout_marginStart="2dp" />
+                                            android:visibility="visible" />
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginStart="2dp"
+                                            android:src="@drawable/rate"
+                                            android:visibility="visible" />
 
                                         <TextView
                                             android:id="@+id/txt_nmlokPintu"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:fontFamily="@font/roboto_regular"
-                                            android:textColor="#37AF57"
                                             android:layout_marginStart="10dp"
                                             android:layout_marginEnd="10dp"
+                                            android:fontFamily="@font/roboto_regular"
+                                            android:textColor="#37AF57"
                                             android:textSize="12sp" />
 
                                         <TextView
                                             android:id="@+id/txt_kdlokPintu"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:fontFamily="@font/roboto_regular"
-                                            android:textColor="#37AF57"
                                             android:layout_marginStart="10dp"
                                             android:layout_marginEnd="10dp"
+                                            android:fontFamily="@font/roboto_regular"
+                                            android:textColor="#37AF57"
                                             android:textSize="12sp" />
 
                                         <ImageView
-                                            android:visibility="visible"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginStart="2dp"
+                                            android:src="@drawable/rate"
+                                            android:visibility="visible" />
+
+                                        <ImageView
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:src="@drawable/rate"
-                                            android:layout_marginStart="2dp" />
-
-                                        <ImageView
-                                            android:visibility="visible"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:src="@drawable/rate" />
+                                            android:visibility="visible" />
 
                                     </LinearLayout>
                                 </LinearLayout>
 
 
-
                                 <LinearLayout
-                                    android:gravity="end"
-                                    android:layout_marginEnd="10dp"
                                     android:layout_width="0dp"
-                                    android:orientation="vertical"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="10dp"
                                     android:layout_weight="1"
-                                    android:layout_height="wrap_content">
+                                    android:gravity="end"
+                                    android:orientation="vertical">
 
                                     <Button
-                                        android:visibility="gone"
                                         android:id="@+id/btn_detail_pintu"
                                         android:layout_width="25dp"
                                         android:layout_height="20dp"
-                                        android:gravity="center"
                                         android:layout_marginStart="10dp"
-                                        android:layout_marginEnd="5dp"
                                         android:layout_marginTop="2dp"
+                                        android:layout_marginEnd="5dp"
                                         android:background="@drawable/bg_btn_blue"
-                                        android:textColorHighlight="#fdb501"
                                         android:drawableEnd="@drawable/ic_chevron_right_white_24dp"
+                                        android:gravity="center"
                                         android:text=" "
                                         android:textColor="#FFF"
+                                        android:textColorHighlight="#fdb501"
                                         android:textSize="8sp"
+                                        android:visibility="gone"
                                         tools:layout_editor_absoluteX="31dp" />
 
                                 </LinearLayout>
@@ -392,13 +392,13 @@
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal"
                                 android:padding="1dp">
+
                                 <ImageView
                                     android:id="@+id/lokPintuPicasso"
                                     android:layout_width="match_parent"
                                     android:layout_height="100dp"
                                     android:layout_gravity="center"
-                                    android:layout_marginTop="2dp"
-                                    />
+                                    android:layout_marginTop="2dp" />
                             </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
@@ -408,8 +408,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
                     android:layout_marginLeft="24dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginRight="24dp"
                     android:layout_marginBottom="24dp"
                     android:orientation="vertical">
@@ -424,11 +424,11 @@
                         android:textSize="15sp" />
 
                     <LinearLayout
-                        android:gravity="left"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        >
+                        android:gravity="left"
+                        android:orientation="horizontal">
+
                         <EditText
 
                             android:id="@+id/tgl_kunjungan_ptgs"
@@ -444,13 +444,13 @@
                             android:textSize="14sp" />
 
                         <TextView
-                            android:textAlignment="center"
                             android:layout_width="40dp"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/mlight"
                             android:layout_marginStart="5dp"
                             android:layout_marginEnd="5dp"
+                            android:fontFamily="@font/mlight"
                             android:text="S/D"
+                            android:textAlignment="center"
                             android:textColor="#37AF57"
                             android:textSize="15sp" />
 
@@ -475,319 +475,321 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@+id/linear_jml_krcs_wisnu">
-                <LinearLayout
-                    android:id="@+id/linearLayoutKarcisUtama"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="4dp"
-                    android:background="@drawable/cardview"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
-                    >
+
                     <LinearLayout
+                        android:id="@+id/linearLayoutKarcisUtama"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical" >
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/cardview"
+                        android:orientation="horizontal"
+                        android:padding="4dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:padding="14dp"
-                            tools:ignore="UselessParent">
-
-
+                            android:orientation="vertical">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:orientation="vertical"
+                                android:padding="14dp"
+                                tools:ignore="UselessParent">
+
 
                                 <LinearLayout
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:orientation="vertical">
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:fontFamily="@font/roboto_regular"
-                                        android:text="Karcis Utama"
-                                        android:layout_marginBottom="5dp"
-                                        android:textColor="#37AF57"
-                                        android:textSize="16sp" />
+                                    android:orientation="horizontal">
 
                                     <LinearLayout
-                                        android:layout_marginTop="1dp"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:orientation="horizontal">
-
-                                        <ImageView
-                                            android:visibility="visible"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:src="@drawable/rate" />
-                                        <ImageView
-                                            android:visibility="visible"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:src="@drawable/rate" />
+                                        android:orientation="vertical">
 
                                         <TextView
-                                            android:visibility="visible"
-                                            android:id="@+id/id_ku"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
+                                            android:layout_marginBottom="5dp"
                                             android:fontFamily="@font/roboto_regular"
+                                            android:text="Karcis Utama"
                                             android:textColor="#37AF57"
-                                            android:textSize="10sp" />
-
-
-                                        <TextView
-                                            android:visibility="visible"
-                                            android:id="@+id/kode_ksda_ku"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:fontFamily="@font/roboto_regular"
-                                            android:textColor="#37AF57"
-                                            android:textSize="10sp" />
-
-                                        <TextView
-                                            android:visibility="visible"
-                                            android:id="@+id/kode_lokasi_ku"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:fontFamily="@font/roboto_regular"
-                                            android:textColor="#37AF57"
-                                            android:textSize="10sp" />
-
-                                        <TextView
-                                            android:visibility="visible"
-                                            android:id="@+id/kode_karcis_ku"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:fontFamily="@font/roboto_regular"
-                                            android:textColor="#37AF57"
-                                            android:textSize="10sp" />
-
-                                        <TextView
-                                            android:layout_marginStart="10dp"
-                                            android:layout_marginEnd="10dp"
-                                            android:visibility="visible"
-                                            android:id="@+id/nama_karcis_ku"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:fontFamily="@font/roboto_regular"
-                                            android:textColor="#37AF57"
-                                            android:textSize="10sp" />
-
-                                        <TextView
-                                            android:visibility="visible"
-                                            android:id="@+id/kode_libur_ku"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:fontFamily="@font/roboto_regular"
-                                            android:textColor="#37AF57"
-                                            android:textSize="10sp" />
-
-                                        <TextView
-                                            android:visibility="visible"
-                                            android:id="@+id/harga_karcis_wisata_wisnu_ku"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:fontFamily="@font/roboto_regular"
-                                            android:textColor="#37AF57"
-                                            android:textSize="10sp" />
-
-                                        <TextView
-                                            android:visibility="visible"
-                                            android:id="@+id/harga_karcis_wisata_wisman_ku"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:fontFamily="@font/roboto_regular"
-                                            android:textColor="#37AF57"
-                                            android:textSize="10sp" />
-
-
-                                        <TextView
-                                            android:visibility="visible"
-                                            android:id="@+id/harga_karcis_asuransi_wisnu_ku"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:fontFamily="@font/roboto_regular"
-                                            android:textColor="#37AF57"
-                                            android:textSize="10sp" />
-
-                                        <TextView
-                                            android:visibility="visible"
-                                            android:id="@+id/harga_karcis_asuransi_wisman_ku"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:fontFamily="@font/roboto_regular"
-                                            android:textColor="#37AF57"
-                                            android:textSize="10sp" />
-
-
-                                        <ImageView
-                                            android:visibility="visible"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:src="@drawable/rate"
-                                            android:layout_marginStart="2dp" />
-                                        <ImageView
-                                            android:visibility="visible"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:src="@drawable/rate" />
-
-
-
-                                    </LinearLayout>
-
-                                    <LinearLayout
-                                        android:orientation="horizontal"
-                                        android:layout_width="wrap_content"
-                                        android:layout_marginTop="16dp"
-                                        android:layout_height="wrap_content">
+                                            android:textSize="16sp" />
 
                                         <LinearLayout
-                                            android:visibility="gone"
                                             android:layout_width="wrap_content"
-                                            android:orientation="vertical"
-                                            android:layout_height="wrap_content">
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="1dp"
+                                            android:orientation="horizontal">
+
+                                            <ImageView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:src="@drawable/rate"
+                                                android:visibility="visible" />
+
+                                            <ImageView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:src="@drawable/rate"
+                                                android:visibility="visible" />
 
                                             <TextView
-                                                android:layout_gravity="center"
+                                                android:id="@+id/id_ku"
                                                 android:layout_width="wrap_content"
-                                                android:textSize="14sp"
-                                                android:textColor="#6A90B5"
-                                                android:fontFamily="@font/roboto_regular"
                                                 android:layout_height="wrap_content"
-                                                android:text="20" />
+                                                android:fontFamily="@font/roboto_regular"
+                                                android:textColor="#37AF57"
+                                                android:textSize="10sp"
+                                                android:visibility="visible" />
+
 
                                             <TextView
-                                                android:layout_gravity="center"
+                                                android:id="@+id/kode_ksda_ku"
                                                 android:layout_width="wrap_content"
-                                                android:textSize="14sp"
-                                                android:textColor="#DF6A90B5"
-                                                android:fontFamily="@font/roboto_regular"
                                                 android:layout_height="wrap_content"
-                                                android:text="Minute" />
+                                                android:fontFamily="@font/roboto_regular"
+                                                android:textColor="#37AF57"
+                                                android:textSize="10sp"
+                                                android:visibility="visible" />
+
+                                            <TextView
+                                                android:id="@+id/kode_lokasi_ku"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:fontFamily="@font/roboto_regular"
+                                                android:textColor="#37AF57"
+                                                android:textSize="10sp"
+                                                android:visibility="visible" />
+
+                                            <TextView
+                                                android:id="@+id/kode_karcis_ku"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:fontFamily="@font/roboto_regular"
+                                                android:textColor="#37AF57"
+                                                android:textSize="10sp"
+                                                android:visibility="visible" />
+
+                                            <TextView
+                                                android:id="@+id/nama_karcis_ku"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginStart="10dp"
+                                                android:layout_marginEnd="10dp"
+                                                android:fontFamily="@font/roboto_regular"
+                                                android:textColor="#37AF57"
+                                                android:textSize="10sp"
+                                                android:visibility="visible" />
+
+                                            <TextView
+                                                android:id="@+id/kode_libur_ku"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:fontFamily="@font/roboto_regular"
+                                                android:textColor="#37AF57"
+                                                android:textSize="10sp"
+                                                android:visibility="visible" />
+
+                                            <TextView
+                                                android:id="@+id/harga_karcis_wisata_wisnu_ku"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:fontFamily="@font/roboto_regular"
+                                                android:textColor="#37AF57"
+                                                android:textSize="10sp"
+                                                android:visibility="visible" />
+
+                                            <TextView
+                                                android:id="@+id/harga_karcis_wisata_wisman_ku"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:fontFamily="@font/roboto_regular"
+                                                android:textColor="#37AF57"
+                                                android:textSize="10sp"
+                                                android:visibility="visible" />
+
+
+                                            <TextView
+                                                android:id="@+id/harga_karcis_asuransi_wisnu_ku"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:fontFamily="@font/roboto_regular"
+                                                android:textColor="#37AF57"
+                                                android:textSize="10sp"
+                                                android:visibility="visible" />
+
+                                            <TextView
+                                                android:id="@+id/harga_karcis_asuransi_wisman_ku"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:fontFamily="@font/roboto_regular"
+                                                android:textColor="#37AF57"
+                                                android:textSize="10sp"
+                                                android:visibility="visible" />
+
+
+                                            <ImageView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginStart="2dp"
+                                                android:src="@drawable/rate"
+                                                android:visibility="visible" />
+
+                                            <ImageView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:src="@drawable/rate"
+                                                android:visibility="visible" />
+
+
                                         </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="16dp"
+                                            android:orientation="horizontal">
+
+                                            <LinearLayout
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:orientation="vertical"
+                                                android:visibility="gone">
+
+                                                <TextView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_gravity="center"
+                                                    android:fontFamily="@font/roboto_regular"
+                                                    android:text="20"
+                                                    android:textColor="#6A90B5"
+                                                    android:textSize="14sp" />
+
+                                                <TextView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_gravity="center"
+                                                    android:fontFamily="@font/roboto_regular"
+                                                    android:text="Minute"
+                                                    android:textColor="#DF6A90B5"
+                                                    android:textSize="14sp" />
+                                            </LinearLayout>
+                                        </LinearLayout>
+                                    </LinearLayout>
+
+
+                                    <de.hdodenhof.circleimageview.CircleImageView
+                                        android:id="@+id/krcsUtamaPicasso_xx"
+                                        android:layout_width="120dp"
+                                        android:layout_height="120dp"
+                                        android:layout_alignParentEnd="true"
+                                        android:layout_gravity="end"
+                                        android:layout_marginTop="40dp"
+                                        android:tint="@color/colorPrimaryDark"
+                                        android:visibility="gone"
+                                        app:civ_border_color="@color/colorAccent"
+                                        app:civ_border_overlay="true"
+                                        app:civ_border_width="1dp" />
+
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginEnd="10dp"
+                                        android:layout_weight="1"
+                                        android:gravity="end"
+                                        android:orientation="vertical">
+
+                                        <Button
+                                            android:id="@+id/btn_detail_ku"
+                                            android:layout_width="25dp"
+                                            android:layout_height="20dp"
+                                            android:layout_marginStart="10dp"
+                                            android:layout_marginTop="2dp"
+                                            android:layout_marginEnd="5dp"
+                                            android:background="@drawable/bg_btn_blue"
+                                            android:drawableEnd="@drawable/ic_chevron_right_white_24dp"
+                                            android:gravity="center"
+                                            android:text=" "
+                                            android:textColor="#FFF"
+                                            android:textColorHighlight="#fdb501"
+                                            android:textSize="8sp"
+                                            android:visibility="visible"
+                                            tools:layout_editor_absoluteX="31dp" />
+
                                     </LinearLayout>
                                 </LinearLayout>
 
-
-                                <de.hdodenhof.circleimageview.CircleImageView
-                                    android:visibility="gone"
-                                    android:id="@+id/krcsUtamaPicasso_xx"
-                                    android:layout_gravity="end"
-                                    android:layout_alignParentEnd="true"
-                                    android:layout_width="120dp"
-                                    android:layout_height="120dp"
-                                    android:layout_marginTop="40dp"
-                                    android:tint="@color/colorPrimaryDark"
-                                    app:civ_border_color="@color/colorAccent"
-                                    app:civ_border_overlay="true"
-                                    app:civ_border_width="1dp" />
-
-
                                 <LinearLayout
-                                    android:gravity="end"
-                                    android:layout_marginEnd="10dp"
-                                    android:layout_width="0dp"
-                                    android:orientation="vertical"
-                                    android:layout_weight="1"
-                                    android:layout_height="wrap_content">
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="6dp"
+                                    android:orientation="horizontal">
 
-                                    <Button
-                                        android:visibility="visible"
-                                        android:id="@+id/btn_detail_ku"
-                                        android:layout_width="25dp"
-                                        android:layout_height="20dp"
-                                        android:gravity="center"
-                                        android:layout_marginStart="10dp"
-                                        android:layout_marginEnd="5dp"
-                                        android:layout_marginTop="2dp"
-                                        android:background="@drawable/bg_btn_blue"
-                                        android:textColorHighlight="#fdb501"
-                                        android:drawableEnd="@drawable/ic_chevron_right_white_24dp"
-                                        android:text=" "
-                                        android:textColor="#FFF"
-                                        android:textSize="8sp"
-                                        tools:layout_editor_absoluteX="31dp" />
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:orientation="horizontal"
+                                        android:visibility="gone">
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:src="@drawable/like" />
+
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:orientation="horizontal"
+                                        android:visibility="gone">
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:src="@drawable/comment" />
+
+
+                                    </LinearLayout>
+
 
                                 </LinearLayout>
                             </LinearLayout>
 
                             <LinearLayout
-                                android:layout_marginStart="6dp"
                                 android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
                                 android:orientation="horizontal"
-                                android:layout_height="wrap_content">
+                                android:padding="1dp"
+                                android:visibility="gone">
 
-                                <LinearLayout
-                                    android:visibility="gone"
-                                    android:layout_width="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:layout_weight="1"
-                                    android:layout_height="wrap_content">
-
-                                    <ImageView
-                                        android:layout_gravity="center"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:src="@drawable/like" />
-
-
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:visibility="gone"
-                                    android:layout_width="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:layout_weight="1"
-                                    android:layout_height="wrap_content">
-
-                                    <ImageView
-                                        android:layout_gravity="center"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:src="@drawable/comment" />
-
-
-                                </LinearLayout>
-
-
+                                <ImageView
+                                    android:id="@+id/krcsUtamaPicasso"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="100dp"
+                                    android:layout_gravity="center"
+                                    android:layout_marginTop="2dp" />
                             </LinearLayout>
                         </LinearLayout>
-
-                        <LinearLayout
-                            android:visibility="gone"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:padding="1dp">
-                            <ImageView
-                                android:id="@+id/krcsUtamaPicasso"
-                                android:layout_width="match_parent"
-                                android:layout_height="100dp"
-                                android:layout_gravity="center"
-                                android:layout_marginTop="2dp"
-                                />
-                        </LinearLayout>
                     </LinearLayout>
-                </LinearLayout>
                 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
                 <LinearLayout
                     android:id="@+id/linear_jml_krcs_wisnu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
                     android:layout_marginLeft="24dp"
+                    android:layout_marginTop="24dp"
                     android:layout_marginRight="24dp"
                     android:layout_marginBottom="24dp"
                     android:orientation="vertical">
@@ -878,19 +880,19 @@
 
                 <LinearLayout
                     android:id="@+id/linearLayoutKarcisTambahan"
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="12dp"
-                    android:background="@drawable/cardview"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
-                    >
+                    android:background="@drawable/cardview"
+                    android:orientation="horizontal"
+                    android:padding="12dp">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical" >
+                        android:orientation="vertical">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -912,249 +914,248 @@
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:layout_marginBottom="5dp"
                                         android:fontFamily="@font/roboto_regular"
                                         android:text="Karcis Tambahan"
-                                        android:layout_marginBottom="5dp"
                                         android:textColor="#37AF57"
                                         android:textSize="16sp" />
 
                                     <LinearLayout
-                                        android:layout_marginTop="4dp"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:layout_marginTop="4dp"
                                         android:orientation="horizontal">
 
                                         <ImageView
-                                            android:visibility="visible"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:src="@drawable/rate" />
+                                            android:src="@drawable/rate"
+                                            android:visibility="visible" />
+
                                         <ImageView
-                                            android:visibility="visible"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:src="@drawable/rate" />
+                                            android:src="@drawable/rate"
+                                            android:visibility="visible" />
 
 
                                         <TextView
-                                            android:visibility="visible"
                                             android:id="@+id/kode_ksda_kt"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:fontFamily="@font/roboto_regular"
                                             android:textColor="#37AF57"
-                                            android:textSize="12sp" />
+                                            android:textSize="12sp"
+                                            android:visibility="visible" />
 
                                         <TextView
-                                            android:visibility="visible"
                                             android:id="@+id/kode_lokasi_kt"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:fontFamily="@font/roboto_regular"
                                             android:textColor="#37AF57"
-                                            android:textSize="12sp" />
+                                            android:textSize="12sp"
+                                            android:visibility="visible" />
 
                                         <TextView
-                                            android:visibility="visible"
                                             android:id="@+id/kode_karcis_kt"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:fontFamily="@font/roboto_regular"
                                             android:textColor="#37AF57"
-                                            android:textSize="12sp" />
+                                            android:textSize="12sp"
+                                            android:visibility="visible" />
 
                                         <TextView
-                                            android:visibility="visible"
-                                            android:layout_marginStart="10dp"
-                                            android:layout_marginEnd="10dp"
                                             android:id="@+id/nama_karcis_kt"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
+                                            android:layout_marginStart="10dp"
+                                            android:layout_marginEnd="10dp"
                                             android:fontFamily="@font/roboto_regular"
                                             android:textColor="#37AF57"
-                                            android:textSize="12sp" />
+                                            android:textSize="12sp"
+                                            android:visibility="visible" />
 
                                         <TextView
-                                            android:visibility="visible"
                                             android:id="@+id/kode_libur_kt"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:fontFamily="@font/roboto_regular"
                                             android:textColor="#37AF57"
-                                            android:textSize="12sp" />
+                                            android:textSize="12sp"
+                                            android:visibility="visible" />
 
                                         <TextView
-                                            android:visibility="visible"
                                             android:id="@+id/harga_karcis_wisata_kt"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:fontFamily="@font/roboto_regular"
                                             android:textColor="#37AF57"
-                                            android:textSize="12sp" />
+                                            android:textSize="12sp"
+                                            android:visibility="visible" />
 
                                         <TextView
-                                            android:visibility="visible"
                                             android:id="@+id/harga_karcis_asuransi_kt"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:fontFamily="@font/roboto_regular"
                                             android:textColor="#37AF57"
-                                            android:textSize="12sp" />
+                                            android:textSize="12sp"
+                                            android:visibility="visible" />
 
                                         <TextView
-                                            android:visibility="visible"
                                             android:id="@+id/id_kt"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:fontFamily="@font/roboto_regular"
                                             android:textColor="#37AF57"
-                                            android:textSize="12sp" />
-
-
+                                            android:textSize="12sp"
+                                            android:visibility="visible" />
 
 
                                         <ImageView
-                                            android:visibility="visible"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:src="@drawable/rate" />
-                                        <ImageView
-                                            android:visibility="visible"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:src="@drawable/rate" />
+                                            android:src="@drawable/rate"
+                                            android:visibility="visible" />
 
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:src="@drawable/rate"
+                                            android:visibility="visible" />
 
 
                                     </LinearLayout>
 
                                     <LinearLayout
-                                        android:orientation="horizontal"
                                         android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
                                         android:layout_marginTop="16dp"
-                                        android:layout_height="wrap_content">
+                                        android:orientation="horizontal">
 
                                         <LinearLayout
-                                            android:visibility="gone"
                                             android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
                                             android:orientation="vertical"
-                                            android:layout_height="wrap_content">
+                                            android:visibility="gone">
 
                                             <TextView
-                                                android:layout_gravity="center"
                                                 android:layout_width="wrap_content"
-                                                android:textSize="14sp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="center"
+                                                android:fontFamily="@font/roboto_regular"
+                                                android:text="20"
                                                 android:textColor="#6A90B5"
-                                                android:fontFamily="@font/roboto_regular"
-                                                android:layout_height="wrap_content"
-                                                android:text="20" />
+                                                android:textSize="14sp" />
 
                                             <TextView
-                                                android:layout_gravity="center"
                                                 android:layout_width="wrap_content"
-                                                android:textSize="14sp"
-                                                android:textColor="#DF6A90B5"
-                                                android:fontFamily="@font/roboto_regular"
                                                 android:layout_height="wrap_content"
-                                                android:text="Minute" />
+                                                android:layout_gravity="center"
+                                                android:fontFamily="@font/roboto_regular"
+                                                android:text="Minute"
+                                                android:textColor="#DF6A90B5"
+                                                android:textSize="14sp" />
                                         </LinearLayout>
                                     </LinearLayout>
                                 </LinearLayout>
 
 
                                 <de.hdodenhof.circleimageview.CircleImageView
-                                    android:visibility="gone"
                                     android:id="@+id/krcsTmbhnPicasso_xx"
-                                    android:layout_gravity="end"
-                                    android:layout_alignParentEnd="true"
                                     android:layout_width="120dp"
                                     android:layout_height="120dp"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_gravity="end"
                                     android:layout_marginTop="40dp"
                                     android:tint="@color/colorPrimaryDark"
+                                    android:visibility="gone"
                                     app:civ_border_color="@color/colorAccent"
                                     app:civ_border_overlay="true"
                                     app:civ_border_width="1dp" />
 
 
                                 <LinearLayout
-                                    android:gravity="end"
-                                    android:layout_marginEnd="10dp"
                                     android:layout_width="0dp"
-                                    android:orientation="vertical"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="10dp"
                                     android:layout_weight="1"
-                                    android:layout_height="wrap_content">
+                                    android:gravity="end"
+                                    android:orientation="vertical">
 
                                     <Button
-                                        android:visibility="visible"
                                         android:id="@+id/btn_detail_kt"
                                         android:layout_width="25dp"
                                         android:layout_height="20dp"
-                                        android:gravity="center"
                                         android:layout_marginStart="10dp"
-                                        android:layout_marginEnd="5dp"
                                         android:layout_marginTop="2dp"
+                                        android:layout_marginEnd="5dp"
                                         android:background="@drawable/bg_btn_blue"
-                                        android:textColorHighlight="#fdb501"
                                         android:drawableEnd="@drawable/ic_chevron_right_white_24dp"
+                                        android:gravity="center"
                                         android:text=""
                                         android:textColor="#FFF"
+                                        android:textColorHighlight="#fdb501"
                                         android:textSize="8sp"
+                                        android:visibility="visible"
                                         tools:layout_editor_absoluteX="31dp" />
 
                                 </LinearLayout>
                             </LinearLayout>
 
                             <LinearLayout
-                                android:layout_marginLeft="6dp"
                                 android:layout_width="match_parent"
-                                android:orientation="horizontal"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="6dp"
+                                android:orientation="horizontal">
 
                                 <LinearLayout
-                                    android:visibility="gone"
                                     android:layout_width="wrap_content"
-                                    android:orientation="horizontal"
+                                    android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:layout_height="wrap_content">
+                                    android:orientation="horizontal"
+                                    android:visibility="gone">
 
 
                                     <ImageView
-                                        android:layout_gravity="center"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
                                         android:src="@drawable/like" />
 
                                     <TextView
                                         android:layout_width="wrap_content"
-                                        android:text="320 Likes"
+                                        android:layout_height="wrap_content"
                                         android:layout_marginLeft="5dp"
                                         android:fontFamily="@font/roboto_regular"
+                                        android:text="320 Likes"
                                         android:textColor="#F06A90B5"
-                                        android:textSize="12sp"
-                                        android:layout_height="wrap_content" />
+                                        android:textSize="12sp" />
                                 </LinearLayout>
 
                                 <LinearLayout
-                                    android:visibility="gone"
                                     android:layout_width="wrap_content"
-                                    android:orientation="horizontal"
+                                    android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:layout_height="wrap_content">
+                                    android:orientation="horizontal"
+                                    android:visibility="gone">
 
                                     <ImageView
-                                        android:layout_gravity="center"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
                                         android:src="@drawable/comment" />
 
                                     <TextView
                                         android:layout_width="wrap_content"
-                                        android:text="14 Comments"
+                                        android:layout_height="wrap_content"
                                         android:layout_marginLeft="5dp"
                                         android:fontFamily="@font/roboto_regular"
+                                        android:text="14 Comments"
                                         android:textColor="#F06A90B5"
-                                        android:textSize="12sp"
-                                        android:layout_height="wrap_content" />
+                                        android:textSize="12sp" />
                                 </LinearLayout>
 
 
@@ -1162,18 +1163,18 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:visibility="gone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
-                            android:padding="1dp">
+                            android:padding="1dp"
+                            android:visibility="gone">
+
                             <ImageView
                                 android:id="@+id/krcsTmbhnPicasso"
                                 android:layout_width="match_parent"
                                 android:layout_height="100dp"
                                 android:layout_gravity="center"
-                                android:layout_marginTop="2dp"
-                                />
+                                android:layout_marginTop="2dp" />
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
@@ -1182,9 +1183,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="24dp"
+                    android:layout_marginTop="24dp"
                     android:layout_marginRight="24dp"
                     android:layout_marginBottom="24dp"
-                    android:layout_marginTop="24dp"
                     android:orientation="vertical">
 
                     <TextView
@@ -1268,22 +1269,22 @@
                 </LinearLayout>
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="24dp"
-                android:layout_marginRight="24dp"
-                android:layout_marginBottom="24dp"
-                android:orientation="vertical">
-
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    android:fontFamily="@font/mlight"
-                    android:text="Metode Pembayaran."
-                    android:textColor="#37AF57"
-                    android:textSize="15sp" />
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginRight="24dp"
+                    android:layout_marginBottom="24dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:fontFamily="@font/mlight"
+                        android:text="Metode Pembayaran."
+                        android:textColor="#37AF57"
+                        android:textSize="15sp" />
 
                     <RadioGroup
                         android:id="@+id/rg_cara_bayar"
@@ -1293,7 +1294,7 @@
 
                     </RadioGroup>
 
-            </LinearLayout>
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -1404,31 +1405,38 @@
                         app:layout_goneMarginTop="0dp" />
 
                 </LinearLayout>
-
             </LinearLayout>
 
             <LinearLayout
-                app:layout_constraintTop_toBottomOf="@+id/linearLayoutPtgs"
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                tools:ignore="NotSibling">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayoutPtgs"
+                android:paddingBottom="70dp"
+                >
+
                 <Button
                     android:id="@+id/btn_order_ptgs"
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
-                    android:gravity="center"
                     android:layout_marginLeft="25dp"
                     android:layout_marginRight="25dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:background="@drawable/bg_btn_blue"
-                    android:paddingEnd="20dp"
                     android:drawableEnd="@drawable/ic_event_note_black_24dp"
+                    android:gravity="center"
+                    android:paddingEnd="20dp"
                     android:text="Pesan "
                     android:textColor="#FFF"
                     android:textSize="10sp"
                     tools:layout_editor_absoluteX="31dp" />
+
+
+
+
             </LinearLayout>
+
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

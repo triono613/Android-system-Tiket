@@ -5,6 +5,12 @@
 
     <uses-sdk tools:overrideLibrary="com.google.zxing.client.android" />
 
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -28,9 +34,13 @@
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true"
         android:versionCode="2"
-        tools:replace="android:label"
+        tools:overrideLibrary="com.mazenrashed.printooth"
+        tools:replace="android:theme,android:label"
         tools:targetApi="m">
-        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".DashboardPrintActivity"></activity>
+        <activity android:name=".ui.DeviceListActivity" />
+        <activity android:name=".DashboardPrintActivity_old" />
+        <activity android:name=".ProfileActivity" />
         <activity android:name=".WeatherActivity" />
         <activity
             android:name=".DashboardWisatawanActivity"

@@ -57,7 +57,7 @@ public class DashboardWisatawanActivity extends AppCompatActivity implements Loc
 
     TextView txt_jljh_wis;
     TextView txt_jljh_wis_dec;
-    ShimmerRecyclerView  featuredRecycle,recyclerViewWebView,ShimmerRecyclerView_cuaca;
+    ShimmerRecyclerView  featuredRecycle,recyclerViewWebView,ShimmerRecyclerView_cuaca, ShimmerRecyclerView_cuaca_2;
     CustomAdapterFeatured customAdapterFeatured;
     CustomAdapterApiWeather customAdapterApiWeather;
     LinearLayoutManager linearLayoutManager;
@@ -102,8 +102,6 @@ public class DashboardWisatawanActivity extends AppCompatActivity implements Loc
 
         txt_jljh_wis.setText(content);
         txt_jljh_wis_desc.setText(content_desc);
-
-
         
         featuredRecycleLokasiWisata();
         recyclerViewWebView();
@@ -111,15 +109,9 @@ public class DashboardWisatawanActivity extends AppCompatActivity implements Loc
         ShimmerRecyclerViewApiCuaca();
 
 
-
-
-//        btn_logout_wstn =(Button) findViewById(R.id.btn_logout_wstn);
         _card_pemesanan_karcis_wstn = (LinearLayout) findViewById(R.id.card_pemesanan_karcis_wstn);
         _card_status_karcis_wstn = (LinearLayout) findViewById(R.id.card_status_karcis_wstn);
         _card_ganti_password_wstwn = (LinearLayout) findViewById(R.id.card_ganti_password_wstwn);
-
-
-
 
 
         _card_pemesanan_karcis_wstn.setOnClickListener(v -> {
@@ -369,8 +361,11 @@ public class DashboardWisatawanActivity extends AppCompatActivity implements Loc
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void ShimmerRecyclerViewApiCuaca() {
         ShimmerRecyclerView_cuaca = (ShimmerRecyclerView) findViewById(R.id.ShimmerRecyclerView_cuaca);
+//        ShimmerRecyclerView_cuaca_2 = (ShimmerRecyclerView) findViewById(R.id.ShimmerRecyclerView_cuaca_2);
         ShimmerRecyclerView_cuaca.setHasFixedSize(true);
+//        ShimmerRecyclerView_cuaca_2.setHasFixedSize(true);
         ShimmerRecyclerView_cuaca.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+//        ShimmerRecyclerView_cuaca_2.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         ArrayList<ModelApiWeather> modelApiWeatherArrayList = new ArrayList<>();
 
 
@@ -385,7 +380,7 @@ public class DashboardWisatawanActivity extends AppCompatActivity implements Loc
         //vanaprasta
 //        this.getApix( 110.34249441399055, -7.206357147014595);
 //        umbul jumprit
-//        this.getApix( 110.01714073541483, -7.254147271866619);
+//        this.getApix_2( 110.01714073541483, -7.254147271866619);
 //        gunung kembang via blembem
 //        this.getApix(109.9692783612453,-7.3353438254413 );
 
@@ -431,7 +426,7 @@ public class DashboardWisatawanActivity extends AppCompatActivity implements Loc
                                 strDescWeather = jsonObject1.getString("description");
                                 strIconWeather = jsonObject1.getString("icon");
                             }
-                            modelApiWeatherArrayList.add(new ModelApiWeather(0,strDescWeather,coord,strNamaKota,strKelembaban,strTemperatur,strKecepatanAngin));
+                            modelApiWeatherArrayList.add(new ModelApiWeather(0,strDescWeather,strNamaKota,strNamaKota,strKelembaban,strTemperatur,strKecepatanAngin));
                         }
                         customAdapterApiWeather = new CustomAdapterApiWeather( modelApiWeatherArrayList, getApplicationContext() );
                         ShimmerRecyclerView_cuaca.setAdapter(customAdapterApiWeather);
@@ -450,10 +445,66 @@ public class DashboardWisatawanActivity extends AppCompatActivity implements Loc
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         stringRequest.setRetryPolicy(policy);
         requestQueue.add(stringRequest);
+    }
 
+    public void getApix_2(double a, double b){
+        double longi = a;
+        double lati = b;
+        String server_url = "https://api.openweathermap.org/data/2.5/weather?lat="+lati+"&lon="+longi+"&units=metric&appid=8ef3b88b48346e6c2d46df2ce0aea96f";
+        final RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        @SuppressLint("SetTextI18n") StringRequest stringRequest = new StringRequest(Request.Method.GET, server_url,
+                response -> {
+                    Log.i("", "response cuaca= " + response );
+                    try {
+                        ArrayList<ModelApiWeather> modelApiWeatherArrayList = new ArrayList<>();
+                        if( Help.isJSONValid(response) ){
+                            ArrayList dx = new ArrayList<>();
+                            JSONObject JO = new JSONObject(response);
 
-//        customAdapterApiWeather = new CustomAdapterApiWeather(modelApiWeatherArrayList,getApplicationContext());
-//        featuredRecycle.setAdapter(customAdapterApiWeather);
+                            JSONArray jsonArrayWeather = JO.getJSONArray("weather");
+                            JSONObject jo_main = JO.getJSONObject("main");
+                            JSONObject jo_wind = JO.getJSONObject("wind");
+                            String coord = JO.getString("coord");
+                            String strNamaKota = JO.getString("name");
+                            String strKelembaban  = jo_main.getString("humidity");
+                            String strTemperatur = jo_main.getString("temp");
+                            String strKecepatanAngin = jo_wind.getString("speed");
+
+                            Log.i("", "response jsonArrayWeather= " + jsonArrayWeather );
+                            Log.i("", "response coord= " + coord );
+                            Log.i("", "strNamaKota= " + strNamaKota );
+                            Log.i("", "strKelembaban= " + strKelembaban );
+                            Log.i("", "strTemperatur= " + strTemperatur );
+                            Log.i("", "strKecepatanAngin= " + strKecepatanAngin );
+
+                            String strMainWeather=null;
+                            String strDescWeather=null;
+                            String strIconWeather=null;
+                            for (int i = 0; i <jsonArrayWeather.length();i++ ) {
+                                JSONObject jsonObject1 = jsonArrayWeather.getJSONObject(i);
+                                strMainWeather = jsonObject1.getString("main");
+                                strDescWeather = jsonObject1.getString("description");
+                                strIconWeather = jsonObject1.getString("icon");
+                            }
+                            modelApiWeatherArrayList.add(new ModelApiWeather(0,strDescWeather,coord,strNamaKota,strKelembaban,strTemperatur,strKecepatanAngin));
+                        }
+                        customAdapterApiWeather = new CustomAdapterApiWeather( modelApiWeatherArrayList, getApplicationContext() );
+//                        ShimmerRecyclerView_cuaca_2.setAdapter(customAdapterApiWeather);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    requestQueue.stop();
+                }, error -> {
+            Log.i("", "response =" + error.toString());
+            error.printStackTrace();
+            requestQueue.stop();
+
+        }
+        ) ;
+        int socketTimeout = 0;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        stringRequest.setRetryPolicy(policy);
+        requestQueue.add(stringRequest);
     }
 
 

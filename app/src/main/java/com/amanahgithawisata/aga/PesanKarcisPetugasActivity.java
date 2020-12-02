@@ -1,7 +1,14 @@
 package com.amanahgithawisata.aga;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothSocket;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -23,6 +30,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -53,6 +61,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.ByteBuffer;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -63,8 +74,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 
-public class PesanKarcisPetugasActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     TextView _tgl_kunjungan_ptgs,_tgl_kunjungan_ptgs_2;
     TextView _jml_krcs_wisnu_ptgs;
     TextView _jml_krcs_wisman_ptgs;
@@ -115,6 +128,17 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
     ImageView _imgv;
     LinearLayout _linearLayoutKarcisUtama;
     LinearLayout _linearLayoutKarcisTambahan;
+    BluetoothDevice bluetoothDevice;
+    BluetoothAdapter bluetoothAdapter;
+    BluetoothSocket bluetoothSocket;
+
+    protected static final String TAG = "TAG";
+    private static final int REQUEST_CONNECT_DEVICE = 1;
+    private static final int REQUEST_ENABLE_BT = 2;
+    Button mScan, mPrint, mDisc;
+
+    private UUID applicationUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
+    private ProgressDialog mBluetoothConnectProgressDialog;
 
     private List<String> arrListUtamaPtgs = new ArrayList<String>();
     private List<String> arrListTambahanPtgs = new ArrayList<String>();
@@ -194,6 +218,8 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
         setContentView(R.layout.activity_pesan_karcis_petugas);
         sessionManager = new SessionManager(getApplicationContext());
         findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+
+
 
         _tgl_kunjungan_ptgs = (TextView) findViewById(R.id.tgl_kunjungan_ptgs);
         _tgl_kunjungan_ptgs_2 = (TextView) findViewById(R.id.tgl_kunjungan_ptgs_2);
@@ -539,7 +565,9 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
                          builder.setMessage("Print Struk")
                                  .setCancelable(false)
                                  .setPositiveButton("Ya", (dialog, id) -> {
-
+//                                     findBluetooth();
+                                    Intent i = new Intent(getApplicationContext(), DashboardPrintActivity.class);
+                                    startActivity(i);
                                  })
                                  .setNegativeButton("Tidak", (dialog, id) -> {
                                      try {
@@ -794,9 +822,274 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
     }
 
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent dataIntent) {
+        super.onActivityResult(requestCode, resultCode, dataIntent);
+
+        Log.i("","requestCode= "+requestCode);
+        Log.i("","resultCode= "+resultCode);
+        Log.i("","dataIntent= "+dataIntent);
+
+        switch (requestCode) {
+            case REQUEST_CONNECT_DEVICE:
+                if (requestCode == Activity.RESULT_OK) {
+                    Bundle mExtra = dataIntent.getExtras();
+                    String mDeviceAddress = mExtra.getString("DeviceAddress");
+
+                    bluetoothDevice = bluetoothAdapter.getRemoteDevice(mDeviceAddress);
+                    mBluetoothConnectProgressDialog = ProgressDialog.show(this, "connecting...",
+                            bluetoothDevice.getName() + " : " + bluetoothDevice.getAddress(), true, false);
+
+                    Thread mBlutoothConnectThread = new Thread((Runnable) this);
+                    mBlutoothConnectThread.start();
+                }
+                break;
+
+            case REQUEST_ENABLE_BT:
+                if (resultCode == Activity.RESULT_OK) {
+//                    ListPairedDevices();
+//                    Intent connectIntent = new Intent(MainActivity.this,
+//                            DeviceListActivity.class);
+//                    startActivityForResult(connectIntent, REQUEST_CONNECT_DEVICE);
+//                } else {
+//                    Toast.makeText(MainActivity.this, "Message", Toast.LENGTH_SHORT).show();
+                }
+                break;
+        }
+    }
+
+    private void ListPairedDevices() {
+        Set<BluetoothDevice> mPairedDevices = bluetoothAdapter
+                .getBondedDevices();
+        if (mPairedDevices.size() > 0) {
+            for (BluetoothDevice mDevice : mPairedDevices) {
+                Log.v(TAG, "PairedDevices: " + mDevice.getName() + "  "
+                        + mDevice.getAddress());
+            }
+        }
+    }
+
+    public void run() {
+        try {
+            bluetoothSocket = bluetoothDevice
+                    .createRfcommSocketToServiceRecord(applicationUUID);
+            bluetoothAdapter.cancelDiscovery();
+            bluetoothSocket.connect();
+
+        } catch (IOException eConnectException) {
+            Log.d(TAG, "CouldNotConnectToSocket", eConnectException);
+            closeSocket(bluetoothSocket);
+            return;
+        }
+    }
+
+    private void closeSocket(BluetoothSocket nOpenSocket) {
+        try {
+            nOpenSocket.close();
+            Log.d(TAG, "SocketClosed");
+        } catch (IOException ex) {
+            Log.d(TAG, "CouldNotCloseSocket");
+        }
+    }
 
 
 
+
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+    public void findBluetooth(){
+
+        try {
+            bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+            Log.i("","bluetoothAdapter= "+bluetoothAdapter);
+            if( bluetoothAdapter == null  ){
+                Log.i("","bluetooth disable");
+
+            }
+            if ( bluetoothAdapter.isEnabled()){
+                Log.i("","bluetooth connect");
+//                Intent enableBT = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+//                startActivityForResult(enableBT,0);
+
+                ListPairedDevices();
+
+//                Intent connectIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+//                startActivityForResult(connectIntent,
+//                        REQUEST_CONNECT_DEVICE);
+
+                Set<BluetoothDevice> pairedDevice = bluetoothAdapter.getBondedDevices();
+                Log.i("","pairedDevice.size()= "+pairedDevice.size());
+
+                if( pairedDevice.size() > 0 ) {
+                    for(BluetoothDevice pairedDev:pairedDevice){
+                        Log.i("","pairedDev.getAddress "+pairedDev.getAddress());
+                        Log.i("","pairedDev.getName "+pairedDev.getName());
+                        Log.i("","pairedDev.getUuids "+ Arrays.toString(pairedDev.getUuids()));
+                        Log.i("","pairedDev.getType "+pairedDev.getType());
+                        Log.i("","pairedDev.getBondState "+pairedDev.getBondState());
+
+                        if(pairedDev.getName().equals("58Printer") ) {
+
+                            bluetoothAdapter.cancelDiscovery();
+                            String mDeviceInfo =  pairedDev.getName() + "\n" + pairedDev.getAddress();
+                            String mDeviceAddress = mDeviceInfo.substring(mDeviceInfo.length() - 17);
+
+                            Log.v("", "mDeviceInfo xc " + mDeviceInfo);
+                            Log.v("", "Device_Address xc " + mDeviceAddress);
+
+
+
+                            print_struk();
+
+//                            Bundle mBundle = new Bundle();
+//                            mBundle.putString("DeviceAddress", mDeviceAddress);
+//                            Intent mBackIntent = new Intent();
+//                            mBackIntent.putExtras(mBundle);
+//                            setResult(Activity.RESULT_OK, mBackIntent);
+
+//                            startActivityForResult(connectIntent,
+//                        REQUEST_CONNECT_DEVICE);
+//                                Intent enableBT = new Intent(String.valueOf(Activity.RESULT_OK));
+//                                startActivityForResult(enableBT,0);
+
+
+                            bluetoothDevice = pairedDev;
+                            Log.i("","bluetoothDevice "+bluetoothDevice );
+                            break;
+                        }
+
+
+                    }
+                }
+
+
+            }
+
+
+
+
+        }catch (Exception ignored){
+
+        }
+    }
+
+    public void print_struk(){
+        Thread t =new Thread(){
+            @Override
+            public void run() {
+
+                try {
+                    UUID applicationUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
+                    bluetoothSocket = bluetoothDevice
+                            .createRfcommSocketToServiceRecord(applicationUUID);
+                    bluetoothAdapter.cancelDiscovery();
+                    bluetoothSocket.connect();
+                    OutputStream os = bluetoothSocket
+                            .getOutputStream();
+                    String BILL = "";
+
+                    BILL = "                   XXXX MART    \n"
+                            + "                   XX.AA.BB.CC.     \n " +
+                            "                 NO 25 ABC ABCDE    \n" +
+                            "                  XXXXX YYYYYY      \n" +
+                            "                   MMM 590019091      \n";
+                    BILL = BILL
+                            + "-----------------------------------------------\n";
+
+
+                    BILL = BILL + String.format("%1$-10s %2$10s %3$13s %4$10s", "Item", "Qty", "Rate", "Totel");
+                    BILL = BILL + "\n";
+                    BILL = BILL
+                            + "-----------------------------------------------";
+                    BILL = BILL + "\n " + String.format("%1$-10s %2$10s %3$11s %4$10s", "item-001", "5", "10", "50.00");
+                    BILL = BILL + "\n " + String.format("%1$-10s %2$10s %3$11s %4$10s", "item-002", "10", "5", "50.00");
+                    BILL = BILL + "\n " + String.format("%1$-10s %2$10s %3$11s %4$10s", "item-003", "20", "10", "200.00");
+                    BILL = BILL + "\n " + String.format("%1$-10s %2$10s %3$11s %4$10s", "item-004", "50", "10", "500.00");
+
+                    BILL = BILL
+                            + "\n-----------------------------------------------";
+                    BILL = BILL + "\n\n ";
+
+                    BILL = BILL + "                   Total Qty:" + "      " + "85" + "\n";
+                    BILL = BILL + "                   Total Value:" + "     " + "700.00" + "\n";
+
+                    BILL = BILL
+                            + "-----------------------------------------------\n";
+                    BILL = BILL + "\n\n ";
+                    os.write(BILL.getBytes());
+                    //This is printer specific code you can comment ==== > Start
+
+                    // Setting height
+                    int gs = 29;
+//                    os.write(intToByteArray(gs));
+                    os.write(gs);
+                    int h = 104;
+//                    os.write(intToByteArray(h));
+                    os.write(h);
+                    int n = 162;
+//                    os.write(intToByteArray(n));
+                    os.write(n);
+
+                    // Setting Width
+                    int gs_width = 29;
+//                    os.write(intToByteArray(gs_width));
+                    os.write(gs_width);
+                    int w = 119;
+//                    os.write(intToByteArray(w));
+                    os.write(w);
+                    int n_width = 2;
+//                    os.write(intToByteArray(n_width));
+                    os.write(n_width);
+
+
+                } catch (Exception e) {
+                    Log.e("MainActivity", "Exe ", e);
+                }
+
+            }
+
+        };
+        t.start();
+    }
+
+    public static byte intToByteArray(int value) {
+        byte[] b = ByteBuffer.allocate(4).putInt(value).array();
+
+        for (int k = 0; k < b.length; k++) {
+            System.out.println("Selva  [" + k + "] = " + "0x"
+                    + Help.byteToHex(b[k]));
+        }
+
+        return b[3];
+    }
+
+
+    //    final BroadcastReceiver mReceiver = new BroadcastReceiver(){
+        private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            bluetoothDevice = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+
+            if(BluetoothDevice.ACTION_FOUND.equals(action)){
+                Log.i("","device found");
+            }
+            else if(BluetoothDevice.ACTION_ACL_CONNECTED.equals(action)){
+                Log.i("","device is connected");
+            }
+            else if(BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)){
+                Log.i("","done searching");
+            }
+            else if(BluetoothDevice.ACTION_ACL_DISCONNECT_REQUESTED.equals(action)){
+                Log.i("","device about disconnected");
+            }
+            else if(BluetoothDevice.ACTION_ACL_DISCONNECTED.equals(action)){
+                Log.i("","device disconnected");
+            }
+
+        }
+    };
 
 
         @RequiresApi(api = Build.VERSION_CODES.O)
@@ -1137,7 +1430,7 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
                                             .load(url_image)
                                             .fit()
                                             .transform(transformation)
-                                            .placeholder(R.drawable.ic_image)
+                                            .placeholder(R.drawable.loading_animation)
                                             .into(img1);
 
                                     ImageView img2 =(ImageView)findViewById(R.id.lokPintuPicasso);
@@ -1146,7 +1439,7 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
                                             .load(url_image_pintu)
                                             .fit()
                                             .transform(transformation)
-                                            .placeholder(R.drawable.ic_image)
+                                            .placeholder(R.drawable.loading_animation)
                                             .into(img2);
 
                                     Log.i("","kdlokPintu x"+kdlokPintu);
@@ -1261,7 +1554,7 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
                                                 .load(url_image)
                                                 .fit()
                                                 .transform(transformation)
-                                                .placeholder(R.drawable.ic_image)
+                                                .placeholder(R.drawable.loading_animation)
                                                 .into(img1);
 
                                         ImageView img2 =(ImageView)findViewById(R.id.lokPintuPicasso);
@@ -1270,7 +1563,7 @@ public class PesanKarcisPetugasActivity extends AppCompatActivity implements Dat
                                                 .load(url_image_pintu)
                                                 .fit()
                                                 .transform(transformation)
-                                                .placeholder(R.drawable.ic_image)
+                                                .placeholder(R.drawable.loading_animation)
                                                 .into(img2);
 
 
