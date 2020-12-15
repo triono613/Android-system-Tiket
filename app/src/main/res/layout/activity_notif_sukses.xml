@@ -870,6 +870,48 @@ android:layout_marginTop="10dp"
                     android:text="Lanjutkan"
                     android:textColor="#FFF"
                     android:textSize="12sp" />
+
+
+                <Button
+                    android:id="@+id/btnPrint"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="0dp"
+                    android:background="@drawable/bg_btn_blue"
+                    android:text="Print Struk"
+                    android:textColor="#FFF"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:visibility="gone"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/bg_btn_blue_square"
+                    android:id="@+id/btnPrintImages"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Print images"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btnPrint" />
+
+                <Button
+                    android:id="@+id/btnPairUnpair"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="0dp"
+                    android:background="@drawable/bg_btn_blue"
+                    android:text="Print Struk"
+                    android:textColor="#FFF"
+                    android:textSize="12sp"/>
+
+
+
             </LinearLayout>
 
         </LinearLayout>

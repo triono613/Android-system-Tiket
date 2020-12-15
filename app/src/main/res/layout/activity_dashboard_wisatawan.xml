@@ -8,8 +8,6 @@
     android:orientation="vertical"
     tools:context=".DashboardWisatawanActivity">
 
-
-
         <LinearLayout
                 android:layout_marginTop="40dp"
                 android:layout_marginStart="20dp"
@@ -52,7 +50,7 @@
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
 
                 <LinearLayout

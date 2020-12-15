@@ -16,8 +16,10 @@ import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -333,27 +335,27 @@ public class DashboardWisatawanActivity extends AppCompatActivity implements Loc
 
 
 
-//        webView.requestFocus();
-//        webView.getSettings().setJavaScriptEnabled(true);
-//        String url = "http://www.amanahgitha.com/jenis-jenis-wisata-berdasarkan-tujuan-wisatanya";
-//        webView.loadUrl(url);
-//        webView.setWebViewClient(new WebViewClient() {
-//            @Override
-//            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-//                view.loadUrl(url);
-//                return true;
-//            }
-//        });
-//        webView.setWebChromeClient(new WebChromeClient() {
-//            public void onProgressChanged(WebView view, int progress) {
-//                if (progress < 100) {
-//                    pDialog.show();
-//                }
-//                if (progress == 100) {
-//                    pDialog.dismiss();
-//                }
-//            }
-//        });
+        webView.requestFocus();
+        webView.getSettings().setJavaScriptEnabled(true);
+        String url = "http://www.amanahgitha.com/jenis-jenis-wisata-berdasarkan-tujuan-wisatanya";
+        webView.loadUrl(url);
+        webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
+            }
+        });
+        webView.setWebChromeClient(new WebChromeClient() {
+            public void onProgressChanged(WebView view, int progress) {
+                if (progress < 100) {
+                    pDialog.show();
+                }
+                if (progress == 100) {
+                    pDialog.dismiss();
+                }
+            }
+        });
 
 
     }

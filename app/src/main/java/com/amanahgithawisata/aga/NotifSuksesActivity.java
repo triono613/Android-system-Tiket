@@ -73,6 +73,7 @@ public class NotifSuksesActivity extends AppCompatActivity {
     LinearLayout linear_cash_red;
     LinearLayout linear_cash_bottom_red;
     LinearLayout linear_va_bottom_red;
+    Button btnPairUnpair, btnPrint;
 
 
 
@@ -142,11 +143,12 @@ public class NotifSuksesActivity extends AppCompatActivity {
 
         String _tgl_kunj_sd = getIntent().getStringExtra("_tgl_kunjungan_sd");
         String _selisih_hari = getIntent().getStringExtra("_selisih_hari");
+        String _flag_print = getIntent().getStringExtra("flag_print");
 
         Log.i("","_selisih_hari notif"+_selisih_hari);
 
 
-         textview_nmr_va = (TextView) findViewById(R.id.textview_nmr_va);
+         textview_nmr_va =  findViewById(R.id.textview_nmr_va);
          textview_nm_ket_kelompok = findViewById(R.id.textview_nm_ket_kelompok);
          textview_no_hp = findViewById(R.id.textview_no_hp);
          textview_email = findViewById(R.id.textview_email);
@@ -159,7 +161,6 @@ public class NotifSuksesActivity extends AppCompatActivity {
          textview_tgl_plg = findViewById(R.id.textview_tgl_plg);
          btn_continue = findViewById(R.id.btn_continue);
          btn_back_regis =  findViewById(R.id.btn_back_regis);;
-
          textview_tgl_red =  findViewById(R.id.textview_tgl_red);
          textview_va_red =  findViewById(R.id.textview_va_red);
          textview_nm_red =  findViewById(R.id.textview_nm_red);
@@ -169,10 +170,8 @@ public class NotifSuksesActivity extends AppCompatActivity {
          textview_nm_lok_wis =  findViewById(R.id.textview_nm_lok_wis);
          textview_tgl_kunj_sd =  findViewById(R.id.textview_tgl_kunj_sd);
          textview_jml_hari =  findViewById(R.id.textview_jml_hari);
-
         textview_no_hp_pengunjung = findViewById(R.id.textview_hp_red);
         textview_email_pengunjung = findViewById(R.id.textview_email_red);
-
         linearMohonWisatawan = findViewById(R.id.linearMohonWisatawan);
         linearMohonPetugas = findViewById(R.id.linearMohonPetugas);
         linear_email_red = findViewById(R.id.linear_email_red);
@@ -183,12 +182,12 @@ public class NotifSuksesActivity extends AppCompatActivity {
         linear_red_cash_ptgs_red = findViewById(R.id.linear_red_cash_ptgs_red);
         linear_va_red = findViewById(R.id.linear_va_red);
         linear_cash_red = findViewById(R.id.linear_cash_red);
-
         linear_cash_bottom_red = findViewById(R.id.linear_cash_bottom_red);
         linear_va_bottom_red = findViewById(R.id.linear_va_bottom_red);
 
+        btnPairUnpair = findViewById(R.id.btnPairUnpair);
+        btnPrint = findViewById(R.id.btnPrint);
 
-//        final View vButton = findViewById(R.id.button1);
 
         Log.i("","result_dt_flag "+result_dt_flag);
         Log.i("","_email_pengunjung "+_email_pengunjung);
@@ -208,6 +207,8 @@ public class NotifSuksesActivity extends AppCompatActivity {
         linear_cash_red.setVisibility(View.GONE);
         linear_va_bottom_red.setVisibility(View.GONE);
         linear_cash_bottom_red.setVisibility(View.GONE);
+        btnPrint.setVisibility(View.GONE);
+        btnPairUnpair.setVisibility(View.GONE);
 
         textview_no_hp_pengunjung.setText(_no_hp_pengunjung);
         textview_email_pengunjung.setText(_email_pengunjung);
@@ -216,6 +217,9 @@ public class NotifSuksesActivity extends AppCompatActivity {
 
 //        i.putExtra("_tgl_kunjungan_sd", tgl_kunjungan_sd);
 //        i.putExtra("_selisih_hari", selisih_hari);
+
+//        Intent i = new Intent(getApplicationContext(), DashboardPrintActivity.class);
+//        startActivity(i);
 
         if(result_dt_flag.equals("flagPesanKarcisWisatawan")) {
             Log.i("", "kesini flagPesanKarcisWisatawan " + result_dt_flag);
@@ -269,6 +273,10 @@ public class NotifSuksesActivity extends AppCompatActivity {
                 linear_va_bottom_red.setVisibility(View.VISIBLE);
                 linear_cash_bottom_red.setVisibility(View.GONE);
 
+            }
+            if( _flag_print.equals("1")){
+                btnPrint.setVisibility(View.VISIBLE);
+                btnPairUnpair.setVisibility(View.VISIBLE);
             }
         }
 

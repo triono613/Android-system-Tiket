@@ -357,6 +357,9 @@ public class SigninActivity extends AppCompatActivity implements GoogleApiClient
                                 Log.i("SigninActivity", "val_flag ===" + val_flag);
                                 Log.i("SigninActivity", "val_kode_lokasi ===" + val_kode_lokasi);
 
+                                Log.i("SigninActivity", "jObj_child.getString(flag) =" + jObj_child.getString("flag"));
+                                Log.i("SigninActivity", "val_email ===" + val_email);
+
                                 if (jObj_child.getString("flag").equals("0")) {
 
                                     Intent i = new Intent(SigninActivity.this, SuccessRegistrasiWisatawanActivity.class);
