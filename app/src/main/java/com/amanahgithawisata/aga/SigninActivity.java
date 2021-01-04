@@ -337,30 +337,6 @@ public class SigninActivity extends AppCompatActivity implements GoogleApiClient
 
 
 
-//                            Intent intent = null;
-//                            switch ( val_user_level )
-//                            {
-//                                case "0":
-//                                    boolean b = val_kode_lokasi == "null"
-//                                            || val_kode_lokasi.isEmpty()
-//                                            || val_kode_lokasi.equals("")
-//                                            || val_kode_lokasi == "";
-//                                    if(b
-//                                        ) {
-//                                        Toast.makeText(getApplication(),"Anda Tidak Berhak Login Di Aplikasi ini", Toast.LENGTH_LONG).show();
-//                                        intent = new Intent(SigninActivity.this,SigninActivity.class);
-//                                    }
-//
-//                                    else  {
-//                                        intent = new Intent(SigninActivity.this, DashboardWisatawanActivity.class);
-//                                    }
-//                                    break;
-//
-//                                default:
-//                                    intent = new Intent(SigninActivity.this,SigninActivity.class);
-//                                    break;
-//                            }
-
 
                                 Intent intent;
                                 switch (val_user_level) {
