@@ -260,7 +260,7 @@ public class ReportClaimActivity extends AppCompatActivity {
         List<ModelQuotaLokWis> modelQuotaLokWisList = new ArrayList<>();
 
         String EP ="get_quota_lokasi_wisata";
-        String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue( getApplicationContext() );
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
                 response -> {
@@ -332,7 +332,7 @@ public class ReportClaimActivity extends AppCompatActivity {
         List<ModelQuotaLokWis> modelQuotaLokWisList = new ArrayList<>();
 
 
-        String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue( getApplicationContext() );
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
                 response -> {

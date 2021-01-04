@@ -2,7 +2,7 @@ package com.amanahgithawisata.aga.Helper;
 
 public class AppConfig {
 
-    public static String URL_LOGIN = "http://kaffah.amanahgitha.com/~androidwisata/?data=login_wisata/";
+    public static String URL_LOGIN = "http://"+ Help.domain_api() +"/~androidwisata/?data=login_wisata/";
 //    // FOR INPUT
 //    public static String URL_IPT_TIKET_TERJUAL = HOSTED+"do.php?input=penjualan_tiket";
 //    public static String URL_IPT_SERI_TIKET_TERJUAL = HOSTED+"do.php?input=penjualan_seri_tiket";

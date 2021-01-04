@@ -154,7 +154,7 @@ public class PopUpActivity extends AppCompatActivity {
                              String txt_id_karcis_tmbhn
     ){
 //        findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-        String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext() );
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
                 response -> {

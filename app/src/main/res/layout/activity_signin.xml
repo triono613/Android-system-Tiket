@@ -31,7 +31,8 @@
         android:paddingTop="10dp"
         android:src="@drawable/jelajah_wisata_rev"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:contentDescription="TODO" />
 </LinearLayout>
 
 
@@ -235,7 +236,8 @@
     android:layout_width="350dp"
     android:layout_height="500dp"
     android:src="@drawable/log_in"
-    tools:ignore="RtlHardcoded" />
+    tools:ignore="RtlHardcoded"
+    android:contentDescription="TODO" />
     </LinearLayout>
 
     <RelativeLayout

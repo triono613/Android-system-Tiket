@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -27,6 +28,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.amanahgithawisata.aga.Adapter.SessionManager;
+import com.amanahgithawisata.aga.Helper.Help;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -153,74 +155,52 @@ public class SigninActivity extends AppCompatActivity implements GoogleApiClient
 
         checkbox =  findViewById(R.id.checkbox);
 
-        checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (!isChecked){
-                    _txt_login_passwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                } else {
-                    _txt_login_passwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                }
+        checkbox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (!isChecked){
+                _txt_login_passwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            } else {
+                _txt_login_passwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
             }
         });
 
-        if( sessionManager.isLoggedIn() ){
+//        if( sessionManager.isLoggedIn() ){
 //            Intent intent;
-            /*
-            switch (sessionManager.getFlag())
-            {
-                case "1":
-                    intent = new Intent(SigninActivity.this, DashboardWisatawanOLdActivity.class);
-                    break;
-                case "0":
-                    intent = new Intent(SigninActivity.this, DashboardPetugasActivity.class);
-                    break;
-                default:
-                    intent = new Intent(SigninActivity.this,SigninActivity.class);
-                    break;
-            }
-            */
+//            switch ( sessionManager.getUserDetail().get(SessionManager.key_user_level) )
+//            {
+//                case "0":
+//                    if (Objects.equals(sessionManager.getUserDetail().get(SessionManager.key_kode_lokasi), "null")){
+//                        Toast.makeText(getApplication(),"Anda Tidak Berhak Login Di Aplikasi ini", Toast.LENGTH_LONG).show();
+//                        intent = new Intent(SigninActivity.this,SigninActivity.class);
+//
+//                    } else {
+//                        intent = new Intent(SigninActivity.this, DashboardWisatawanActivity.class);
+//                    }
+//                    break;
+//
+//                case "1":
+//                    intent = new Intent(SigninActivity.this, DashboardPetugasActivity.class);
+//                    break;
+//                default:
+//                    intent = new Intent(SigninActivity.this,SigninActivity.class);
+//                    break;
+//
+//            }
+//            startActivity(intent);
+//            finish();
+//        }
 
-            Intent intent;
-            switch (sessionManager.getFlag())
-            {
-                case "1":
-                    if (Objects.equals(sessionManager.getUserDetail().get(SessionManager.key_user_level), "0")){
-//                        intent = new Intent(SigninActivity.this, DashboardWisatawanOLdActivity.class);
-                        intent = new Intent(SigninActivity.this, DashboardWisatawanActivity.class);
-                        break;
-                    } else {
-                        intent = new Intent(SigninActivity.this, DashboardPetugasActivity.class);
-                        break;
-                    }
+        btn_login_user.setOnClickListener(v -> {
 
-                case "0":
-                    intent = new Intent(SigninActivity.this, DashboardPetugasActivity.class);
-                    break;
-                default:
-                    intent = new Intent(SigninActivity.this,SigninActivity.class);
-                    break;
-            }
-            startActivity(intent);
-            finish();
-        }
-
-        btn_login_user.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onClick(View v) {
-
-                if (isOnline()) {
-                    getDataPostVolley();
-                } else {
-                    try {
-                        Toast.makeText(SigninActivity.this, "Tidak Ada Koneksi Internet", Toast.LENGTH_LONG).show();
-                    } catch (Exception e) {
-                        Log.d("", "Show Dialog: " + e.getMessage());
-                    }
+            if (isOnline()) {
+                getDataPostVolley();
+            } else {
+                try {
+                    Toast.makeText(SigninActivity.this, "Tidak Ada Koneksi Internet", Toast.LENGTH_LONG).show();
+                } catch (Exception e) {
+                    Log.d("", "Show Dialog: " + e.getMessage());
                 }
-
             }
+
         });
 
         _linear_lupa_password.setOnClickListener(v -> {
@@ -286,14 +266,11 @@ public class SigninActivity extends AppCompatActivity implements GoogleApiClient
 
     private void getDataPostVolley() {
         EditText loginEmail, loginPsswd;
-
         loginEmail = (EditText) findViewById(R.id.txt_login_email);
         loginPsswd = (EditText) findViewById(R.id.txt_login_passwd);
 
-
         final String email_val = loginEmail.getText().toString();
         final String passwd_val = loginPsswd.getText().toString();
-
 
 //        if  (!Help.EMAIL_ADDRESS_PATTERN.matcher(email_val).matches() ) {
 //            loginEmail.setError("Alamat Email Invalid!");
@@ -313,114 +290,116 @@ public class SigninActivity extends AppCompatActivity implements GoogleApiClient
         btn_login_user.setEnabled(false);
         btn_login_user.setText("Loading...");
 
-        String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data=login_wisata";
+
+        String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data=login_wisata";
         final RequestQueue requestQueue = Volley.newRequestQueue(SigninActivity.this);
 
+        Log.i("","server_url= "+server_url);
+
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-                        try {
-                            JSONObject jObj = new JSONObject(response);
-                            Boolean sukses = jObj.getBoolean("success");
+                (Response.Listener<String>) response -> {
+                    findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+                    try {
+                        JSONObject jObj = new JSONObject(response);
+                        Boolean sukses = jObj.getBoolean("success");
 
-                            Log.i("triono ","jObj "+ jObj);
-                            Log.i("triono ","sukses "+ sukses);
+                        Log.i(" ","jObj "+ jObj);
+                        Log.i(" ","sukses "+ sukses);
 
-                            btn_login_user.setEnabled(true);
-                            btn_login_user.setText("LOGIN");
-                            btn_login_user.refreshDrawableState();
+                        btn_login_user.setEnabled(true);
+                        btn_login_user.setText("LOGIN");
+                        btn_login_user.refreshDrawableState();
 
-                            if(sukses) {
+                        if(sukses) {
+                            String data = jObj.getString("data");
+                            JSONObject jObj_child = new JSONObject(data);
+                            Log.i("", "data login=" + data);
+                            Boolean is_login = true;
+                            String val_id = jObj_child.getString("id");
+                            String val_email = jObj_child.getString("alamat_email");
+                            String val_flag = jObj_child.getString("flag");
+                            String val_name = jObj_child.getString("full_name");
+                            String val_ket = jObj_child.getString("keterangan");
+                            String val_kode_lokasi = jObj_child.getString("kode_lokasi");
+                            String val_nama_lokasi = jObj_child.getString("nama_lokasi");
+                            String val_tgl_lahir = jObj_child.getString("tgl_lahir");
+                            String val_jenis_kelamin = jObj_child.getString("jenis_kelamin");
+                            String val_sellular_no = jObj_child.getString("sellular_no");
+                            String val_user_level = jObj_child.getString("user_level");
+                            String val_kode_pintu = jObj_child.getString("kode_pintu");
 
-                                String data = jObj.getString("data");
-                                JSONObject jObj_child = new JSONObject(data);
-
-                                Log.i("triono", "sukses= " + sukses);
-                                Log.i("triono", "data ===" + data);
-
-                                Boolean is_login = true;
-                                String val_id = jObj_child.getString("id");
-                                String val_email = jObj_child.getString("alamat_email");
-                                String val_flag = jObj_child.getString("flag");
-                                String val_name = jObj_child.getString("full_name");
-                                String val_ket = jObj_child.getString("keterangan");
-                                String val_kode_lokasi = jObj_child.getString("kode_lokasi");
-                                String val_nama_lokasi = jObj_child.getString("nama_lokasi");
-                                String val_tgl_lahir = jObj_child.getString("tgl_lahir");
-                                String val_jenis_kelamin = jObj_child.getString("jenis_kelamin");
-                                String val_sellular_no = jObj_child.getString("sellular_no");
-                                String val_user_level = jObj_child.getString("user_level");
-                                String val_kode_pintu = jObj_child.getString("kode_pintu");
-
-                                Log.i("SigninActivity", "val_flag ===" + val_flag);
-                                Log.i("SigninActivity", "val_kode_lokasi ===" + val_kode_lokasi);
-
-                                Log.i("SigninActivity", "jObj_child.getString(flag) =" + jObj_child.getString("flag"));
-                                Log.i("SigninActivity", "val_email ===" + val_email);
-
-                                if (jObj_child.getString("flag").equals("0")) {
-
-                                    Intent i = new Intent(SigninActivity.this, SuccessRegistrasiWisatawanActivity.class);
-                                    i.putExtra("result_dt_ket",val_ket);
-                                    i.putExtra("result_dt_email", val_email);
-                                    i.putExtra("result_dt_berhasil", false);
-                                    i.putExtra("result_dt_flag", "flagSignin");
-                                    startActivity(i);
+                            Log.i("SigninActivity", "val_flag ===" + val_flag);
+                            Log.i("SigninActivity", "val_kode_lokasi ===" + val_kode_lokasi);
+                            Log.i("SigninActivity", "jObj_child.getString(flag) =" + jObj_child.getString("flag"));
+                            Log.i("SigninActivity", "val_email ===" + val_email);
+                            Log.i("SigninActivity", "val_kode_lokasi ===" + val_kode_lokasi);
+                            Log.i("SigninActivity", "val_user_level ===" + val_user_level);
 
 
-                                } else if (jObj_child.getString("flag").equals("1")) {
 
-                                    sessionManager.createSessionUserLogin( val_email,
-                                                                            val_flag,
-                                                                            val_name,
-                                                                            val_id,
-                                                                            val_ket,
-                                                                            val_kode_lokasi,
-                                                                            val_nama_lokasi,
-                                                                            val_tgl_lahir,
-                                                                            val_jenis_kelamin,
-                                                                            val_sellular_no,
-                                                                            val_user_level,
-                                                                            val_kode_pintu);
+//                            Intent intent = null;
+//                            switch ( val_user_level )
+//                            {
+//                                case "0":
+//                                    boolean b = val_kode_lokasi == "null"
+//                                            || val_kode_lokasi.isEmpty()
+//                                            || val_kode_lokasi.equals("")
+//                                            || val_kode_lokasi == "";
+//                                    if(b
+//                                        ) {
+//                                        Toast.makeText(getApplication(),"Anda Tidak Berhak Login Di Aplikasi ini", Toast.LENGTH_LONG).show();
+//                                        intent = new Intent(SigninActivity.this,SigninActivity.class);
+//                                    }
+//
+//                                    else  {
+//                                        intent = new Intent(SigninActivity.this, DashboardWisatawanActivity.class);
+//                                    }
+//                                    break;
+//
+//                                default:
+//                                    intent = new Intent(SigninActivity.this,SigninActivity.class);
+//                                    break;
+//                            }
 
-                                    if (jObj_child.getString("kode_lokasi").equals("null")) {
 
-                                        /*  activity for Wisatawan */
-                                        Log.i("SigninActivity", "kode_lokasi ===" + jObj_child.getString("kode_lokasi"));
-//                                                Toast.makeText(SigninActivity.this,"kode_lokasi equals null= "+ jObj_child.getString("kode_lokasi"), Toast.LENGTH_LONG).show();
+                                Intent intent;
+                                switch (val_user_level) {
+                                    case "0":
+                                        switch (val_kode_lokasi) {
+                                            case "null":
+                                                Toast toast= Toast.makeText(getApplicationContext(),
+                                                        "Anda Tidak Berhak Login Di Aplikasi ini", Toast.LENGTH_LONG);
+                                                toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
+                                                toast.show();
+                                                break;
+                                            default:
+                                                intent = new Intent(SigninActivity.this, DashboardWisatawanActivity.class);
+                                                sessionManager.createSessionUserLogin(val_email, val_flag, val_name, val_id, val_ket, val_kode_lokasi, val_nama_lokasi, val_tgl_lahir, val_jenis_kelamin, val_sellular_no, val_user_level, val_kode_pintu);
+                                                startActivity(intent);
+                                                finish();
+                                                break;
+                                        }
+                                        break;
 
-                                        Intent ii = new Intent(SigninActivity.this, DashboardWisatawanActivity.class);
-                                        ii.putExtra("result_dt_ket", val_ket);
-                                        ii.putExtra("result_dt_email", val_email);
-                                        ii.putExtra("result_dt_berhasil", true);
-                                        ii.putExtra("result_dt_flag", "");
-                                        startActivity(ii);
-                                        overridePendingTransition(R.anim.app_getstarted,R.anim.btt);
-                                    } else {
-                                        /*  activity for Petugas */
-
-//                                        Toast.makeText(SigninActivity.this,"kode_lokasi not null= "+ jObj_child.getString("kode_lokasi"), Toast.LENGTH_LONG).show();
-
-                                        Intent iii = new Intent(SigninActivity.this, DashboardPetugasActivity.class);
-                                        iii.putExtra("result_dt_ket", val_ket);
-                                        iii.putExtra("result_dt_email", val_email);
-                                        iii.putExtra("result_dt_berhasil", true);
-                                        iii.putExtra("result_dt_flag", "");
-                                        startActivity(iii);
-                                        overridePendingTransition(R.anim.app_getstarted,R.anim.btt);
-                                    }
+                                    case "1":
+                                        intent = new Intent(SigninActivity.this, DashboardPetugasActivity.class);
+                                        sessionManager.createSessionUserLogin(val_email, val_flag, val_name, val_id, val_ket, val_kode_lokasi, val_nama_lokasi, val_tgl_lahir, val_jenis_kelamin, val_sellular_no, val_user_level, val_kode_pintu);
+                                        startActivity(intent);
+                                        finish();
+                                        break;
+                                    default:
+                                        new Intent(SigninActivity.this, SigninActivity.class);
+                                        finish();
+                                        break;
                                 }
-                            }
-
-                        } catch (JSONException e) {
-                            Log.i("triono", "error ===" + e.toString() );
-                            e.printStackTrace();
                         }
 
-                        requestQueue.stop();
+                    } catch (JSONException e) {
+                        Log.i("", "error ===" + e.toString() );
+                        e.printStackTrace();
                     }
+
+                    requestQueue.stop();
                 }, (Response.ErrorListener) error -> {
                     Log.i("", "response =" + error.toString());
     //                Toast.makeText(SigninActivity.this,"Kesalahan Network= "+ error.toString(), Toast.LENGTH_LONG).show();
@@ -428,26 +407,15 @@ public class SigninActivity extends AppCompatActivity implements GoogleApiClient
                     btn_login_user.setEnabled(true);
                     btn_login_user.setText("Login");
 
-                    AlertDialog.Builder builder = new AlertDialog.Builder(SigninActivity.this);
-                    builder.setMessage("Terjadi Gangguan, Refresh ")
-                            .setCancelable(false)
-                            .setPositiveButton("Ya", (dialog, id) -> {
-                                newPostLogin();
-                            })
-                            .setNegativeButton("Tidak", (dialog, id) -> dialog.cancel());
-                    AlertDialog alert = builder.create();
-                    alert.show();
-
                     error.printStackTrace();
                     requestQueue.stop();
                 }
         ){
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams() {
                 Map<String, String> obj = new HashMap<String, String>();
 
                 EditText loginEmail, loginPsswd ;
-                Spinner spinnerLokWisata;
 
                 loginEmail = (EditText) findViewById(R.id.txt_login_email);
                 loginPsswd = (EditText) findViewById(R.id.txt_login_passwd);

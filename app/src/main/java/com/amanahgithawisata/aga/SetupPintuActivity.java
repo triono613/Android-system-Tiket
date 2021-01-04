@@ -122,7 +122,7 @@ public class SetupPintuActivity extends AppCompatActivity {
 
     private void spinnerLokWisata(String EP){
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-        String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue(SetupPintuActivity.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
                 response -> {
@@ -214,7 +214,7 @@ public class SetupPintuActivity extends AppCompatActivity {
 
     private void spinnerLokPintu(String EP,String KSDA){
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-        String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue(SetupPintuActivity.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
                 response -> {
@@ -299,7 +299,7 @@ public class SetupPintuActivity extends AppCompatActivity {
 
     private void sendData(String EP,String KSDA){
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-        String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue(SetupPintuActivity.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
                 new Response.Listener<String>() {

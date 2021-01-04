@@ -156,7 +156,7 @@ public class EditKarcisStatusWisatawanActivity extends AppCompatActivity {
     public void changeVa(String EP,String va){
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
 
-        String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue(EditKarcisStatusWisatawanActivity.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
                 new Response.Listener<String>() {
@@ -253,7 +253,7 @@ public class EditKarcisStatusWisatawanActivity extends AppCompatActivity {
 
     private void getDataNova(String EP,String NOVA){
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-        String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue(EditKarcisStatusWisatawanActivity.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
                 new Response.Listener<String>() {
@@ -403,7 +403,7 @@ public class EditKarcisStatusWisatawanActivity extends AppCompatActivity {
 
     private void spinnerLokWisata(String EP,String VA_NO, String KDX){
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-        String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue(EditKarcisStatusWisatawanActivity.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
                 new Response.Listener<String>() {
@@ -493,7 +493,7 @@ public class EditKarcisStatusWisatawanActivity extends AppCompatActivity {
 
     private void spinnerJnsByrwstwn(String EP,String KL){
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-        String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue(EditKarcisStatusWisatawanActivity.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
                 response -> {

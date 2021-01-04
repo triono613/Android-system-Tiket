@@ -283,7 +283,8 @@
                         android:visibility="gone"
                         android:id="@+id/_tv_img_card_karcis_tmbhn"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:contentDescription="TODO" />
                     <Button
                         android:id="@+id/buttonH_card_karcis_tmbhn"
                         android:layout_width="100dp"

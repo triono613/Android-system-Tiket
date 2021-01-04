@@ -5,12 +5,14 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -18,9 +20,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
@@ -123,6 +127,8 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
     RadioButton rb;
     ProgressBar progress_bar_popup;
     ShimmerFrameLayout shimmer_layout_popup;
+    ViewGroup rg_cara_bayar;
+    RadioButton rbNew;
 
 //    CustomAdapterViewPagerLokasiWisata customAdapterViewPagerLokasiWisata;
     CustomAdapterViewPagerLokasiWisata _adapter_1 = new CustomAdapterViewPagerLokasiWisata();
@@ -198,6 +204,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
         ClearCalculateKarcis();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -219,6 +226,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
         _txt_ttl_tmbhn = (TextView) findViewById(R.id.txt_ttl_tmbhn);
         _txt_grand_ttl = (TextView) findViewById(R.id.txt_grand_ttl);
         _btnH = (Button) findViewById(R.id.buttonH);
+        rg_cara_bayar = (ViewGroup) findViewById(R.id.rg_cara_bayar);
 
         _txt_kdlokwis = findViewById(R.id.txt_kdlokwis);
         _txt_nmlokwis = findViewById(R.id.txt_nmlokwis);
@@ -584,29 +592,42 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
         _txt_ttl_tmbhn.setText("0");
         _txt_grand_ttl.setText("0");
 
+        @SuppressLint("CutPasteId") RadioGroup rg_cara_bayarn = (RadioGroup)findViewById(R.id.rg_cara_bayar);
 
-        String ksda_par;
+        final String[] mode_pembayaran = new String[1];
+        final String[] nama_pembayaran = new String[1];
+        rg_cara_bayarn.setOnCheckedChangeListener((group, checkedId) -> {
+            rbNew = findViewById(checkedId);
+            boolean isChecked = rbNew.isChecked();
+
+
+            if( isChecked ) {
+                Log.i("","isChecked "+rbNew.getText() );
+                Log.i("","isChecked "+rbNew.getId() );
+//                Log.i("","id txt "+ txtId );
+                mode_pembayaran[0] = String.valueOf(rbNew.getId());
+                nama_pembayaran[0] = String.valueOf(rbNew.getText());
+            } else {
+                mode_pembayaran[0] = "";
+                nama_pembayaran[0] = "";
+            }
+        });
+
         String kode_pintu;
         String sess_ksda_par;
 
         _txt_jml_krcs_tmbhn.performClick();
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            getRbCaraBayar("wisatawan_mode_pembayaran",mode_pembayaran[0],"1");
+        }
+
         /*  this when first time load activity PesanKarcis*/
         if( result_dt_kodeKarcis == null &&  result_dt_kd_lokwis_adapter == null && result_dt_judul_pintu == null && result_dt_kdlokPintu2 == null && result_dt_kodeKarcis_kt == null) {
 
             Log.i("", "result_dt_kd_lokwis_adapter && result_dt_judul_pintu null = " + result_dt_kd_lokwis_adapter + " "+result_dt_judul_pintu+ " "+result_dt_kdlokPintu2 );
-
             _txt_tgl_kunjungan_order.setText(result_dt_tgl_kunj_lokwis);
-
             horizontalLokasiWisata("daftar_lokasi_wisata","","","","");
-
-//            ksda_par ="0001";
-//            horizontalLokasiPintu("daftar_lokasi_pintu", ksda_par, getApplicationContext(),"","","null");
-
-            kode_pintu ="00011";
-
-//            horizontalKarcisWisatawanUtamaFirst("daftar_karcis_wisatawan_utama",kode_pintu);
-//            horizontalKarcisWisatawanTambahanFirst("daftar_karcis_wisatawan_tambahan",kode_pintu);
 
         }
         /*  this after click adapter Entity Lokasi Wisata */
@@ -1032,7 +1053,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
                 int mYear = c.get(Calendar.YEAR);
                 int mMonth = c.get(Calendar.MONTH);
                 int mDay = c.get(Calendar.DAY_OF_MONTH);
-                DatePickerDialog datePickerDialog = new DatePickerDialog(v13.getContext(),
+                @SuppressLint("SetTextI18n") DatePickerDialog datePickerDialog = new DatePickerDialog(v13.getContext(),
                         (view, year, monthOfYear, dayOfMonth) -> {
                             @SuppressLint("SimpleDateFormat") SimpleDateFormat fr = new SimpleDateFormat("dd-MM-yyyy");
                             _txt_tgl_kunjungan_2_order.setText( year + "-" + (monthOfYear + 1)  + "-" +dayOfMonth );
@@ -1063,7 +1084,8 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
                 _txt_tgl_kunjungan_2_order.requestFocus();
             }
             else {
-                quotaTwaForBtnOrderWist("quota_per_twa",key_kd_lokwis,tgl_kunj_val1,tgl_kunj_val2);
+                Log.i("","nama_pembayaran[0]="+nama_pembayaran[0]);
+                quotaTwaForBtnOrderWist("quota_per_twa",key_kd_lokwis,tgl_kunj_val1,tgl_kunj_val2,nama_pembayaran[0]);
             }
         });
 
@@ -1484,7 +1506,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
 
     private void horizontalKarcisWisatawanUtamaFirst (String EP,String Lksi){
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-        String server_url_s2 = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        String server_url_s2 = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue_s2 = Volley.newRequestQueue(getApplicationContext() );
         StringRequest stringRequest_s2 = new StringRequest(Request.Method.POST, server_url_s2,
                 response -> {
@@ -1592,7 +1614,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
 
     private void horizontalKarcisWisatawanTambahanFirst (String EP,String LP){
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-        String server_url_s2 = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        String server_url_s2 = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue_s2 = Volley.newRequestQueue(getApplicationContext() );
         StringRequest stringRequest_s2 = new StringRequest(Request.Method.POST, server_url_s2,
                 response -> {
@@ -1680,7 +1702,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
 
     private void horizontalKarcisWisatawanTambahanFirstforKT (String EP,String LP){
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-        String server_url_s2 = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        String server_url_s2 = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue_s2 = Volley.newRequestQueue(getApplicationContext() );
         StringRequest stringRequest_s2 = new StringRequest(Request.Method.POST, server_url_s2,
                 response -> {
@@ -1816,7 +1838,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
 
     private void horizontalKarcisWisatawanTambahanFirstforLokWis (String EP,String LP){
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-        String server_url_s2 = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        String server_url_s2 = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue_s2 = Volley.newRequestQueue(getApplicationContext() );
         StringRequest stringRequest_s2 = new StringRequest(Request.Method.POST, server_url_s2,
                 response -> {
@@ -1952,7 +1974,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
 
     private void horizontalKarcisWisatawanUtamaFirstForLoKwIS (String EP,String Lksi) {
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-        String server_url_s2 = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        String server_url_s2 = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue_s2 = Volley.newRequestQueue(getApplicationContext() );
         StringRequest stringRequest_s2 = new StringRequest(Request.Method.POST, server_url_s2,
                 response -> {
@@ -2065,7 +2087,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
 
     private void horizontalKarcisWisatawanUtama (String EP,String LP){
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-        String server_url_s2 = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        String server_url_s2 = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue_s2 = Volley.newRequestQueue(getApplicationContext() );
         StringRequest stringRequest_s2 = new StringRequest(Request.Method.POST, server_url_s2,
                 response -> {
@@ -2171,7 +2193,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
 
     private void horizontalKarcisWisatawanTambahan (String EP,String LP){
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-        String server_url_s2 = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        String server_url_s2 = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue_s2 = Volley.newRequestQueue(getApplicationContext() );
         StringRequest stringRequest_s2 = new StringRequest(Request.Method.POST, server_url_s2,
                 response -> {
@@ -2255,7 +2277,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
     private void horizontalLokasiWisata(String EP,String jdl, String text,String alamat,String kota){
 
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-        String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue( getApplicationContext() );
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
                 response -> {
@@ -2345,7 +2367,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> obj = new HashMap<String, String>();
-                obj.put("lokasi", "27");
+                obj.put("lokasi", "");
                 return obj;
             }
         };
@@ -2360,7 +2382,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
     public void horizontalLokasiPintu(String EP, String KSDA_PAR, Context par, String kdLokOld, String nmLokOld, String url_img_lokwis){
 
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-        String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext() );
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
                 response -> {
@@ -2458,7 +2480,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
     public void horizontalLokasiPintuForWisata(String EP, String KSDA_PAR, Context par, String kdLokOld, String nmLokOld, String url_img_lokwis){
 
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-        String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext() );
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
                 response -> {
@@ -2675,9 +2697,9 @@ public long get_selisih_day() throws ParseException {
 
 }
 
-    private void inputKarcisWisatawan(String EP, long selisih_hari){
+    private void inputKarcisWisatawan(String EP, long selisih_hari, String nama_pembayaran_par ) {
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-        String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue(PesanKarcisWisatawanActivity.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
                 (Response.Listener<String>) response -> {
@@ -2710,8 +2732,8 @@ public long get_selisih_day() throws ParseException {
                                 String _menit_valid = jsonObject1.getString("menit_valid");
                                 String _tgl_valid = jsonObject1.getString("tgl_valid");
                                 String _tagihan_total = jsonObject1.getString("tagihan_total");
-                                String _nama_lokasi = jsonObject1.getString("nama_lokasi");
-                                String _jumlah_tambahan = jsonObject1.getString("jumlah_tambahan");
+//                                String _nama_lokasi = jsonObject1.getString("nama_lokasi");
+//                                String _jumlah_tambahan = jsonObject1.getString("jumlah_tambahan");
 
                                 final String tgl_kunjungan_sd =  _txt_tgl_kunjungan_2_order.getText().toString().trim();
 
@@ -2732,11 +2754,12 @@ public long get_selisih_day() throws ParseException {
                                 i.putExtra("_tgl_valid", _tgl_valid);
                                 i.putExtra("_tagihan_total", _tagihan_total);
                                 i.putExtra("_txt_nmlokwis", _txt_nmlokwis.getText().toString());
-                                i.putExtra("_jumlah_tambahan", _jumlah_tambahan);
-                                i.putExtra("_nama_lokasi", _nama_lokasi);
+                                i.putExtra("_jumlah_tambahan", _txt_jml_krcs_tmbhn.getText().toString());
+//                                i.putExtra("_nama_lokasi", "");
                                 i.putExtra("_tgl_kunjungan_sd", tgl_kunjungan_sd);
                                 i.putExtra("_selisih_hari", String.valueOf(selisih_hari) );
                                 i.putExtra("result_dt_berhasil", berhasil);
+                                i.putExtra("_nama_pembayaran", nama_pembayaran_par );
                                 i.putExtra("result_dt_flag", "flagPesanKarcisWisatawan");
                                 startActivity(i);
                             }
@@ -2886,7 +2909,7 @@ public long get_selisih_day() throws ParseException {
     private void quotaTwa(String EP,String KSDA, String TGL){
 
                             findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-                            String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+                            String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
                             final RequestQueue requestQueue = Volley.newRequestQueue(PesanKarcisWisatawanActivity.this);
                             StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
                                     (Response.Listener<String>) response -> {
@@ -2959,10 +2982,10 @@ public long get_selisih_day() throws ParseException {
         requestQueue.add(stringRequest);
     }
 
-    private void quotaTwaForBtnOrderWist(String EP,String KSDA, String TGL, String TGL2){
+    private void quotaTwaForBtnOrderWist(String EP,String KSDA, String TGL, String TGL2, String nama_pembayaran_par ){
 
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-        String server_url_q = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        String server_url_q = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue_q = Volley.newRequestQueue(PesanKarcisWisatawanActivity.this);
 
         StringRequest stringRequest_q = new StringRequest(Request.Method.POST, server_url_q,
@@ -2997,28 +3020,11 @@ public long get_selisih_day() throws ParseException {
                                 startActivity(i);
 
                             } else {
-//                                String dateStr1 = "2020-11-15";
-//                                String dateStr2 = "2020-11-20";
-//                                String dateStr1 = TGL;
-//                                String dateStr2 = TGL2;
-//
-//                                 @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//                                 Date dateOne = sdf.parse(dateStr1);
-//                                 Date dateTwo = sdf.parse(dateStr2);
-//
-//                                long timeOne = dateOne.getTime();
-//                                long timeTwo = dateTwo.getTime();
-//                                long oneDay = 1000 * 60 * 60 * 24;
-//                                long selisih_hari = (timeTwo - timeOne) / oneDay;
-//
-//                                Log.i("","selisih_hari "+selisih_hari);
-//                                Log.i("","TGL "+TGL);
-//                                Log.i("","TGL2 "+TGL2);
 
                                 long selisih_day = get_selisih_day();
                                 Log.i("","selisih_day "+selisih_day);
 
-                                inputKarcisWisatawan("input_wisatawan",selisih_day);
+                                inputKarcisWisatawan("new_input_wisatawan",selisih_day, nama_pembayaran_par);
                             }
                         }
 
@@ -3052,6 +3058,86 @@ public long get_selisih_day() throws ParseException {
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         stringRequest_q.setRetryPolicy(policy);
         requestQueue_q.add(stringRequest_q);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void getRbCaraBayar(String EP,String mode_pembayaran_par, String def_value){
+
+        findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
+        String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
+        final RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
+                response -> {
+                    Log.i("tag", "response getRbCaraBayar =" + response );
+                    try {
+                        if( Help.isJSONValid(response) ){
+                            JSONObject jsonObject = new JSONObject(response);
+                            findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+                            if( jsonObject.getBoolean("success") ) {
+
+                                JSONArray jsonArray = jsonObject.getJSONArray("data");
+                                for (int i = 0; i <jsonArray.length();i++ ) {
+                                    JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+
+                                    String mode_pembayaran =  jsonObject1.getString("mode_pembayaran");
+                                    String nama_pembayaran =  jsonObject1.getString("nama_pembayaran");
+//                                            String mode_pembayaran_par = "2";
+
+                                    Log.i("tag","mode_pembayaran= "+mode_pembayaran);
+                                    Log.i("tag","nama_pembayaran= "+nama_pembayaran);
+                                    sessionManager.createSessionJnsByr(mode_pembayaran, nama_pembayaran);
+
+                                    RadioButton button = new RadioButton(this);
+                                    button.setId(Integer.parseInt(mode_pembayaran));
+                                    button.setText(nama_pembayaran);
+                                    button.setBackgroundResource(R.drawable.cardview);
+                                    button.setWidth(700);
+                                    rg_cara_bayar.addView(button);
+
+                                    if( def_value != null ){
+                                        if( i == 0 ) {
+                                            button.setChecked(true);
+                                            button.setSelected(true);
+                                        }
+                                    }
+
+                                    if( mode_pembayaran.equals(mode_pembayaran_par)){
+                                        button.setChecked(true);
+                                        button.setSelected(true);
+                                    }
+
+                                    Log.i("","def_value "+  def_value);
+                                    Log.i("","rdbtn.getId() "+button.getId());
+                                    Log.i("","rdbtn.getText() "+button.getText());
+                                }
+                            }
+                        }
+
+                    } catch (JSONException e) {
+                        Log.i("", "error ===" + e.toString() );
+                        e.printStackTrace();
+                    }
+                    requestQueue.stop();
+                }, error -> {
+            error.printStackTrace();
+            requestQueue.stop();
+        }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> obj = new HashMap<String, String>();
+                final String key_email =  sessionManager.getUserDetail().get(SessionManager.key_email).trim();
+                obj.put("kode_ksda", "");
+                return obj;
+            }
+        };
+        int socketTimeout = 0;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        stringRequest.setRetryPolicy(policy);
+        requestQueue.add(stringRequest);
+
+
+
     }
 
 }

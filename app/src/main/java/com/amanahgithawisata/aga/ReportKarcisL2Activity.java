@@ -177,7 +177,7 @@ public class ReportKarcisL2Activity extends AppCompatActivity implements DatePic
 
             progressBar.setVisibility(View.VISIBLE);
             String EP = "daftar_lokasi_pintu";
-            String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+            String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
             final RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
             StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
                     response -> {
@@ -343,7 +343,7 @@ public class ReportKarcisL2Activity extends AppCompatActivity implements DatePic
 
             progressBar.setVisibility(View.VISIBLE);
             String EP = "daftar_lokasi_pintu";
-            String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+            String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
             final RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
             StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
                     response -> {
@@ -537,7 +537,7 @@ public class ReportKarcisL2Activity extends AppCompatActivity implements DatePic
         List<ModelReportKarcis> modelReportKarcisList = new ArrayList<>();
 
 
-        String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue( getApplicationContext() );
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
                 response -> {
@@ -666,7 +666,7 @@ public class ReportKarcisL2Activity extends AppCompatActivity implements DatePic
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
         List<ModelReportKarcis> modelReportKarcisList = new ArrayList<>();
 
-        String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue( getApplicationContext() );
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
                 response -> {

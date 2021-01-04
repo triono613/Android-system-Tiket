@@ -89,7 +89,8 @@
                         android:layout_height="64dp"
                         android:layout_gravity="center"
                         android:background="@drawable/circlebackground1"
-                        android:src="@drawable/ic_account_balance_wallet_black_24dp" />
+                        app:srcCompat="@drawable/ic_account_balance_wallet_black_24dp"
+                        android:contentDescription="TODO" />
 
                     <LinearLayout
                         android:layout_gravity="center"
@@ -138,7 +139,8 @@
                         android:layout_height="64dp"
                         android:layout_gravity="center"
                         android:background="@drawable/circlebackground5"
-                        android:src="@drawable/ic_transfer_within_a_station_black_24dp" />
+                        app:srcCompat="@drawable/ic_transfer_within_a_station_black_24dp"
+                        android:contentDescription="TODO" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -159,7 +161,7 @@
 
                         <TextView
                             android:visibility="gone"
-                            android:id="@+id/text_dashboard_scan"
+                            android:id="@+id/text_dashboard_scan_quota"
                             android:layout_width="wrap_content"
                             android:layout_height="2dp"/>
 
@@ -195,7 +197,8 @@
                         android:layout_marginBottom="10dp"
                         android:background="@drawable/circlebackground3"
                         android:padding="10dp"
-                        android:src="@drawable/ic_speaker_group_black_24dp" />
+                        app:srcCompat="@drawable/ic_speaker_group_black_24dp"
+                        android:contentDescription="TODO" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -233,7 +236,8 @@
                                 android:elevation="4dp"
                                 android:src="@drawable/bell2"
                                 android:textAlignment="textEnd"
-                                tools:ignore="RtlCompat" />
+                                tools:ignore="RtlCompat"
+                                android:contentDescription="TODO" />
                         </LinearLayout>
 
                         <TextView
@@ -267,7 +271,8 @@
                         android:layout_height="64dp"
                         android:layout_gravity="center"
                         android:background="@drawable/circlebackground3"
-                        android:src="@drawable/ic_speaker_group_black_24dp" />
+                        app:srcCompat="@drawable/ic_speaker_group_black_24dp"
+                        android:contentDescription="TODO" />
 
 
 
@@ -331,7 +336,8 @@
                         android:layout_height="64dp"
                         android:layout_gravity="center"
                         android:background="@drawable/circlebackground6"
-                        android:src="@drawable/ic_event_note_black_24dp" />
+                        android:src="@drawable/ic_event_note_black_24dp"
+                        android:contentDescription="TODO" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -380,7 +386,8 @@
                         android:layout_height="64dp"
                         android:layout_gravity="center"
                         android:background="@drawable/circlebackground5"
-                        android:src="@drawable/ic_assignment_returned_black_24dp" />
+                        app:srcCompat="@drawable/ic_assignment_returned_black_24dp"
+                        android:contentDescription="TODO" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -429,7 +436,8 @@
                         android:layout_height="64dp"
                         android:layout_gravity="center"
                         android:background="@drawable/circlebackground1"
-                        android:src="@drawable/lock2" />
+                        android:src="@drawable/lock2"
+                        android:contentDescription="TODO" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -476,7 +484,8 @@
                     android:layout_height="64dp"
                     android:layout_gravity="center"
                     android:background="@drawable/circlebackground3"
-                    android:src="@drawable/ic_center_focus_weak_black_24dp" />
+                    android:src="@drawable/ic_center_focus_weak_black_24dp"
+                    android:contentDescription="TODO" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -528,7 +537,8 @@
                         android:layout_height="64dp"
                         android:layout_gravity="center"
                         android:background="@drawable/circlebackground1"
-                        android:src="@drawable/ic_assessment_black_24dp" />
+                        app:srcCompat="@drawable/ic_assessment_black_24dp"
+                        android:contentDescription="TODO" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -549,7 +559,7 @@
 
                         <TextView
                             android:visibility="gone"
-                            android:id="@+id/text_dashboard_scan"
+                            android:id="@+id/text_dashboard_scan_l2"
                             android:layout_width="wrap_content"
                             android:layout_height="2dp"/>
 
@@ -580,7 +590,8 @@
                         android:layout_height="64dp"
                         android:layout_gravity="center"
                         android:background="@drawable/circlebackground6"
-                        android:src="@drawable/ic_assessment_black_24dp" />
+                        app:srcCompat="@drawable/ic_assessment_black_24dp"
+                        android:contentDescription="TODO" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -601,7 +612,7 @@
 
                         <TextView
                             android:visibility="gone"
-                            android:id="@+id/text_dashboard_scan"
+                            android:id="@+id/text_dashboard_scan_l3"
                             android:layout_width="wrap_content"
                             android:layout_height="2dp"/>
 
@@ -632,7 +643,8 @@
                         android:layout_height="64dp"
                         android:layout_gravity="center"
                         android:background="@drawable/circlebackground2"
-                        android:src="@drawable/ic_assessment_black_24dp" />
+                        app:srcCompat="@drawable/ic_assessment_black_24dp"
+                        android:contentDescription="TODO" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -653,7 +665,7 @@
 
                         <TextView
                             android:visibility="gone"
-                            android:id="@+id/text_dashboard_scan"
+                            android:id="@+id/text_dashboard_scan_l4"
                             android:layout_width="wrap_content"
                             android:layout_height="2dp"/>
 

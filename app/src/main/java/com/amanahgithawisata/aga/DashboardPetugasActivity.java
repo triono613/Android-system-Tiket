@@ -134,11 +134,9 @@ public class DashboardPetugasActivity extends AppCompatActivity implements  ZXin
                 AlertDialog.Builder builder = new AlertDialog.Builder(DashboardPetugasActivity.this);
                 builder.setMessage("Connection id poor ?")
                         .setCancelable(false)
-                        .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
+                        .setPositiveButton("Ya", (dialog, id) -> {
 //                                DashboardPetugasActivity.this.onSuperBackPressed();
 //                                sessionManager.logout();
-                            }
                         })
                         .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
@@ -339,81 +337,72 @@ public class DashboardPetugasActivity extends AppCompatActivity implements  ZXin
 
     private void checkQuotaTwa(String EP,String KSDA, String _flag){
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-        String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue(DashboardPetugasActivity.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
-                new Response.Listener<String>() {
-                    @SuppressLint("SetTextI18n")
-                    @Override
-                    public void onResponse(String response) {
-                        Log.i("tag", "response checkQuotaTwa =" + response );
-                        try {
-                            findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-                            if( Help.isJSONValid(response) ){
+                response -> {
+                    Log.i("tag", "response checkQuotaTwa =" + response );
+                    try {
+                        findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+                        if( Help.isJSONValid(response) ){
 
-                                JSONObject jsonObject = new JSONObject(response);
-                                String data = jsonObject.getString("data");
-                                JSONObject jsonObject1 = new JSONObject(data);
-                                boolean _berhasil = jsonObject1.getBoolean("berhasil");
+                            JSONObject jsonObject = new JSONObject(response);
+                            String data = jsonObject.getString("data");
+                            JSONObject jsonObject1 = new JSONObject(data);
+                            boolean _berhasil = jsonObject1.getBoolean("berhasil");
 
 //                                if( _berhasil ) {
-                                String  _id = jsonObject1.getString("id");
-                                int _quota = jsonObject1.getInt("quota");
-                                String _ket = jsonObject1.getString("keterangan");
-                                Log.i("","_keterangan "+_ket);
+                            String  _id = jsonObject1.getString("id");
+                            int _quota = jsonObject1.getInt("quota");
+                            String _ket = jsonObject1.getString("keterangan");
+                            Log.i("","_keterangan "+_ket);
 //                                Log.i("","_berhasil "+_berhasil);
 //                                Log.i("","qouta "+_quota);
 //                                Log.i("","_keterangan "+_keterangan);
 
 //                                _quota = 100;
-                                Log.i("","_quota"+ _quota);
+                            Log.i("","_quota"+ _quota);
 
-                                Intent ix;
-                                if( _quota > 0  ) {
-                                    if(_flag == "PesanKarcisPetugasActivity"){
-                                         ix = new Intent(getApplicationContext(), PesanKarcisPetugasNewActivity.class);
-                                    } else {
-                                         ix = new Intent(getApplicationContext(), PesanKarcisPetugasActivity.class);
-                                    }
-
-
-                                    startActivity(ix);
-                                }else {
-                                    Intent i = new Intent(DashboardPetugasActivity.this, SuccessRegistrasiWisatawanActivity.class);
-                                    final String _email = sessionManager.getUserDetail().get(SessionManager.key_email);
-                                    i.putExtra("result_dt_ket", _ket);
-                                    i.putExtra("result_dt_email",_email);
-                                    i.putExtra("result_dt_berhasil", false);
-                                    i.putExtra("result_dt_flag", "checkQuotaTwaPetugas");
-                                    startActivity(i);
+                            Intent ix;
+                            if( _quota > 0  ) {
+                                if(_flag == "PesanKarcisPetugasActivity"){
+                                     ix = new Intent(getApplicationContext(), PesanKarcisPetugasNewActivity.class);
+                                } else {
+                                     ix = new Intent(getApplicationContext(), PesanKarcisPetugasActivity.class);
                                 }
+                                startActivity(ix);
+                            }else {
+                                Intent i = new Intent(DashboardPetugasActivity.this, SuccessRegistrasiWisatawanActivity.class);
+                                final String _email = sessionManager.getUserDetail().get(SessionManager.key_email);
+                                i.putExtra("result_dt_ket", _ket);
+                                i.putExtra("result_dt_email",_email);
+                                i.putExtra("result_dt_berhasil", false);
+                                i.putExtra("result_dt_flag", "checkQuotaTwaPetugas");
+                                startActivity(i);
                             }
-
-                        } catch (JSONException e) {
-                            Log.i("", "error =" + e.toString() );
-                            e.printStackTrace();
                         }
-                        requestQueue.stop();
+
+                    } catch (JSONException e) {
+                        Log.i("", "error =" + e.toString() );
+                        e.printStackTrace();
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.i("", "response =" + error.toString());
-                error.printStackTrace();
-                requestQueue.stop();
-                findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-                AlertDialog.Builder builder = new AlertDialog.Builder(DashboardPetugasActivity.this);
-                builder.setMessage("Terjadi Gangguan, Refresh Halaman")
-                        .setCancelable(false)
-                        .setPositiveButton("Ya", (dialog, id) -> {
-                            finish();
-                            startActivity(getIntent());
-                        })
-                        .setNegativeButton("Tidak", (dialog, id) -> dialog.cancel());
-                AlertDialog alert = builder.create();
-                alert.show();
-            }
-        }
+                    requestQueue.stop();
+                }, error -> {
+                    Log.i("", "response =" + error.toString());
+                    error.printStackTrace();
+                    requestQueue.stop();
+                    findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(DashboardPetugasActivity.this);
+                    builder.setMessage("Terjadi Gangguan, Refresh Halaman")
+                            .setCancelable(false)
+                            .setPositiveButton("Ya", (dialog, id) -> {
+                                finish();
+                                startActivity(getIntent());
+                            })
+                            .setNegativeButton("Tidak", (dialog, id) -> dialog.cancel());
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                }
         ) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {

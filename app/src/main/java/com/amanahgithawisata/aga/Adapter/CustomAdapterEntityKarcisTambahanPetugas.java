@@ -191,6 +191,7 @@ public class CustomAdapterEntityKarcisTambahanPetugas extends RecyclerView.Adapt
         final String _email = modelHorizontalScrollKarcisTambahans.get(position).getEmail_pengunjung();
         final String _mode_pembayaran = modelHorizontalScrollKarcisTambahans.get(position).getMode_pembayaran();
         final String _tgl_kunjungan_ptgs_2 = modelHorizontalScrollKarcisTambahans.get(position).getTgl_kujungan_2_val();
+        final String _nama_pembayaran = modelHorizontalScrollKarcisTambahans.get(position).getNama_pembayaran();
 
         Log.i("","_url_img_lokWis tambahan adapter"+_url_img_lokWis);
         Log.i("","_url_img_pintu tambahan adapter"+_url_img_pintu);
@@ -266,6 +267,7 @@ public class CustomAdapterEntityKarcisTambahanPetugas extends RecyclerView.Adapt
             i.putExtra("result_dt_flag_kt",true);
             i.putExtra("result_dt_mode_pembayaran",_mode_pembayaran);
             i.putExtra("result_dt_tgl_kunjungan_ptgs_2_kt_ptgs",_tgl_kunjungan_ptgs_2);
+            i.putExtra("result_dt_nama_pembayaran",_nama_pembayaran);
 
 
             sessionManager.createSessionWisTmbhn(   _kodeKarcis,

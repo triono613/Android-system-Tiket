@@ -134,12 +134,14 @@ public class NotifSuksesActivity extends AppCompatActivity {
         String _berhasil = getIntent().getStringExtra("berhasil");
         String result_dt_flag = getIntent().getStringExtra("result_dt_flag");
         String _jumlah_tambahan = getIntent().getStringExtra("_jumlah_tambahan");
-        String _nama_lokasi = getIntent().getStringExtra("_nama_lokasi");
+        String _txt_nmlokwis = getIntent().getStringExtra("_txt_nmlokwis");
 
         String _mode_pembayaran = getIntent().getStringExtra("_mode_pembayaran");
+        String _nama_pembayaran = getIntent().getStringExtra("_nama_pembayaran");
         String _nama_pengunjung = getIntent().getStringExtra("_nama_pengunjung");
         String _no_hp_pengunjung = getIntent().getStringExtra("_no_hp_pengunjung");
         String _email_pengunjung = getIntent().getStringExtra("_email_pengunjung");
+
 
         String _tgl_kunj_sd = getIntent().getStringExtra("_tgl_kunjungan_sd");
         String _selisih_hari = getIntent().getStringExtra("_selisih_hari");
@@ -193,6 +195,7 @@ public class NotifSuksesActivity extends AppCompatActivity {
         Log.i("","_email_pengunjung "+_email_pengunjung);
         Log.i("","_no_hp_pengunjung "+_no_hp_pengunjung);
         Log.i("","_mode_pembayaran "+_mode_pembayaran);
+        Log.i("","_nama_pembayaran "+_nama_pembayaran);
 
 
         linearMohonPetugas.setVisibility(View.GONE);
@@ -230,6 +233,8 @@ public class NotifSuksesActivity extends AppCompatActivity {
             linear_email_red.setVisibility(View.GONE);
             linear_nm_bank_red.setVisibility(View.VISIBLE);
             linear_va_bottom_red.setVisibility(View.VISIBLE);
+            textview_bank_red.setText(_nama_pembayaran);
+
         }
          else if(result_dt_flag.equals("detailTagihan")){
                 Log.i("","kesini detailTagihan "+result_dt_flag);
@@ -240,6 +245,7 @@ public class NotifSuksesActivity extends AppCompatActivity {
                 linear_email_red.setVisibility(View.GONE);
                 linear_nm_bank_red.setVisibility(View.GONE);
                 linear_va_bottom_red.setVisibility(View.VISIBLE);
+
 
         }else if ( result_dt_flag.equals("flagPesanKarcisPetugas") ) {
             Log.i("","kesini flagPesanKarcisPetugas "+result_dt_flag);
@@ -252,6 +258,7 @@ public class NotifSuksesActivity extends AppCompatActivity {
 
             linear_va_red.setVisibility(View.GONE);
             linear_cash_red.setVisibility(View.VISIBLE);
+            textview_bank_red.setText(_nama_pembayaran);
 
             // 1. Cash
             // 2. Virtual Account
@@ -274,6 +281,7 @@ public class NotifSuksesActivity extends AppCompatActivity {
                 linear_cash_bottom_red.setVisibility(View.GONE);
 
             }
+            assert _flag_print != null;
             if( _flag_print.equals("1")){
                 btnPrint.setVisibility(View.VISIBLE);
                 btnPairUnpair.setVisibility(View.VISIBLE);
@@ -288,7 +296,7 @@ public class NotifSuksesActivity extends AppCompatActivity {
         textview_jml_psrt_wisman.setText(_jumlah_wisman);
         textview_jam_red.setText(_menit_valid);
         textview_jml_krcs_tmbhn.setText( _jumlah_tambahan );
-        textview_nm_lok_wis.setText(_nama_lokasi);
+        textview_nm_lok_wis.setText(_txt_nmlokwis);
 
         String  new_key_tgl_penjualan ;
         String  new_tgl_kunjungan ;
@@ -312,7 +320,7 @@ public class NotifSuksesActivity extends AppCompatActivity {
         textview_tgl_red.setText(_tgl_valid);
         textview_va_red.setText(_va_no);
         textview_nm_red.setText(_vnama);
-        textview_bank_red.setText("PT Bank BRIsyariah Tbk ");
+//        textview_bank_red.setText("PT Bank BRIsyariah Tbk ");
         textview_grand_ttl_red.setText(_tagihan_total);
 
 
@@ -389,7 +397,7 @@ public class NotifSuksesActivity extends AppCompatActivity {
                 String key_kode_lok_new
         ) {
 
-        String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue( getApplicationContext() );
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
                 new Response.Listener<String>() {

@@ -88,31 +88,36 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/rate" />
+                            android:src="@drawable/rate"
+                            android:contentDescription="TODO" />
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/rate"
-                            android:layout_marginLeft="2dp" />
+                            android:layout_marginLeft="2dp"
+                            android:contentDescription="TODO" />
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/rate"
-                            android:layout_marginLeft="2dp" />
+                            android:layout_marginLeft="2dp"
+                            android:contentDescription="TODO" />
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/rate"
-                            android:layout_marginLeft="2dp" />
+                            android:layout_marginLeft="2dp"
+                            android:contentDescription="TODO" />
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/rate"
-                            android:layout_marginLeft="2dp" />
+                            android:layout_marginLeft="2dp"
+                            android:contentDescription="TODO" />
 
                     </LinearLayout>
 
@@ -150,7 +155,8 @@
                             android:layout_marginLeft="16dp"
                             android:layout_width="wrap_content"
                             android:src="@drawable/split"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:contentDescription="TODO" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -192,7 +198,8 @@
                         android:layout_width="wrap_content"
                         android:layout_marginTop="-8dp"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/food1" />
+                        android:src="@drawable/food1"
+                        android:contentDescription="TODO" />
                 </RelativeLayout>
 
             </LinearLayout>
@@ -214,7 +221,8 @@
                         android:layout_gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/like" />
+                        android:src="@drawable/like"
+                        android:contentDescription="TODO" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -238,7 +246,8 @@
                         android:layout_gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/comment" />
+                        android:src="@drawable/comment"
+                        android:contentDescription="TODO" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -262,7 +271,8 @@
                         android:layout_gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/share" />
+                        android:src="@drawable/share"
+                        android:contentDescription="TODO" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -322,31 +332,36 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/rate" />
+                            android:src="@drawable/rate"
+                            android:contentDescription="TODO" />
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/rate"
-                            android:layout_marginLeft="2dp" />
+                            android:layout_marginLeft="2dp"
+                            android:contentDescription="TODO" />
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/rate"
-                            android:layout_marginLeft="2dp" />
+                            android:layout_marginLeft="2dp"
+                            android:contentDescription="TODO" />
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/rate"
-                            android:layout_marginLeft="2dp" />
+                            android:layout_marginLeft="2dp"
+                            android:contentDescription="TODO" />
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/rate"
-                            android:layout_marginLeft="2dp" />
+                            android:layout_marginLeft="2dp"
+                            android:contentDescription="TODO" />
 
                     </LinearLayout>
 
@@ -384,7 +399,8 @@
                             android:layout_marginLeft="16dp"
                             android:layout_width="wrap_content"
                             android:src="@drawable/split"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:contentDescription="TODO" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -426,7 +442,8 @@
                         android:layout_width="wrap_content"
                         android:layout_marginTop="-8dp"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/food2" />
+                        android:src="@drawable/food2"
+                        android:contentDescription="TODO" />
                 </RelativeLayout>
 
             </LinearLayout>
@@ -448,7 +465,8 @@
                         android:layout_gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/like" />
+                        android:src="@drawable/like"
+                        android:contentDescription="TODO" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -472,7 +490,8 @@
                         android:layout_gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/comment" />
+                        android:src="@drawable/comment"
+                        android:contentDescription="TODO" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -496,7 +515,8 @@
                         android:layout_gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/share" />
+                        android:src="@drawable/share"
+                        android:contentDescription="TODO" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -556,31 +576,36 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/rate" />
+                            android:src="@drawable/rate"
+                            android:contentDescription="TODO" />
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/rate"
-                            android:layout_marginLeft="2dp" />
+                            android:layout_marginLeft="2dp"
+                            android:contentDescription="TODO" />
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/rate"
-                            android:layout_marginLeft="2dp" />
+                            android:layout_marginLeft="2dp"
+                            android:contentDescription="TODO" />
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/rate"
-                            android:layout_marginLeft="2dp" />
+                            android:layout_marginLeft="2dp"
+                            android:contentDescription="TODO" />
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/rate"
-                            android:layout_marginLeft="2dp" />
+                            android:layout_marginLeft="2dp"
+                            android:contentDescription="TODO" />
 
                     </LinearLayout>
 
@@ -618,7 +643,8 @@
                             android:layout_marginLeft="16dp"
                             android:layout_width="wrap_content"
                             android:src="@drawable/split"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:contentDescription="TODO" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -660,7 +686,8 @@
                         android:layout_width="wrap_content"
                         android:layout_marginTop="-8dp"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/food3" />
+                        android:src="@drawable/food3"
+                        android:contentDescription="TODO" />
                 </RelativeLayout>
 
             </LinearLayout>
@@ -682,7 +709,8 @@
                         android:layout_gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/like" />
+                        android:src="@drawable/like"
+                        android:contentDescription="TODO" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -706,7 +734,8 @@
                         android:layout_gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/comment" />
+                        android:src="@drawable/comment"
+                        android:contentDescription="TODO" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -730,7 +759,8 @@
                         android:layout_gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/share" />
+                        android:src="@drawable/share"
+                        android:contentDescription="TODO" />
 
                     <TextView
                         android:layout_width="wrap_content"

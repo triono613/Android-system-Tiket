@@ -67,7 +67,7 @@
                                 android:layout_height="120dp"
                                 android:layout_marginStart="20dp"
                                 android:layout_marginEnd="20dp"
-                                />
+                                android:contentDescription="TODO" />
 
 
 
@@ -309,7 +309,7 @@
                         android:layout_height="100dp"
                         android:layout_gravity="center"
                         android:layout_marginTop="2dp"
-                        />
+                        android:contentDescription="TODO" />
                 </LinearLayout>
 
 

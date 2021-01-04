@@ -3,12 +3,13 @@ package com.amanahgithawisata.aga;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
+import android.view.Gravity;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -81,28 +82,33 @@ public class GetStartedActivity extends AppCompatActivity {
 
 
         if( sessionManager.isLoggedIn() ){
-
             Intent intent;
-
-            switch (sessionManager.getFlag())
+            switch ( sessionManager.getUserDetail().get(SessionManager.key_user_level) )
             {
-                case "1":
-                    if (Objects.equals(sessionManager.getUserDetail().get(SessionManager.key_kode_lokasi), "null")){
-                        intent = new Intent(GetStartedActivity.this, DashboardWisatawanActivity.class);
-                        break;
-                    } else {
-                        intent = new Intent(GetStartedActivity.this, DashboardPetugasActivity.class);
-                    }
-
                 case "0":
+                    switch (sessionManager.getUserDetail().get(SessionManager.key_kode_lokasi) ) {
+                        case "null":
+                            break;
+                        default:
+                            intent = new Intent(GetStartedActivity.this, DashboardWisatawanActivity.class);
+                            startActivity(intent);
+                            finish();
+                            break;
+                    }
+                    break;
+
+                case "1":
                     intent = new Intent(GetStartedActivity.this, DashboardPetugasActivity.class);
+                    startActivity(intent);
+                    finish();
                     break;
                 default:
                     intent = new Intent(GetStartedActivity.this,SigninActivity.class);
+                    startActivity(intent);
+                    finish();
                     break;
+
             }
-            startActivity(intent);
-            finish();
         }
 
 

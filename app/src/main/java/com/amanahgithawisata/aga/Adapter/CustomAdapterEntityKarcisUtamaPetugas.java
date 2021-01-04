@@ -180,6 +180,7 @@ public class CustomAdapterEntityKarcisUtamaPetugas extends RecyclerView.Adapter<
         final String _email = modelHorizontalScrollKarcisUtamas.get(position).getEmail_pengunjung();
         final String _mode_pembayaran = modelHorizontalScrollKarcisUtamas.get(position).getMode_pembayaran();
         final String result_dt_tgl_kunj_2 = modelHorizontalScrollKarcisUtamas.get(position).getResult_dt_tgl_kunj_2();
+        final String _nama_pembayaran = modelHorizontalScrollKarcisUtamas.get(position).getNama_pembayaran();
 
 
         Log.i("","_namaKarcis adapter"+_namaKarcis);
@@ -264,6 +265,7 @@ public class CustomAdapterEntityKarcisUtamaPetugas extends RecyclerView.Adapter<
             i.putExtra("result_dt_flag_ku",true);
             i.putExtra("result_dt_mode_pembayaran",_mode_pembayaran);
             i.putExtra("result_dt_tgl_kunj_2",result_dt_tgl_kunj_2);
+            i.putExtra("result_dt_nama_pembayaran",_nama_pembayaran);
 
 
 

@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 import com.amanahgithawisata.aga.Adapter.DatePickerOneFragment;
+import com.amanahgithawisata.aga.Helper.Help;
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -177,12 +178,12 @@ public class RegisterWisatawanActivity extends AppCompatActivity implements Date
         String username_key= "";
 
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-        String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue(RegisterWisatawanActivity.this);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
                 response -> {
-                    Log.i("triono", "response 1 ===" + response );
+                    Log.i("", "response 1 ===" + response );
                     try {
 
                         findViewById(R.id.loadingPanel).setVisibility(View.GONE);

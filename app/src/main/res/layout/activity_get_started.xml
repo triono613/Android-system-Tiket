@@ -40,7 +40,8 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.030" />
+        app:layout_constraintVertical_bias="0.030"
+        android:contentDescription="TODO" />
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -109,7 +110,7 @@
         android:orientation="vertical"
         android:fontFamily="@font/mregular"
         android:gravity="center"
-        android:text="V2.1"
+        android:text="@string/version_app"
         android:textColor="#FFF"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -149,7 +150,7 @@
         android:fontFamily="@font/mregular"
         android:gravity="center"
         android:src="@drawable/jelajah_wisata_rev"
-        />
+        android:contentDescription="TODO" />
 
     <TextView
         android:id="@+id/lbl_aga_getstarted"

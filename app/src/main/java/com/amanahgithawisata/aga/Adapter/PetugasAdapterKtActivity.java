@@ -88,6 +88,7 @@ public class PetugasAdapterKtActivity extends AppCompatActivity {
         String email_pengunjung = getIntent().getStringExtra("email_pengunjung");
         String mode_pembayaran = getIntent().getStringExtra("mode_pembayaran");
         String tgl_kunjungan_ptgs_2 = getIntent().getStringExtra("tgl_kunjungan_ptgs_2");
+        String nama_pembayaran = getIntent().getStringExtra("nama_pembayaran");
 
         Log.i("","result_dt_tgl_kunj kt "+result_dt_tgl_kunj);
         Log.i("","result_dt_kdlokWis kt "+result_dt_kdlokWis);
@@ -136,7 +137,8 @@ public class PetugasAdapterKtActivity extends AppCompatActivity {
                 hp_pengunjung,
                 email_pengunjung,
                 mode_pembayaran,
-                tgl_kunjungan_ptgs_2
+                tgl_kunjungan_ptgs_2,
+                nama_pembayaran
         );
 
 
@@ -172,11 +174,12 @@ public class PetugasAdapterKtActivity extends AppCompatActivity {
                              String hp_pengunjung,
                              String email_pengunjung,
                              String mode_pembayaran,
-                             String tgl_kunjungan_ptgs_2
+                             String tgl_kunjungan_ptgs_2,
+                             String nama_pembayaran
 
     ) {
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-        String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext() );
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
                 response -> {
@@ -240,7 +243,8 @@ public class PetugasAdapterKtActivity extends AppCompatActivity {
                                             hp_pengunjung,
                                             email_pengunjung,
                                             mode_pembayaran,
-                                            tgl_kunjungan_ptgs_2
+                                            tgl_kunjungan_ptgs_2,
+                                            nama_pembayaran
                                     ));
                                 }
 

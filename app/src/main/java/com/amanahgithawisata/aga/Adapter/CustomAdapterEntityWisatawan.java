@@ -138,7 +138,7 @@ public class CustomAdapterEntityWisatawan extends RecyclerView.Adapter<CustomAda
 
     private void tagihan_by_no_va(String EP, String VA){
 
-        String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue(context);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
                 (Response.Listener<String>) response -> {

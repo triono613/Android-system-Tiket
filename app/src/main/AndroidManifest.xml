@@ -33,11 +33,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true"
-        android:versionCode="2"
+        android:versionCode="3"
         tools:overrideLibrary="com.mazenrashed.printooth"
         tools:replace="android:theme,android:label"
         tools:targetApi="m">
-        <activity android:name=".DashboardPrintActivity"></activity>
+        <activity android:name=".DashboardPrintActivity" />
         <activity android:name=".ui.DeviceListActivity" />
         <activity android:name=".DashboardPrintActivity_old" />
         <activity android:name=".ProfileActivity" />
@@ -96,8 +96,7 @@
         <activity
             android:name=".PopUpActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".Adapter.SessionManager" />
-        <activity android:name=".Adapter.CustomAdapterViewPagerLokasiWisata" />
+
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

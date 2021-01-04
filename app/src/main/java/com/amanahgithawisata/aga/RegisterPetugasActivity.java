@@ -154,7 +154,7 @@ public class RegisterPetugasActivity extends AppCompatActivity implements DatePi
 
     void loadSpinnerData(String EP) {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        String url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
@@ -294,7 +294,7 @@ public class RegisterPetugasActivity extends AppCompatActivity implements DatePi
     void newPostDt(String EP){
 
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-        String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+EP;
+        String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+EP;
         final RequestQueue requestQueue = Volley.newRequestQueue(RegisterPetugasActivity.this);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,

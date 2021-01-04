@@ -34,6 +34,7 @@ public class ModelHorizontalScrollKarcisUtama {
     public String  email_pengunjung;
     public String mode_pembayaran;
     public String result_dt_tgl_kunj_2;
+    public String nama_pembayaran;
 
 
     public ModelHorizontalScrollKarcisUtama(String url_ku,
@@ -68,7 +69,8 @@ public class ModelHorizontalScrollKarcisUtama {
                                             String  hp_pengunjung,
                                             String  email_pengunjung,
                                             String mode_pembayaran,
-                                            String result_dt_tgl_kunj_2
+                                            String result_dt_tgl_kunj_2,
+                                            String nama_pembayaran
     ) {
 
         this.url_ku = url_ku;
@@ -104,7 +106,17 @@ public class ModelHorizontalScrollKarcisUtama {
         this.email_pengunjung = email_pengunjung;
         this.mode_pembayaran = mode_pembayaran;
         this.result_dt_tgl_kunj_2 = result_dt_tgl_kunj_2;
+        this.nama_pembayaran = nama_pembayaran;
 
+    }
+
+
+    public String getNama_pembayaran() {
+        return nama_pembayaran;
+    }
+
+    public void setNama_pembayaran(String nama_pembayaran) {
+        this.nama_pembayaran = nama_pembayaran;
     }
 
     public String getResult_dt_tgl_kunj_2() {

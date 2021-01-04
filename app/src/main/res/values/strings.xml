@@ -1,4 +1,5 @@
 <resources>
+    <string name="version_app">V2.2</string>
     <string name="app_name">Tiket</string>
     <string name="lbl_btn_checkout">Checkout</string>
     <string name="pendaftaran_wisatawan">Pendaftaran Wisatawan</string>

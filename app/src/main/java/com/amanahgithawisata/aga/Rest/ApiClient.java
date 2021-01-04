@@ -1,13 +1,15 @@
 package com.amanahgithawisata.aga.Rest;
 
 
+import com.amanahgithawisata.aga.Helper.Help;
+
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
 
     public  static Retrofit retrofit;
-    public  static final String BASE_URL = "http://kaffah.amanahgitha.com/~androidwisata/";
+    public  static final String BASE_URL = "http://"+ Help.domain_api() +"/~androidwisata/";
 
 
     public static Retrofit getRetrofitInstance(){

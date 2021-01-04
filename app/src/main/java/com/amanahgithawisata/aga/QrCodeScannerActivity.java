@@ -68,7 +68,7 @@ public class QrCodeScannerActivity extends AppCompatActivity implements ZXingSca
 
 
     private void postScannerVa(String EP,String _VA){
-        String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue(QrCodeScannerActivity.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
                 response -> {

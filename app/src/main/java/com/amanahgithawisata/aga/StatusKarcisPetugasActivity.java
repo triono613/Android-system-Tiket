@@ -45,7 +45,7 @@ import java.util.Objects;
 
 public class StatusKarcisPetugasActivity extends AppCompatActivity {
 
-    private final String JSON_URL ="http://kaffah.amanahgitha.com/~androidwisata/?data=informasi_status_karcis";
+    private final String JSON_URL ="http://"+ Help.domain_api() +"/~androidwisata/?data=informasi_status_karcis";
     private JsonArrayRequest jsonArrayRequest;
     private RequestQueue requestQueue;
     RecyclerView recyclerView;
@@ -100,7 +100,7 @@ public class StatusKarcisPetugasActivity extends AppCompatActivity {
 
 
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-        String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data=informasi_status_karcis_petugas";
+        String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data=informasi_status_karcis_petugas";
         final RequestQueue requestQueue = Volley.newRequestQueue(StatusKarcisPetugasActivity.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
                 response -> {

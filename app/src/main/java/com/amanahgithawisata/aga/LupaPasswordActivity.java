@@ -80,7 +80,7 @@ public class LupaPasswordActivity extends AppCompatActivity {
 
     public void forgetPassword(String EP) {
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-        String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data=" + EP;
+        String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data=" + EP;
         final RequestQueue requestQueue = Volley.newRequestQueue(LupaPasswordActivity.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
                 new Response.Listener<String>() {

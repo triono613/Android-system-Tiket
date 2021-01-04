@@ -367,7 +367,7 @@ public class LokasiWisataScrollViewActivity extends AppCompatActivity implements
     private void horizontalLokasiWisata(String EP){
 
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-        String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue(LokasiWisataScrollViewActivity.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
                 response -> {
@@ -484,7 +484,7 @@ public class LokasiWisataScrollViewActivity extends AppCompatActivity implements
     public void horizontalLokasiPintu(String EP, String KSDA_PAR,Context par){
 
 //        findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-        String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue(par);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
                 response -> {
@@ -635,7 +635,7 @@ public class LokasiWisataScrollViewActivity extends AppCompatActivity implements
 
     private void spinnerLokWisata(String EP){
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-        String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue(LokasiWisataScrollViewActivity.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
                 response -> {
@@ -706,7 +706,7 @@ public class LokasiWisataScrollViewActivity extends AppCompatActivity implements
 
     private void spinnerLokWisataWisatawan(String EP,String KSDA){
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-        String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue(LokasiWisataScrollViewActivity.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
                 response -> {
@@ -781,7 +781,7 @@ public class LokasiWisataScrollViewActivity extends AppCompatActivity implements
 
     private void spinnerKarcisWisatawanUtama(String EP,String LP){
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-        String server_url_s2 = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        String server_url_s2 = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue_s2 = Volley.newRequestQueue(LokasiWisataScrollViewActivity.this);
         StringRequest stringRequest_s2 = new StringRequest(Request.Method.POST, server_url_s2,
                 (Response.Listener<String>) response -> {
@@ -865,7 +865,7 @@ public class LokasiWisataScrollViewActivity extends AppCompatActivity implements
 
     private void spinnerKarcisWisatawanTambahan(String EP, String LP){
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-        String server_url_s1 = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        String server_url_s1 = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue_s1 = Volley.newRequestQueue(LokasiWisataScrollViewActivity.this);
         StringRequest stringRequest_s1 = new StringRequest(Request.Method.POST, server_url_s1,
                 new Response.Listener<String>() {
@@ -937,7 +937,7 @@ public class LokasiWisataScrollViewActivity extends AppCompatActivity implements
 
     private void inputKarcisWisatawan(String EP){
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-        String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue(LokasiWisataScrollViewActivity.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
                 new Response.Listener<String>() {
@@ -1101,7 +1101,7 @@ public class LokasiWisataScrollViewActivity extends AppCompatActivity implements
     private void quotaTwa(String EP,String KSDA, String TGL){
 
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-        String server_url_q = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        String server_url_q = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue_q = Volley.newRequestQueue(LokasiWisataScrollViewActivity.this);
 
         StringRequest stringRequest_q = new StringRequest(Request.Method.POST, server_url_q,

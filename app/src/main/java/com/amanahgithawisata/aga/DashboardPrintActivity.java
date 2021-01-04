@@ -356,7 +356,7 @@ public class DashboardPrintActivity extends AppCompatActivity {
     ) {
 
             findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-            String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+            String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
             final RequestQueue requestQueue = Volley.newRequestQueue(DashboardPrintActivity.this);
             StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
                     response -> {
@@ -657,7 +657,7 @@ public class DashboardPrintActivity extends AppCompatActivity {
             ArrayList<Printable> printImg = new ArrayList<>();
 
             Resources resources = getResources();
-            String uri = "http://kaffah.amanahgitha.com/~androidwisata/va.bmp";
+            String uri = "http://"+ Help.domain_api() +"/~androidwisata/va.bmp";
             Picasso.with(getApplicationContext())
                     .load(uri)
                     .into(new Target() {

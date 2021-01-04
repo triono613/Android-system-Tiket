@@ -22,20 +22,22 @@
                     android:layout_centerVertical="true"
                     android:background="@drawable/ic_menu_black_24dp"
                     android:layout_width="30dp"
-                    android:layout_height="30dp" />
+                    android:layout_height="30dp"
+                    android:contentDescription="TODO" />
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:src="@drawable/jelajah_wisata_rev"
                     android:layout_weight="1"
-                    />
+                    android:contentDescription="TODO" />
                 <ImageView
                     android:visibility="gone"
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
                     android:background="@drawable/ic_menu_black_24dp"
                     android:layout_width="30dp"
-                    android:layout_height="30dp" />
+                    android:layout_height="30dp"
+                    android:contentDescription="TODO" />
 
             </LinearLayout>
 
@@ -124,7 +126,8 @@
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
                                 android:layout_gravity="center"
-                                app:srcCompat="@drawable/ic_date_range_black_new_24dp" />
+                                app:srcCompat="@drawable/ic_date_range_black_new_24dp"
+                                android:contentDescription="TODO" />
 
                         </LinearLayout>
                         <TextView
@@ -159,7 +162,8 @@
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
                                 android:layout_gravity="center"
-                                app:srcCompat="@drawable/ic_lock_black_new_24dp" />
+                                app:srcCompat="@drawable/ic_lock_black_new_24dp"
+                                android:contentDescription="TODO" />
 
                         </LinearLayout>
                         <TextView

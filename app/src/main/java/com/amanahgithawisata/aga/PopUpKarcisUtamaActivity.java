@@ -145,7 +145,7 @@ public class PopUpKarcisUtamaActivity extends AppCompatActivity {
                              String result_dt_tgl_kunj_2
     ) {
 //        findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-        String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext() );
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
                 response -> {
@@ -214,7 +214,8 @@ public class PopUpKarcisUtamaActivity extends AppCompatActivity {
                                             "",
                                             "",
                                             "",
-                                            result_dt_tgl_kunj_2
+                                            result_dt_tgl_kunj_2,
+                                            ""
                                             ));
 
                                     Log.i("","_url_ku popup"+ _url_ku);

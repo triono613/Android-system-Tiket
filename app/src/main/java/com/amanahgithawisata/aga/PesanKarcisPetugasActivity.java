@@ -295,8 +295,8 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
 
 
 
-        _tgl_kunjungan_ptgs.setText(Help.getDateTime());
-        _tgl_kunjungan_ptgs.setEnabled(false);
+//        _tgl_kunjungan_ptgs.setText(Help.getDateTime());
+//        _tgl_kunjungan_ptgs.setEnabled(false);
         _ttl_ptgs.setEnabled(false);
         _ttl_tmbhn_ptgs.setEnabled(false);
         _grand_ttl_ptgs.setEnabled(false);
@@ -325,6 +325,7 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
         RadioGroup rg_cara_bayarn = (RadioGroup)findViewById(R.id.rg_cara_bayar);
 
         final String[] mode_pembayaran = new String[1];
+        final String[] nama_pembayaran = new String[1];
         rg_cara_bayarn.setOnCheckedChangeListener((group, checkedId) -> {
             rbNew = findViewById(checkedId);
             boolean isChecked = rbNew.isChecked();
@@ -333,9 +334,12 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
             if( isChecked ) {
                 Log.i("","isChecked "+rbNew.getText() );
                 Log.i("","isChecked "+rbNew.getId() );
+//                Log.i("","id txt "+ txtId );
                 mode_pembayaran[0] = String.valueOf(rbNew.getId());
+                nama_pembayaran[0] = String.valueOf(rbNew.getText());
             } else {
                 mode_pembayaran[0] = "";
+                nama_pembayaran[0] = "";
             }
         });
 
@@ -367,6 +371,8 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
 
         btn_detail_ku.setOnClickListener(v -> {
             Log.i("","mode_pembayaran x"+ mode_pembayaran[0]);
+            Log.i("","nama_pembayaran x"+ nama_pembayaran[0]);
+
 
             String txt_kdlokwis = _txt_kdlokwis.getText().toString().trim();
             String txt_nmlokWis = _txt_nmlokwis.getText().toString().trim();
@@ -435,6 +441,8 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
             i.putExtra("txt_harga_karcis_wisata_kt", txt_harga_karcis_wisata_kt);
             i.putExtra("txt_harga_karcis_asuransi_kt", txt_harga_karcis_asuransi_kt);
             i.putExtra("mode_pembayaran", mode_pembayaran[0]);
+            i.putExtra("nama_pembayaran", nama_pembayaran[0]);
+
             startActivity(i);
         });
 
@@ -524,6 +532,7 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
             i.putExtra("txt_ttl_tmbhn_ptgs", txt_ttl_tmbhn_ptgs);
             i.putExtra("txt_grand_ttl_ptgs", txt_grand_ttl_ptgs);
             i.putExtra("mode_pembayaran", mode_pembayaran[0]);
+            i.putExtra("nama_pembayaran", nama_pembayaran[0]);
 
             startActivity(i);
         });
@@ -633,7 +642,9 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
                                                  _nama_lokasi,
                                                  _jml_krcs_tmbhn,
                                                  get_selisih_day(),
-                                                 "0" );
+                                                 "0",
+                                                 nama_pembayaran[0]
+                                         );
                                      } catch (ParseException e) {
                                          e.printStackTrace();
                                      }
@@ -646,7 +657,9 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
                                  _nama_lokasi,
                                  _jml_krcs_tmbhn,
                                  get_selisih_day(),
-                                 "0" );
+                                 "0",
+                                 nama_pembayaran[0]
+                         );
                      }
 
                  } catch (ParseException e) {
@@ -746,6 +759,8 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
         String result_dt_url_img_lokWis_ku = getIntent().getStringExtra("result_dt_url_img_lokWisOld");
         boolean result_dt_flag_kt = getIntent().getBooleanExtra("result_dt_flag_kt",false);
         String result_dt_mode_pembayaran = getIntent().getStringExtra("result_dt_mode_pembayaran");
+        String result_dt_nama_pembayaran = getIntent().getStringExtra("result_dt_nama_pembayaran");
+
         String result_dt_tgl_kunjungan_ptgs_2_kt_ptgs = getIntent().getStringExtra("result_dt_tgl_kunjungan_ptgs_2_kt_ptgs");
 
 
@@ -774,7 +789,7 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
             Log.i("","masuk kesini kl 1"+KL);
 
             apiLokwisPtgsFirst("petugas_daftar_lokasi_wisata",KL);
-            getRbCaraBayar("informasi_mode_pembayaran","","1");
+            getRbCaraBayar("informasi_mode_pembayaran","","1", "");
 
         }
 
@@ -825,7 +840,7 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
                     result_dt_jml_karcis_tmbhn
             );
 
-            getRbCaraBayar("informasi_mode_pembayaran",result_dt_mode_pembayaran,"");
+            getRbCaraBayar("informasi_mode_pembayaran",result_dt_mode_pembayaran,"",result_dt_nama_pembayaran);
         }
 
 
@@ -880,7 +895,7 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
                     result_dt_jml_karcis_tmbhn
             );
 
-            getRbCaraBayar("informasi_mode_pembayaran",result_dt_mode_pembayaran,"");
+            getRbCaraBayar("informasi_mode_pembayaran",result_dt_mode_pembayaran,"", result_dt_nama_pembayaran);
 
         }
 
@@ -1159,11 +1174,11 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
 
 
         @RequiresApi(api = Build.VERSION_CODES.O)
-        public void getRbCaraBayar(String EP,String mode_pembayaran_par, String def_value){
+        public void getRbCaraBayar(String EP,String mode_pembayaran_par, String def_value, String nama_pembayaran_par ){
 //                rg_cara_bayar.setOrientation(LinearLayout.HORIZONTAL);
 
                 findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-                String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+                String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
                 final RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
                         response -> {
@@ -1186,6 +1201,9 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
                                             Log.i("tag","nama_pembayaran= "+nama_pembayaran);
 
                                                 sessionManager.createSessionJnsByr(mode_pembayaran, nama_pembayaran);
+
+
+                                            Log.i("","Permata"+Integer.parseInt("88561540"));
 
                                                 RadioButton button = new RadioButton(this);
                                                 button.setId(Integer.parseInt(mode_pembayaran));
@@ -1344,7 +1362,7 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
 
     private void quotaTwa(String EP,String KSDA){
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-        String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue(PesanKarcisPetugasActivity.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
                 new Response.Listener<String>() {
@@ -1430,7 +1448,7 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
 
     private void apiLokwisPtgs(String EP,String KL,String kdlokPintu){
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-        String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue(PesanKarcisPetugasActivity.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
                 (Response.Listener<String>) response -> {
@@ -1549,105 +1567,95 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
 
     private void apiLokwisPtgsFirst(String EP,String KL){
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-        String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue(PesanKarcisPetugasActivity.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Log.i("tag", "response apiLokwisPtgsFirst =" + response );
-                        try {
+                (Response.Listener<String>) response -> {
+                    Log.i("tag", "response apiLokwisPtgsFirst =" + response );
+                    try {
 
-                            if( Help.isJSONValid(response) ){
-                                JSONObject jsonObject = new JSONObject(response);
+                        if( Help.isJSONValid(response) ){
+                            JSONObject jsonObject = new JSONObject(response);
 
-                                Log.i("","apiLokwisPtgsFirst= "+response);
+                            Log.i("","apiLokwisPtgsFirst= "+response);
 
-                                arrListWisata.clear();
+                            arrListWisata.clear();
 
-                                findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-                                if( jsonObject.getBoolean("success") ) {
+                            findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+                            if( jsonObject.getBoolean("success") ) {
 
-                                    JSONArray jsonArray = jsonObject.getJSONArray("data");
-                                    for (int i = 0; i <jsonArray.length();i++ ) {
-                                        JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                                JSONArray jsonArray = jsonObject.getJSONArray("data");
+                                for (int i = 0; i <jsonArray.length();i++ ) {
+                                    JSONObject jsonObject1 = jsonArray.getJSONObject(i);
 
-                                        String id =  jsonObject1.getString("id");
-                                        final String kode_ksda =  jsonObject1.getString("kode_ksda");
-                                        String nama =  jsonObject1.getString("nama");
-                                        String alamat =  jsonObject1.getString("alamat");
-                                        String kota =  jsonObject1.getString("kota");
-                                        String email1 =  jsonObject1.getString("email1");
-                                        String email2 =  jsonObject1.getString("email2");
-                                        String email3 =  jsonObject1.getString("email3");
-                                        String android_flag =  jsonObject1.getString("android_flag");
-                                        String detail_flag =  jsonObject1.getString("detail_flag");
-                                        String url_image =  jsonObject1.getString("url_image");
-                                        String lokasi_pintu =  jsonObject1.getString("lokasi_pintu");
-                                        String nama_pintu = jsonObject1.getString("nama_pintu");
-                                        String total_pengunjung =  jsonObject1.getString("total_pengunjung");
-                                        String total_berkunjung = jsonObject1.getString("total_berkunjung");
-                                        String total_semua =  jsonObject1.getString("total_semua");
-                                        String url_image_pintu =  jsonObject1.getString("url_image_pintu");
+                                    String id =  jsonObject1.getString("id");
+                                    final String kode_ksda =  jsonObject1.getString("kode_ksda");
+                                    String nama =  jsonObject1.getString("nama");
+                                    String alamat =  jsonObject1.getString("alamat");
+                                    String kota =  jsonObject1.getString("kota");
+                                    String email1 =  jsonObject1.getString("email1");
+                                    String email2 =  jsonObject1.getString("email2");
+                                    String email3 =  jsonObject1.getString("email3");
+                                    String android_flag =  jsonObject1.getString("android_flag");
+                                    String detail_flag =  jsonObject1.getString("detail_flag");
+                                    String url_image =  jsonObject1.getString("url_image");
+                                    String lokasi_pintu =  jsonObject1.getString("lokasi_pintu");
+                                    String nama_pintu = jsonObject1.getString("nama_pintu");
+                                    String total_pengunjung =  jsonObject1.getString("total_pengunjung");
+                                    String total_berkunjung = jsonObject1.getString("total_berkunjung");
+                                    String total_semua =  jsonObject1.getString("total_semua");
+                                    String url_image_pintu =  jsonObject1.getString("url_image_pintu");
 
-                                        _txt_kdlokwis.setText(kode_ksda);
-                                        _txt_nmlokwis.setText(nama);
-                                        _txt_kdlokPintu.setText(lokasi_pintu);
-                                        _txt_nmlokPintu.setText(nama_pintu);
+                                    _txt_kdlokwis.setText(kode_ksda);
+                                    _txt_nmlokwis.setText(nama);
+                                    _txt_kdlokPintu.setText(lokasi_pintu);
+                                    _txt_nmlokPintu.setText(nama_pintu);
 
+                                    sessionManager.createSessionEksp(kode_ksda,nama_pintu);
 
+                                    Log.i("tag","kode_ksda= "+kode_ksda);
+                                    Log.i("tag","nama= "+nama);
+                                    Log.i("tag","lokasi_pintu first= "+lokasi_pintu);
+                                    Log.i("tag","nama_pintu= "+nama_pintu);
 
+                                    quotaTwa("quota_per_twa",kode_ksda);
 
-                                        sessionManager.createSessionEksp(kode_ksda,nama_pintu);
+                                    ImageView img1 =(ImageView)findViewById(R.id.lokwisPicasso);
+                                    Transformation transformation = new RoundedTransformationBuilder()
+                                            .oval(false)
+                                            .build();
 
-                                        Log.i("tag","kode_ksda= "+kode_ksda);
-                                        Log.i("tag","nama= "+nama);
-                                        Log.i("tag","lokasi_pintu first= "+lokasi_pintu);
-                                        Log.i("tag","nama_pintu= "+nama_pintu);
+                                    Picasso.with(getApplicationContext())
+                                            .load(url_image)
+                                            .fit()
+                                            .transform(transformation)
+                                            .placeholder(R.drawable.loading_animation)
+                                            .into(img1);
 
+                                    ImageView img2 =(ImageView)findViewById(R.id.lokPintuPicasso);
 
-//                                        arrListWisata.add(new SpinnerListWisata(lokasi_pintu,nama_pintu,"","",""));
-
-                                        quotaTwa("quota_per_twa",kode_ksda);
-
-
-                                        ImageView img1 =(ImageView)findViewById(R.id.lokwisPicasso);
-                                        Transformation transformation = new RoundedTransformationBuilder()
-                                                .oval(false)
-                                                .build();
-
-                                        Picasso.with(getApplicationContext())
-                                                .load(url_image)
-                                                .fit()
-                                                .transform(transformation)
-                                                .placeholder(R.drawable.loading_animation)
-                                                .into(img1);
-
-                                        ImageView img2 =(ImageView)findViewById(R.id.lokPintuPicasso);
-
-                                        Picasso.with(getApplicationContext())
-                                                .load(url_image_pintu)
-                                                .fit()
-                                                .transform(transformation)
-                                                .placeholder(R.drawable.loading_animation)
-                                                .into(img2);
+                                    Picasso.with(getApplicationContext())
+                                            .load(url_image_pintu)
+                                            .fit()
+                                            .transform(transformation)
+                                            .placeholder(R.drawable.loading_animation)
+                                            .into(img2);
 
 
-                                        apiWisatawanUtamaFirst("daftar_karcis_wisatawan_utama",lokasi_pintu);
-                                        apiWisatawanTambahanFirst("daftar_karcis_wisatawan_tambahan",lokasi_pintu,"");
+                                    apiWisatawanUtamaFirst("daftar_karcis_wisatawan_utama",lokasi_pintu);
+                                    apiWisatawanTambahanFirst("daftar_karcis_wisatawan_tambahan",lokasi_pintu,"");
 
-                                    }
                                 }
                             }
-
-                            String compareValue = sessionManager.getDataSetupPintu().get(SessionManager.key_index);
-                            Log.i("","compareValue "+compareValue);
-                        } catch (JSONException e) {
-                            Log.i("", "error ===" + e.toString() );
-                            e.printStackTrace();
                         }
-                        requestQueue.stop();
+
+                        String compareValue = sessionManager.getDataSetupPintu().get(SessionManager.key_index);
+                        Log.i("","compareValue "+compareValue);
+                    } catch (JSONException e) {
+                        Log.i("", "error ===" + e.toString() );
+                        e.printStackTrace();
                     }
+                    requestQueue.stop();
                 }, (Response.ErrorListener) error -> {
                     Log.i("triono", "response spinnerLokPintuPtgs=" + error.toString());
                     error.printStackTrace();
@@ -1670,7 +1678,7 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
 
     private void apiWisatawanUtamaFirst(String EP,String LP){
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-        String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue(PesanKarcisPetugasActivity.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
                 new Response.Listener<String>() {
@@ -1754,7 +1762,7 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
 
     private void apiWisatawanTambahanFirst(String EP, String LP,String _id_kt_par ){
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-        String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue(PesanKarcisPetugasActivity.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
                 new Response.Listener<String>() {
@@ -1849,7 +1857,7 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
                                           String _hrg_karcis_tmbhn
     ){
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-        String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue(PesanKarcisPetugasActivity.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
                 new Response.Listener<String>() {
@@ -2010,7 +2018,7 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
 
     ){
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-        String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue(PesanKarcisPetugasActivity.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
                 new Response.Listener<String>() {
@@ -2160,7 +2168,7 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
 
     private void spinnerWisatawanTambahan(String EP, String LP){
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-        String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue(PesanKarcisPetugasActivity.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
                 response -> {
@@ -2248,10 +2256,11 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
                                     String nama_lokasi,
                                     String jml_krcs_tmbhn,
                                     long selisih_day,
-                                    String flag_print
+                                    String flag_print,
+                                    String nama_pembayaran_par
     ){
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-        String server_url = "http://kaffah.amanahgitha.com/~androidwisata/?data="+ EP;
+        String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue(PesanKarcisPetugasActivity.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
                 response -> {
@@ -2291,6 +2300,7 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
                                 String _no_hp_pengunjung = jsonObject1.getString("no_hp_pengunjung");
                                 String _email_pengunjung = jsonObject1.getString("email_pengunjung");
 
+
 //                                    Intent i = new Intent(PesanKarcisPetugasActivity.this, SuccessRegistrasiWisatawanActivity.class);
 //                                    i.putExtra("result_dt_ket","Pesanan Karcis berhasil, harap check email Anda");
 //                                    i.putExtra("result_dt_email", _alamat_email);
@@ -2321,14 +2331,15 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
                                 i.putExtra("_jumlah_tambahan", jml_krcs_tmbhn);
                                 i.putExtra("_nama_lokasi", nama_lokasi);
                                 i.putExtra("_mode_pembayaran", _mode_pembayaran);
+                                i.putExtra("_nama_pembayaran", nama_pembayaran_par);
                                 i.putExtra("_nama_pengunjung", _nama_pengunjung);
                                 i.putExtra("_no_hp_pengunjung", _no_hp_pengunjung);
                                 i.putExtra("_email_pengunjung", _email_pengunjung);
 
                                 i.putExtra("_tgl_kunjungan_sd", tgl_kunjungan_sd);
                                 i.putExtra("_selisih_hari", String.valueOf(selisih_day) );
-                                i.putExtra("flag_print", flag_print );
-                                i.putExtra("result_dt_berhasil", berhasil);
+                                i.putExtra("flag_print", "0");
+                                i.putExtra("result_dt_berhasil", true);
                                 i.putExtra("result_dt_flag", "flagPesanKarcisPetugas");
                                 startActivity(i);
 
@@ -2388,7 +2399,7 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
                 }
 
 
-                Log.i("tag","jns_byr= " + jns_byr );
+                Log.i("tag","mode_pembayaran= " + jns_byr );
                 Log.i("tag","hp_pengunjung= " + hp_pengunjung );
                 Log.i("tag","nama_pengunjung= " + nama_pengunjung );
                 Log.i("tag","email_pengunjung= " + email_pengunjung );

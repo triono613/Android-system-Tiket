@@ -96,5 +96,9 @@ public class Help {
         return byteToHex(hi) + byteToHex(lo);
     }
 
+    public static String domain_api(){
+      return "kaffah.amanahgitha.com";
+    }
+
 
 }
