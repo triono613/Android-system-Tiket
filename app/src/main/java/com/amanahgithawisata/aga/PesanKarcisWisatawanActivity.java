@@ -286,10 +286,8 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
         _txt_urlLokPintu.setVisibility(View.GONE);
 
         /*  ini di hide  */
-
         _txt_urlLokWisOld.setVisibility(View.GONE);
         _txt_nmlokPintu.setVisibility(View.VISIBLE);
-//
         _txt_id_karcis_utama.setVisibility(View.GONE);
         _txt_url_karcis_utama.setVisibility(View.GONE);
         _txt_kode_ksda.setVisibility(View.GONE);
@@ -619,7 +617,8 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
         _txt_jml_krcs_tmbhn.performClick();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            getRbCaraBayar("wisatawan_mode_pembayaran",mode_pembayaran[0],"1");
+//            getRbCaraBayar("wisatawan_mode_pembayaran",mode_pembayaran[0],"1");
+            getRbCaraBayar("list_bank",mode_pembayaran[0],"1");
         }
 
         /*  this when first time load activity PesanKarcis*/
@@ -3079,17 +3078,20 @@ public long get_selisih_day() throws ParseException {
                                 for (int i = 0; i <jsonArray.length();i++ ) {
                                     JSONObject jsonObject1 = jsonArray.getJSONObject(i);
 
-                                    String mode_pembayaran =  jsonObject1.getString("mode_pembayaran");
-                                    String nama_pembayaran =  jsonObject1.getString("nama_pembayaran");
-//                                            String mode_pembayaran_par = "2";
 
-                                    Log.i("tag","mode_pembayaran= "+mode_pembayaran);
-                                    Log.i("tag","nama_pembayaran= "+nama_pembayaran);
-                                    sessionManager.createSessionJnsByr(mode_pembayaran, nama_pembayaran);
+                                    String id_x =  jsonObject1.getString("id");
+                                    String bank_code =  jsonObject1.getString("bank_code");
+                                    String bank_name =  jsonObject1.getString("bank_name");
+                                    String bank_branch =  jsonObject1.getString("bank_branch");
+                                    String bank_address =  jsonObject1.getString("bank_address");
+
+                                    Log.i("tag","id_x= "+id_x);
+                                    Log.i("tag","bank_code_x= "+bank_code);
+                                    sessionManager.createSessionJnsByr(bank_code, bank_name);
 
                                     RadioButton button = new RadioButton(this);
-                                    button.setId(Integer.parseInt(mode_pembayaran));
-                                    button.setText(nama_pembayaran);
+                                    button.setId(Integer.parseInt(bank_code));
+                                    button.setText(bank_name);
                                     button.setBackgroundResource(R.drawable.cardview);
                                     button.setWidth(700);
                                     rg_cara_bayar.addView(button);
@@ -3101,7 +3103,7 @@ public long get_selisih_day() throws ParseException {
                                         }
                                     }
 
-                                    if( mode_pembayaran.equals(mode_pembayaran_par)){
+                                    if( bank_code.equals(mode_pembayaran_par)){
                                         button.setChecked(true);
                                         button.setSelected(true);
                                     }
@@ -3124,10 +3126,10 @@ public long get_selisih_day() throws ParseException {
         }
         ) {
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams() {
                 Map<String, String> obj = new HashMap<String, String>();
                 final String key_email =  sessionManager.getUserDetail().get(SessionManager.key_email).trim();
-                obj.put("kode_ksda", "");
+                obj.put("lokasi", "JELAJAH");
                 return obj;
             }
         };

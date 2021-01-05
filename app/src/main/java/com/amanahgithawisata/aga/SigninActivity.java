@@ -341,22 +341,11 @@ public class SigninActivity extends AppCompatActivity implements GoogleApiClient
                                 Intent intent;
                                 switch (val_user_level) {
                                     case "0":
-                                        switch (val_kode_lokasi) {
-                                            case "null":
-                                                Toast toast= Toast.makeText(getApplicationContext(),
-                                                        "Anda Tidak Berhak Login Di Aplikasi ini", Toast.LENGTH_LONG);
-                                                toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
-                                                toast.show();
-                                                break;
-                                            default:
-                                                intent = new Intent(SigninActivity.this, DashboardWisatawanActivity.class);
-                                                sessionManager.createSessionUserLogin(val_email, val_flag, val_name, val_id, val_ket, val_kode_lokasi, val_nama_lokasi, val_tgl_lahir, val_jenis_kelamin, val_sellular_no, val_user_level, val_kode_pintu);
-                                                startActivity(intent);
-                                                finish();
-                                                break;
-                                        }
+                                        intent = new Intent(SigninActivity.this, DashboardWisatawanActivity.class);
+                                        sessionManager.createSessionUserLogin(val_email, val_flag, val_name, val_id, val_ket, val_kode_lokasi, val_nama_lokasi, val_tgl_lahir, val_jenis_kelamin, val_sellular_no, val_user_level, val_kode_pintu);
+                                        startActivity(intent);
+                                        finish();
                                         break;
-
                                     case "1":
                                         intent = new Intent(SigninActivity.this, DashboardPetugasActivity.class);
                                         sessionManager.createSessionUserLogin(val_email, val_flag, val_name, val_id, val_ket, val_kode_lokasi, val_nama_lokasi, val_tgl_lahir, val_jenis_kelamin, val_sellular_no, val_user_level, val_kode_pintu);
