@@ -99,6 +99,9 @@ public class CustomAdapterEntityWisatawan extends RecyclerView.Adapter<CustomAda
 
         final String _va = entityStatusKarcisWisatawanArrayList.get(position).getVa();
         final String _status = entityStatusKarcisWisatawanArrayList.get(position).getStatus();
+        final String _tgl_kunjungan_sd = entityStatusKarcisWisatawanArrayList.get(position).get_tgl_kunjungan_sd();
+        final String _jumlah_hari = entityStatusKarcisWisatawanArrayList.get(position).get_jumlah_hari();
+        final String _bank_name = entityStatusKarcisWisatawanArrayList.get(position).get_bank_name();
 
         tv_va.setText(entityStatusKarcisWisatawanArrayList.get(position).va);
         tv_tgl.setText(entityStatusKarcisWisatawanArrayList.get(position).tgl);
@@ -127,7 +130,7 @@ public class CustomAdapterEntityWisatawan extends RecyclerView.Adapter<CustomAda
 
         });
 
-        btn_detail_tagihan.setOnClickListener(v -> tagihan_by_no_va("tagihan_by_no_va", _va));
+        btn_detail_tagihan.setOnClickListener(v -> tagihan_by_no_va("tagihan_by_no_va", _va, _tgl_kunjungan_sd,_jumlah_hari,_bank_name));
 
     }
 
@@ -136,7 +139,7 @@ public class CustomAdapterEntityWisatawan extends RecyclerView.Adapter<CustomAda
         return entityStatusKarcisWisatawanArrayList.size();
     }
 
-    private void tagihan_by_no_va(String EP, String VA){
+    private void tagihan_by_no_va(String EP, String VA ,String _tgl_kunjungan_sd,String _jumlah_hari,String _bank_name  ){
 
         String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue(context);
@@ -193,6 +196,10 @@ public class CustomAdapterEntityWisatawan extends RecyclerView.Adapter<CustomAda
                                 i.putExtra("_tagihan_total", _tagihan_total);
                                 i.putExtra("_jumlah_tambahan", _jumlah_tambahan);
                                 i.putExtra("_nama_lokasi", _nama_lokasi);
+
+                                i.putExtra("_tgl_kunjungan_sd", _tgl_kunjungan_sd);
+                                i.putExtra("_selisih_hari", _jumlah_hari);
+                                i.putExtra("_nama_pembayaran", _bank_name);
 
                                 i.putExtra("result_dt_berhasil", berhasil);
                                 i.putExtra("result_dt_flag", "detailTagihan");

@@ -295,8 +295,8 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
 
 
 
-//        _tgl_kunjungan_ptgs.setText(Help.getDateTime());
-//        _tgl_kunjungan_ptgs.setEnabled(false);
+        _tgl_kunjungan_ptgs.setText(Help.getDateTime());
+        _tgl_kunjungan_ptgs.setEnabled(false);
         _ttl_ptgs.setEnabled(false);
         _ttl_tmbhn_ptgs.setEnabled(false);
         _grand_ttl_ptgs.setEnabled(false);
@@ -355,7 +355,16 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
                 @SuppressLint("SetTextI18n") DatePickerDialog datePickerDialog = new DatePickerDialog(v13.getContext(),
                         (view, year, monthOfYear, dayOfMonth) -> {
                             @SuppressLint("SimpleDateFormat") SimpleDateFormat fr = new SimpleDateFormat("dd-MM-yyyy");
-                            _tgl_kunjungan_ptgs_2.setText( year + "-" + (monthOfYear + 1)  + "-" +dayOfMonth );
+
+                            c.set(Calendar.YEAR, year);
+                            c.set(Calendar.MONTH, monthOfYear);
+                            c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+                            String myFormat = "yyyy-MM-dd";
+                            SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+                            _tgl_kunjungan_ptgs_2.setText(sdf.format(c.getTime()));
+
+//                            _tgl_kunjungan_ptgs_2.setText( year + "-" + (monthOfYear + 1)  + "-" +dayOfMonth );
                             try {
                                 CalculateKarcis();
                             } catch (ParseException e) {
@@ -371,8 +380,6 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
 
         btn_detail_ku.setOnClickListener(v -> {
             Log.i("","mode_pembayaran x"+ mode_pembayaran[0]);
-            Log.i("","nama_pembayaran x"+ nama_pembayaran[0]);
-
 
             String txt_kdlokwis = _txt_kdlokwis.getText().toString().trim();
             String txt_nmlokWis = _txt_nmlokwis.getText().toString().trim();
@@ -589,23 +596,14 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
                                      String jml_wisman = _jml_krcs_wisman_ptgs.getText().toString().trim();
                                      String jml_tmhn = _jml_krcs_wisman_tmbhn_ptgs.getText().toString().trim();
                                      final String key_kode_lok_new = (String) sessionManager.getUserDetail().get(SessionManager.key_kode_lokasi);
-
                                      if ( key_kode_lok_new.isEmpty() ){  flag_pemesan = "1"; } else { flag_pemesan= "2";  }
-
-                                     final String jns_byr = mode_pembayaran[0];
                                      final String tgl_kunjungan_sd =  _tgl_kunjungan_ptgs_2.getText().toString();
 
                                      if(jml_wisnu.equals("")){  jml_wisnu = "0";  }
                                      if(jml_wisman.equals("")){  jml_wisman = "0";  }
                                      if(jml_tmhn.equals("")){  jml_tmhn = "0";  }
 
-                                     Log.i("","_nama_lokasi struk "+ _nama_lokasi);
-                                     Log.i("","txt_grand_ttl_ptgs struk "+ txt_grand_ttl_ptgs);
 
-                                     Log.i("","key_alamat_email 1 "+ key_alamat_email);
-                                     Log.i("","key_email 1 "+ key_email);
-
-                                     assert jns_byr != null;
                                      i.putExtra("nama_lokasi",_nama_lokasi);
                                      i.putExtra("nama_pintu",_nmlokPintu);
                                      i.putExtra("registration_by", key_email);
@@ -620,13 +618,14 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
                                      i.putExtra("jumlah_wisnu",jml_wisnu);
                                      i.putExtra("jumlah_wisman",jml_wisman);
                                      i.putExtra("jumlah_tambahan",jml_tmhn);
-                                     i.putExtra("mode_pembayaran", jns_byr);
+                                     i.putExtra("mode_pembayaran", mode_pembayaran[0]);
                                      i.putExtra("no_hp_pengunjung", hp_pengunjung);
                                      i.putExtra("email_pengunjung", key_email_pengunjung);
                                      i.putExtra("nama_pengunjung", nama_pengunjung);
                                      i.putExtra("tgl_kunjungan",tgl_kunjungan);
                                      i.putExtra("tgl_kunjungan_sd",tgl_kunjungan_sd);
                                      i.putExtra("grand_ttl_ptgs", txt_grand_ttl_ptgs);
+                                     i.putExtra("nama_pembayaran", nama_pembayaran[0]);
                                      try {
                                          i.putExtra("jumlah_hari", String.valueOf(get_selisih_day()) );
                                      } catch (ParseException e) {
@@ -637,14 +636,7 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
                                  })
                                  .setNegativeButton("Tidak", (dialog, id) -> {
                                      try {
-                                         inputKarcisPetugas("new_input_petugas",
-                                                 mode_pembayaran[0],
-                                                 _nama_lokasi,
-                                                 _jml_krcs_tmbhn,
-                                                 get_selisih_day(),
-                                                 "0",
-                                                 nama_pembayaran[0]
-                                         );
+                                         inputKarcisPetugas("new_input_petugas", mode_pembayaran[0], _nama_lokasi, _jml_krcs_tmbhn, get_selisih_day(), "0", nama_pembayaran[0] );
                                      } catch (ParseException e) {
                                          e.printStackTrace();
                                      }
@@ -652,14 +644,7 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
                          AlertDialog alert = builder.create();
                          alert.show();
                      } else {
-                         inputKarcisPetugas("new_input_petugas",
-                                 mode_pembayaran[0],
-                                 _nama_lokasi,
-                                 _jml_krcs_tmbhn,
-                                 get_selisih_day(),
-                                 "0",
-                                 nama_pembayaran[0]
-                         );
+                         inputKarcisPetugas("new_input_petugas", mode_pembayaran[0], _nama_lokasi, _jml_krcs_tmbhn, get_selisih_day(), "0" , nama_pembayaran[0]);
                      }
 
                  } catch (ParseException e) {
@@ -759,8 +744,6 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
         String result_dt_url_img_lokWis_ku = getIntent().getStringExtra("result_dt_url_img_lokWisOld");
         boolean result_dt_flag_kt = getIntent().getBooleanExtra("result_dt_flag_kt",false);
         String result_dt_mode_pembayaran = getIntent().getStringExtra("result_dt_mode_pembayaran");
-        String result_dt_nama_pembayaran = getIntent().getStringExtra("result_dt_nama_pembayaran");
-
         String result_dt_tgl_kunjungan_ptgs_2_kt_ptgs = getIntent().getStringExtra("result_dt_tgl_kunjungan_ptgs_2_kt_ptgs");
 
 
@@ -789,7 +772,7 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
             Log.i("","masuk kesini kl 1"+KL);
 
             apiLokwisPtgsFirst("petugas_daftar_lokasi_wisata",KL);
-            getRbCaraBayar("informasi_mode_pembayaran","","1", "");
+            getRbCaraBayar("list_bank","","1");
 
         }
 
@@ -840,7 +823,7 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
                     result_dt_jml_karcis_tmbhn
             );
 
-            getRbCaraBayar("informasi_mode_pembayaran",result_dt_mode_pembayaran,"",result_dt_nama_pembayaran);
+            getRbCaraBayar("list_bank",result_dt_mode_pembayaran,"");
         }
 
 
@@ -895,7 +878,7 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
                     result_dt_jml_karcis_tmbhn
             );
 
-            getRbCaraBayar("informasi_mode_pembayaran",result_dt_mode_pembayaran,"", result_dt_nama_pembayaran);
+            getRbCaraBayar("list_bank",result_dt_mode_pembayaran,"");
 
         }
 
@@ -1174,7 +1157,7 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
 
 
         @RequiresApi(api = Build.VERSION_CODES.O)
-        public void getRbCaraBayar(String EP,String mode_pembayaran_par, String def_value, String nama_pembayaran_par ){
+        public void getRbCaraBayar(String EP,String mode_pembayaran_par, String def_value){
 //                rg_cara_bayar.setOrientation(LinearLayout.HORIZONTAL);
 
                 findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
@@ -1193,24 +1176,22 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
                                         for (int i = 0; i <jsonArray.length();i++ ) {
                                             JSONObject jsonObject1 = jsonArray.getJSONObject(i);
 
-                                            String mode_pembayaran =  jsonObject1.getString("mode_pembayaran");
-                                            String nama_pembayaran =  jsonObject1.getString("nama_pembayaran");
-//                                            String mode_pembayaran_par = "2";
+                                            String id_x =  jsonObject1.getString("id");
+                                            String bank_code =  jsonObject1.getString("bank_code");
+                                            String bank_name =  jsonObject1.getString("bank_name");
+                                            String bank_branch =  jsonObject1.getString("bank_branch");
+                                            String bank_address =  jsonObject1.getString("bank_address");
 
-                                            Log.i("tag","mode_pembayaran= "+mode_pembayaran);
-                                            Log.i("tag","nama_pembayaran= "+nama_pembayaran);
+                                            Log.i("tag","id_x= "+id_x);
+                                            Log.i("tag","bank_code_x= "+bank_code);
+                                            sessionManager.createSessionJnsByr(bank_code, bank_name);
 
-                                                sessionManager.createSessionJnsByr(mode_pembayaran, nama_pembayaran);
-
-
-                                            Log.i("","Permata"+Integer.parseInt("88561540"));
-
-                                                RadioButton button = new RadioButton(this);
-                                                button.setId(Integer.parseInt(mode_pembayaran));
-                                                button.setText(nama_pembayaran);
-                                                button.setBackgroundResource(R.drawable.cardview);
-                                                button.setWidth(700);
-                                                rg_cara_bayar.addView(button);
+                                            RadioButton button = new RadioButton(this);
+                                            button.setId(Integer.parseInt(bank_code));
+                                            button.setText(bank_name);
+                                            button.setBackgroundResource(R.drawable.cardview);
+                                            button.setWidth(700);
+                                            rg_cara_bayar.addView(button);
 
                                             if( def_value != null ){
                                                 if( i == 0 ) {
@@ -1221,7 +1202,7 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
 
                                             }
 
-                                                if( mode_pembayaran.equals(mode_pembayaran_par)){
+                                                if( bank_code.equals(mode_pembayaran_par)){
                                                     button.setChecked(true);
                                                     button.setSelected(true);
                                                 }
@@ -1247,7 +1228,8 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
                     protected Map<String, String> getParams() throws AuthFailureError {
                         Map<String, String> obj = new HashMap<String, String>();
                         final String key_email =  sessionManager.getUserDetail().get(SessionManager.key_email).trim();
-                        obj.put("kode_ksda", "");
+                        obj.put("lokasi", "JELAJAH");
+                        obj.put("petugas","1");
                         return obj;
                     }
                 };
@@ -1570,92 +1552,102 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
         String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue(PesanKarcisPetugasActivity.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url,
-                (Response.Listener<String>) response -> {
-                    Log.i("tag", "response apiLokwisPtgsFirst =" + response );
-                    try {
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.i("tag", "response apiLokwisPtgsFirst =" + response );
+                        try {
 
-                        if( Help.isJSONValid(response) ){
-                            JSONObject jsonObject = new JSONObject(response);
+                            if( Help.isJSONValid(response) ){
+                                JSONObject jsonObject = new JSONObject(response);
 
-                            Log.i("","apiLokwisPtgsFirst= "+response);
+                                Log.i("","apiLokwisPtgsFirst= "+response);
 
-                            arrListWisata.clear();
+                                arrListWisata.clear();
 
-                            findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-                            if( jsonObject.getBoolean("success") ) {
+                                findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+                                if( jsonObject.getBoolean("success") ) {
 
-                                JSONArray jsonArray = jsonObject.getJSONArray("data");
-                                for (int i = 0; i <jsonArray.length();i++ ) {
-                                    JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                                    JSONArray jsonArray = jsonObject.getJSONArray("data");
+                                    for (int i = 0; i <jsonArray.length();i++ ) {
+                                        JSONObject jsonObject1 = jsonArray.getJSONObject(i);
 
-                                    String id =  jsonObject1.getString("id");
-                                    final String kode_ksda =  jsonObject1.getString("kode_ksda");
-                                    String nama =  jsonObject1.getString("nama");
-                                    String alamat =  jsonObject1.getString("alamat");
-                                    String kota =  jsonObject1.getString("kota");
-                                    String email1 =  jsonObject1.getString("email1");
-                                    String email2 =  jsonObject1.getString("email2");
-                                    String email3 =  jsonObject1.getString("email3");
-                                    String android_flag =  jsonObject1.getString("android_flag");
-                                    String detail_flag =  jsonObject1.getString("detail_flag");
-                                    String url_image =  jsonObject1.getString("url_image");
-                                    String lokasi_pintu =  jsonObject1.getString("lokasi_pintu");
-                                    String nama_pintu = jsonObject1.getString("nama_pintu");
-                                    String total_pengunjung =  jsonObject1.getString("total_pengunjung");
-                                    String total_berkunjung = jsonObject1.getString("total_berkunjung");
-                                    String total_semua =  jsonObject1.getString("total_semua");
-                                    String url_image_pintu =  jsonObject1.getString("url_image_pintu");
+                                        String id =  jsonObject1.getString("id");
+                                        final String kode_ksda =  jsonObject1.getString("kode_ksda");
+                                        String nama =  jsonObject1.getString("nama");
+                                        String alamat =  jsonObject1.getString("alamat");
+                                        String kota =  jsonObject1.getString("kota");
+                                        String email1 =  jsonObject1.getString("email1");
+                                        String email2 =  jsonObject1.getString("email2");
+                                        String email3 =  jsonObject1.getString("email3");
+                                        String android_flag =  jsonObject1.getString("android_flag");
+                                        String detail_flag =  jsonObject1.getString("detail_flag");
+                                        String url_image =  jsonObject1.getString("url_image");
+                                        String lokasi_pintu =  jsonObject1.getString("lokasi_pintu");
+                                        String nama_pintu = jsonObject1.getString("nama_pintu");
+                                        String total_pengunjung =  jsonObject1.getString("total_pengunjung");
+                                        String total_berkunjung = jsonObject1.getString("total_berkunjung");
+                                        String total_semua =  jsonObject1.getString("total_semua");
+                                        String url_image_pintu =  jsonObject1.getString("url_image_pintu");
 
-                                    _txt_kdlokwis.setText(kode_ksda);
-                                    _txt_nmlokwis.setText(nama);
-                                    _txt_kdlokPintu.setText(lokasi_pintu);
-                                    _txt_nmlokPintu.setText(nama_pintu);
-
-                                    sessionManager.createSessionEksp(kode_ksda,nama_pintu);
-
-                                    Log.i("tag","kode_ksda= "+kode_ksda);
-                                    Log.i("tag","nama= "+nama);
-                                    Log.i("tag","lokasi_pintu first= "+lokasi_pintu);
-                                    Log.i("tag","nama_pintu= "+nama_pintu);
-
-                                    quotaTwa("quota_per_twa",kode_ksda);
-
-                                    ImageView img1 =(ImageView)findViewById(R.id.lokwisPicasso);
-                                    Transformation transformation = new RoundedTransformationBuilder()
-                                            .oval(false)
-                                            .build();
-
-                                    Picasso.with(getApplicationContext())
-                                            .load(url_image)
-                                            .fit()
-                                            .transform(transformation)
-                                            .placeholder(R.drawable.loading_animation)
-                                            .into(img1);
-
-                                    ImageView img2 =(ImageView)findViewById(R.id.lokPintuPicasso);
-
-                                    Picasso.with(getApplicationContext())
-                                            .load(url_image_pintu)
-                                            .fit()
-                                            .transform(transformation)
-                                            .placeholder(R.drawable.loading_animation)
-                                            .into(img2);
+                                        _txt_kdlokwis.setText(kode_ksda);
+                                        _txt_nmlokwis.setText(nama);
+                                        _txt_kdlokPintu.setText(lokasi_pintu);
+                                        _txt_nmlokPintu.setText(nama_pintu);
 
 
-                                    apiWisatawanUtamaFirst("daftar_karcis_wisatawan_utama",lokasi_pintu);
-                                    apiWisatawanTambahanFirst("daftar_karcis_wisatawan_tambahan",lokasi_pintu,"");
 
+
+                                        sessionManager.createSessionEksp(kode_ksda,nama_pintu);
+
+                                        Log.i("tag","kode_ksda= "+kode_ksda);
+                                        Log.i("tag","nama= "+nama);
+                                        Log.i("tag","lokasi_pintu first= "+lokasi_pintu);
+                                        Log.i("tag","nama_pintu= "+nama_pintu);
+
+
+//                                        arrListWisata.add(new SpinnerListWisata(lokasi_pintu,nama_pintu,"","",""));
+
+                                        quotaTwa("quota_per_twa",kode_ksda);
+
+
+                                        ImageView img1 =(ImageView)findViewById(R.id.lokwisPicasso);
+                                        Transformation transformation = new RoundedTransformationBuilder()
+                                                .oval(false)
+                                                .build();
+
+                                        Picasso.with(getApplicationContext())
+                                                .load(url_image)
+                                                .fit()
+                                                .transform(transformation)
+                                                .placeholder(R.drawable.loading_animation)
+                                                .into(img1);
+
+                                        ImageView img2 =(ImageView)findViewById(R.id.lokPintuPicasso);
+
+                                        Picasso.with(getApplicationContext())
+                                                .load(url_image_pintu)
+                                                .fit()
+                                                .transform(transformation)
+                                                .placeholder(R.drawable.loading_animation)
+                                                .into(img2);
+
+
+                                        apiWisatawanUtamaFirst("daftar_karcis_wisatawan_utama",lokasi_pintu);
+                                        apiWisatawanTambahanFirst("daftar_karcis_wisatawan_tambahan",lokasi_pintu,"");
+
+                                    }
                                 }
                             }
-                        }
 
-                        String compareValue = sessionManager.getDataSetupPintu().get(SessionManager.key_index);
-                        Log.i("","compareValue "+compareValue);
-                    } catch (JSONException e) {
-                        Log.i("", "error ===" + e.toString() );
-                        e.printStackTrace();
+                            String compareValue = sessionManager.getDataSetupPintu().get(SessionManager.key_index);
+                            Log.i("","compareValue "+compareValue);
+                        } catch (JSONException e) {
+                            Log.i("", "error ===" + e.toString() );
+                            e.printStackTrace();
+                        }
+                        requestQueue.stop();
                     }
-                    requestQueue.stop();
                 }, (Response.ErrorListener) error -> {
                     Log.i("triono", "response spinnerLokPintuPtgs=" + error.toString());
                     error.printStackTrace();
@@ -2257,7 +2249,7 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
                                     String jml_krcs_tmbhn,
                                     long selisih_day,
                                     String flag_print,
-                                    String nama_pembayaran_par
+                                    String nama_bayar
     ){
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
         String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
@@ -2331,16 +2323,15 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
                                 i.putExtra("_jumlah_tambahan", jml_krcs_tmbhn);
                                 i.putExtra("_nama_lokasi", nama_lokasi);
                                 i.putExtra("_mode_pembayaran", _mode_pembayaran);
-                                i.putExtra("_nama_pembayaran", nama_pembayaran_par);
                                 i.putExtra("_nama_pengunjung", _nama_pengunjung);
                                 i.putExtra("_no_hp_pengunjung", _no_hp_pengunjung);
                                 i.putExtra("_email_pengunjung", _email_pengunjung);
-
                                 i.putExtra("_tgl_kunjungan_sd", tgl_kunjungan_sd);
                                 i.putExtra("_selisih_hari", String.valueOf(selisih_day) );
                                 i.putExtra("flag_print", "0");
                                 i.putExtra("result_dt_berhasil", true);
                                 i.putExtra("result_dt_flag", "flagPesanKarcisPetugas");
+                                i.putExtra("_nama_pembayaran", nama_bayar);
                                 startActivity(i);
 
                             }
@@ -2357,7 +2348,7 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
                 }
         ) {
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams() {
                 Map<String, String> obj = new HashMap<String, String>();
 
                 String flag_pemesan = null;
@@ -2382,7 +2373,7 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
                     flag_pemesan= "2";
                 }
 
-                final String jns_byr = mode_bayar;
+                String jns_byr = "";
                 final  String hp_pengunjung = _hp_pengunjung_ptgs.getText().toString().trim();
                 final String email_pengunjung = _email_pengunjung.getText().toString().trim();
                 final String nama_pengunjung = _nama_pengunjung_ptgs.getText().toString().trim();
@@ -2398,8 +2389,16 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
                     jml_tmhn = "0";
                 }
 
+                if( mode_bayar.equals("1") ){
+                    jns_byr = "1";
+//                    jns_byr = "2";
+                } else{
+                    jns_byr = "2";
+                }
 
                 Log.i("tag","mode_pembayaran= " + jns_byr );
+                Log.i("tag","nama_bayar= " + nama_bayar );
+                Log.i("tag","prefix_bank= " + mode_bayar);
                 Log.i("tag","hp_pengunjung= " + hp_pengunjung );
                 Log.i("tag","nama_pengunjung= " + nama_pengunjung );
                 Log.i("tag","email_pengunjung= " + email_pengunjung );
@@ -2418,27 +2417,27 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
                 Log.i("tag","selisih_day= " + selisih_day);
 
 
+
                 obj.put("registration_by", key_email);
                 obj.put("flag_pemesan",flag_pemesan);
                 obj.put("nama",key_name);
                 obj.put("sellular_no",key_hp);
                 obj.put("alamat_email",key_email);
                 obj.put("tgl_penjualan",key_tgl_penjualan);
-                obj.put("tgl_kunjungan",tgl_kunjungan);
                 obj.put("kode_lokasi",key_kode_lokasi);
                 obj.put("id_karcis_utama",key_id_utama);
                 obj.put("id_karcis_tambahan",key_id_tmbhn);
                 obj.put("jumlah_wisnu",jml_wisnu);
                 obj.put("jumlah_wisman",jml_wisman);
                 obj.put("jumlah_tambahan",jml_tmhn);
-                assert jns_byr != null;
-                obj.put("mode_pembayaran", jns_byr.toString());
+                obj.put("mode_pembayaran", jns_byr);
                 obj.put("no_hp_pengunjung", hp_pengunjung);
                 obj.put("email_pengunjung", email_pengunjung);
                 obj.put("nama_pengunjung", nama_pengunjung);
                 obj.put("tgl_kunjungan",tgl_kunjungan);
                 obj.put("tgl_kunjungan_sd",tgl_kunjungan_sd);
                 obj.put("jumlah_hari", String.valueOf(selisih_day) );
+                obj.put("prefix_bank", mode_bayar );
 
                 return obj;
             }

@@ -625,7 +625,9 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
         if( result_dt_kodeKarcis == null &&  result_dt_kd_lokwis_adapter == null && result_dt_judul_pintu == null && result_dt_kdlokPintu2 == null && result_dt_kodeKarcis_kt == null) {
 
             Log.i("", "result_dt_kd_lokwis_adapter && result_dt_judul_pintu null = " + result_dt_kd_lokwis_adapter + " "+result_dt_judul_pintu+ " "+result_dt_kdlokPintu2 );
+
             _txt_tgl_kunjungan_order.setText(result_dt_tgl_kunj_lokwis);
+
             horizontalLokasiWisata("daftar_lokasi_wisata","","","","");
 
         }
@@ -1083,8 +1085,9 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
                 _txt_tgl_kunjungan_2_order.requestFocus();
             }
             else {
-                Log.i("","nama_pembayaran[0]="+nama_pembayaran[0]);
-                quotaTwaForBtnOrderWist("quota_per_twa",key_kd_lokwis,tgl_kunj_val1,tgl_kunj_val2,nama_pembayaran[0]);
+                Log.i("","nama_pembayaran[0] oke="+ nama_pembayaran[0]);
+                Log.i("","mode_pembayaran[0] oke="+ mode_pembayaran[0]);
+                quotaTwaForBtnOrderWist("quota_per_twa", key_kd_lokwis, tgl_kunj_val1, tgl_kunj_val2, nama_pembayaran[0], mode_pembayaran[0]);
             }
         });
 
@@ -2321,8 +2324,6 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
 
                                 sessionManager.createSessionLokWisPesankarcisWisatawan(_kd_lokasi,_nm_obj_wisata,_alamat,_kota,_url_image);
 
-
-
                                 ImageView img1 =(ImageView)findViewById(R.id.lokwisPicasso);
                                 Transformation transformation = new RoundedTransformationBuilder()
 //                                        .borderColor(Color.BLUE)
@@ -2364,7 +2365,7 @@ public class PesanKarcisWisatawanActivity extends AppCompatActivity implements  
         }
         ) {
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams() {
                 Map<String, String> obj = new HashMap<String, String>();
                 obj.put("lokasi", "");
                 return obj;
@@ -2696,7 +2697,7 @@ public long get_selisih_day() throws ParseException {
 
 }
 
-    private void inputKarcisWisatawan(String EP, long selisih_hari, String nama_pembayaran_par ) {
+    private void inputKarcisWisatawan(String EP, long selisih_hari, String nama_pembayaran_par, String mode_pembayaran_par ) {
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
         String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue(PesanKarcisWisatawanActivity.this);
@@ -2759,6 +2760,7 @@ public long get_selisih_day() throws ParseException {
                                 i.putExtra("_selisih_hari", String.valueOf(selisih_hari) );
                                 i.putExtra("result_dt_berhasil", berhasil);
                                 i.putExtra("_nama_pembayaran", nama_pembayaran_par );
+                                i.putExtra("_mode_pembayaran", mode_pembayaran_par );
                                 i.putExtra("result_dt_flag", "flagPesanKarcisWisatawan");
                                 startActivity(i);
                             }
@@ -2768,17 +2770,14 @@ public long get_selisih_day() throws ParseException {
                         e.printStackTrace();
                     }
                     requestQueue.stop();
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.i("tag", "response =" + error.toString());
-                error.printStackTrace();
-                requestQueue.stop();
-            }
-        }
+                }, (Response.ErrorListener) error -> {
+                    Log.i("tag", "response =" + error.toString());
+                    error.printStackTrace();
+                    requestQueue.stop();
+                }
         ) {
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams() {
                 Map<String, String> obj = new HashMap<String, String>();
 
 
@@ -2862,6 +2861,7 @@ public long get_selisih_day() throws ParseException {
                 Log.i("tag","jml_tmbhn= " + jml_tmbhn );
                 Log.i("tag","flag_pemesan= " + flag_pemesan );
                 Log.i("tag","jumlah_hari= " + jumlah_hari );
+                Log.i("tag","mode_pembayaran_par= " + mode_pembayaran_par );
 
 
 
@@ -2895,6 +2895,8 @@ public long get_selisih_day() throws ParseException {
                 obj.put("jumlah_wisman",jml_wisman);
                 obj.put("jumlah_tambahan",jml_tmbhn);
                 obj.put("jumlah_hari",jumlah_hari);
+                obj.put("prefix_bank", mode_pembayaran_par);
+                obj.put("expire_time","120");
                 return obj;
             }
         };
@@ -2981,7 +2983,7 @@ public long get_selisih_day() throws ParseException {
         requestQueue.add(stringRequest);
     }
 
-    private void quotaTwaForBtnOrderWist(String EP,String KSDA, String TGL, String TGL2, String nama_pembayaran_par ){
+    private void quotaTwaForBtnOrderWist(String EP,String KSDA, String TGL, String TGL2, String nama_pembayaran_par, String mode_pembayaran_par ){
 
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
         String server_url_q = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
@@ -3023,7 +3025,7 @@ public long get_selisih_day() throws ParseException {
                                 long selisih_day = get_selisih_day();
                                 Log.i("","selisih_day "+selisih_day);
 
-                                inputKarcisWisatawan("new_input_wisatawan",selisih_day, nama_pembayaran_par);
+                                inputKarcisWisatawan("new_input_wisatawan",selisih_day, nama_pembayaran_par, mode_pembayaran_par);
                             }
                         }
 
@@ -3077,7 +3079,6 @@ public long get_selisih_day() throws ParseException {
                                 JSONArray jsonArray = jsonObject.getJSONArray("data");
                                 for (int i = 0; i <jsonArray.length();i++ ) {
                                     JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-
 
                                     String id_x =  jsonObject1.getString("id");
                                     String bank_code =  jsonObject1.getString("bank_code");

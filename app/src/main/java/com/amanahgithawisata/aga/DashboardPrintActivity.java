@@ -165,12 +165,11 @@ public class DashboardPrintActivity extends AppCompatActivity {
         String _tagihan_total = getIntent().getStringExtra("_tagihan_total");
         String _berhasil = getIntent().getStringExtra("berhasil");
         String result_dt_flag = getIntent().getStringExtra("result_dt_flag");
-
         String _nama_pengunjung = getIntent().getStringExtra("nama_pengunjung");
         String _no_hp_pengunjung = getIntent().getStringExtra("no_hp_pengunjung");
         String _email_pengunjung = getIntent().getStringExtra("email_pengunjung");
-
-
+        String _mode_pembayaran = getIntent().getStringExtra("mode_pembayaran");
+        String _nama_pembayaran = getIntent().getStringExtra("nama_pembayaran");
         String _selisih_hari = getIntent().getStringExtra("jumlah_hari");
         String _flag_print = getIntent().getStringExtra("flag_print");
         String _grand_ttl_ptgs = getIntent().getStringExtra("grand_ttl_ptgs");
@@ -256,8 +255,8 @@ public class DashboardPrintActivity extends AppCompatActivity {
         }
         textview_tgl_kunj.setText(new_tgl_kunjungan );
         textview_nm_red.setText(_vnama);
-        textview_bank_red.setText("PT Bank BRIsyariah Tbk ");
-//        textview_grand_ttl_red.setText(_tagihan_total);
+//        textview_bank_red.setText("PT Bank BRIsyariah Tbk ");
+        textview_bank_red.setText(_nama_pembayaran);
 
 
 
@@ -633,7 +632,6 @@ public class DashboardPrintActivity extends AppCompatActivity {
                     obj.put("nama_pengunjung", nama);
                     obj.put("tgl_kunjungan_sd",tgl_kunj_sd);
                     obj.put("jumlah_hari", String.valueOf(selisih_hari) );
-
 
 
                     return obj;

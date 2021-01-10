@@ -243,9 +243,9 @@ public class NotifSuksesActivity extends AppCompatActivity {
                 linearMohonPetugas.setVisibility(View.GONE);
                 linear_hp_red.setVisibility(View.GONE);
                 linear_email_red.setVisibility(View.GONE);
-                linear_nm_bank_red.setVisibility(View.GONE);
+                linear_nm_bank_red.setVisibility(View.VISIBLE);
                 linear_va_bottom_red.setVisibility(View.VISIBLE);
-
+                textview_bank_red.setText(_nama_pembayaran);
 
         }else if ( result_dt_flag.equals("flagPesanKarcisPetugas") ) {
             Log.i("","kesini flagPesanKarcisPetugas "+result_dt_flag);

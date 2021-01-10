@@ -52,13 +52,13 @@ public class StatusKarcisWisatawanActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        jsonrequest("informasi_status_karcis");
+        informasi_status_karcis("informasi_status_karcis");
 
     }
 
 
 
-    private void jsonrequest(String EP){
+    private void informasi_status_karcis(String EP){
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
         String server_url = "http://"+ Help.domain_api() +"/~androidwisata/?data="+ EP;
         final RequestQueue requestQueue = Volley.newRequestQueue(StatusKarcisWisatawanActivity.this);
@@ -72,11 +72,8 @@ public class StatusKarcisWisatawanActivity extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(response.toString());
                             if( jsonObject.getBoolean("success") ) {
                                 JSONArray jsonArray = jsonObject.getJSONArray("data");
-                                Log.i("triono", "jsonObject.getBoolean() ===" + jsonObject.getBoolean("success") );
-                                String _va_no;
-                                String _tgl_kunjungan;
-                                String _status;
-                                String _nama;
+                                Log.i("", "jsonObject.getBoolean() ===" + jsonObject.getBoolean("success") );
+                                String _va_no, _tgl_kunjungan,_status,_nama,_tgl_kunjungan_sd,_jumlah_hari,_bank_name;
                                 entityStatusKarcisArrayList = new ArrayList<>();
 
                                 for (int i = 0; i <jsonArray.length();i++ ) {
@@ -85,11 +82,18 @@ public class StatusKarcisWisatawanActivity extends AppCompatActivity {
                                     _tgl_kunjungan = jsonObject1.getString("tgl_kunjungan");
                                     _status = jsonObject1.getString("status");
                                     _nama = jsonObject1.getString("nama");
+                                    _tgl_kunjungan_sd = jsonObject1.getString("tgl_kunjungan_sd");
+                                    _jumlah_hari = jsonObject1.getString("jumlah_hari");
+                                    _bank_name = jsonObject1.getString("bank_name");
 
                                     Log.i("wisatawan","i "+ i);
                                     Log.i("wisatawan","_va_no "+_va_no);
+                                    Log.i("wisatawan","_tgl_kunjungan_sd "+_tgl_kunjungan_sd);
+                                    Log.i("wisatawan","_jumlah_hari "+_jumlah_hari);
+                                    Log.i("wisatawan","_bank_name "+_bank_name);
 
-                                    entityStatusKarcisArrayList.add(new EntityStatusKarcisWisatawan(_va_no,_tgl_kunjungan,_status,_nama));
+
+                                    entityStatusKarcisArrayList.add(new EntityStatusKarcisWisatawan(_va_no,_tgl_kunjungan,_status,_nama,_tgl_kunjungan_sd,_jumlah_hari,_bank_name));
                                 }
                                 customAdapter = new CustomAdapterEntityWisatawan( entityStatusKarcisArrayList, StatusKarcisWisatawanActivity.this);
                                 recyclerView.setAdapter(customAdapter);
