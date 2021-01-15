@@ -119,13 +119,11 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
     TextView _harga_karcis_wisata_kt;
     TextView _harga_karcis_asuransi_kt;
     TextView _id_kt;
-    TextView _url_image_kt;
 
     Button _btn_order_ptgs;
     Button btn_detail_ku;
     Button btn_detail_kt;
 
-    ImageView _imgv;
     LinearLayout _linearLayoutKarcisUtama;
     LinearLayout _linearLayoutKarcisTambahan;
     BluetoothDevice bluetoothDevice;
@@ -138,21 +136,14 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
     Button mScan, mPrint, mDisc;
 
     private UUID applicationUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
-    private ProgressDialog mBluetoothConnectProgressDialog;
-
     private List<String> arrListUtamaPtgs = new ArrayList<String>();
-    private List<String> arrListTambahanPtgs = new ArrayList<String>();
     ArrayList<SpinnerListWisata> arrListWisata = new ArrayList<SpinnerListWisata>();
-    ArrayList<SpinnerListWisataKsda> arrListWisataKsda = new ArrayList<SpinnerListWisataKsda>();
-    ArrayList<SpinnerJnsByr> arrJnsByr = new ArrayList<SpinnerJnsByr>();
-    ArrayList<SpinnerKarcisUtama> arrKarcisUtama = new ArrayList<SpinnerKarcisUtama>();
     ArrayList<SpinnerKarcisTambahan> arrKarcisTambahan = new ArrayList<SpinnerKarcisTambahan>();
 
     SessionManager sessionManager;
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        TextView _tgl_kunjungan_order = (TextView) findViewById(R.id.tgl_kunjungan_ptgs);
         Calendar c = Calendar.getInstance();
         c.set(Calendar.YEAR, year);
         c.set(Calendar.MONTH, month);
@@ -901,7 +892,7 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
                     String mDeviceAddress = mExtra.getString("DeviceAddress");
 
                     bluetoothDevice = bluetoothAdapter.getRemoteDevice(mDeviceAddress);
-                    mBluetoothConnectProgressDialog = ProgressDialog.show(this, "connecting...",
+                    ProgressDialog mBluetoothConnectProgressDialog = ProgressDialog.show(this, "connecting...",
                             bluetoothDevice.getName() + " : " + bluetoothDevice.getAddress(), true, false);
 
                     Thread mBlutoothConnectThread = new Thread((Runnable) this);
@@ -2352,7 +2343,6 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
                 Map<String, String> obj = new HashMap<String, String>();
 
                 String flag_pemesan = null;
-//                final String key_kode_ksda = (String) sessionManager.getDaftarKarcisWisatawanUtama().get(SessionManager.key_kode_ksda).trim();
                 final String key_name =  _nama_pengunjung_ptgs.getText().toString().trim().trim();
                 final String key_email =  _email_pengunjung.getText().toString().trim().trim();
                 final String key_hp =  _hp_pengunjung_ptgs.getText().toString().trim().trim();
@@ -2391,7 +2381,6 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
 
                 if( mode_bayar.equals("1") ){
                     jns_byr = "1";
-//                    jns_byr = "2";
                 } else{
                     jns_byr = "2";
                 }
@@ -2417,8 +2406,9 @@ public class PesanKarcisPetugasActivity<Hundler> extends AppCompatActivity imple
                 Log.i("tag","selisih_day= " + selisih_day);
 
 
-
-                obj.put("registration_by", key_email);
+                Log.i("","email sesssion "+sessionManager.getUserDetail().get(SessionManager.key_email));
+                String username_login = sessionManager.getUserDetail().get(SessionManager.key_email);
+                obj.put("registration_by", username_login );
                 obj.put("flag_pemesan",flag_pemesan);
                 obj.put("nama",key_name);
                 obj.put("sellular_no",key_hp);

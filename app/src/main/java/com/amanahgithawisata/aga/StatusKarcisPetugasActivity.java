@@ -45,14 +45,9 @@ import java.util.Objects;
 
 public class StatusKarcisPetugasActivity extends AppCompatActivity {
 
-    private final String JSON_URL ="http://"+ Help.domain_api() +"/~androidwisata/?data=informasi_status_karcis";
-    private JsonArrayRequest jsonArrayRequest;
-    private RequestQueue requestQueue;
     RecyclerView recyclerView;
     Toolbar _toolbar;
-    MenuItem _cariToolbar;
     Button _btn_entity_edit;
-
 
     RecyclerView.LayoutManager layoutManager;
     SessionManager sessionManager ;
@@ -68,28 +63,18 @@ public class StatusKarcisPetugasActivity extends AppCompatActivity {
         findViewById(R.id.loadingPanel).setVisibility(View.GONE);
         sessionManager = new SessionManager(getApplicationContext());
 
-//        recyclerView = (RecyclerView) findViewById(R.id.recycler_view_data_status_karcis_ptgs);
-//        jsonrequest("informasi_status_karcis");
-
         @SuppressLint("InflateParams") View inflatedView = getLayoutInflater().inflate(R.layout.entity_status_karcis_wisatawan, null);
         _btn_entity_edit = (Button) inflatedView.findViewById(R.id.btn_entity_edit);
-//        _btn_entity_edit.setText("Hello!");
 
         _toolbar = (Toolbar)  findViewById(R.id.toolbar_new);
         setSupportActionBar(_toolbar);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_data_status_karcis_ptgs);
 
-//        _btn_entity_edit = (Button) findViewById(R.id.btn_entity_edit_ptgs);
 
-
-        _btn_entity_edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(sessionManager.isLoggedIn()) {
-                    Intent i = new Intent(StatusKarcisPetugasActivity.this,EditPasswordPetugasActivity.class);
-                    startActivity(i);
-                }
-
+        _btn_entity_edit.setOnClickListener(v -> {
+            if(sessionManager.isLoggedIn()) {
+                Intent i = new Intent(StatusKarcisPetugasActivity.this,EditPasswordPetugasActivity.class);
+                startActivity(i);
             }
         });
 
@@ -108,7 +93,7 @@ public class StatusKarcisPetugasActivity extends AppCompatActivity {
                     try {
                         findViewById(R.id.loadingPanel).setVisibility(View.GONE);
                         if( Help.isJSONValid(response) ){
-                            ArrayList dx = new ArrayList<>();
+
                             JSONObject jsonObject = new JSONObject(response);
 
                             if( jsonObject.getBoolean("success") ) {
@@ -119,7 +104,7 @@ public class StatusKarcisPetugasActivity extends AppCompatActivity {
                                 String _status;
                                 String _nm_objk_wis;
                                 String _email;
-//                                    entityStatusKarcisPetugasArrayList = new ArrayList<>();
+
                                 entityStatusKarcisPetugasArrayList.clear();
 
                                 Log.i("","jsonArray.length() "+jsonArray.length());
@@ -135,13 +120,10 @@ public class StatusKarcisPetugasActivity extends AppCompatActivity {
                                     Log.i("petugas","_va_no "+_va_no);
 
                                     entityStatusKarcisPetugasArrayList.add(new EntityStatusKarcisPetugas(_va_no,_tgl_kunjungan,_status,_nm_objk_wis,_email));
-//                                        entityStatusKarcisPetugasArrayList.add(new EntityStatusKarcisPetugas("20122020000000098","2020-01-02","unPaid","gunung pangrango"));
-
                                 }
                                 customAdapter = new CustomAdapterEntityPetugas( entityStatusKarcisPetugasArrayList, getApplicationContext() );
                                 recyclerView.setAdapter(customAdapter);
                             }
-//                                entityStatusKarcisPetugasArrayList.add(new EntityStatusKarcisPetugas("20122020000000098","2020-01-02","unPaid","gunung pangrango"));
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -165,10 +147,12 @@ public class StatusKarcisPetugasActivity extends AppCompatActivity {
                 }
         ) {
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams() {
                 Map<String, String> obj = new HashMap<String, String>();
                 final String _email =  sessionManager.getUserDetail().get(SessionManager.key_email);
+
                 obj.put("text_pencarian", "");
+                obj.put("registration_by",_email);
                 return obj;
             }
         };
@@ -184,14 +168,6 @@ public class StatusKarcisPetugasActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
     }
-
-
-
-
-
-
-
-
 
 
 
@@ -231,8 +207,6 @@ public class StatusKarcisPetugasActivity extends AppCompatActivity {
 
 
 
-
-
     @SuppressLint("ResourceType")
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -245,7 +219,7 @@ public class StatusKarcisPetugasActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-//                jsonrequest(query);
+                Log.i("","query ya= "+query);
                 return true;
             }
             @Override
@@ -256,6 +230,7 @@ public class StatusKarcisPetugasActivity extends AppCompatActivity {
                     String va = data.getVa().toLowerCase();
                     String tgl = data.getTgl().toLowerCase();
                     String status = data.getStatus().toLowerCase();
+                    String email = data.getEmail().toLowerCase();
                     if(va.contains(nextText)){
                         dataFilter.add(data);
                     }
@@ -263,6 +238,9 @@ public class StatusKarcisPetugasActivity extends AppCompatActivity {
                         dataFilter.add(data);
                     }
                     else if(status.contains(nextText)){
+                        dataFilter.add(data);
+                    }
+                    else if(email.contains(nextText)){
                         dataFilter.add(data);
                     }
 
